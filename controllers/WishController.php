@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Wish;
+use app\models\Activity;
 use app\models\Category;
 use app\models\search\SearchWish;
 use yii\web\Controller;
@@ -148,8 +149,21 @@ class WishController extends Controller
 	 * Param: wish id
 	 * @return boolean
 	 */
-	public function actionLike($id){
-		
+	public function actionLike($w_id,$type)
+	{
+		$wish = $this->findModel($w_id);
+		$activity = Activity::find()->where(['wish_id'=>$wish->w_id,'activity'=>$type,'user_id'=>\Yii::$app->user->id])->one();
+		if($activity != null){
+			$activity->delete();
+			return "removed";
+		}
+			$activity = new Activity();
+		$activity->wish_id = $wish->w_id;
+		$activity->activity = $type;
+		$activity->user_id = \Yii::$app->user->id;
+		if($activity->save())
+			return "added";
+		else return false;
 	}
 	 
     /**

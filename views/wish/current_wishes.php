@@ -1,3 +1,7 @@
+<?php 
+use yii\helpers\Html;
+use yii\helpers\Url;
+?>
     <div class="col-md-12">
 		<div class="col-md-3">
 			<h3>Find A Wish</h3>
@@ -38,8 +42,17 @@
 					foreach($dataProvider->models as $wish){
 						echo '<div class="item col-md-4"><div class="thumbnail">';
 						echo '<img src="'.\Yii::$app->homeUrl.$wish->primary_image.'" class="img-responsive" alt="Image">';
-						echo '<div class="smp-links"><span class="glyphicon glyphicon-heart-empty txt-smp-orange"></span></br>
-						<span class="glyphicon glyphicon glyphicon-thumbs-up txt-smp-green"></span></div>';
+						/////activities///
+						if(!$wish->isFaved(\Yii::$app->user->id))
+							echo '<div class="smp-links"><span title="Add to favourites" data-w_id="'.$wish->w_id.'" data-a_type="fav" class="fav-wish glyphicon glyphicon-heart-empty txt-smp-orange"></span></br>';
+						else 
+							echo '<div class="smp-links"><span title="You favourited it" data-w_id="'.$wish->w_id.'" data-a_type="fav" class="fav-wish glyphicon glyphicon-heart-empty txt-smp-blue"></span></br>';
+						
+						if(!$wish->isLiked(\Yii::$app->user->id))
+							echo '<span title="Like it" data-w_id="'.$wish->w_id.'" data-a_type="like" class="like-wish glyphicon glyphicon glyphicon-thumbs-up txt-smp-green"></span></div>';
+						else
+							echo '<span title="You liked it" data-w_id="'.$wish->w_id.'" data-a_type="like" class="like-wish glyphicon glyphicon glyphicon-thumbs-up txt-smp-pink"></span></div>';
+						//////////////////
 						echo '<div class="smp-wish-desc">';
 							echo '<p>Name : <span>'.$wish->wisher->username.'</span></p>
 							<p>Wish For : <span>'.$wish->wish_title.'</span></p>
@@ -57,3 +70,44 @@
 			</div>
 		</div>
 	</div>
+	<script>
+		$(".shareIcons").jsSocials({
+			showLabel: false,
+			showCount: false,
+			shares: ["facebook", "twitter", "googleplus", "pinterest", "linkedin", "whatsapp"]
+		});
+		$(".like-wish, .fav-wish").on("click",function(){
+			var wish_id = $(this).attr("data-w_id");
+			var type = $(this).attr("data-a_type");
+			var elem = $(this);
+			$.ajax({
+				url : '<?=Url::to(['wish/like'])?>',
+				type: 'GET',
+				data: {w_id:wish_id,type:type},
+				success:function(data){
+					if(data == "added"){
+						if(type=="fav"){
+							elem.removeClass("txt-smp-orange");
+							elem.addClass("txt-smp-blue");
+						}
+						if(type=="like"){
+							elem.removeClass("txt-smp-green");
+							elem.addClass("txt-smp-pink");
+						}							
+					}
+					if(data == "removed"){
+						if(type=="fav"){
+							elem.addClass("txt-smp-orange");
+							elem.removeClass("txt-smp-blue");
+						}
+						if(type=="like"){
+							elem.addClass("txt-smp-green");
+							elem.removeClass("txt-smp-pink");
+						}							
+					}
+						
+					console.log(data);
+				}
+			});
+		});
+	</script>

@@ -83,4 +83,16 @@ class Wish extends \yii\db\ActiveRecord
     {
         return $this->hasOne(User::className(), ['id' => 'wished_by']);
     }
+	
+	public function isLiked($byUser){
+		if(Activity::find()->where(['wish_id'=>$this->w_id,'activity'=>'like','user_id'=>$byUser])->one()!= null)
+			return true;
+		else return false;
+	}
+	
+	public function isFaved($byUser){
+		if(Activity::find()->where(['wish_id'=>$this->w_id,'activity'=>'fav','user_id'=>$byUser])->one()!= null)
+			return true;
+		else return false;
+	}
 }

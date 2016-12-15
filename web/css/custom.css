@@ -72,6 +72,18 @@ button:focus {outline:0 !important;}
     border-radius: 14px;
     color: #fff;
 }
+.txt-smp-blue {
+    background-color: #1a67f3;
+    padding: 7px;
+    border-radius: 14px;
+    color: #fff;
+}
+.txt-smp-pink {
+    background-color: #b30c4a;
+    padding: 7px;
+    border-radius: 14px;
+    color: #fff;
+}
 .smp-links{
 	float: right;
     position: relative;
