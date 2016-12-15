@@ -1,7 +1,10 @@
-<?php 
+<?php
 use yii\helpers\Html;
 use yii\helpers\Url;
 ?>
+
+<script src="<?= Yii::$app->request->baseUrl?>/src/masonry.js" type="text/javascript"></script>
+<script src="<?= Yii::$app->request->baseUrl?>/src/imagesloaded.js" type="text/javascript"></script>
     <div class="col-md-12">
 		<div class="col-md-3">
 			<h3>Find A Wish</h3>
@@ -29,25 +32,19 @@ use yii\helpers\Url;
 				</div>
 				<div class="tab-pane" id="fullfilled">
 				</div>
-				<div class="tab-pane active" id="current">
+				<div class="tab-pane active holder col-md-12"  data-masonry='{ "itemSelector": ".item", "columnWidth": 5, "gutter": 1 }' id="current">
 					<h3 style="color:#006699;">Current Wishes</h3>
-					<?php 
-					\yii2masonry\yii2masonry::begin([
-						'clientOptions' => [
-							'columnWidth' => 50,
-							'itemSelector' => '.item'
-						]
-					]); 
-					
+					<?php
+
 					foreach($dataProvider->models as $wish){
 						echo '<div class="item col-md-4"><div class="thumbnail">';
 						echo '<img src="'.\Yii::$app->homeUrl.$wish->primary_image.'" class="img-responsive" alt="Image">';
 						/////activities///
 						if(!$wish->isFaved(\Yii::$app->user->id))
 							echo '<div class="smp-links"><span title="Add to favourites" data-w_id="'.$wish->w_id.'" data-a_type="fav" class="fav-wish glyphicon glyphicon-heart-empty txt-smp-orange"></span></br>';
-						else 
+						else
 							echo '<div class="smp-links"><span title="You favourited it" data-w_id="'.$wish->w_id.'" data-a_type="fav" class="fav-wish glyphicon glyphicon-heart-empty txt-smp-blue"></span></br>';
-						
+
 						if(!$wish->isLiked(\Yii::$app->user->id))
 							echo '<span title="Like it" data-w_id="'.$wish->w_id.'" data-a_type="like" class="like-wish glyphicon glyphicon glyphicon-thumbs-up txt-smp-green"></span></div>';
 						else
@@ -57,13 +54,13 @@ use yii\helpers\Url;
 							echo '<p>Name : <span>'.$wish->wisher->username.'</span></p>
 							<p>Wish For : <span>'.$wish->wish_title.'</span></p>
 							<p>Location : <span>Location1</span></p>
-							<p><a class="fnt-green" href="#">Read Happy Story</a> 
+							<p><a class="fnt-green" href="#">Read Happy Story</a>
 							&nbsp;<i class="fa fa-thumbs-o-up fnt-blue"></i> 2,432 Likes</p>';
 						echo '</div>
 						<div class="shareIcons"></div>';
 						echo '</div></div>';
-					} 
-					\yii2masonry\yii2masonry::end(); ?>
+					}
+?>
 				</div>
 				<div class="tab-pane" id="recent">
 				</div>
@@ -71,6 +68,37 @@ use yii\helpers\Url;
 		</div>
 	</div>
 	<script>
+  $(window).load(function() {
+  	var win = $(window);
+  	var page = 2;
+  	var $container = $('.item');
+  	$container.masonry();
+  	// Each time the user scrolls
+  	win.scroll(function() {
+  		// End of the document reached?
+  		if ($(document).height() - win.height() == win.scrollTop()) {
+  			$.ajax({
+  				url: '<?=Url::to(['wish/scroll'], true);?>',
+  				dataType: 'html',
+  				data: {'page':page},
+  				success: function(html) {
+  					var el = $(html);
+  					//$(".grid").append(el).masonry( 'appended', el, false );
+  					var $newElems = $( html ).css({ opacity: 0 });
+  					$newElems.imagesLoaded(function(){
+  						$newElems.animate({ opacity: 1 });
+  						$(".holder").append(el).masonry( 'appended', el, true );
+  					});
+  				},
+  				error:function(){
+  				}
+  			});
+  			//$container.masonry();
+  			page = page+1;
+  		}
+  	});
+
+  });
 		$(".shareIcons").jsSocials({
 			showLabel: false,
 			showCount: false,
@@ -93,7 +121,7 @@ use yii\helpers\Url;
 						if(type=="like"){
 							elem.removeClass("txt-smp-green");
 							elem.addClass("txt-smp-pink");
-						}							
+						}
 					}
 					if(data == "removed"){
 						if(type=="fav"){
@@ -103,9 +131,9 @@ use yii\helpers\Url;
 						if(type=="like"){
 							elem.addClass("txt-smp-green");
 							elem.removeClass("txt-smp-pink");
-						}							
+						}
 					}
-						
+
 					console.log(data);
 				}
 			});

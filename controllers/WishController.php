@@ -58,7 +58,45 @@ class WishController extends Controller
             'dataProvider' => $dataProvider,
         ]);
     }
+    /**
+     * Lists all Wish models.
+     * @return mixed
+     */
+    public function actionScroll($page)
+    {
+        $searchModel = new SearchWish();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $count = Wish::find()->count();
+        $last_page = ($count%5)+1;
+        if($page > $last_page && $page != $last_page)
+          return null;
+        $str = '';
+        foreach($dataProvider->models as $wish){
+          $str .= '<div class="item col-md-4"><div class="thumbnail">';
+          $str .= '<img src="'.\Yii::$app->homeUrl.$wish->primary_image.'" class="img-responsive" alt="Image">';
+          /////activities///
+          if(!$wish->isFaved(\Yii::$app->user->id))
+            $str .=  '<div class="smp-links"><span title="Add to favourites" data-w_id="'.$wish->w_id.'" data-a_type="fav" class="fav-wish glyphicon glyphicon-heart-empty txt-smp-orange"></span></br>';
+          else
+            $str .=  '<div class="smp-links"><span title="You favourited it" data-w_id="'.$wish->w_id.'" data-a_type="fav" class="fav-wish glyphicon glyphicon-heart-empty txt-smp-blue"></span></br>';
 
+          if(!$wish->isLiked(\Yii::$app->user->id))
+            $str .=  '<span title="Like it" data-w_id="'.$wish->w_id.'" data-a_type="like" class="like-wish glyphicon glyphicon glyphicon-thumbs-up txt-smp-green"></span></div>';
+          else
+            $str .=  '<span title="You liked it" data-w_id="'.$wish->w_id.'" data-a_type="like" class="like-wish glyphicon glyphicon glyphicon-thumbs-up txt-smp-pink"></span></div>';
+          //////////////////
+          $str .=  '<div class="smp-wish-desc">';
+            $str .=  '<p>Name : <span>'.$wish->wisher->username.'</span></p>
+            <p>Wish For : <span>'.$wish->wish_title.'</span></p>
+            <p>Location : <span>Location1</span></p>
+            <p><a class="fnt-green" href="#">Read Happy Story</a>
+            &nbsp;<i class="fa fa-thumbs-o-up fnt-blue"></i> 2,432 Likes</p>';
+          $str .=  '</div>
+          <div class="shareIcons"></div>';
+          $str .=  '</div></div>';
+        }
+        return $str;
+    }
     /**
      * Displays a single Wish model.
      * @param integer $id
@@ -89,7 +127,7 @@ class WishController extends Controller
 			}
 			$model->wished_by = \Yii::$app->user->id;
 			$model->save();
-            return $this->redirect(['view', 'id' => $model->w_id]);
+            return $this->redirect(['index']);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -115,7 +153,7 @@ class WishController extends Controller
 			if(!empty($model->primary_image)) {
 				if(!$model->uploadImage())
 					return;
-			}			
+			}
 			else
 				$model->primary_image = $current_image;
 			//save model
@@ -165,7 +203,7 @@ class WishController extends Controller
 			return "added";
 		else return false;
 	}
-	 
+
     /**
      * Finds the Wish model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
