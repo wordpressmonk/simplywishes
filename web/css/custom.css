@@ -1,0 +1,161 @@
+@font-face {
+  font-family: 'FontAwesome';
+  src: url('./fonts/fontawesome-webfont.eot?v=3.0.1');
+  src: url('./fonts/fontawesome-webfont.eot?#iefix&v=3.0.1') format('embedded-opentype'),
+    url('./fonts/fontawesome-webfont.woff?v=3.0.1') format('woff'),
+    url('./fonts/fontawesome-webfont.ttf?v=3.0.1') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+/***** Custom CSS *****/
+@font-face {
+  font-family: 'Mavenprobold';
+  src: url('./fonts/MavenPro-Bold.ttf') format('truetype'); 
+} 
+@font-face {
+  font-family: 'MavenproMedium';
+  src: url('./fonts/MavenPro-Medium.ttf') format('truetype'); 
+}  
+@font-face {
+  font-family: 'Quicksand';
+  src: url('./fonts/Quicksand-Bold.ttf') format('truetype'); 
+}  
+.slide_header{
+	color:#fff;
+	font-size:65px;
+	font-family: 'Quicksand';
+	padding-bottom:10px;
+	font-weight:bold;
+}
+body{
+	font-family: 'Quicksand';
+}
+.simply-head{
+	text-align:center;
+	padding:20px;
+	font-weight:bold;
+	margin:30px 0px;
+}
+.simply-head h3{
+	font-weight:bold;
+	margin:0px;
+}
+.smpl-brdr{
+	border-radius:16px;
+	letter-spacing: 1px;
+}
+button:focus {outline:0 !important;}
+.btn-smp-green{
+	background-color:#0cb370;
+	color:#fff;
+}
+.btn-smp-blue{
+	background-color:#005a87;
+	color:#fff;
+}
+.btn-smp-orange{
+	background-color:#f3ae1a;
+	color:#000;
+}
+.txt-smp-orange{
+	color:#f3ae1a;
+}
+.txt-smp-green{
+	background-color: #0cb370;
+    padding: 7px;
+    border-radius: 14px;
+    color: #fff;
+}
+.txt-smp-orange{
+    background-color: #f3ae1a;
+    padding: 7px;
+    border-radius: 14px;
+    color: #fff;
+}
+.smp-links{
+	float: right;
+    position: relative;
+    top: -120px;
+    left: -8px;
+}
+.smp-links>span{
+	margin:2px;
+	cursor:pointer;
+}
+.smpl-wish-block{
+	display: inline-block;
+    max-width: 200px;
+    margin: 0 10px;
+}
+.arrow-links>img{
+	position:relative;
+	bottom:-140px;
+	cursor:pointer;
+}
+.smp-wish-desc{
+	padding:5px;
+	font-family:'MavenproMedium';
+}
+.shareIcons a {
+    font-size: 18px;
+}
+.smp-foot{
+	background-color:#1e3a52;
+	padding:30px 0px;
+}
+.smp-head{
+	background-color:#006699;
+	padding-top:10px;
+}
+footer{
+	color:#fff;
+	font-family:'MavenproMedium';
+}
+.smp-footer-links li{
+	display:inline;
+	padding-right:12px;
+	
+}
+.smp-footer-links li:after {
+    content: "\2022";
+    padding-left: 12px;
+}
+.smp-footer-links li:nth-child(n+5):after{
+	content: "";
+}
+.smp-logo img{
+	max-width:230px;
+}
+.smp-pills li a{
+    border-radius: 0px;
+	color:#fff;
+	font-family:'MavenproMedium';
+}
+.smp-pills li ul li a{
+	color:#808080;
+}
+.smp-pills li ul li a i{
+	color:#006699;
+	padding-right:10px;
+}
+.smp-pills li ul li{
+	border-bottom:solid 1px #ddd;
+}
+.smp-pills li.active{
+	border-bottom: solid 3px #f3ae1a;
+}
+.smp-pills li a:hover{
+	color:#000;
+}
+.shareIcons .jssocials-share.jssocials-share {
+    padding: 3px;
+}
+li.list-group-item.active a {
+    color: #fff;
+}
+.fnt-green{
+	color:#0cb370;
+}
+.fnt-blue{
+	color:#006699;
+}
