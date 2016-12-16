@@ -173,7 +173,7 @@ class Wish extends \yii\db\ActiveRecord
 		$country = Country::findOne($this->country);
 		$state = State::findOne($this->state);
 		$city = City::findOne($this->city);
-		if(!$country || $state)
+		if(!$country || !$state)
 			return "Unknown";
 		else return "$state->name , $country->name";
 	}
