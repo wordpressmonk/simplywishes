@@ -36,12 +36,12 @@ AppAsset::register($this);
 		<div class="row" style="padding:28px 0px;">
 		<?php if(\Yii::$app->user->isGuest){ ?>
 			<div class="btn-group pull-right">
-			  <button class="btn btn-smp-blue smpl-brdr" type="button">
-				<a href="<?=Yii::$app->homeUrl?>/site/login">Login</a>
-			  </button>
-			  <button class="btn btn-smp-green smpl-brdr" type="button">
-				<a href="<?=Yii::$app->homeUrl?>/site/sign-up">Join Today</a>
-			  </button>
+			  <a href="<?=Yii::$app->homeUrl?>/site/login"><button class="btn btn-smp-blue smpl-brdr-left" type="button">
+				Login
+			  </button></a>
+			  <a href="<?=Yii::$app->homeUrl?>/site/sign-up"><button class="btn btn-smp-green smpl-brdr-right" type="button">
+				Join Today
+			  </button></a>
 			</div>
 		<?php  } else { ?>
 			<div class="btn-group pull-right">
@@ -61,7 +61,7 @@ AppAsset::register($this);
 		  <ul class="nav nav-pills smp-pills">
 			<li class="active"><a href="#">Home</a></li>
 			<li><a href="#">About Us</a></li>
-			<li><a href="#">Find a Wish</a></li>
+			<li><a href="<?=Yii::$app->homeUrl?>/wish/index">Find a Wish</a></li>
 			<li><a href="#">iWish</a></li>
 			<li><a href="#">iGrant</a></li>
 			<li><a href="#">Happy stories</a></li>

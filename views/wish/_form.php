@@ -21,11 +21,33 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'primary_image')->fileInput() ?>
 
-    <?= $form->field($model, 'state')->textInput() ?>
-
-    <?= $form->field($model, 'country')->textInput() ?>
-
-    <?= $form->field($model, 'city')->textInput() ?>
+					<div class="col-lg-4">
+						<?= $form->field($model, 'country')->dropDownList($countries,[
+							'prompt'=>'--Select Country--',
+							'onchange'=>'$.post( "'.Yii::$app->urlManager->createUrl('site/get-states?country_id=').'"+$(this).val(), function( data ) 
+							{
+								$( "select#state_select" ).html( data ).change();
+										
+							});'
+							]) ?>
+					</div>
+					<div class="col-lg-4">
+						<?= $form->field($model, 'state')->dropDownList($states,[
+							'id' => 'state_select',
+							'prompt'=>'--Select State--',
+							'onchange'=>'$.post( "'.Yii::$app->urlManager->createUrl('site/get-cities?state_id=').'"+$(this).val(), function( data ) 
+							{
+								$( "select#city_select" ).html( data ).change();
+										
+							});'
+						]); ?>
+					</div>
+					<div class="col-lg-4">
+						<?= $form->field($model, 'city')->dropDownList($cities,[
+							'id' => 'city_select',
+							'prompt'=>'--Select State--',
+						]); ?>
+					</div>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

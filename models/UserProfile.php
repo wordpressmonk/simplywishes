@@ -60,11 +60,22 @@ class UserProfile extends \yii\db\ActiveRecord
     }
 	
 	public function uploadImage(){
-		if($this->validate()) {
+		//if($this->validate()) {
 			$this->profile_image->saveAs('uploads/' . $this->profile_image->baseName . '.' .$this->profile_image->extension);
 			$this->profile_image = 'uploads/'.$this->profile_image->baseName.'.'.$this->profile_image->extension;
 			return true;
-		}else
-			return false;
+		//}else
+		//	return false;
+	}
+    /**
+     * @returns the location of the wish
+     */	
+	public function getLocation(){
+		
+		$country = Country::findOne($this->country);
+		$state = State::findOne($this->state);
+		$city = City::findOne($this->city);
+		
+		return "$state->name , $country->name";
 	}
 }

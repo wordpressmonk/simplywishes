@@ -59,41 +59,44 @@ class WishController extends Controller
         ]);
     }
     /**
-     * Lists all Wish models.
+     * Lists all Wish models when scrolls.
      * @return mixed
      */
     public function actionScroll($page)
     {
         $searchModel = new SearchWish();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        $count = Wish::find()->count();
-        $last_page = ($count%5)+1;
-        if($page > $last_page && $page != $last_page)
-          return null;
+		$dataProvider->pagination->page = $page;
+        $str = '';
+		//if ($dataProvider->totalCount > 0) {
+        foreach($dataProvider->models as $wish){
+				$str .= $wish->wishAsCard;
+        }
+		//}
+        return $str;
+    }
+    /**
+     * Lists all Wish models according to the number of likes.
+     * @return mixed
+     */
+    public function actionPopular()
+    {
+        $searchModel = new SearchWish();
+        $dataProvider = $searchModel->searchPopular(Yii::$app->request->queryParams);
+
+        return $this->render('popular_wishes', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+    public function actionScrollPopular($page)
+    {
+        $searchModel = new SearchWish();
+        $dataProvider = $searchModel->searchPopular(Yii::$app->request->queryParams);
+		$dataProvider->pagination->page = $page;
         $str = '';
         foreach($dataProvider->models as $wish){
-          $str .= '<div class="item col-md-4"><div class="thumbnail">';
-          $str .= '<img src="'.\Yii::$app->homeUrl.$wish->primary_image.'" class="img-responsive" alt="Image">';
-          /////activities///
-          if(!$wish->isFaved(\Yii::$app->user->id))
-            $str .=  '<div class="smp-links"><span title="Add to favourites" data-w_id="'.$wish->w_id.'" data-a_type="fav" class="fav-wish glyphicon glyphicon-heart-empty txt-smp-orange"></span></br>';
-          else
-            $str .=  '<div class="smp-links"><span title="You favourited it" data-w_id="'.$wish->w_id.'" data-a_type="fav" class="fav-wish glyphicon glyphicon-heart-empty txt-smp-blue"></span></br>';
-
-          if(!$wish->isLiked(\Yii::$app->user->id))
-            $str .=  '<span title="Like it" data-w_id="'.$wish->w_id.'" data-a_type="like" class="like-wish glyphicon glyphicon glyphicon-thumbs-up txt-smp-green"></span></div>';
-          else
-            $str .=  '<span title="You liked it" data-w_id="'.$wish->w_id.'" data-a_type="like" class="like-wish glyphicon glyphicon glyphicon-thumbs-up txt-smp-pink"></span></div>';
-          //////////////////
-          $str .=  '<div class="smp-wish-desc">';
-            $str .=  '<p>Name : <span>'.$wish->wisher->username.'</span></p>
-            <p>Wish For : <span>'.$wish->wish_title.'</span></p>
-            <p>Location : <span>Location1</span></p>
-            <p><a class="fnt-green" href="#">Read Happy Story</a>
-            &nbsp;<i class="fa fa-thumbs-o-up fnt-blue"></i> 2,432 Likes</p>';
-          $str .=  '</div>
-          <div class="shareIcons"></div>';
-          $str .=  '</div></div>';
+			$str .= $wish->wishAsCard;
         }
         return $str;
     }
@@ -118,6 +121,11 @@ class WishController extends Controller
     {
         $model = new Wish();
 		$model->scenario = 'create';
+		
+		$countries = \yii\helpers\ArrayHelper::map(\app\models\Country::find()->all(),'id','name');	
+		$states = \yii\helpers\ArrayHelper::map(\app\models\State::find()->all(),'id','name');	
+		$cities = \yii\helpers\ArrayHelper::map(\app\models\City::find()->all(),'id','name');	
+		
 		$categories =  ArrayHelper::map(Category::find()->all(), 'cat_id', 'title');
         if ($model->load(Yii::$app->request->post())) {
 			$model->primary_image = UploadedFile::getInstance($model, 'primary_image');
@@ -131,7 +139,10 @@ class WishController extends Controller
         } else {
             return $this->render('create', [
                 'model' => $model,
-				'categories' => $categories
+				'categories' => $categories,
+				'countries' => $countries,
+				'states' => $states,
+				'cities' => $cities
             ]);
         }
     }
@@ -146,6 +157,9 @@ class WishController extends Controller
     {
         $model = $this->findModel($id);
 		$categories =  ArrayHelper::map(Category::find()->all(), 'cat_id', 'title');
+		$countries = \yii\helpers\ArrayHelper::map(\app\models\Country::find()->all(),'id','name');	
+		$states = \yii\helpers\ArrayHelper::map(\app\models\State::find()->all(),'id','name');	
+		$cities = \yii\helpers\ArrayHelper::map(\app\models\City::find()->all(),'id','name');	
 		$current_image = $model->primary_image;
         if ($model->load(Yii::$app->request->post())) {
 			//check for a new image
@@ -163,7 +177,10 @@ class WishController extends Controller
         } else {
             return $this->render('update', [
                 'model' => $model,
-				'categories' => $categories
+				'categories' => $categories,
+				'countries' => $countries,
+				'states' => $states,
+				'cities' => $cities
             ]);
         }
     }
