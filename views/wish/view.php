@@ -42,8 +42,7 @@ $this->params['breadcrumbs'][] = $this->title;
 			<p>What Do I Give In Return : <span><?=$model->in_return?> </span></p>
 			<p>Who Can Potentialy Help me : <span><?=$model->who_can?> </span></p>
 			<p>Category : <span><?=$model->categoryName?></span></p>
-			<!--<button class="btn btn-success">Click Here To Grant</button>-->
-			<?php if(is_null($model->granted_by)){ ?>
+			<?php if(is_null($model->granted_by) && !\Yii::$app->user->isGuest){ ?>
 				<form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
 				  <!-- Identify your business so that you can collect the payments. -->
 				  <input type="hidden" name="business" value="dency@abacies.com">
@@ -63,6 +62,8 @@ $this->params['breadcrumbs'][] = $this->title;
 				  <img alt="" border="0" width="1" height="1"
 				  src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" >
 				</form>
+			<?php } else{ ?>
+				<a href="<?=Url::to(['site/login'])?>"><button class="btn btn-success">Click Here To Grant</button></a>
 			<?php } ?>
 			
 			<?php if(is_null($model->granted_by) && !\Yii::$app->user->isGuest && \Yii::$app->user->id==$model->wished_by)
