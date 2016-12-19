@@ -39,10 +39,11 @@ class SearchWish extends Wish
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
+    public function search($params,$cat_id=null)
     {
         $query = Wish::find()->orderBy('w_id DESC');
-
+		if($cat_id)
+			$query->andWhere(['category'=>$cat_id]);
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([

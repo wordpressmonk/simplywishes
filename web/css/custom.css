@@ -188,4 +188,12 @@ position: relative;
 letter-spacing: 1px;
 border-radius: 16px 0px 0px 16px;
 }
-
+.nav.list>li>a:focus,.nav.list>li>a:hover{
+	background: none;
+}
+a[aria-expanded='true'] .fa-plus{
+display:none;
+}
+a[aria-expanded='true'] .fa-minus{
+display:block !important;
+}

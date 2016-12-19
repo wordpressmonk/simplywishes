@@ -11,8 +11,28 @@ use yii\helpers\Url;
 			<ul class="nav list list-group">
 				<li class="list-group-item"><a href="<?=\Yii::$app->homeUrl?>wish/popular">Most Popular Wishes</a></li>
 				<li class="list-group-item"><a href="<?=\Yii::$app->homeUrl?>wish/granted">Fullfilled Wishes</a></li>
-				<li class="active list-group-item"><a href="#current" data-toggle="tab">Current Wishes</a></li>
-				<li class="list-group-item"><a data-toggle="tab" href="#recipient">Recipient</a></li>
+				<?php if($cat_id) 
+					echo '<li class="list-group-item"><a href="#current" data-toggle="tab">Current Wishes</a></li>';
+				else 
+					echo '<li class="active list-group-item"><a href="#current" data-toggle="tab">Current Wishes</a></li>'			
+				?>
+				<?php if($cat_id) 
+					$active = 'active';
+				else $active = ''; ?>
+				<li class="<?=$active?> list-group-item dropdown">
+					<a data-toggle="collapse" data-target="#demo">Recipient 
+						<i class="fa fa-plus text-success pull-right"></i>
+						<i class="fa fa-minus text-success pull-right" style="display:none;"></i>
+					</a>
+					<ul id="demo" class="nav nav-stacked collapsed collapse">
+						<?php
+							$categories = \app\models\Category::find()->all();
+							foreach($categories as $cat){
+							echo "<li><a href='".\Yii::$app->homeUrl."wish/index?cat_id=$cat->cat_id'> $cat->title</a></li>";
+							}
+						?>
+					</ul>
+				</li>
 			</ul>
 			</br>
 			<p>Search By Keyword Or Location</p>
@@ -33,7 +53,10 @@ use yii\helpers\Url;
 				<div class="tab-pane" id="fullfilled">
 				</div>
 				<div class="tab-pane active"  id="current">
-					<h3 style="color:#006699;">Current Wishes</h3>
+					<h3 style="color:#006699;">Current Wishes
+					<?php if($cat_id)
+						echo " : ".\app\models\Category::findOne($cat_id)->title; ?>
+					</h3>
 					<div class="grid"  data-masonry='{ "itemSelector": ".grid-item" }' id="current">
 					<?php
 
@@ -64,7 +87,7 @@ use yii\helpers\Url;
   		if ($(document).height() - win.height()-1 == scroll_top ) {
 			console.log("scrolld");
   			$.ajax({
-  				url: '<?=Url::to(['wish/scroll'], true);?>',
+  				url: '<?=Url::to(['wish/scroll','cat_id'=>$cat_id], true);?>',
   				dataType: 'html',
   				data: {'page':page},
   				success: function(html) {

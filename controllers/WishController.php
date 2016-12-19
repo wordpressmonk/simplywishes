@@ -48,24 +48,25 @@ class WishController extends Controller
      * Lists all Wish models.
      * @return mixed
      */
-    public function actionIndex()
+    public function actionIndex($cat_id=null)
     {
         $searchModel = new SearchWish();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams,$cat_id);
 
         return $this->render('current_wishes', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+			'cat_id'=>$cat_id
         ]);
     }
     /**
      * Lists all Wish models when scrolls.
      * @return mixed
      */
-    public function actionScroll($page)
+    public function actionScroll($page,$cat_id=null)
     {
         $searchModel = new SearchWish();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams,$cat_id);
 		$dataProvider->pagination->page = $page;
         $str = '';
 		//if ($dataProvider->totalCount > 0) {
