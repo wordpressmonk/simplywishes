@@ -73,7 +73,7 @@ class SiteController extends Controller
      *
      * @return string
      */
-    public function actionLogin()
+    public function actionLogin($red_url=null)
     {
 		
         if (!Yii::$app->user->isGuest) {
@@ -82,6 +82,8 @@ class SiteController extends Controller
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
+			if($red_url)
+				return $this->redirect($red_url);
             return $this->goBack();
         }
         return $this->render('login', [
@@ -157,6 +159,36 @@ class SiteController extends Controller
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);		
+	}
+	public function actionMyFullfilled(){
+		
+		$user = User::findOne(\Yii::$app->user->id);
+		$profile = UserProfile::find()->where(['user_id'=>\Yii::$app->user->id])->one();
+		
+        $searchModel = new SearchWish();
+        $dataProvider = $searchModel->searchUserWishes(Yii::$app->request->queryParams,\Yii::$app->user->id,'fullfilled');
+		
+		return $this->render('my_fullfilled', [
+            'user' => $user,
+			'profile' => $profile,
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);			
+	}
+	public function actionMySaved(){
+		
+		$user = User::findOne(\Yii::$app->user->id);
+		$profile = UserProfile::find()->where(['user_id'=>\Yii::$app->user->id])->one();
+		
+        $searchModel = new SearchWish();
+        $dataProvider = $searchModel->searchSavedWishes(Yii::$app->request->queryParams,\Yii::$app->user->id,'fullfilled');
+		
+		return $this->render('saved', [
+            'user' => $user,
+			'profile' => $profile,
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);			
 	}
 	public function actionEditAccount()
 	{

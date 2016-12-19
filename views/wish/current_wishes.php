@@ -10,7 +10,7 @@ use yii\helpers\Url;
 			<h3>Find A Wish</h3>
 			<ul class="nav list list-group">
 				<li class="list-group-item"><a href="<?=\Yii::$app->homeUrl?>wish/popular">Most Popular Wishes</a></li>
-				<li class="list-group-item"><a href="<?=\Yii::$app->homeUrl?>wish/fullfilled">Fullfilled Wishes</a></li>
+				<li class="list-group-item"><a href="<?=\Yii::$app->homeUrl?>wish/granted">Fullfilled Wishes</a></li>
 				<li class="active list-group-item"><a href="#current" data-toggle="tab">Current Wishes</a></li>
 				<li class="list-group-item"><a data-toggle="tab" href="#recipient">Recipient</a></li>
 			</ul>

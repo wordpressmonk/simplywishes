@@ -100,6 +100,26 @@ class WishController extends Controller
         }
         return $str;
     }
+	public function actionGranted(){
+        $searchModel = new SearchWish();
+        $dataProvider = $searchModel->searchGranted(Yii::$app->request->queryParams);
+
+        return $this->render('fullfilled_wishes', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);		
+	}
+    public function actionScrollGranted($page)
+    {
+        $searchModel = new SearchWish();
+        $dataProvider = $searchModel->searchGranted(Yii::$app->request->queryParams);
+		$dataProvider->pagination->page = $page;
+        $str = '';
+        foreach($dataProvider->models as $wish){
+			$str .= $wish->wishAsCard;
+        }
+        return $str;
+    }
     /**
      * Displays a single Wish model.
      * @param integer $id
@@ -134,6 +154,7 @@ class WishController extends Controller
 					return;
 			}
 			$model->wished_by = \Yii::$app->user->id;
+			//print_r($model);die;
 			$model->save();
             return $this->redirect(['index']);
         } else {
@@ -206,6 +227,8 @@ class WishController extends Controller
 	 */
 	public function actionLike($w_id,$type)
 	{
+		if(\Yii::$app->user->isGuest)
+			return $this->redirect(['site/login','red_url'=>Yii::$app->request->referrer]);
 		$wish = $this->findModel($w_id);
 		$activity = Activity::find()->where(['wish_id'=>$wish->w_id,'activity'=>$type,'user_id'=>\Yii::$app->user->id])->one();
 		if($activity != null){
@@ -220,7 +243,16 @@ class WishController extends Controller
 			return "added";
 		else return false;
 	}
-
+	
+	public function actionFullfilled($w_id){
+		
+		$wish = $this->findModel($w_id);
+		//do this only after verifying the IPN
+		$wish->granted_by = \Yii::$app->user->id;
+		if($wish->save())
+			return $this->redirect(['wish/view','id'=>$w_id]);
+		
+	}
     /**
      * Finds the Wish model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.

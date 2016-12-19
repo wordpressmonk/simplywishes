@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use kartik\date\DatePicker;
 /* @var $this yii\web\View */
 /* @var $model app\models\Wish */
 /* @var $form yii\widgets\ActiveForm */
@@ -20,7 +21,7 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'wish_description')->textarea(['rows' => 6]) ?>
 
     <?= $form->field($model, 'primary_image')->fileInput() ?>
-
+	<div class="row">
 					<div class="col-lg-4">
 						<?= $form->field($model, 'country')->dropDownList($countries,[
 							'prompt'=>'--Select Country--',
@@ -48,7 +49,25 @@ use yii\widgets\ActiveForm;
 							'prompt'=>'--Select State--',
 						]); ?>
 					</div>
-
+	</div>
+	<div class="row">
+			<div class="col-lg-6">
+				<?=DatePicker::widget([
+						'model' => $model, 
+						'attribute' => 'expected_date',
+						'options' => ['placeholder' => 'Select issue date ...'],
+						'pluginOptions' => [
+							'format' => 'dd-mm-yyyy',
+							'todayHighlight' => true
+						]
+					])?>
+			</div>
+			<div class="col-lg-6">
+				<?= $form->field($model, 'expected_cost')?>
+			</div>
+	</div>
+	<?= $form->field($model, 'who_can')->textArea()?>
+	<?= $form->field($model, 'in_return')->textArea()?>
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>

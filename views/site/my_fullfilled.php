@@ -27,21 +27,20 @@ use yii\helpers\Url;
 	</div>
 	<!-- To replace tab as link remove data-toggle=tab and replace href with link-->
 	<ul class="nav nav-tabs smp-mg-bottom" role="tablist">
-	  <li role="presentation" class="active">
-		<a href="#activewish" role="tab" data-toggle="tab">My Active Wishes</a>
-	  </li>
 	  <li role="presentation">
-		<a href="<?=\Yii::$app->homeUrl?>site/my-fullfilled" role="tab" >My Fullfilled Wishes</a>
+		<a href="<?=\Yii::$app->homeUrl?>site/my-account" role="tab">My Active Wishes</a>
+	  </li>
+	  <li role="presentation" class="active">
+		<a href="#fullfilledwish" role="tab" data-toggle="tab">My Fullfilled Wishes</a>
 	  </li>
 	</ul>
 	<div class="tab-content">
-		<div role="tabpanel" class="tab-pane active grid" id="activewish">
+		<div role="tabpanel" class="tab-pane" id="activewish">
+		</div>
+		<div role="tabpanel" class="tab-pane active grid" id="fullfilledwish">
 			<?php foreach($dataProvider->models as $wish){
 				echo $wish->htmlForProfile;;
-			}?>
-		</div>
-		<div role="tabpanel" class="tab-pane" id="fullfilledwish">
-			
+			}?>			
 		</div>
 	  </div>
 	<script>

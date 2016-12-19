@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\helpers\Url;
 
 /**
  * This is the model class for table "wishes".
@@ -35,18 +36,19 @@ class Wish extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['category', 'wish_title','state', 'country', 'city'], 'required'],
+            [['category', 'wish_title','state', 'country', 'city','expected_cost','expected_date'], 'required'],
 			['primary_image', 'required', 'message' => '{attribute} can\'t be blank', 'on'=>'create'],
             [['wished_by', 'granted_by', 'category', 'state', 'country', 'city'], 'integer'],
             [['wish_description'], 'string'],
 			[['primary_image'], 'file','extensions' => 'jpg,png', 'skipOnEmpty' => true],
             [['wish_title'], 'string', 'max' => 100],
-            [['summary_title'], 'string', 'max' => 150],
+            [['summary_title','who_can'], 'string', 'max' => 150],
+			[['in_return'], 'string', 'max' => 1500],
         ];
     }
 	public function scenarios() {
         $scenarios = parent::scenarios();
-        $scenarios['create'] = ['category', 'wish_title','summary_title', 'wish_description','primary_image','state', 'country', 'city'];
+        $scenarios['create'] = ['category', 'wish_title','summary_title', 'wish_description','primary_image','state', 'country', 'city','expected_cost','expected_date','in_return','who_can'];
         return $scenarios;
     }
     /**
@@ -66,6 +68,10 @@ class Wish extends \yii\db\ActiveRecord
             'state' => 'State',
             'country' => 'Country',
             'city' => 'City',
+			'expected_cost'=>'Expected Cost(USD)',
+			'expected_date'=>'Expected Date',
+			'in_return'=>'What Do I Give In Return',
+			'who_can'=>'Who Can Potentialy Help me',
         ];
     }
 	public function uploadImage(){
@@ -130,9 +136,9 @@ class Wish extends \yii\db\ActiveRecord
           $str .= '<img src="'.\Yii::$app->homeUrl.$this->primary_image.'" class="img-responsive" alt="Image">';
           /////activities///
           if(!$this->isFaved(\Yii::$app->user->id))
-            $str .=  '<div class="smp-links"><span title="Add to favourites" data-w_id="'.$this->w_id.'" data-a_type="fav" class="fav-wish glyphicon glyphicon-heart-empty txt-smp-orange"></span></br>';
+            $str .=  '<div class="smp-links"><span title="Save this wish" data-w_id="'.$this->w_id.'" data-a_type="fav" class="fav-wish fa fa-save txt-smp-orange"></span></br>';
           else
-            $str .=  '<div class="smp-links"><span title="You favourited it" data-w_id="'.$this->w_id.'" data-a_type="fav" class="fav-wish glyphicon glyphicon-heart-empty txt-smp-blue"></span></br>';
+            $str .=  '<div class="smp-links"><span title="You saved it" data-w_id="'.$this->w_id.'" data-a_type="fav" class="fav-wish fa fa-save txt-smp-blue"></span></br>';
 
           if(!$this->isLiked(\Yii::$app->user->id))
             $str .=  '<span title="Like it" data-w_id="'.$this->w_id.'" data-a_type="like" class="like-wish glyphicon glyphicon glyphicon-thumbs-up txt-smp-green"></span></div>';
@@ -143,7 +149,7 @@ class Wish extends \yii\db\ActiveRecord
             $str .=  '<p>Name : <span>'.$this->wisherName.'</span></p>
             <p>Wish For : <span>'.$this->wish_title.'</span></p>
             <p>Location : <span>'.$this->location.'</span></p>
-            <p><a class="fnt-green" href="#">Read More</a>
+            <p><a class="fnt-green" href="'.Url::to(['wish/view','id'=>$this->w_id]).'">Read More</a>
             &nbsp;<i class="fa fa-thumbs-o-up fnt-blue"></i> '.$this->likesCount.' Likes</p>';
           $str .=  '</div>
           <div class="shareIcons"></div>';
@@ -161,7 +167,7 @@ class Wish extends \yii\db\ActiveRecord
 					<p>Wish Description : <span>'.$this->wish_description.'</span></p>
 					<p>Location : <span>'.$this->location.'</span></p>
 					<p>Category : <span>'.$this->categoryName.'</span></p>
-					<p><a class="fnt-green" href="#">Read More >></a> </p>
+					<p><a class="fnt-green" href="'.Url::to(['wish/view','id'=>$this->w_id]).'">Read More >></a> </p>
 				</div>
 			</div>';
 	}

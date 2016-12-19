@@ -9,8 +9,8 @@ use yii\helpers\Url;
 		<div class="col-md-3">
 			<h3>Find A Wish</h3>
 			<ul class="nav list list-group">
-				<li class="active list-group-item"><a href="#mostpopular" data-toggle="tab">Most Popular Wishes</a></li>
-				<li class="list-group-item"><a href="<?=\Yii::$app->homeUrl?>wish/granted">Fullfilled Wishes</a></li>
+				<li class="list-group-item"><a href="<?=\Yii::$app->homeUrl?>wish/popular">Most Popular Wishes</a></li>
+				<li class="active list-group-item"><a href="#fullfilled" data-toggle="tab">Fullfilled Wishes</a></li>
 				<li class="list-group-item"><a href="<?=\Yii::$app->homeUrl?>wish/index">Current Wishes</a></li>
 				<li class="list-group-item"><a data-toggle="tab" href="#recipient">Recipient</a></li>
 			</ul>
@@ -27,18 +27,19 @@ use yii\helpers\Url;
 		</div>
 		<div class="col-md-9">
 			<div class="tab-content">
-				<div class="tab-pane active" id="mostpopular">
+				<div class="tab-pane" id="mostpopular">
 					<h3 style="color:#006699;">Most Popular Wishes</h3>
-					<div class="grid"  data-masonry='{ "itemSelector": ".grid-item" }'>
+				</div>
+				<div class="tab-pane active" id="fullfilled">
+					<h3 style="color:#006699;">Fullfilled Wishes</h3>
+					<div class="grid"  data-masonry='{ "itemSelector": ".grid-item" }' id="current">
 					<?php
 
 					foreach($dataProvider->models as $wish){
 						echo $wish->wishAsCard;;
 					}
-					?>
+?>
 					</div>
-				</div>
-				<div class="tab-pane" id="fullfilled">
 				</div>
 				<div class="tab-pane"  id="current">
 					<h3 style="color:#006699;">Current Wishes</h3>
@@ -65,7 +66,7 @@ use yii\helpers\Url;
   		if ($(document).height() - win.height()-1 == scroll_top ) {
 			console.log("scrolld");
   			$.ajax({
-  				url: '<?=Url::to(['wish/scroll-popular'], true);?>',
+  				url: '<?=Url::to(['wish/scroll-granted'], true);?>',
   				dataType: 'html',
   				data: {'page':page},
   				success: function(html) {
@@ -91,8 +92,8 @@ use yii\helpers\Url;
   				}
   			});
   			//$container.masonry();
-  			
-			}}
+  			//page = page+1;
+	}}
 		});
 
 	});
