@@ -71,6 +71,9 @@ use yii\helpers\Url;
 		$(".send-msg").on("click",function(){			
 			var send_to = $(this).attr('data-send_to');
 			var msg = $('#'+send_to+'_msg').val();
+			var prof_image = "<?=\Yii::$app->homeUrl.$profile->profile_image?>";
+			var fullname = "<?=$profile->fullname?>";
+			var elem = $(this);
 			console.log(msg);
 			var send_from = "<?=\Yii::$app->user->id?>";
 			$.ajax({
@@ -78,7 +81,16 @@ use yii\helpers\Url;
 				type : 'POST',
 				data : {msg:msg,send_from:send_from,send_to:send_to},
 				success: function(response){
-					console.log("response");
+					var data = $.parseJSON(response);
+					//console.log(response.status);
+					if(data.status){
+						
+						var html = '<li class="media"><div class="media-left list-icon"><img src="'+prof_image+'" alt=""></div><div class="media-body"><h4 class="media-heading">'+fullname+'</h4><p class="list-group-item-text">'+msg+'</p><span class="label label-primary pull-right">Date:Now</span></div></li>';
+					//$(elem).parent('li').append(html);
+						$( html ).insertAfter( $(elem).parent('li'));
+					}
+					
+					
 				}
 			});
 		});

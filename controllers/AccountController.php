@@ -179,9 +179,13 @@ class AccountController extends Controller
 			$message->parent_id = 0;
 			$message->text = $msg;
 			if($message->save()){
-				return true;
+				return json_encode([
+					'status'=>true
+				]);
 			}
-			else return false;
+			else return json_encode([
+					'status'=>false
+				]);
 		}
 	}	
 	public function actionInbox(){
