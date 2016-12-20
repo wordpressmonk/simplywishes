@@ -62,7 +62,7 @@ $this->params['breadcrumbs'][] = $this->title;
 				  <img alt="" border="0" width="1" height="1"
 				  src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" >
 				</form>
-			<?php } else{ ?>
+			<?php } else if(!is_null($model->granted_by)&& \Yii::$app->user->isGuest){ ?>
 				<a href="<?=Url::to(['site/login'])?>"><button class="btn btn-success">Click Here To Grant</button></a>
 			<?php } ?>
 			
