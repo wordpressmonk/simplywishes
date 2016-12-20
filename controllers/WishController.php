@@ -66,7 +66,7 @@ class WishController extends Controller
         return $this->render('current_wishes', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
-
+			'cat_id' => $cat_id
 
         ]);
     }
