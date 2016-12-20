@@ -35,7 +35,7 @@ use yii\helpers\Url;
 				<p>About Me : <span><?=$profile->about?> </span></p>
 				<?php if (!Yii::$app->user->isGuest && $user->id != \Yii::$app->user->id): ?>
 				<a href="#messagemodal" data-toggle="modal"><button class="btn btn-warning">Send Me A Message</button></a>
-				<?php else if ($user->id != \Yii::$app->user->id): ?>
+				<?php if ($user->id != \Yii::$app->user->id): ?>
 				<a href="<?=\Yii::$app->homeUrl?>/site/login" data-toggle="modal"><button class="btn btn-warning">Send Me A Message</button></a>
 				<?php endif; ?>
 				
