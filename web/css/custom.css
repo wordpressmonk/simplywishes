@@ -197,3 +197,22 @@ display:none;
 a[aria-expanded='true'] .fa-minus{
 display:block !important;
 }
+.gravatar a {
+    width: 90px;
+    margin: 5px;
+    display: inline-block;
+}
+.gravatar {
+    width: 50%;
+    margin: 20px 0px;
+}
+/* Arivazhagan for new Singup and edit profile Duplicate logo */
+.selected{
+   margin:10px;
+   border:solid 1px blue; 
+   box-shadow:0px 12px 22px 1px #333;
+}
+/* Arivazhagan for new Singup and edit profile Duplicate logo */
+.profilelogo{
+	cursor:pointer;	
+}

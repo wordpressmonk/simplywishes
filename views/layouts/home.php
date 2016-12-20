@@ -38,7 +38,7 @@ AppAsset::register($this);
 			  <a href="<?=Yii::$app->homeUrl?>/site/login"><button class="btn btn-smp-blue smpl-brdr-left" type="button">
 				Login
 			  </button></a>
-			  <a href="<?=Yii::$app->homeUrl?>/site/sign-up"><button class="btn btn-smp-green smpl-brdr-right" type="button">
+			  <a href="<?=Yii::$app->homeUrl?>site/sign-up"><button class="btn btn-smp-green smpl-brdr-right" type="button">
 				Join Today
 			  </button></a>
 			</div>

@@ -48,40 +48,7 @@ use yii\helpers\Url;
 		<div class="col-md-9">
 			<div class="tab-content">
 				<div class="tab-pane" id="mostpopular">
-					<h3 style="color:#006699;">Most Popular Wishes</h3>
-						<?php 
-					\yii2masonry\yii2masonry::begin([
-						'clientOptions' => [
-							'columnWidth' => 50,
-							'itemSelector' => '.item'
-						]
-					]); 
-					
-					foreach($dataProvidermostpopular->models as $wish){
-						echo '<div class="item col-md-4"><div class="thumbnail">';
-						echo '<img src="'.\Yii::$app->homeUrl.$wish->primary_image.'" class="img-responsive" alt="Image">';
-						/////activities///
-						if(!$wish->isFaved(\Yii::$app->user->id))
-							echo '<div class="smp-links"><span title="Add to favourites" data-w_id="'.$wish->w_id.'" data-a_type="fav" class="fav-wish glyphicon glyphicon-heart-empty txt-smp-orange"></span></br>';
-						else 
-							echo '<div class="smp-links"><span title="You favourited it" data-w_id="'.$wish->w_id.'" data-a_type="fav" class="fav-wish glyphicon glyphicon-heart-empty txt-smp-blue"></span></br>';
-						
-						if(!$wish->isLiked(\Yii::$app->user->id))
-							echo '<span title="Like it" data-w_id="'.$wish->w_id.'" data-a_type="like" class="like-wish glyphicon glyphicon glyphicon-thumbs-up txt-smp-green"></span></div>';
-						else
-							echo '<span title="You liked it" data-w_id="'.$wish->w_id.'" data-a_type="like" class="like-wish glyphicon glyphicon glyphicon-thumbs-up txt-smp-pink"></span></div>';
-						//////////////////
-						echo '<div class="smp-wish-desc">';
-							echo '<p>Name : <span>'.$wish->wisher->username.'</span></p>
-							<p>Wish For : <span>'.$wish->wish_title.'</span></p>
-							<p>Location : <span>Location1</span></p>
-							<p><a class="fnt-green" href="#">Read Happy Story</a> 
-							&nbsp;<i class="fa fa-thumbs-o-up fnt-blue"></i> 2,432 Likes</p>';
-						echo '</div>
-						<div class="shareIcons"></div>';
-						echo '</div></div>';
-					} 
-					\yii2masonry\yii2masonry::end(); ?>
+					<h3 style="color:#006699;">Most Popular Wishes</h3>					
 				</div>
 				<div class="tab-pane" id="fullfilled">
 					<h3 style="color:#006699;">Fullfilled Wishes</h3>
@@ -95,7 +62,7 @@ use yii\helpers\Url;
 					<?php
 
 					foreach($dataProvider->models as $wish){
-						echo $wish->wishAsCard;;
+						echo $wish->wishAsCard;
 					}
 ?>
 					</div>

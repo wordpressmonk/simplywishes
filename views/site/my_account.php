@@ -65,8 +65,25 @@ $this->params['breadcrumbs'][] = $this->title;
 						]); ?>
 					</div>
 					<img src="<?= \Yii::$app->homeUrl.$profile->profile_image;?>" width="150" height="150" />
-					<?= $form->field($profile, 'profile_image')->fileInput() ?>
 					
+					<?= $form->field($profile, 'profile_image')->fileInput(['class' => 'form-control'])->label('Upload Profile Image') ?>
+					
+					</br>
+      <span>Or Choose One</span>         
+      <div class="gravatar thumbnail">
+       <a class="profilelogo" for="images/lady1.jpg" ><img  src="<?=Yii::$app->homeUrl?>images/lady1.jpg"/></a>
+		<a class="profilelogo" for="images/man1.jpg" ><img src="<?=Yii::$app->homeUrl?>images/man1.jpg"/></a>
+		<a class="profilelogo" for="images/lady2.jpg" ><img src="<?=Yii::$app->homeUrl?>images/lady2.jpg"/></a>
+		<a class="profilelogo" for="images/man2.jpg" ><img src="<?=Yii::$app->homeUrl?>images/man2.jpg"/></a>
+		<a class="profilelogo" for="images/lady3.jpg" ><img src="<?=Yii::$app->homeUrl?>images/lady3.jpg"/></a>
+		<a class="profilelogo" for="images/man3.jpg" ><img src="<?=Yii::$app->homeUrl?>images/man3.jpg"/></a>
+		<a class="profilelogo" for="images/lady4.jpg" ><img src="<?=Yii::$app->homeUrl?>images/lady4.jpg"/></a>
+		<a class="profilelogo" for="images/man4.jpg" ><img src="<?=Yii::$app->homeUrl?>images/man4.jpg"/></a>
+		<a class="profilelogo" for="images/lady5.jpg" ><img src="<?=Yii::$app->homeUrl?>images/lady5.jpg"/></a>
+	  </div>
+	
+   <?= $form->field($profile, 'dulpicate_image')->hiddenInput()->label(false) ?>	
+   
 					<h3> Change Password </h3>
 					<p> Change password if you want to, or leave it empty</p>
 					
@@ -84,3 +101,15 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
 
 </div>
+
+<script type="text/javascript" >
+$('.profilelogo').click(function(){
+ $('.profilelogo').find( "img" ).removeClass('selected'); 
+  var val = $(this).attr('for');
+  $(this).find( "img" ).addClass('selected'); 
+  $("#userprofile-dulpicate_image").val(val);
+});
+
+</script>
+
+

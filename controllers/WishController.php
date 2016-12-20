@@ -53,11 +53,10 @@ class WishController extends Controller
         $searchModel = new SearchWish();
 
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-		$dataProvidermostpopular = $searchModel->searchmostpopular(Yii::$app->request->queryParams);
         return $this->render('current_wishes', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
-            'dataProvidermostpopular' => $dataProvidermostpopular,
+
 
         ]);
     }

@@ -19,6 +19,9 @@ use Yii;
  */
 class UserProfile extends \yii\db\ActiveRecord
 {
+	
+	public $dulpicate_image;
+	
     /**
      * @inheritdoc
      */
@@ -36,6 +39,7 @@ class UserProfile extends \yii\db\ActiveRecord
             [['firstname', 'lastname'], 'required'],
             [['user_id', 'country', 'state', 'city'], 'integer'],
             [['about'], 'string'],
+            [['dulpicate_image'], 'safe'],
 			[['profile_image'], 'file','extensions' => 'jpg,png', 'skipOnEmpty' => true],
             [['firstname', 'lastname'], 'string', 'max' => 100],
         ];
@@ -49,9 +53,10 @@ class UserProfile extends \yii\db\ActiveRecord
         return [
             'profile_id' => 'Profile ID',
             'user_id' => 'User ID',
-            'firstname' => 'Firstname',
-            'lastname' => 'Lastname',
+            'firstname' => 'First Name',
+            'lastname' => 'Last Name',
             'about' => 'About',
+            'location' => 'Location',
             'country' => 'Country',
             'state' => 'State',
             'city' => 'City',

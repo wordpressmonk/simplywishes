@@ -12,6 +12,7 @@ class User extends ActiveRecord implements IdentityInterface
 {
 	public $password;
 	public $verify_password;
+
 	
     const STATUS_DELETED = 12;
     const STATUS_ACTIVE = 10;   
@@ -30,7 +31,7 @@ class User extends ActiveRecord implements IdentityInterface
 			[['username', 'email'], 'string', 'max' => 255],
 			[['username'], 'unique','targetClass' => '\app\models\User', 'message' => 'This Username has already been taken.'],
 			[['email'], 'unique','targetClass' => '\app\models\User', 'message' => 'This email address has already been taken.'],
-			[['password','verify_password'], 'safe'],
+			[['password','verify_password'], 'string','min'=>6,'max'=>15],
 			[['verify_password'],'compare','compareAttribute'=>'password','message'=>'Password do not match'],
 		];
 	}
