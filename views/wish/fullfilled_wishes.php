@@ -5,21 +5,34 @@ use yii\helpers\Url;
 
 <script src="<?= Yii::$app->request->baseUrl?>/src/masonry.js" type="text/javascript"></script>
 <script src="<?= Yii::$app->request->baseUrl?>/src/imagesloaded.js" type="text/javascript"></script>
-    <div class="col-md-12">
+    <div class="col-md-12 smp-mg-bottom">
 		<div class="col-md-3">
 			<h3>Find A Wish</h3>
 			<ul class="nav list list-group">
 				<li class="list-group-item"><a href="<?=\Yii::$app->homeUrl?>wish/popular">Most Popular Wishes</a></li>
 				<li class="active list-group-item"><a href="#fullfilled" data-toggle="tab">Fullfilled Wishes</a></li>
 				<li class="list-group-item"><a href="<?=\Yii::$app->homeUrl?>wish/index">Current Wishes</a></li>
-				<li class="list-group-item"><a data-toggle="tab" href="#recipient">Recipient</a></li>
+				<li class="list-group-item dropdown">
+					<a data-toggle="collapse" data-target="#demo">Recipient 
+						<i class="fa fa-plus text-success pull-right"></i>
+						<i class="fa fa-minus text-success pull-right" style="display:none;"></i>
+					</a>
+					<ul id="demo" class="nav nav-stacked collapsed collapse">
+						<?php
+							$categories = \app\models\Category::find()->all();
+							foreach($categories as $cat){
+								echo "<li id='cat_".$cat->cat_id."'><a href='".\Yii::$app->homeUrl."wish/index?cat_id=$cat->cat_id'> $cat->title</a></li>";
+							}
+						?>
+					</ul>
+				</li>
 			</ul>
 			</br>
 			<p>Search By Keyword Or Location</p>
 			<div class="input-group">
 				<input type="text" class="form-control" placeholder="City, State, Country.....other">
 				<span class="input-group-btn">
-				  <button class="btn btn-default" type="button">
+				  <button class="search-wish btn btn-default" type="button">
 					<span class="glyphicon glyphicon-search"></span>
 				  </button>
 				</span>

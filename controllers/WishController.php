@@ -43,7 +43,17 @@ class WishController extends Controller
             ],
         ];
     }
+	public function actionSearch(){
+        $searchModel = new SearchWish();
+		//$cat_id = null;
+		//$searchModel->wish_title = Yii::$app->request->queryParams['match'];
+        $dataProvider = $searchModel->searchCustom(Yii::$app->request->queryParams);
 
+        return $this->render('searched_wishes', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);		
+	}
     /**
      * Lists all Wish models.
      * @return mixed

@@ -4,44 +4,26 @@ use yii\helpers\Url;
 ?>
 <script src="<?= Yii::$app->request->baseUrl?>/src/masonry.js" type="text/javascript"></script>
 <script src="<?= Yii::$app->request->baseUrl?>/src/imagesloaded.js" type="text/javascript"></script>	
-	<div class="col-md-12">
-	<h3>My Profile <a href="<?=\Yii::$app->homeUrl?>/site/edit-account"><button class="btn btn-info">Edit Profile</button></a></h3>
-		<div class="col-md-3">
-			<div class="thumbnail">
-			<?php 
-			if($profile->profile_image!='') 
-				echo '<img src="'.\Yii::$app->homeUrl.$profile->profile_image.'"  class="img-responsive" alt="my-profile-Image">';
-			else 
-				echo '<img src="'.\Yii::$app->homeUrl.'images/default_profile.png"  class="img-responsive" alt="my-profile-Image">';
-			?>
-			</div>
-		</div>
-		<div class="col-md-8">
-			<div class="">
-				<p>Name : <span><?=$profile->firstname." ".$profile->lastname?></span></p>
-				<p>Location : <span><?=$profile->location?></span></p>
-				<p>About Me : <span><?=$profile->about?> </span></p>
-				<button class="btn btn-warning">Send A Message</button>
-			</div>
-		</div>
-	</div>
+	<?php echo $this->render('_profile',['user'=>$user,'profile'=>$profile])?>
 	<!-- To replace tab as link remove data-toggle=tab and replace href with link-->
 	<ul class="nav nav-tabs smp-mg-bottom" role="tablist">
+	  <li role="presentation">
+		<a href="<?=\Yii::$app->homeUrl?>account/my-account" role="tab">My Active Wishes</a>
+	  </li>
 	  <li role="presentation" class="active">
-		<a href="#activewish" role="tab" data-toggle="tab">My Active Wishes</a>
+		<a href="#fullfilledwish" role="tab" data-toggle="tab">My Fullfilled Wishes</a>
 	  </li>
 	  <li role="presentation">
-		<a href="<?=\Yii::$app->homeUrl?>site/my-fullfilled" role="tab" >My Fullfilled Wishes</a>
+		<a href="<?=\Yii::$app->homeUrl?>account/my-saved" role="tab" >My Saved Wishes</a>
 	  </li>
 	</ul>
 	<div class="tab-content">
-		<div role="tabpanel" class="tab-pane active grid" id="activewish">
+		<div role="tabpanel" class="tab-pane" id="activewish">
+		</div>
+		<div role="tabpanel" class="tab-pane active grid" id="fullfilledwish">
 			<?php foreach($dataProvider->models as $wish){
 				echo $wish->htmlForProfile;;
-			}?>
-		</div>
-		<div role="tabpanel" class="tab-pane" id="fullfilledwish">
-			
+			}?>			
 		</div>
 	  </div>
 	<script>

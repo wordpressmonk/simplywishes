@@ -31,7 +31,42 @@ class SearchWish extends Wish
         // bypass scenarios() implementation in the parent class
         return Model::scenarios();
     }
-
+	
+	/* Custom single field search for wishes
+	 * Currently searching only wish title, country,state and city
+	 * @param array $params
+	 * @return ActiveDataProvider
+	 */
+	public function searchCustom($params)
+	{
+		$keywords = explode(",",$params['match']);
+		$query = Wish::find()->orderBy('w_id DESC');
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
+		$query->innerJoinWith('countryModel as countries');
+		$query->innerJoinWith('stateModel as states');
+		$query->innerJoinWith('cityModel as cities');
+		
+		foreach($keywords as $key=>$search){
+			
+			//if there are multiple searches, we are `and`ing the `or` queries
+			if($key>0)
+				$query->andFilterWhere(['or',
+				['like', 'wish_title',$search],
+				['like', 'countries.name', $search],
+				['like', 'states.name', $search],
+				['like', 'cities.name', $search]]);		
+			else
+				$query->where(['like', 'wish_title',$search])
+					->orFilterWhere(['like', 'countries.name', $search])
+					->orFilterWhere(['like', 'states.name', $search])
+					->orFilterWhere(['like', 'cities.name', $search]);					
+					
+		}
+        return $dataProvider;
+	}
+	
     /**
      * Creates data provider instance with search query applied
      *
@@ -196,5 +231,18 @@ class SearchWish extends Wish
             ->andFilterWhere(['like', 'primary_image', $this->primary_image]);
 
         return $dataProvider;		
+	}
+	public function searchSavedWishes($params, $user_id){
+		
+		$query = Wish::find()->where(['activity.user_id'=>$user_id])->orderBy('w_id DESC');
+		$query->innerJoinWith(['saved as activity']);
+		$query->groupBy('w_id');
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+            'pagination' => [
+                'pageSize'=>0
+            ]
+        ]);
+		return $dataProvider;	
 	}
 }

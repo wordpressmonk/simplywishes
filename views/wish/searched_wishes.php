@@ -10,15 +10,7 @@ use yii\helpers\Url;
 			<ul class="nav list list-group">
 				<li class="list-group-item"><a href="<?=\Yii::$app->homeUrl?>wish/popular">Most Popular Wishes</a></li>
 				<li class="list-group-item"><a href="<?=\Yii::$app->homeUrl?>wish/granted">Fullfilled Wishes</a></li>
-				<?php if($cat_id) 
-					echo '<li class="list-group-item"><a href="'.\Yii::$app->homeUrl.'wish/index">Current Wishes</a></li>';
-				else 
-					echo '<li class="active list-group-item"><a href="#current" data-toggle="tab">Current Wishes</a></li>'			
-				?>
-				<?php if($cat_id) 
-					$active = 'active';
-				else $active = ''; ?>
-				<li class="<?=$active?> list-group-item dropdown">
+				<li class="list-group-item dropdown">
 					<a data-toggle="collapse" data-target="#demo">Recipient 
 						<i class="fa fa-plus text-success pull-right"></i>
 						<i class="fa fa-minus text-success pull-right" style="display:none;"></i>
@@ -36,7 +28,7 @@ use yii\helpers\Url;
 			</br>
 			<p>Search By Keyword Or Location</p>
 			<div class="input-group">
-				<input name="searh_field" type="text" class="form-control" placeholder="City, State, Country.....other">
+				<input name="searh_field" type="text" class="form-control" placeholder="City, State, Country.....other" value="<?=$_GET['match']?>">
 				<span class="input-group-btn">
 				  <button class="search-wish btn btn-default" type="button">
 					<span class="glyphicon glyphicon-search"></span>
@@ -52,17 +44,17 @@ use yii\helpers\Url;
 				<div class="tab-pane" id="fullfilled">
 				</div>
 				<div class="tab-pane active"  id="current">
-					<h3 style="color:#006699;">Current Wishes
-					<?php if($cat_id)
-						echo " : ".\app\models\Category::findOne($cat_id)->title; ?>
+					<h3 style="color:#006699;">Wishes
 					</h3>
 					<div class="grid"  data-masonry='{ "itemSelector": ".grid-item" }' id="current">
 					<?php
-
-					foreach($dataProvider->models as $wish){
-						echo $wish->wishAsCard;;
-					}
-?>
+					if(count($dataProvider->models) == 0)
+						echo "No wishes found";
+					else
+						foreach($dataProvider->models as $wish){
+							echo $wish->wishAsCard;;
+						}
+					?>
 					</div>
 				</div>
 				<div class="tab-pane" id="recent">
@@ -77,7 +69,7 @@ use yii\helpers\Url;
   	var $container = $('.grid');
   	$container.masonry();
   	// Each time the user scrolls
-  	win.scroll(function() {
+ /*  	win.scroll(function() {
 		console.log($(document).height() - win.height(),"total");
 		var scroll_top = Math.round(win.scrollTop());
 		console.log(scroll_top,"top");
@@ -86,7 +78,7 @@ use yii\helpers\Url;
   		if ($(document).height() - win.height()-1 == scroll_top ) {
 			console.log("scrolld");
   			$.ajax({
-  				url: '<?=Url::to(['wish/scroll','cat_id'=>$cat_id], true);?>',
+  				url: '<?php //echo Url::to(['wish/scroll','cat_id'=>$cat_id], true);?>',
   				dataType: 'html',
   				data: {'page':page},
   				success: function(html) {
@@ -114,7 +106,7 @@ use yii\helpers\Url;
   			//$container.masonry();
   			//page = page+1;
 	}}
-		});
+		}); */
 
 	});
 	$(".shareIcons").jsSocials({
@@ -157,20 +149,16 @@ use yii\helpers\Url;
 			}
 		});
 	});
-	var cat_id = '<?=$cat_id?>';
-	if(cat_id){
-		$('#demo').addClass('in');
-		$('#cat_'+cat_id).addClass('selected');
-	}
 	//search srcipt
-	$(".search-wish").on("click",function(){		
+	$(".search-wish").on("click",function(){
+		
 		if($("input[name=searh_field]").val() != ''){
 			var url = "<?=Url::to(['wish/search'])?>";
 			window.location.href = url+"?match="+$("input[name=searh_field]").val();
-		}
-		else{
+		}else{
 			var url = "<?=Url::to(['wish/index'])?>";
-			window.location.href = url;			
-		}		
+			window.location.href = url;
+		}
+			
 	});
 	</script>

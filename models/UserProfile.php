@@ -78,4 +78,8 @@ class UserProfile extends \yii\db\ActiveRecord
 		
 		return "$state->name , $country->name";
 	}
+	
+	public function getFullname(){
+		return $this->firstname." ".$this->lastname;
+	}
 }

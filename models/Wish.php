@@ -89,7 +89,27 @@ class Wish extends \yii\db\ActiveRecord
     {
         return $this->hasOne(User::className(), ['id' => 'wished_by']);
     }
-	
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCountryModel()
+    {
+        return $this->hasOne(Country::className(), ['id' => 'country']);
+    }	
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getStateModel()
+    {
+        return $this->hasOne(State::className(), ['id' => 'state']);
+    }
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCityModel()
+    {
+        return $this->hasOne(City::className(), ['id' => 'city']);
+    }	
     /**
      * @return \yii\db\ActiveQuery
      */
@@ -97,7 +117,13 @@ class Wish extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Activity::className(), ['wish_id' => 'w_id']) ->andOnCondition(['activity' => 'like']);
     }
-	
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getSaved()
+    {
+        return $this->hasMany(Activity::className(), ['wish_id' => 'w_id']) ->andOnCondition(['activity' => 'fav']);
+    }	
     /**
      * @return no of likes
      */

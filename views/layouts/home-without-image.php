@@ -70,9 +70,9 @@ AppAsset::register($this);
 			<li class="dropdown"><a href="#">Hello,<?php echo substr(\Yii::$app->user->identity->username,0,5)?>..!</a>
 				<ul class="dropdown-menu nav nav-stacked">
 					<li><a href="#"><i class="fa fa-inbox fa-lg"></i> Inbox</a></li>
-					<li><a href="<?=Yii::$app->homeUrl?>/site/my-account"><i class="fa fa-user-circle-o fa-lg"></i> Account Info</a></li>
+					<li><a href="<?=Yii::$app->homeUrl?>account/my-account"><i class="fa fa-user-circle-o fa-lg"></i> Account Info</a></li>
 					<li><a href="<?=Yii::$app->homeUrl?>/wish/create"><i class="fa fa-clone fa-lg"></i>Add Wish</a></li>
-					<li><a href="<?=Yii::$app->homeUrl?>/site/my-account"><i class="fa fa-heart fa-lg"></i>My Wishes</a></li>
+					<li><a href="<?=Yii::$app->homeUrl?>account/my-account"><i class="fa fa-heart fa-lg"></i>My Wishes</a></li>
 					<li><a href="#"><i class="fa fa-commenting-o fa-lg"></i>Tell Your Story</a></li>
 					<li><a href="#"><i class="fa fa-smile-o fa-lg"></i>My Happy Story</a></li>
 					<li><a href="#"><i class="fa fa-save fa-lg"></i>Saved Wishes</a></li>
