@@ -57,7 +57,7 @@ AppAsset::register($this);
 		<hr style="border-color:#1085bf;">
 		<nav>
 		  <ul class="nav nav-pills smp-pills">
-			<li class="active"><a href="#">Home</a></li>
+			<li><a href="<?=Yii::$app->homeUrl?>">Home</a></li>
 			<li><a href="#">About Us</a></li>
 			<li><a href="<?=Yii::$app->homeUrl?>/wish/index">Find a Wish</a></li>
 			<li><a href="<?=Yii::$app->homeUrl?>wish/top-wishers">iWish</a></li>
