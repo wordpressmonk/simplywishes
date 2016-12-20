@@ -62,8 +62,8 @@ AppAsset::register($this);
 			<li class="active"><a href="#">Home</a></li>
 			<li><a href="#">About Us</a></li>
 			<li><a href="<?=Yii::$app->homeUrl?>/wish/index">Find a Wish</a></li>
-			<li><a href="#">iWish</a></li>
-			<li><a href="#">iGrant</a></li>
+			<li><a href="<?=Yii::$app->homeUrl?>wish/top-wishers">iWish</a></li>
+			<li><a href="<?=Yii::$app->homeUrl?>wish/top-granters">iGrant</a></li>
 			<li><a href="#">Happy stories</a></li>
 			<li><a href="#">Editorial</a></li>
 			<?php if(!\Yii::$app->user->isGuest){  ?>

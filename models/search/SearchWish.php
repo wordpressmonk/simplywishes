@@ -249,5 +249,4 @@ class SearchWish extends Wish
         ]);
 		return $dataProvider;	
 	}
-
 }

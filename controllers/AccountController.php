@@ -251,4 +251,5 @@ class AccountController extends Controller
 		arsort($threads);
 		return $threads;
 	}
+	
 }

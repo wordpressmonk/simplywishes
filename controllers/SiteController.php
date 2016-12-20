@@ -137,9 +137,7 @@ class SiteController extends Controller
 		$user->scenario = 'sign-up';
 		$profile = new UserProfile();
 		$countries = \yii\helpers\ArrayHelper::map(\app\models\Country::find()->all(),'id','name');	
-		if ($user->load(Yii::$app->request->post()) && $profile->load(Yii::$app->request->post())){	
-			
-			
+		if ($user->load(Yii::$app->request->post()) && $profile->load(Yii::$app->request->post())){			
 			$user->setPassword($user->password);
 			$user->generateAuthKey();
 			//print_r($profile);die;
