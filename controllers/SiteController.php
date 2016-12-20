@@ -11,7 +11,7 @@ use app\models\ContactForm;
 use app\models\User;
 use app\models\UserProfile;
 use yii\web\UploadedFile;
-
+use app\models\search\SearchWish;
 
 class SiteController extends Controller
 {
@@ -23,10 +23,10 @@ class SiteController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['logout','my-account'],
+                'only' => ['logout','edit-account','my-account'],
                 'rules' => [
                     [
-                        'actions' => ['logout','my-account'],
+                        'actions' => ['logout','edit-account','my-account'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -73,7 +73,7 @@ class SiteController extends Controller
      *
      * @return string
      */
-    public function actionLogin()
+    public function actionLogin($red_url=null)
     {
 		
         if (!Yii::$app->user->isGuest) {
@@ -82,6 +82,8 @@ class SiteController extends Controller
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
+			if($red_url)
+				return $this->redirect($red_url);
             return $this->goBack();
         }
         return $this->render('login', [
@@ -128,8 +130,68 @@ class SiteController extends Controller
     {
         return $this->render('about');
     }
-	
+	public function actionProfile($id){
+		
+		$user = User::findOne($id);
+		$profile = UserProfile::find()->where(['user_id'=>$id])->one();
+		
+        $searchModel = new SearchWish();
+        $dataProvider = $searchModel->searchUserWishes(Yii::$app->request->queryParams,$id,'active');
+		
+		return $this->render('profile', [
+            'user' => $user,
+			'profile' => $profile,
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);		
+	}
 	public function actionMyAccount(){
+		
+		$user = User::findOne(\Yii::$app->user->id);
+		$profile = UserProfile::find()->where(['user_id'=>\Yii::$app->user->id])->one();
+		
+        $searchModel = new SearchWish();
+        $dataProvider = $searchModel->searchUserWishes(Yii::$app->request->queryParams,\Yii::$app->user->id,'active');
+		
+		return $this->render('profile', [
+            'user' => $user,
+			'profile' => $profile,
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);		
+	}
+	public function actionMyFullfilled(){
+		
+		$user = User::findOne(\Yii::$app->user->id);
+		$profile = UserProfile::find()->where(['user_id'=>\Yii::$app->user->id])->one();
+		
+        $searchModel = new SearchWish();
+        $dataProvider = $searchModel->searchUserWishes(Yii::$app->request->queryParams,\Yii::$app->user->id,'fullfilled');
+		
+		return $this->render('my_fullfilled', [
+            'user' => $user,
+			'profile' => $profile,
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);			
+	}
+	public function actionMySaved(){
+		
+		$user = User::findOne(\Yii::$app->user->id);
+		$profile = UserProfile::find()->where(['user_id'=>\Yii::$app->user->id])->one();
+		
+        $searchModel = new SearchWish();
+        $dataProvider = $searchModel->searchSavedWishes(Yii::$app->request->queryParams,\Yii::$app->user->id,'fullfilled');
+		
+		return $this->render('saved', [
+            'user' => $user,
+			'profile' => $profile,
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);			
+	}
+	public function actionEditAccount()
+	{
 		
 		$user = User::findOne(\Yii::$app->user->id);
 		$profile = UserProfile::find()->where(['user_id'=>\Yii::$app->user->id])->one();

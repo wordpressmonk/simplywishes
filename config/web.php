@@ -6,6 +6,7 @@ $config = [
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
+	'defaultRoute' => 'wish/index',
 	'layout' => 'home-without-image',
     'components' => [
         'request' => [

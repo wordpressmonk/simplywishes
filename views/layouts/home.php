@@ -35,12 +35,12 @@ AppAsset::register($this);
 		<div class="row" style="padding:28px 0px;">
 		<?php if(\Yii::$app->user->isGuest){ ?> 
 			<div class="btn-group pull-right">
-			  <button class="btn btn-smp-blue smpl-brdr" type="button">
-				<a href="<?=Yii::$app->homeUrl?>/site/login">Login</a>
-			  </button>
-			  <button class="btn btn-smp-green smpl-brdr" type="button">
-				<a href="<?=Yii::$app->homeUrl?>/site/sign-up">Join Today</a>
-			  </button>
+			  <a href="<?=Yii::$app->homeUrl?>/site/login"><button class="btn btn-smp-blue smpl-brdr-left" type="button">
+				Login
+			  </button></a>
+			  <a href="<?=Yii::$app->homeUrl?>/site/sign-up"><button class="btn btn-smp-green smpl-brdr-right" type="button">
+				Join Today
+			  </button></a>
 			</div>
 		<?php  } else { ?>
 			<div class="btn-group pull-right">
@@ -59,7 +59,7 @@ AppAsset::register($this);
 		  <ul class="nav nav-pills smp-pills">
 			<li class="active"><a href="#">Home</a></li>
 			<li><a href="#">About Us</a></li>
-			<li><a href="#">Find a Wish</a></li>
+			<li><a href="<?=Yii::$app->homeUrl?>/wish/index">Find a Wish</a></li>
 			<li><a href="#">iWish</a></li>
 			<li><a href="#">iGrant</a></li>
 			<li><a href="#">Happy stories</a></li>
@@ -68,9 +68,9 @@ AppAsset::register($this);
 			<li class="dropdown"><a href="#">Hello,<?php echo substr(\Yii::$app->user->identity->username,0,5)?>..!</a>
 				<ul class="dropdown-menu nav nav-stacked">
 					<li><a href="#"><i class="fa fa-inbox fa-lg"></i> Inbox</a></li>
-					<li><a href="#"><i class="fa fa-user-circle-o fa-lg"></i> Account Info</a></li>
-					<li><a href="#"><i class="fa fa-clone fa-lg"></i>Add Wish</a></li>
-					<li><a href="#"><i class="fa fa-heart fa-lg"></i>My Wishes</a></li>
+					<li><a href="<?=Yii::$app->homeUrl?>/site/my-account"><i class="fa fa-user-circle-o fa-lg"></i> Account Info</a></li>
+					<li><a href="<?=Yii::$app->homeUrl?>/wish/create"><i class="fa fa-clone fa-lg"></i>Add Wish</a></li>
+					<li><a href="<?=Yii::$app->homeUrl?>/site/my-account"><i class="fa fa-heart fa-lg"></i>My Wishes</a></li>
 					<li><a href="#"><i class="fa fa-commenting-o fa-lg"></i>Tell Your Story</a></li>
 					<li><a href="#"><i class="fa fa-smile-o fa-lg"></i>My Happy Story</a></li>
 					<li><a href="#"><i class="fa fa-save fa-lg"></i>Saved Wishes</a></li>

@@ -9,30 +9,10 @@ use yii\helpers\Url;
 		<div class="col-md-3">
 			<h3>Find A Wish</h3>
 			<ul class="nav list list-group">
-				<li class="list-group-item"><a href="<?=\Yii::$app->homeUrl?>wish/popular">Most Popular Wishes</a></li>
+				<li class="active list-group-item"><a href="#mostpopular" data-toggle="tab">Most Popular Wishes</a></li>
 				<li class="list-group-item"><a href="<?=\Yii::$app->homeUrl?>wish/granted">Fullfilled Wishes</a></li>
-				<?php if($cat_id) 
-					echo '<li class="list-group-item"><a href="#current" data-toggle="tab">Current Wishes</a></li>';
-				else 
-					echo '<li class="active list-group-item"><a href="#current" data-toggle="tab">Current Wishes</a></li>'			
-				?>
-				<?php if($cat_id) 
-					$active = 'active';
-				else $active = ''; ?>
-				<li class="<?=$active?> list-group-item dropdown">
-					<a data-toggle="collapse" data-target="#demo">Recipient 
-						<i class="fa fa-plus text-success pull-right"></i>
-						<i class="fa fa-minus text-success pull-right" style="display:none;"></i>
-					</a>
-					<ul id="demo" class="nav nav-stacked collapsed collapse">
-						<?php
-							$categories = \app\models\Category::find()->all();
-							foreach($categories as $cat){
-							echo "<li><a href='".\Yii::$app->homeUrl."wish/index?cat_id=$cat->cat_id'> $cat->title</a></li>";
-							}
-						?>
-					</ul>
-				</li>
+				<li class="list-group-item"><a href="<?=\Yii::$app->homeUrl?>wish/index">Current Wishes</a></li>
+				<li class="list-group-item"><a data-toggle="tab" href="#recipient">Recipient</a></li>
 			</ul>
 			</br>
 			<p>Search By Keyword Or Location</p>
@@ -47,61 +27,24 @@ use yii\helpers\Url;
 		</div>
 		<div class="col-md-9">
 			<div class="tab-content">
-				<div class="tab-pane" id="mostpopular">
+				<div class="tab-pane active" id="mostpopular">
 					<h3 style="color:#006699;">Most Popular Wishes</h3>
-						<?php 
-					\yii2masonry\yii2masonry::begin([
-						'clientOptions' => [
-							'columnWidth' => 50,
-							'itemSelector' => '.item'
-						]
-					]); 
-					
-					foreach($dataProvidermostpopular->models as $wish){
-						echo '<div class="item col-md-4"><div class="thumbnail">';
-						echo '<img src="'.\Yii::$app->homeUrl.$wish->primary_image.'" class="img-responsive" alt="Image">';
-						/////activities///
-						if(!$wish->isFaved(\Yii::$app->user->id))
-							echo '<div class="smp-links"><span title="Add to favourites" data-w_id="'.$wish->w_id.'" data-a_type="fav" class="fav-wish glyphicon glyphicon-heart-empty txt-smp-orange"></span></br>';
-						else 
-							echo '<div class="smp-links"><span title="You favourited it" data-w_id="'.$wish->w_id.'" data-a_type="fav" class="fav-wish glyphicon glyphicon-heart-empty txt-smp-blue"></span></br>';
-						
-						if(!$wish->isLiked(\Yii::$app->user->id))
-							echo '<span title="Like it" data-w_id="'.$wish->w_id.'" data-a_type="like" class="like-wish glyphicon glyphicon glyphicon-thumbs-up txt-smp-green"></span></div>';
-						else
-							echo '<span title="You liked it" data-w_id="'.$wish->w_id.'" data-a_type="like" class="like-wish glyphicon glyphicon glyphicon-thumbs-up txt-smp-pink"></span></div>';
-						//////////////////
-						echo '<div class="smp-wish-desc">';
-							echo '<p>Name : <span>'.$wish->wisher->username.'</span></p>
-							<p>Wish For : <span>'.$wish->wish_title.'</span></p>
-							<p>Location : <span>Location1</span></p>
-							<p><a class="fnt-green" href="#">Read Happy Story</a> 
-							&nbsp;<i class="fa fa-thumbs-o-up fnt-blue"></i> 2,432 Likes</p>';
-						echo '</div>
-						<div class="shareIcons"></div>';
-						echo '</div></div>';
-					} 
-					\yii2masonry\yii2masonry::end(); ?>
-				</div>
-				<div class="tab-pane" id="fullfilled">
-					<h3 style="color:#006699;">Fullfilled Wishes</h3>
-				</div>
-				<div class="tab-pane active"  id="current">
-					<h3 style="color:#006699;">Current Wishes
-					<?php if($cat_id)
-						echo " : ".\app\models\Category::findOne($cat_id)->title; ?>
-					</h3>
-					<div class="grid"  data-masonry='{ "itemSelector": ".grid-item" }' id="current">
+					<div class="grid"  data-masonry='{ "itemSelector": ".grid-item" }'>
 					<?php
 
 					foreach($dataProvider->models as $wish){
 						echo $wish->wishAsCard;;
 					}
-?>
+					?>
 					</div>
 				</div>
+				<div class="tab-pane" id="fullfilled">
+				</div>
+				<div class="tab-pane"  id="current">
+					<h3 style="color:#006699;">Current Wishes</h3>
+
+				</div>
 				<div class="tab-pane" id="recent">
-					<h3 style="color:#006699;">Recipient</h3>
 				</div>
 			</div>
 		</div>
@@ -122,7 +65,7 @@ use yii\helpers\Url;
   		if ($(document).height() - win.height()-1 == scroll_top ) {
 			console.log("scrolld");
   			$.ajax({
-  				url: '<?=Url::to(['wish/scroll','cat_id'=>$cat_id], true);?>',
+  				url: '<?=Url::to(['wish/scroll-popular'], true);?>',
   				dataType: 'html',
   				data: {'page':page},
   				success: function(html) {
@@ -148,8 +91,8 @@ use yii\helpers\Url;
   				}
   			});
   			//$container.masonry();
-  			//page = page+1;
-	}}
+  			
+			}}
 		});
 
 	});

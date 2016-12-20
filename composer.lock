@@ -57,165 +57,6 @@
             ]
         },
         {
-            "name": "bower-asset/desandro-matches-selector",
-            "version": "v2.0.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/desandro/matches-selector.git",
-                "reference": "94f06d14dc2defafe8b6d6be4d9b999269d70abc"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/desandro/matches-selector/zipball/94f06d14dc2defafe8b6d6be4d9b999269d70abc",
-                "reference": "94f06d14dc2defafe8b6d6be4d9b999269d70abc",
-                "shasum": ""
-            },
-            "require-dev": {
-                "bower-asset/qunit": "dev-1.x|1.x"
-            },
-            "type": "bower-asset-library",
-            "extra": {
-                "bower-asset-main": "matches-selector.js",
-                "bower-asset-ignore": [
-                    "**/.*",
-                    "node_modules",
-                    "bower_components",
-                    "test",
-                    "tests",
-                    "tests.*",
-                    "package.json"
-                ]
-            },
-            "license": [
-                "MIT"
-            ],
-            "description": "matches/matchesSelector helper",
-            "keywords": [
-                "DOM",
-                "matches",
-                "matchesSelector"
-            ]
-        },
-        {
-            "name": "bower-asset/ev-emitter",
-            "version": "v1.0.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/metafizzy/ev-emitter.git",
-                "reference": "1c67f55ea625b87857c2846e9505aee43f45bc6c"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/metafizzy/ev-emitter/zipball/1c67f55ea625b87857c2846e9505aee43f45bc6c",
-                "reference": "1c67f55ea625b87857c2846e9505aee43f45bc6c",
-                "shasum": ""
-            },
-            "type": "bower-asset-library",
-            "extra": {
-                "bower-asset-main": "ev-emitter.js",
-                "bower-asset-ignore": [
-                    "**/.*",
-                    "node_modules",
-                    "bower_components",
-                    "test",
-                    "tests",
-                    "sandbox"
-                ]
-            },
-            "license": [
-                "MIT"
-            ],
-            "description": "lil' event emitter",
-            "keywords": [
-                "emitter",
-                "event",
-                "pubsub"
-            ]
-        },
-        {
-            "name": "bower-asset/fizzy-ui-utils",
-            "version": "v2.0.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/metafizzy/fizzy-ui-utils.git",
-                "reference": "e9f2d4eab08c8cc19db3cae946e5d99df614070f"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/metafizzy/fizzy-ui-utils/zipball/e9f2d4eab08c8cc19db3cae946e5d99df614070f",
-                "reference": "e9f2d4eab08c8cc19db3cae946e5d99df614070f",
-                "shasum": ""
-            },
-            "require": {
-                "bower-asset/desandro-matches-selector": "~2.0.0"
-            },
-            "require-dev": {
-                "bower-asset/qunit": "~1.20.0"
-            },
-            "type": "bower-asset-library",
-            "extra": {
-                "bower-asset-main": "utils.js",
-                "bower-asset-ignore": [
-                    "**/.*",
-                    "node_modules",
-                    "bower_components",
-                    "test",
-                    "tests",
-                    "package.json"
-                ]
-            },
-            "license": [
-                "MIT"
-            ],
-            "description": "UI utilities",
-            "keywords": [
-                "ui",
-                "utility"
-            ]
-        },
-        {
-            "name": "bower-asset/get-size",
-            "version": "v2.0.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/desandro/get-size.git",
-                "reference": "2d64a97712adcaeaa9c3a415559934df20bf8009"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/desandro/get-size/zipball/2d64a97712adcaeaa9c3a415559934df20bf8009",
-                "reference": "2d64a97712adcaeaa9c3a415559934df20bf8009",
-                "shasum": ""
-            },
-            "require-dev": {
-                "bower-asset/qunit": "~1.10"
-            },
-            "type": "bower-asset-library",
-            "extra": {
-                "bower-asset-main": "get-size.js",
-                "bower-asset-ignore": [
-                    "test/",
-                    "**/.*",
-                    "package.json",
-                    "node_modules",
-                    "bower_components",
-                    "test",
-                    "tests",
-                    "sandbox.html"
-                ]
-            },
-            "license": [
-                "MIT"
-            ],
-            "description": "measures element size",
-            "keywords": [
-                "dom",
-                "height",
-                "size",
-                "width"
-            ]
-        },
-        {
             "name": "bower-asset/jquery",
             "version": "2.2.4",
             "source": {
@@ -293,116 +134,17 @@
             ]
         },
         {
-            "name": "bower-asset/masonry",
-            "version": "v4.1.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/desandro/masonry.git",
-                "reference": "3de4f58f11837c99f608fd6cfb651305869b7e70"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/desandro/masonry/zipball/3de4f58f11837c99f608fd6cfb651305869b7e70",
-                "reference": "3de4f58f11837c99f608fd6cfb651305869b7e70",
-                "shasum": ""
-            },
-            "require": {
-                "bower-asset/get-size": ">=2.0.2,<3.0.0",
-                "bower-asset/outlayer": ">=2.1.0,<3.0.0"
-            },
-            "require-dev": {
-                "bower-asset/jquery": ">=1.4.3,<4",
-                "bower-asset/jquery-bridget": "~2.0.0",
-                "bower-asset/qunit": ">=1.12.0,<2.0.0"
-            },
-            "type": "bower-asset-library",
-            "extra": {
-                "bower-asset-main": "masonry.js",
-                "bower-asset-ignore": [
-                    "**/.*",
-                    "node_modules",
-                    "bower_components",
-                    "test",
-                    "tests",
-                    "sandbox/",
-                    "gulpfile.js",
-                    "package.json",
-                    "composer.json"
-                ]
-            },
-            "license": [
-                "MIT"
-            ],
-            "description": "Cascading grid layout library",
-            "keywords": [
-                "layout",
-                "masonry",
-                "outlayer"
-            ]
-        },
-        {
-            "name": "bower-asset/outlayer",
-            "version": "v2.1.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/metafizzy/outlayer.git",
-                "reference": "910f139591665752a0e779460438a6404eed4977"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/metafizzy/outlayer/zipball/910f139591665752a0e779460438a6404eed4977",
-                "reference": "910f139591665752a0e779460438a6404eed4977",
-                "shasum": ""
-            },
-            "require": {
-                "bower-asset/ev-emitter": ">=1.0.0,<2.0.0",
-                "bower-asset/fizzy-ui-utils": ">=2.0.0,<3.0.0",
-                "bower-asset/get-size": ">=2.0.2,<3.0.0"
-            },
-            "require-dev": {
-                "bower-asset/jquery": ">=1.4.3,<4",
-                "bower-asset/jquery-bridget": "dev-2.x|2.x",
-                "bower-asset/qunit": ">=1.17.0,<2.0.0"
-            },
-            "type": "bower-asset-library",
-            "extra": {
-                "bower-asset-main": "outlayer.js",
-                "bower-asset-ignore": [
-                    "test/",
-                    "docs/",
-                    "sandbox/",
-                    ".*",
-                    "notes.md",
-                    "**/.*",
-                    "node_modules",
-                    "bower_components",
-                    "test",
-                    "tests",
-                    "package.json"
-                ]
-            },
-            "license": [
-                "MIT"
-            ],
-            "description": "the brains and guts of a layout library",
-            "keywords": [
-                "isotope",
-                "layout",
-                "masonry"
-            ]
-        },
-        {
             "name": "bower-asset/punycode",
             "version": "v1.3.2",
             "source": {
                 "type": "git",
-                "url": "https://github.com/bestiejs/punycode.js.git",
-                "reference": "38c8d3131a82567bfef18da09f7f4db68c84f8a3"
+                "url": "https://github.com/bower-asset/punycode.git",
+                "reference": "bc39b1333f2747030d69d89b76af49e571366205"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bestiejs/punycode.js/zipball/38c8d3131a82567bfef18da09f7f4db68c84f8a3",
-                "reference": "38c8d3131a82567bfef18da09f7f4db68c84f8a3",
+                "url": "https://api.github.com/repos/bower-asset/punycode/zipball/bc39b1333f2747030d69d89b76af49e571366205",
+                "reference": "bc39b1333f2747030d69d89b76af49e571366205",
                 "shasum": ""
             },
             "type": "bower-asset-library",
@@ -558,48 +300,109 @@
             "time": "2016-07-16 12:58:58"
         },
         {
-            "name": "philippfrenzel/yii2masonry",
-            "version": "1.1.1",
+            "name": "kartik-v/yii2-krajee-base",
+            "version": "v1.8.7",
             "source": {
                 "type": "git",
-                "url": "https://github.com/philippfrenzel/yii2masonry.git",
-                "reference": "cedc03e4fa622f77a98c9a29dbc2491cc2f2f66c"
+                "url": "https://github.com/kartik-v/yii2-krajee-base.git",
+                "reference": "8f558809e6093c8f4f4599b7b9fd64b366b22a60"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/philippfrenzel/yii2masonry/zipball/cedc03e4fa622f77a98c9a29dbc2491cc2f2f66c",
-                "reference": "cedc03e4fa622f77a98c9a29dbc2491cc2f2f66c",
+                "url": "https://api.github.com/repos/kartik-v/yii2-krajee-base/zipball/8f558809e6093c8f4f4599b7b9fd64b366b22a60",
+                "reference": "8f558809e6093c8f4f4599b7b9fd64b366b22a60",
                 "shasum": ""
             },
             "require": {
-                "bower-asset/masonry": "*",
-                "yiisoft/yii2": "*"
+                "yiisoft/yii2-bootstrap": "@dev"
             },
             "type": "yii2-extension",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.8.x-dev"
+                }
+            },
             "autoload": {
                 "psr-4": {
-                    "yii2masonry\\": ""
+                    "kartik\\base\\": ""
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "MIT License"
+                "BSD-3-Clause"
             ],
             "authors": [
                 {
-                    "name": "Philipp Frenzel",
-                    "email": "philipp@frenzel.net",
-                    "homepage": "http://www.frenzel.net/",
-                    "role": "Author Extension for yii2"
+                    "name": "Kartik Visweswaran",
+                    "email": "kartikv2@gmail.com",
+                    "homepage": "http://www.krajee.com/"
                 }
             ],
-            "description": "Yii2 Masonry Integration for Yii2",
-            "homepage": "http://www.frenzel.net/",
+            "description": "Base library and foundation components for all Yii2 Krajee extensions.",
+            "homepage": "https://github.com/kartik-v/yii2-krajee-base",
             "keywords": [
-                "masonry",
+                "base",
+                "extension",
+                "foundation",
+                "krajee",
+                "widget",
                 "yii2"
             ],
-            "time": "2015-01-21 21:51:24"
+            "time": "2016-09-04 09:25:29"
+        },
+        {
+            "name": "kartik-v/yii2-widget-datepicker",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kartik-v/yii2-widget-datepicker.git",
+                "reference": "92e04c6a9ff90c4290db7566f68af429f2d641d5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kartik-v/yii2-widget-datepicker/zipball/92e04c6a9ff90c4290db7566f68af429f2d641d5",
+                "reference": "92e04c6a9ff90c4290db7566f68af429f2d641d5",
+                "shasum": ""
+            },
+            "require": {
+                "kartik-v/yii2-krajee-base": "~1.7"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.4.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "kartik\\date\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Kartik Visweswaran",
+                    "email": "kartikv2@gmail.com",
+                    "homepage": "http://www.krajee.com/"
+                }
+            ],
+            "description": "Enhanced Yii2 wrapper for the bootstrap datepicker plugin (sub repo split from yii2-widgets).",
+            "homepage": "https://github.com/kartik-v/yii2-widget-datepicker",
+            "keywords": [
+                "date",
+                "extension",
+                "form",
+                "jquery",
+                "picker",
+                "plugin",
+                "select2",
+                "widget",
+                "yii2"
+            ],
+            "time": "2016-11-11 15:42:04"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -3299,7 +3102,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "kartik-v/yii2-widget-datepicker": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

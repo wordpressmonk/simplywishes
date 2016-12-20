@@ -5,7 +5,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Wish */
 
-$this->title = 'Update Wish: ' . $model->w_id;
+$this->title = 'Update Wish: ' . $model->wish_title;
 $this->params['breadcrumbs'][] = ['label' => 'Wishes', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->w_id, 'url' => ['view', 'id' => $model->w_id]];
 $this->params['breadcrumbs'][] = 'Update';
@@ -16,7 +16,10 @@ $this->params['breadcrumbs'][] = 'Update';
 
     <?= $this->render('_form', [
         'model' => $model,
-		'categories' => $categories
+		'categories' => $categories,
+		'countries' => $countries,
+		'states' => $states,
+		'cities' => $cities
     ]) ?>
 
 </div>

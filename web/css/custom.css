@@ -171,3 +171,29 @@ li.list-group-item.active a {
 .fnt-blue{
 	color:#006699;
 }
+.smp_inline {
+	width: 46%;
+	float: left;
+	margin-left: 10px;
+}
+.smp-mg-bottom{
+	margin-bottom:30px;
+}
+.smpl-brdr-right {
+border-radius: 0px 16px 16px 0px;
+right: 3px;
+position: relative;
+}
+.smpl-brdr-left {
+letter-spacing: 1px;
+border-radius: 16px 0px 0px 16px;
+}
+.nav.list>li>a:focus,.nav.list>li>a:hover{
+	background: none;
+}
+a[aria-expanded='true'] .fa-plus{
+display:none;
+}
+a[aria-expanded='true'] .fa-minus{
+display:block !important;
+}

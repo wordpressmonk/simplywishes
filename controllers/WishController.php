@@ -48,18 +48,81 @@ class WishController extends Controller
      * Lists all Wish models.
      * @return mixed
      */
-    public function actionIndex()
+    public function actionIndex($cat_id=null)
     {
         $searchModel = new SearchWish();
+
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 		$dataProvidermostpopular = $searchModel->searchmostpopular(Yii::$app->request->queryParams);
         return $this->render('current_wishes', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
             'dataProvidermostpopular' => $dataProvidermostpopular,
+
         ]);
     }
+    /**
+     * Lists all Wish models when scrolls.
+     * @return mixed
+     */
+    public function actionScroll($page,$cat_id=null)
+    {
+        $searchModel = new SearchWish();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams,$cat_id);
+		$dataProvider->pagination->page = $page;
+        $str = '';
+		//if ($dataProvider->totalCount > 0) {
+        foreach($dataProvider->models as $wish){
+				$str .= $wish->wishAsCard;
+        }
+		//}
+        return $str;
+    }
+    /**
+     * Lists all Wish models according to the number of likes.
+     * @return mixed
+     */
+    public function actionPopular()
+    {
+        $searchModel = new SearchWish();
+        $dataProvider = $searchModel->searchPopular(Yii::$app->request->queryParams);
 
+        return $this->render('popular_wishes', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+    public function actionScrollPopular($page)
+    {
+        $searchModel = new SearchWish();
+        $dataProvider = $searchModel->searchPopular(Yii::$app->request->queryParams);
+		$dataProvider->pagination->page = $page;
+        $str = '';
+        foreach($dataProvider->models as $wish){
+			$str .= $wish->wishAsCard;
+        }
+        return $str;
+    }
+	public function actionGranted(){
+        $searchModel = new SearchWish();
+        $dataProvider = $searchModel->searchGranted(Yii::$app->request->queryParams);
+
+        return $this->render('fullfilled_wishes', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);		
+	}
+    public function actionScrollGranted($page)
+    {
+        $searchModel = new SearchWish();
+        $dataProvider = $searchModel->searchGranted(Yii::$app->request->queryParams);
+		$dataProvider->pagination->page = $page;
+        $str = '';
+        foreach($dataProvider->models as $wish){
+			$str .= $wish->wishAsCard;
+        }
+        return $str;
+    }
     /**
      * Displays a single Wish model.
      * @param integer $id
@@ -81,6 +144,11 @@ class WishController extends Controller
     {
         $model = new Wish();
 		$model->scenario = 'create';
+		
+		$countries = \yii\helpers\ArrayHelper::map(\app\models\Country::find()->all(),'id','name');	
+		$states = \yii\helpers\ArrayHelper::map(\app\models\State::find()->all(),'id','name');	
+		$cities = \yii\helpers\ArrayHelper::map(\app\models\City::find()->all(),'id','name');	
+		
 		$categories =  ArrayHelper::map(Category::find()->all(), 'cat_id', 'title');
         if ($model->load(Yii::$app->request->post())) {
 			$model->primary_image = UploadedFile::getInstance($model, 'primary_image');
@@ -89,12 +157,16 @@ class WishController extends Controller
 					return;
 			}
 			$model->wished_by = \Yii::$app->user->id;
+			//print_r($model);die;
 			$model->save();
-            return $this->redirect(['view', 'id' => $model->w_id]);
+            return $this->redirect(['index']);
         } else {
             return $this->render('create', [
                 'model' => $model,
-				'categories' => $categories
+				'categories' => $categories,
+				'countries' => $countries,
+				'states' => $states,
+				'cities' => $cities
             ]);
         }
     }
@@ -109,6 +181,9 @@ class WishController extends Controller
     {
         $model = $this->findModel($id);
 		$categories =  ArrayHelper::map(Category::find()->all(), 'cat_id', 'title');
+		$countries = \yii\helpers\ArrayHelper::map(\app\models\Country::find()->all(),'id','name');	
+		$states = \yii\helpers\ArrayHelper::map(\app\models\State::find()->all(),'id','name');	
+		$cities = \yii\helpers\ArrayHelper::map(\app\models\City::find()->all(),'id','name');	
 		$current_image = $model->primary_image;
         if ($model->load(Yii::$app->request->post())) {
 			//check for a new image
@@ -116,7 +191,7 @@ class WishController extends Controller
 			if(!empty($model->primary_image)) {
 				if(!$model->uploadImage())
 					return;
-			}			
+			}
 			else
 				$model->primary_image = $current_image;
 			//save model
@@ -126,7 +201,10 @@ class WishController extends Controller
         } else {
             return $this->render('update', [
                 'model' => $model,
-				'categories' => $categories
+				'categories' => $categories,
+				'countries' => $countries,
+				'states' => $states,
+				'cities' => $cities
             ]);
         }
     }
@@ -152,6 +230,8 @@ class WishController extends Controller
 	 */
 	public function actionLike($w_id,$type)
 	{
+		if(\Yii::$app->user->isGuest)
+			return $this->redirect(['site/login','red_url'=>Yii::$app->request->referrer]);
 		$wish = $this->findModel($w_id);
 		$activity = Activity::find()->where(['wish_id'=>$wish->w_id,'activity'=>$type,'user_id'=>\Yii::$app->user->id])->one();
 		if($activity != null){
@@ -166,7 +246,16 @@ class WishController extends Controller
 			return "added";
 		else return false;
 	}
-	 
+	
+	public function actionFullfilled($w_id){
+		
+		$wish = $this->findModel($w_id);
+		//do this only after verifying the IPN
+		$wish->granted_by = \Yii::$app->user->id;
+		if($wish->save())
+			return $this->redirect(['wish/view','id'=>$w_id]);
+		
+	}
     /**
      * Finds the Wish model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
