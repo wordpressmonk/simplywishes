@@ -26,6 +26,7 @@ use yii\helpers\Url;
 							</div>
 						</li>
 						<li class="media media_button"><button type="button" data-send_to="'.$key.'" class="send-msg btn btn-primary ">Reply</button></li>';
+						arsort($msg['threads']);
 					foreach($msg['threads'] as $thread){
 						$profile = \app\models\Userprofile::find()->where(['user_id'=>$thread['send_by']])->one();
 						echo '<li class="media">
