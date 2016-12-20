@@ -125,7 +125,14 @@ class AccountController extends Controller
 					if(!$profile->uploadImage())
 						return;
 				}else{
-					$profile->profile_image = $current_image;
+					
+					if(!empty($profile->dulpicate_image) && ($profile->dulpicate_image != $current_image ))
+					{
+						$profile->profile_image = $profile->dulpicate_image;
+					} else {
+						$profile->profile_image = $current_image;
+					}
+					
 				}
 				$profile->save();
 				\Yii::$app->getSession()->setFlash('success', 'Account details have been changed successfully');
