@@ -23,10 +23,10 @@ class SiteController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['logout','edit-account','my-account'],
+                'only' => ['logout'],
                 'rules' => [
                     [
-                        'actions' => ['logout','edit-account','my-account'],
+                        'actions' => ['logout'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -137,7 +137,9 @@ class SiteController extends Controller
 		$user->scenario = 'sign-up';
 		$profile = new UserProfile();
 		$countries = \yii\helpers\ArrayHelper::map(\app\models\Country::find()->all(),'id','name');	
-		if ($user->load(Yii::$app->request->post()) && $profile->load(Yii::$app->request->post())){
+		if ($user->load(Yii::$app->request->post()) && $profile->load(Yii::$app->request->post())){	
+			
+			
 			$user->setPassword($user->password);
 			$user->generateAuthKey();
 			//print_r($profile);die;
@@ -145,14 +147,24 @@ class SiteController extends Controller
 				$profile->user_id = $user->id;
 				//save profile image here
 				$profile->profile_image = UploadedFile::getInstance($profile, 'profile_image');
-				if(!empty($profile->profile_image)) {
+				
+				if(!empty($profile->profile_image)) { 
 					if(!$profile->uploadImage())
 						return;
+				} else {
+					$profile->profile_image = $profile->dulpicate_image;
+
 				}
+							
 				$profile->save();
 				\Yii::$app->user->login($user,0);
 				return $this->redirect('index');
 			}
+			else return $this->render('sign_up', [
+            'user' => $user,
+			'profile' => $profile,
+			'countries' => $countries,
+			]);
 		}
         else return $this->render('sign_up', [
             'user' => $user,

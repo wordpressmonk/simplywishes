@@ -61,12 +61,13 @@ class WishController extends Controller
     public function actionIndex($cat_id=null)
     {
         $searchModel = new SearchWish();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams,$cat_id);
 
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         return $this->render('current_wishes', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
-			'cat_id'=>$cat_id
+
+
         ]);
     }
     /**

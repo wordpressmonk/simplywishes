@@ -6,6 +6,7 @@ use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use app\models\Wish;
+use app\models\Activity;
 
 /**
  * SearchWish represents the model behind the search form about `app\models\Wish`.
@@ -115,8 +116,10 @@ class SearchWish extends Wish
         return $dataProvider;
     }
 	
+
 	public function searchPopular($params){
         $query = Wish::find()->select(['wishes.*,count(a_id) as likes' ])->orderBy('likes DESC');
+
 
         // add conditions that should always apply here
 
@@ -188,7 +191,7 @@ class SearchWish extends Wish
             ->andFilterWhere(['like', 'summary_title', $this->summary_title])
             ->andFilterWhere(['like', 'wish_description', $this->wish_description])
             ->andFilterWhere(['like', 'primary_image', $this->primary_image]);
-
+			
         return $dataProvider;			
 	}
 	public function searchUserWishes($params, $user_id, $type){
@@ -232,6 +235,7 @@ class SearchWish extends Wish
 
         return $dataProvider;		
 	}
+
 	public function searchSavedWishes($params, $user_id){
 		
 		$query = Wish::find()->where(['activity.user_id'=>$user_id])->orderBy('w_id DESC');
@@ -245,4 +249,5 @@ class SearchWish extends Wish
         ]);
 		return $dataProvider;	
 	}
+
 }

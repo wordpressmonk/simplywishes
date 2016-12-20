@@ -47,9 +47,10 @@ use yii\helpers\Url;
 		<div class="col-md-9">
 			<div class="tab-content">
 				<div class="tab-pane" id="mostpopular">
-					<h3 style="color:#006699;">Most Popular Wishes</h3>
+					<h3 style="color:#006699;">Most Popular Wishes</h3>					
 				</div>
 				<div class="tab-pane" id="fullfilled">
+					<h3 style="color:#006699;">Fullfilled Wishes</h3>
 				</div>
 				<div class="tab-pane active"  id="current">
 					<h3 style="color:#006699;">Current Wishes
@@ -60,12 +61,13 @@ use yii\helpers\Url;
 					<?php
 
 					foreach($dataProvider->models as $wish){
-						echo $wish->wishAsCard;;
+						echo $wish->wishAsCard;
 					}
 ?>
 					</div>
 				</div>
 				<div class="tab-pane" id="recent">
+					<h3 style="color:#006699;">Recipient</h3>
 				</div>
 			</div>
 		</div>

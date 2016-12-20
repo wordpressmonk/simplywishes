@@ -36,10 +36,10 @@ AppAsset::register($this);
 		<div class="row" style="padding:28px 0px;">
 		<?php if(\Yii::$app->user->isGuest){ ?>
 			<div class="btn-group pull-right">
-			  <a href="<?=Yii::$app->homeUrl?>/site/login"><button class="btn btn-smp-blue smpl-brdr-left" type="button">
+			  <a href="<?=Yii::$app->homeUrl?>site/login"><button class="btn btn-smp-blue smpl-brdr-left" type="button">
 				Login
 			  </button></a>
-			  <a href="<?=Yii::$app->homeUrl?>/site/sign-up"><button class="btn btn-smp-green smpl-brdr-right" type="button">
+			  <a href="<?=Yii::$app->homeUrl?>site/sign-up"><button class="btn btn-smp-green smpl-brdr-right" type="button">
 				Join Today
 			  </button></a>
 			</div>
