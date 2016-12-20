@@ -1,53 +1,60 @@
-<?php
-
-/* @var $this yii\web\View */
-
-$this->title = 'My Yii Application';
-?>
-<div class="site-index">
-
-    <div class="jumbotron">
-        <h1>Congratulations!</h1>
-
-        <p class="lead">You have successfully created your Yii-powered application.</p>
-
-        <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Get started with Yii</a></p>
-    </div>
-
-    <div class="body-content">
-
-        <div class="row">
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/doc/">Yii Documentation &raquo;</a></p>
-            </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/forum/">Yii Forum &raquo;</a></p>
-            </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/extensions/">Yii Extensions &raquo;</a></p>
-            </div>
-        </div>
-
-    </div>
-</div>
+	<div class="simply-head"><h3>Fullfilled Wishes</h3></div>
+	<div class="container-fluid">    
+		<div class="col-md-1 arrow-links"><img src="<?=\Yii::$app->homeUrl?>/images/left-arrow.jpg" class="img-responsive" alt="Image"></div>
+		<div class="col-md-10">
+			<div class="smpl-wish-block thumbnail">
+				<img src="<?=\Yii::$app->homeUrl?>/images/wish1.jpg" class="img-responsive" alt="Image">
+				<div class="smp-links"><span class="glyphicon glyphicon-heart-empty txt-smp-orange"></span></br>
+				<span class="glyphicon glyphicon glyphicon-thumbs-up txt-smp-green"></span></div>
+				<div class="smp-wish-desc">
+					<p>Name : <span>Test1</span></p>
+					<p>Wish For : <span>Wish1</span></p>
+					<p>Location : <span>Location1</span></p>
+					<p><a class="fnt-green" href="#">Read Happy Story</a> 
+					&nbsp;<i class="fa fa-thumbs-o-up fnt-blue"></i> 2,432 Likes</p>
+				</div>
+				<div class="shareIcons"></div>
+			</div>
+			<div class="smpl-wish-block thumbnail"> 
+				<img src="<?=\Yii::$app->homeUrl?>/images/wish2.jpg" class="img-responsive" alt="Image">
+				<div class="smp-links"><span class="glyphicon glyphicon-heart-empty txt-smp-orange"></span></br>
+				<span class="glyphicon glyphicon glyphicon-thumbs-up txt-smp-green"></span></div>
+				<div class="smp-wish-desc">
+					<p>Name : <span></span></p>
+					<p>Wish For : <span></span></p>
+					<p>Location : <span></span></p>
+					<p><a class="fnt-green" href="#">Read Happy Story</a>
+					&nbsp;<i class="fa fa-thumbs-o-up fnt-blue"></i> 2,432 Likes</p>
+				</div>
+				<div class="shareIcons"></div>
+			</div>
+			<div class="smpl-wish-block thumbnail"> 
+				<img src="<?=\Yii::$app->homeUrl?>/images/wish3.jpg"  class="img-responsive" alt="Image">
+				<div class="smp-links"><span class="glyphicon glyphicon-heart-empty txt-smp-orange"></span></br>
+				<span class="glyphicon glyphicon glyphicon-thumbs-up txt-smp-green"></span></div>
+				<div class="smp-wish-desc">
+					<p>Name : <span></span></p>
+					<p>Wish For : <span></span></p>
+					<p>Location : <span></span></p>
+					<p><a class="fnt-green" href="#">Read Happy Story</a> 
+					&nbsp;<i class="fa fa-thumbs-o-up fnt-blue"></i> 2,438 Likes</p>
+				</div>
+				<div class="shareIcons"></div>
+			</div>
+			<div class="smpl-wish-block thumbnail">
+				<img src="<?=\Yii::$app->homeUrl?>/images/wish4.jpg"  class="img-responsive" alt="Image">
+				<div class="smp-links"><span class="glyphicon glyphicon-heart-empty txt-smp-orange"></span></br>
+				<span class="glyphicon glyphicon glyphicon-thumbs-up txt-smp-green"></span></div>
+				<div class="smp-wish-desc">
+					<p>Name : <span></span></p>
+					<p>Wish For : <span></span></p>
+					<p>Location : <span></span></p>
+					<p><a class="fnt-green" href="#">Read Happy Story</a> 
+					&nbsp;<i class="fa fa-thumbs-o-up fnt-blue"></i> 2,432 Likes</p>
+				</div>
+				<div class="shareIcons"></div>
+			</div>
+		</div>
+		<div class="col-md-1 arrow-links"><img src="<?=\Yii::$app->homeUrl?>/images/right-arrow.jpg" class="img-responsive" alt="Image"></div>
+	</div>
+	<div class="simply-head"><button class="btn btn-smp-green smpl-brdr" type="button">SEE ALL POPULAR WISHES</button></div>
