@@ -33,11 +33,11 @@ use yii\helpers\Url;
 				<p>Name : <span><?=$profile->firstname." ".$profile->lastname?></span></p>
 				<p>Location : <span><?=$profile->location?></span></p>
 				<p>About Me : <span><?=$profile->about?> </span></p>
-				<?php if (!Yii::$app->user->isGuest && $user->id != \Yii::$app->user->id): ?>
+				<?php if (!Yii::$app->user->isGuest && $user->id != \Yii::$app->user->id){ ?>
 				<a href="#messagemodal" data-toggle="modal"><button class="btn btn-warning">Send Me A Message</button></a>
-				<?php if ($user->id != \Yii::$app->user->id): ?>
+				<?php } else if ($user->id != \Yii::$app->user->id){ ?>
 				<a href="<?=\Yii::$app->homeUrl?>/site/login" data-toggle="modal"><button class="btn btn-warning">Send Me A Message</button></a>
-				<?php endif; ?>
+				<?php } ?>
 				
 			</div>
 		</div>
