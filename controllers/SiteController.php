@@ -196,4 +196,11 @@ class SiteController extends Controller
 			echo "<option value=''>-</option>";
 		}
 	}
+	
+	public function actionEditorial(){
+		$model = \app\models\Editorial::find()->where(['status'=>0])->orderBy()->all();		
+		return $this->render('', [
+            'model' => $model,	
+			]);
+	}
 }

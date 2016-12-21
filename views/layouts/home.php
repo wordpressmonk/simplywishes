@@ -54,6 +54,7 @@ AppAsset::register($this);
 			</div>		
 		<?php } ?>
 		</div>
+		
 		<hr style="border-color:#1085bf;">
 		<nav>
 		  <ul class="nav nav-pills smp-pills">
@@ -62,8 +63,15 @@ AppAsset::register($this);
 			<li><a href="<?=Yii::$app->homeUrl?>/wish/index">Find a Wish</a></li>
 			<li><a href="#">iWish</a></li>
 			<li><a href="#">iGrant</a></li>
-			<li><a href="#">Happy stories</a></li>
-			<li><a href="#">Editorial</a></li>
+			<li><a href="<?=Yii::$app->homeUrl?>happy-stories/index">Happy stories</a></li>
+			<li> 
+				<?php if(isset(\Yii::$app->user->identity->role) && (\Yii::$app->user->identity->role == 'admin')){ ?>
+					<a href="<?=Yii::$app->homeUrl?>editorial/index">Editorial</a>
+				<?php } else { ?> 
+					<a href="<?=Yii::$app->homeUrl?>editorial/editorial">Editorial</a>
+				<?php } ?>			
+			</li>
+			
 			<?php if(!\Yii::$app->user->isGuest){  ?>
 			<li class="dropdown"><a href="#">Hello,<?php echo substr(\Yii::$app->user->identity->username,0,5)?>..!</a>
 				<ul class="dropdown-menu nav nav-stacked">

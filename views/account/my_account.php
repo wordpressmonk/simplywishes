@@ -23,7 +23,7 @@ $this->params['breadcrumbs'][] = $this->title;
 			</div>
 	
 		<?php }
-					$form = ActiveForm::begin(['id' => 'contact-form']); ?>
+					$form = ActiveForm::begin(['id' => 'contact-form','options' => ['enctype'=>'multipart/form-data']]); ?>
 
                     <?= $form->field($user, 'username')->textInput(['autofocus' => true,'disabled' => true]) ?>
 

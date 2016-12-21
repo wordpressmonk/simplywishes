@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
   <div class="container join-taday">
 	<h3 class="smp-mg-bottom"><?= Html::encode($this->title) ?></h3>
   
-<?php $form = ActiveForm::begin(['id' => 'contact-form','options' => ['class' => 'col-md-8']]); ?>
+<?php $form = ActiveForm::begin(['id' => 'contact-form','options' => ['class' => 'col-md-8','enctype'=>'multipart/form-data']]); ?>
   
 	   <?= $form->field($user, 'username')->textInput(['autofocus' => true])?>
 	   
