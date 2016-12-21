@@ -56,8 +56,8 @@ class HappyStories extends \yii\db\ActiveRecord
     }
 	
 	public function uploadImage(){	
-			$this->story_image->saveAs('happystory/' . $this->story_image->baseName . '.' .$this->story_image->extension);
-			$this->story_image = 'happystory/'.$this->story_image->baseName .'.'.$this->story_image->extension;
+			$this->story_image->saveAs('uploads/happystory/' . $this->story_image->baseName . '.' .$this->story_image->extension);
+			$this->story_image = 'uploads/happystory/'.$this->story_image->baseName .'.'.$this->story_image->extension;
 			return true;	
 	}
 }
