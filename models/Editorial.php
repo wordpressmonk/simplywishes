@@ -65,8 +65,8 @@ class Editorial extends \yii\db\ActiveRecord
     }
 	
 	public function uploadImage(){	
-			$this->e_image->saveAs('editorial/' . $this->e_image->baseName . '.' .$this->e_image->extension);
-			$this->e_image = 'editorial/'.$this->e_image->baseName .'.'.$this->e_image->extension;
+			$this->e_image->saveAs('uploads/editorial/' . $this->e_image->baseName . '.' .$this->e_image->extension);
+			$this->e_image = 'uploads/editorial/'.$this->e_image->baseName .'.'.$this->e_image->extension;
 			return true;	
 	}
 }
