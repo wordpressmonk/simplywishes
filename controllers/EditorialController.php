@@ -164,22 +164,24 @@ class EditorialController extends Controller
 		 
         return $this->render('editorial_comments', ['model' =>$model,'comments'=>$comments,'listcomments'=>$listcomments]); 
     }
+	
 	public function actionEditorialComments()
-    {
-		
+    {		
 		 $model = new EditorialComments();
          if($model->load(Yii::$app->request->post()))
 		 {
-			 $model->user_id = \Yii::$app->user->identity->id;
+			if(\Yii::$app->user->isGuest){			
+				Yii::$app->session->setFlash('login_to_comment');
+				return $this->redirect(['editorial/editorial-page?id='.$model->e_id]);
+			}
+			 $model->user_id = \Yii::$app->user->id;
 			   if($model->save())
 			   {
 				 return $this->redirect(['editorial/editorial-page?id='.$model->e_id]);
 			   }else{
-				   
+				   Yii::$app->session->setFlash('error_comments');
+				   return $this->redirect(['editorial/editorial-page?id='.$model->e_id]);
 			   }
-		 }else{
-			 
 		 }
-		 return $this->redirect(['editorial/editorial-page?id='.$model->e_id]);
     }
 }

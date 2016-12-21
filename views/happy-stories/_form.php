@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 use app\models\Wish;
-
+use dosamigos\ckeditor\CKEditor;
 /* @var $this yii\web\View */
 /* @var $model app\models\Editorial */
 /* @var $form yii\widgets\ActiveForm */
@@ -24,8 +24,11 @@ use app\models\Wish;
         )->label('Wish List');  ?>
 		
 		 
-		 
-    <?= $form->field($model, 'story_text')->textarea(['rows' => 6])->label('Story') ?>
+		<?= $form->field($model, 'story_text')->widget(CKEditor::className(), [
+        'options' => ['rows' => 6],
+        'preset' => 'basic'
+    ]); ?>		 
+   
 
    
 	

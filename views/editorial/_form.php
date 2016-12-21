@@ -2,7 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-
+use dosamigos\ckeditor\CKEditor;
 /* @var $this yii\web\View */
 /* @var $model app\models\Editorial */
 /* @var $form yii\widgets\ActiveForm */
@@ -14,8 +14,10 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'e_title')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'e_text')->textarea(['rows' => 6]) ?>
-
+	<?= $form->field($model, 'e_text')->widget(CKEditor::className(), [
+        'options' => ['rows' => 6],
+        'preset' => 'basic'
+    ]); ?>		
     <?php // $form->field($model, 'e_image')->fileInput(['class' => 'form-control']) ?>
 
 	

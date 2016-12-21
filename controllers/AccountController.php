@@ -35,7 +35,8 @@ class AccountController extends Controller
     }
 	
 	public function actionProfile($id){
-		
+		if($id==\Yii::$app->user->id)
+			return $this->redirect('my-account');
 		$user = User::findOne($id);
 		$profile = UserProfile::find()->where(['user_id'=>$id])->one();
 		

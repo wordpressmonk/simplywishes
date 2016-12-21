@@ -14,7 +14,19 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="editorial-create">
 
     <h1>Editorial</h1>
-	
+    <?php if (Yii::$app->session->hasFlash('error_comments')): ?>
+
+        <div class="alert alert-success">
+            Oops!Something went wrong. Plesae try again later.
+        </div>
+	<?php endif; ?>	
+    <?php if(Yii::$app->session->hasFlash('login_to_comment')): ?>
+
+        <div class="alert alert-success">
+            Please login to post a comment!
+        </div>
+
+    <?php endif; ?>		
 	<?php
 	
 		if(isset($model) && !empty($model))
