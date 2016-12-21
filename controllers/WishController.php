@@ -297,7 +297,7 @@ class WishController extends Controller
 	}
 	
 	public function actionTopGranters(){
-		$query = Wish::find()->select(['wishes.wished_by,count(w_id) as total_wishes'])->where(['not', ['granted_by' => null]])->orderBy('total_wishes DESC');
+		$query = Wish::find()->select(['wishes.granted_by,count(w_id) as total_wishes'])->where(['not', ['granted_by' => null]])->orderBy('total_wishes DESC');
 		$query->groupBy('granted_by');
         $dataProvider = new ActiveDataProvider([
             'query' => $query,

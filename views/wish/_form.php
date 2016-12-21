@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use kartik\date\DatePicker;
+use dosamigos\ckeditor\CKEditor;
 /* @var $this yii\web\View */
 /* @var $model app\models\Wish */
 /* @var $form yii\widgets\ActiveForm */
@@ -17,8 +18,11 @@ use kartik\date\DatePicker;
     <?= $form->field($model, 'wish_title')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'summary_title')->textInput(['maxlength' => true]) ?>
+	<?= $form->field($model, 'wish_description')->widget(CKEditor::className(), [
+        'options' => ['rows' => 6],
+        'preset' => 'basic'
+    ]); ?>
 
-    <?= $form->field($model, 'wish_description')->textarea(['rows' => 6]) ?>
 
     <?= $form->field($model, 'primary_image')->fileInput() ?>
 	<div class="row">

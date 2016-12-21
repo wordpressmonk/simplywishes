@@ -137,7 +137,17 @@ class SiteController extends Controller
      */
     public function actionAbout()
     {
-        return $this->render('about');
+		$query = Wish::find()->select(['wishes.wished_by,count(w_id) as total_wishes'])->orderBy('total_wishes DESC');
+		$query->groupBy('wished_by');
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+            'pagination' => [
+                'pageSize'=>50
+            ]
+        ]);
+        return $this->render('about',[
+			'dataProvider' => $dataProvider,
+		]);
     }
 
 	public function actionSignUp()

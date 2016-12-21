@@ -58,7 +58,7 @@ AppAsset::register($this);
 		<nav>
 		  <ul class="nav nav-pills smp-pills">
 			<li><a href="<?=Yii::$app->homeUrl?>">Home</a></li>
-			<li><a href="#">About Us</a></li>
+			<li><a href="<?=Yii::$app->homeUrl?>site/about">About Us</a></li>
 			<li><a href="<?=Yii::$app->homeUrl?>/wish/index">Find a Wish</a></li>
 			<li><a href="<?=Yii::$app->homeUrl?>wish/top-wishers">iWish</a></li>
 			<li><a href="<?=Yii::$app->homeUrl?>wish/top-granters">iGrant</a></li>
@@ -102,11 +102,11 @@ AppAsset::register($this);
 		</div>
 		<div class="col-md-8">
 			<ul class="smp-footer-links">
-				<li>Privacy Policy</li>
-				<li>Terms Of Us</li>
-				<li>Community Guidelines</li>
-				<li>About Us</li>
-				<li>Contact Us</li>
+				<a href="<?=\Yii::$app->homeUrl?>page/view?id=1"><li>Privacy Policy</li></a>
+				<a href="<?=\Yii::$app->homeUrl?>page/view?id=2"><li>Terms Of Use</li></a>
+				<a href="<?=\Yii::$app->homeUrl?>page/view?id=3"><li>Community Guidelines</li></a>
+				<a href="<?=\Yii::$app->homeUrl?>site/about"><li>About Us</li></a>
+				<a href="<?=\Yii::$app->homeUrl?>site/contact"><li>Contact Us</li></a>
 			</ul>
 		</div>
 	</div>

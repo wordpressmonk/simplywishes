@@ -8,7 +8,7 @@ use yii\helpers\Url;
 		<div class="col-md-10">
 			<?php foreach($models as $model){
 				echo '<div class="smpl-wish-block thumbnail">';
-				echo '<img src="'.\Yii::$app->homeUrl.$model->primary_image.'" class="img-responsive" alt="Image">';
+				echo '<div><img src="'.\Yii::$app->homeUrl.$model->primary_image.'" class="img-responsive" alt="Image"></div>';
 				  /////activities///
 				  if(!$model->isFaved(\Yii::$app->user->id))
 					echo  '<div class="smp-links"><span title="Save this wish" data-w_id="'.$model->w_id.'" data-a_type="fav" class="fav-wish fa fa-save txt-smp-orange"></span></br>';
