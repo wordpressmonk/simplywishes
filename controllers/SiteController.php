@@ -12,6 +12,8 @@ use app\models\User;
 use app\models\UserProfile;
 use yii\web\UploadedFile;
 use app\models\search\SearchWish;
+use yii\data\ActiveDataProvider;
+use app\models\Wish;
 
 class SiteController extends Controller
 {
@@ -65,7 +67,14 @@ class SiteController extends Controller
     public function actionIndex()
     {
 		$this->layout = "home";
-        return $this->render('index');
+		$query = Wish::find()->where(['not', ['granted_by' => null]])->orderBy('w_id DESC');
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+            'pagination' => [
+                'pageSize'=>4
+            ]
+        ]);
+        return $this->render('index',['models'=>$dataProvider->models]);
     }
 
     /**
