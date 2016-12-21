@@ -179,9 +179,13 @@ class AccountController extends Controller
 			$message->parent_id = 0;
 			$message->text = $msg;
 			if($message->save()){
-				return true;
+				return json_encode([
+					'status'=>true
+				]);
 			}
-			else return false;
+			else return json_encode([
+					'status'=>false
+				]);
 		}
 	}	
 	public function actionInbox(){
@@ -198,46 +202,54 @@ class AccountController extends Controller
 	public function getThreads(){
 		//first send
 		$threads = [];
-		$send_messages = Message::find()->where(['sender_id'=>\Yii::$app->user->id])->orderBy('created_at DESC')->all();
+		$send_messages = Message::find()->where(['sender_id'=>\Yii::$app->user->id])->orderBy('m_id DESC')->all();
 		foreach($send_messages as $send_message){
 			if(!array_key_exists($send_message->recipient_id,$threads))
 				$threads[$send_message->recipient_id] = [
+					'm_id' => $send_message->m_id,
 					'text' => $send_message->text,
 					'created_at' => $send_message->created_at,
 					'send_by' => $send_message->sender_id,
 					'threads' => [
-						['text' => $send_message->text,
+						[
+						'm_id' => $send_message->m_id,
+						'text' => $send_message->text,
 						'created_at' => $send_message->created_at,
 						'send_by' => $send_message->sender_id,]
 						]
 				];
 			else
 				$threads[$send_message->recipient_id]['threads'][] = [
+					'm_id' => $send_message->m_id,
 					'text' => $send_message->text,
 					'created_at' => $send_message->created_at,
 					'send_by' => $send_message->sender_id
 				];
 		}
-		$recievd_messages = Message::find()->where(['recipient_id'=>\Yii::$app->user->id])->orderBy('created_at DESC')->all();
+		$recievd_messages = Message::find()->where(['recipient_id'=>\Yii::$app->user->id])->orderBy('m_id DESC')->all();
 		foreach($recievd_messages as $message){
 			if(!array_key_exists($message->sender_id,$threads))
 				$threads[$message->sender_id] = [
+					'm_id' => $message->m_id,
 					'text' => $message->text,
 					'created_at' => $message->created_at,
 					'send_by' => $message->sender_id,
 					'threads' => [[
+						'm_id' => $message->m_id,
 						'text' => $message->text,
 						'created_at' => $message->created_at,
 						'send_by' => $message->sender_id,]]
 				];
 			else
 				$threads[$message->sender_id]['threads'][] = [
+					'm_id' => $message->m_id,
 					'text' => $message->text,
 					'created_at' => $message->created_at,
 					'send_by' => $message->sender_id,
 				];
 		}
-
+		arsort($threads);
 		return $threads;
 	}
+	
 }

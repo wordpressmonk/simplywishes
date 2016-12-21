@@ -13,7 +13,11 @@ use yii\helpers\Url;
 	<?php endif; ?>
 	<!-- end alert messages -->
 	
-	<h3>Profile <a href="<?=\Yii::$app->homeUrl?>account/edit-account"><button class="btn btn-info">Edit Profile</button></a></h3>
+	<h3>Profile 
+		<?php if (!Yii::$app->user->isGuest && Yii::$app->user->id == $user->id): ?> 
+			<a href="<?=\Yii::$app->homeUrl?>account/edit-account"><button class="btn btn-info">Edit Profile</button></a>
+		<?php endif; ?>
+	</h3>
 		<div class="col-md-3">
 			<div class="thumbnail">
 			<?php 
@@ -29,9 +33,12 @@ use yii\helpers\Url;
 				<p>Name : <span><?=$profile->firstname." ".$profile->lastname?></span></p>
 				<p>Location : <span><?=$profile->location?></span></p>
 				<p>About Me : <span><?=$profile->about?> </span></p>
-				<?php if ($user->id != \Yii::$app->user->id): ?>
+				<?php if (!Yii::$app->user->isGuest && $user->id != \Yii::$app->user->id){ ?>
 				<a href="#messagemodal" data-toggle="modal"><button class="btn btn-warning">Send Me A Message</button></a>
-				<?php endif; ?>
+				<?php } else if ($user->id != \Yii::$app->user->id){ ?>
+				<a href="<?=\Yii::$app->homeUrl?>/site/login" data-toggle="modal"><button class="btn btn-warning">Send Me A Message</button></a>
+				<?php } ?>
+				
 			</div>
 		</div>
 	</div>

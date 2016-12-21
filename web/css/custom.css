@@ -18,8 +18,18 @@
 }  
 @font-face {
   font-family: 'Quicksand';
-  src: url('./fonts/Quicksand-Bold.ttf') format('truetype'); 
+  src: url('./fonts/Quicksand-Regular.otf') format('truetype'); 
 }  
+@font-face {
+  font-family: 'QuicksandBold';
+  src: url('./fonts/Quicksand-Bold.ttf') format('truetype'); 
+} 
+body>.container {
+    min-height: 52vh;
+} 
+h1,h2,h3,h4,h5,h6{
+	font-family: 'QuicksandBold';
+}
 .slide_header{
 	color:#fff;
 	font-size:65px;
@@ -87,7 +97,7 @@ button:focus {outline:0 !important;}
 .smp-links{
 	float: right;
     position: relative;
-    top: -120px;
+    top: -100px;
     left: -8px;
 }
 .smp-links>span{
@@ -107,6 +117,12 @@ button:focus {outline:0 !important;}
 .smp-wish-desc{
 	padding:5px;
 	font-family:'MavenproMedium';
+	min-height:170px;
+}
+.grid .smp-wish-desc{
+	padding:5px;
+	font-family:'MavenproMedium';
+	min-height:0px;
 }
 .shareIcons a {
     font-size: 18px;
@@ -278,4 +294,28 @@ li.media.media_button{
 /* Arivazhagan for new Singup and edit profile Duplicate logo */
 .profilelogo{
 	cursor:pointer;	
+}
+.smpl-wish-block.thumbnail>div:first-child {
+   max-height: 115px;
+   overflow: hidden;
+}
+.smp_about_slide {
+   text-align:center;
+}
+.smp_about_slide img {
+    width: 150px;
+    height: 150px;
+    margin: 5px;
+}
+ul.smp-footer-links a {
+    color: #fff;
+    text-decoration: none;
+}
+.about-arw-link{
+	width:7%;
+	display:inline-block;
+}
+.about-arw-link img{
+	width:40px;
+	height:40px;
 }

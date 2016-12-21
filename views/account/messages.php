@@ -6,7 +6,8 @@ use yii\helpers\Url;
 	<h3 class="smp-mg-bottom">Inbox</h3>
 	<div class="message">
 		<ul class="list-group">
-		<?php 		
+		<?php 	
+			$current_user = \app\models\Userprofile::find()->where(['user_id'=>\Yii::$app->user->id])->one();
 			foreach($messages as $key=>$msg){
 				$profile = \app\models\Userprofile::find()->where(['user_id'=>$key])->one();
 				echo '<li class="list-group-item">
@@ -26,6 +27,7 @@ use yii\helpers\Url;
 							</div>
 						</li>
 						<li class="media media_button"><button type="button" data-send_to="'.$key.'" class="send-msg btn btn-primary ">Reply</button></li>';
+						arsort($msg['threads']);
 					foreach($msg['threads'] as $thread){
 						$profile = \app\models\Userprofile::find()->where(['user_id'=>$thread['send_by']])->one();
 						echo '<li class="media">
@@ -34,8 +36,8 @@ use yii\helpers\Url;
 						  </div>
 						  <div class="media-body">
 							<h4 class="media-heading">'.$profile->fullname.'</h4>
-							<p class="list-group-item-text">'.$thread['text'].'</p>
-							<span class="label label-primary pull-right">Date:'.$thread['created_at'].'</span>
+							<p class="list-group-item-text">'.$thread['text'].'<span class="label label-primary pull-right">Date:'.$thread['created_at'].'</span></p>
+							
 						  </div>
 						</li>';
 					}
@@ -70,6 +72,9 @@ use yii\helpers\Url;
 		$(".send-msg").on("click",function(){			
 			var send_to = $(this).attr('data-send_to');
 			var msg = $('#'+send_to+'_msg').val();
+			var prof_image = "<?=\Yii::$app->homeUrl.$current_user->profile_image?>";
+			var fullname = "<?=$current_user->fullname?>";
+			var elem = $(this);
 			console.log(msg);
 			var send_from = "<?=\Yii::$app->user->id?>";
 			$.ajax({
@@ -77,7 +82,16 @@ use yii\helpers\Url;
 				type : 'POST',
 				data : {msg:msg,send_from:send_from,send_to:send_to},
 				success: function(response){
-					console.log("response");
+					var data = $.parseJSON(response);
+					//console.log(response.status);
+					if(data.status){
+						
+						var html = '<li class="media"><div class="media-left list-icon"><img src="'+prof_image+'" alt=""></div><div class="media-body"><h4 class="media-heading">'+fullname+'</h4><p class="list-group-item-text">'+msg+'<span class="label label-primary pull-right">Date:Now</span></p></div></li>';
+					//$(elem).parent('li').append(html);
+						$( html ).insertAfter( $(elem).parent('li'));
+					}
+					
+					
 				}
 			});
 		});

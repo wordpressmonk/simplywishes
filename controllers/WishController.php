@@ -13,6 +13,7 @@ use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use yii\helpers\ArrayHelper;
 use yii\web\UploadedFile;
+use yii\data\ActiveDataProvider;
 /**
  * WishController implements the CRUD actions for Wish model.
  */
@@ -62,7 +63,7 @@ class WishController extends Controller
     {
         $searchModel = new SearchWish();
 
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams,$cat_id);
         return $this->render('current_wishes', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -280,4 +281,32 @@ class WishController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+	
+	public function actionTopWishers(){
+		$query = Wish::find()->select(['wishes.wished_by,count(w_id) as total_wishes'])->orderBy('total_wishes DESC');
+		$query->groupBy('wished_by');
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+            'pagination' => [
+                'pageSize'=>50
+            ]
+        ]);
+		return $this->render('iWish', [
+			'dataProvider' => $dataProvider,
+		]);		
+	}
+	
+	public function actionTopGranters(){
+		$query = Wish::find()->select(['wishes.granted_by,count(w_id) as total_wishes'])->where(['not', ['granted_by' => null]])->orderBy('total_wishes DESC');
+		$query->groupBy('granted_by');
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+            'pagination' => [
+                'pageSize'=>50
+            ]
+        ]);
+		return $this->render('iGrant', [
+			'dataProvider' => $dataProvider,
+		]);		
+	}
 }

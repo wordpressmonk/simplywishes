@@ -12,6 +12,8 @@ use app\models\User;
 use app\models\UserProfile;
 use yii\web\UploadedFile;
 use app\models\search\SearchWish;
+use yii\data\ActiveDataProvider;
+use app\models\Wish;
 
 class SiteController extends Controller
 {
@@ -65,7 +67,14 @@ class SiteController extends Controller
     public function actionIndex()
     {
 		$this->layout = "home";
-        return $this->render('index');
+		$query = Wish::find()->where(['not', ['granted_by' => null]])->orderBy('w_id DESC');
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+            'pagination' => [
+                'pageSize'=>4
+            ]
+        ]);
+        return $this->render('index',['models'=>$dataProvider->models]);
     }
 
     /**
@@ -128,7 +137,17 @@ class SiteController extends Controller
      */
     public function actionAbout()
     {
-        return $this->render('about');
+		$query = Wish::find()->select(['wishes.wished_by,count(w_id) as total_wishes'])->orderBy('total_wishes DESC');
+		$query->groupBy('wished_by');
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+            'pagination' => [
+                'pageSize'=>50
+            ]
+        ]);
+        return $this->render('about',[
+			'dataProvider' => $dataProvider,
+		]);
     }
 
 	public function actionSignUp()
@@ -137,9 +156,7 @@ class SiteController extends Controller
 		$user->scenario = 'sign-up';
 		$profile = new UserProfile();
 		$countries = \yii\helpers\ArrayHelper::map(\app\models\Country::find()->all(),'id','name');	
-		if ($user->load(Yii::$app->request->post()) && $profile->load(Yii::$app->request->post())){	
-			
-			
+		if ($user->load(Yii::$app->request->post()) && $profile->load(Yii::$app->request->post())){			
 			$user->setPassword($user->password);
 			$user->generateAuthKey();
 			//print_r($profile);die;
