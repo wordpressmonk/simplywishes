@@ -320,7 +320,7 @@ class WishController extends Controller
 	 */
 	public function actionVerifyGranted($id){
 		// STEP 1: Read POST data
-
+		echo "The Url is working";
 		// reading posted data from directly from $_POST causes serialization 
 		// issues with array data in POST
 		// reading raw POST data from input stream instead. 
