@@ -387,16 +387,21 @@ class WishController extends Controller
 			$payment = new Payment();
 			// assign posted variables to local variables
 			$payment->item_name = $_POST['item_name'];
-			$payment->item_number = $_POST['item_number'];
+			$payment->item_number = $id;
 			$payment->payment_status = $_POST['payment_status'];
 			$payment->payment_amount = $_POST['mc_gross'];
 			$payment->payment_currency = $_POST['mc_currency'];
 			$payment->txn_id = $_POST['txn_id'];
 			$payment->receiver_email = $_POST['receiver_email'];
 			$payment->payer_email = $_POST['payer_email'];
-
+			$payment->payment_date = $_POST['payment_date'];
 			$payment->save();
-			// <---- HERE you can do your INSERT to the database
+			//check if success
+			if($payment->payment_status != "Completed"){
+				$wish = $this->findModel($id);
+				$wish->granted_by = NULL;
+				$wish->save();
+			}
 
 		} else if (strcmp ($res, "INVALID") == 0) {
 			  // Save the output (to append or create file)
