@@ -49,7 +49,7 @@ $this->params['breadcrumbs'][] = $this->title;
 				  <!-- Specify a Buy Now button. -->
 				  <input type="hidden" name="cmd" value="_xclick">
 				  <input type="hidden" name="return" value="<?=Url::to(['wish/fullfilled','w_id'=>$model->w_id],true)?>">
-				  <!--<input type="hidden" name="notify_url" value="<?php //Url::to(['wish/fullfilled','w_id'=>$model->w_id],true)?>">-->
+				  <input type="hidden" name="notify_url" value="<?=Url::to(['wish/verify-granted','id'=>$model->w_id],true)?>">
 				  <!-- Specify details about the item that buyers will purchase. -->
 				  <input type="hidden" name="item_name" value="<?=$model->wish_title?>">
 				  <input type="hidden" name="amount" value="<?=$model->expected_cost?>">
