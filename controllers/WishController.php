@@ -325,6 +325,9 @@ class WishController extends Controller
 		// issues with array data in POST
 		// reading raw POST data from input stream instead. 
 		$raw_post_data = file_get_contents('php://input');
+			$fh = fopen(Yii::$app->basePath."web/uploads/paypal_log.txt", "a");
+			  fwrite($fh, $raw_post_data);
+			  fclose($fh);
 		$raw_post_array = explode('&', $raw_post_data);
 		$myPost = array();
 		foreach ($raw_post_array as $keyval) {
