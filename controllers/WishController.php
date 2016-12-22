@@ -21,6 +21,7 @@ use app\models\Payment;
  */
 class WishController extends Controller
 {
+	public $enableCsrfValidation = false;
     /**
      * @inheritdoc
      */
