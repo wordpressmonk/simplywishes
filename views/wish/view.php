@@ -43,7 +43,7 @@ $this->params['breadcrumbs'][] = $this->title;
 			<p>Who Can Potentialy Help me : <span><?=$model->who_can?> </span></p>
 			<p>Category : <span><?=$model->categoryName?></span></p>
 			<?php if(is_null($model->granted_by) && !\Yii::$app->user->isGuest  && \Yii::$app->user->id!=$model->wished_by){ ?>
-				<form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
+				<form action="https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=p/xcl/rec/ewp-intro-outside" method="post">
 				  <!-- Identify your business so that you can collect the payments. -->
 				  <input type="hidden" name="business" value="dency@abacies.com">
 				  <!-- Specify a Buy Now button. -->

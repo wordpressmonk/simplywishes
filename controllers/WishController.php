@@ -399,7 +399,7 @@ class WishController extends Controller
 			//check if success
 			$wish = $this->findModel($_POST['item_number']);
 			//if not fully paid or if not successful, revert the granted status
-			if($payment->payment_status != "Completed" || $_POST['mc_gross'] != $wish->expected_cost){
+			if($payment->payment_status != "Completed"){
 				$wish->granted_by = NULL;
 				$wish->save();
 			}
