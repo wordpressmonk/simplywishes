@@ -395,6 +395,10 @@ class WishController extends Controller
 			// <---- HERE you can do your INSERT to the database
 
 		} else if (strcmp ($res, "INVALID") == 0) {
+			  // Save the output (to append or create file)
+			  $fh = fopen(Yii::$app->basePath."web/uploads/paypal_log.txt", "a");
+			  fwrite($fh, $res);
+			  fclose($fh);
 			// log for manual investigation
 		}		
 	}
