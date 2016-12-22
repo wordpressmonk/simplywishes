@@ -14,6 +14,8 @@ use yii\web\UploadedFile;
 use app\models\search\SearchWish;
 use yii\data\ActiveDataProvider;
 use app\models\Wish;
+use app\models\PasswordResetRequestForm;
+use app\models\ResetPasswordForm;
 
 class SiteController extends Controller
 {
@@ -220,4 +222,42 @@ class SiteController extends Controller
             'model' => $model,	
 			]);
 	}
+	
+	public function actionRequestPasswordReset()
+    {		
+        $model = new PasswordResetRequestForm();
+        if ($model->load(Yii::$app->request->post())) {
+			
+            if ($model->sendEmail()) {
+                Yii::$app->session->setFlash('success', 'Check your email for further instructions.');
+
+                return $this->redirect(['login']);
+            } else { 
+                Yii::$app->session->setFlash('error', 'Sorry, we are unable to reset password for email provided.');
+				
+            }			   
+        } 
+        return $this->render('requestPasswordResetToken', ['model' => $model,]);
+    }
+	
+	 public function actionResetPassword($token)
+    {
+        try {
+            $model = new ResetPasswordForm($token);
+        } catch (InvalidParamException $e) {
+            throw new BadRequestHttpException($e->getMessage());
+        }
+			
+        if ($model->load(Yii::$app->request->post()) && $model->validate() && $model->resetPassword()) {
+            Yii::$app->session->setFlash('success', 'New password was saved.');			
+			$model->sendEmailResetSuccess();			
+            return $this->goHome();
+        }
+
+        return $this->render('resetPassword', [
+            'model' => $model,
+        ]);
+    }
+
+	
 }

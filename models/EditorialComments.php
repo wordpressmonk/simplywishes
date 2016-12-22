@@ -31,7 +31,7 @@ class EditorialComments extends \yii\db\ActiveRecord
     {
         return [
             [['e_id', 'user_id', 'comments'], 'required'],
-            [['e_id', 'user_id', 'status'], 'integer'],
+            [['e_id', 'user_id', 'status','parent_id'], 'integer'],
             [['comments'], 'string'],
             [['created_at'], 'safe'],
         ];
@@ -44,6 +44,7 @@ class EditorialComments extends \yii\db\ActiveRecord
     {
         return [
             'e_comment_id' => 'E Com ID',
+            'parent_id' => 'Parent ID',
             'e_id' => 'E ID',
             'user_id' => 'User ID',
             'comments' => 'Comments',

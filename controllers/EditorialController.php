@@ -160,8 +160,7 @@ class EditorialController extends Controller
     {
          $model = Editorial::findOne($id);
          $listcomments = new EditorialComments();
-         $comments = $listcomments->find()->where(['e_id'=>$id])->orderBy('e_comment_id Desc')->all();
-		 
+         $comments = $listcomments->find()->where(['e_id'=>$id,'parent_id'=>0])->orderBy('e_comment_id Desc')->all();		 
         return $this->render('editorial_comments', ['model' =>$model,'comments'=>$comments,'listcomments'=>$listcomments]); 
     }
 	
@@ -182,6 +181,26 @@ class EditorialController extends Controller
 				   Yii::$app->session->setFlash('error_comments');
 				   return $this->redirect(['editorial/editorial-page?id='.$model->e_id]);
 			   }
+		 }
+    }
+	
+	public function actionCommentreply()
+    {		
+		$model = new EditorialComments();
+         if($model->load(Yii::$app->request->post()))
+		 {				
+			 if(\Yii::$app->user->isGuest){			
+				Yii::$app->session->setFlash('login_to_comment');
+				return $this->redirect(['editorial/editorial-page?id='.$model->e_id]);
+			}
+			 $model->user_id = \Yii::$app->user->id;
+			   if($model->save())
+			   {
+				 return $this->redirect(['editorial/editorial-page?id='.$model->e_id]);
+			   }else{
+				   Yii::$app->session->setFlash('error_comments');
+				   return $this->redirect(['editorial/editorial-page?id='.$model->e_id]);
+			   } 
 		 }
     }
 }

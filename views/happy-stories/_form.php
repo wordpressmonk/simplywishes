@@ -58,7 +58,7 @@ use dosamigos\ckeditor\CKEditor;
 
  <script type="text/javascript"> 
   $(function(){	
-			$('#happy-stories-e_image').change( function(event) {
+			$('#happystories-story_image').change( function(event) {
 				var tmppath = URL.createObjectURL(event.target.files[0]);
 				$("#imagesorce").fadeIn("fast").attr('src',tmppath);
 			});
@@ -67,6 +67,6 @@ use dosamigos\ckeditor\CKEditor;
   
 <script>
 $(".removelogo").click(function() {	
-				$( "#happy-stories-e_image" ).click();
+				$( "#happystories-story_image" ).click();
 		  });
 </script>

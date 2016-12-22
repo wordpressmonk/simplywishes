@@ -14,6 +14,14 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>Please fill out the following fields to login:</p>
+<?php 
+	$sessioncheck = Yii::$app->session->getFlash('success');
+	if(isset($sessioncheck) && !empty($sessioncheck)) { ?>
+	<div id="w3-success-0" class="alert-success alert fade in">
+	<button class="close" type="button" data-dismiss="alert" aria-hidden="true">×</button>
+	<?= Yii::$app->session->getFlash('success'); ?>
+	</div>
+<?php } ?>
 
     <?php $form = ActiveForm::begin([
         'id' => 'login-form',
@@ -32,6 +40,17 @@ $this->params['breadcrumbs'][] = $this->title;
             'template' => "<div class=\"col-lg-offset-1 col-lg-3\">{input} {label}</div>\n<div class=\"col-lg-8\">{error}</div>",
         ]) ?>
 
+		<div class="form-group">
+		
+		<div class="col-lg-1"></div>
+		<div class="col-lg-8">
+		<div style="color:#999;">
+                    Forgotten Password? reset it <?= Html::a('here', ['site/request-password-reset']) ?>.
+         </div>
+		</div>
+		</div>
+		 
+				
         <div class="form-group">
             <div class="col-lg-offset-1 col-lg-11">
                 <?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>

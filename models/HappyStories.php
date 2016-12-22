@@ -31,11 +31,12 @@ class HappyStories extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'wish_id', 'story_text', 'story_image'], 'required'],
+            [['user_id', 'wish_id', 'story_text'], 'required'],
+			[['story_image'], 'required','except' => 'update_by_happystory_user'], 
             [['user_id', 'wish_id', 'status'], 'integer'],
             [['story_text'], 'string'],
-            [['created_at'], 'safe'],
-            [['story_image'], 'string', 'max' => 255],
+            [['created_at'], 'safe'],          
+			[['story_image'], 'file','extensions' => 'jpg,png'],
         ];
     }
 
