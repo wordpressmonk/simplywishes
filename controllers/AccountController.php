@@ -252,5 +252,22 @@ class AccountController extends Controller
 		arsort($threads);
 		return $threads;
 	}
-	
+/* 	public function actionSendResetPassword(){
+		if(isset(\Yii::$app->request->post()['email'])){
+			$user = User::find()->where(['email'=>\Yii::$app->request->post()['email']])->one();
+			if($user != null){
+				$user->generatePasswordResetToken();
+				$user->save();
+				
+				Yii::$app->mailer->compose('password-reset',['key'=>$user->password_reset_token]) // a view rendering result becomes the message body here
+				->setFrom(Yii::$app->params['adminEmail'])
+				->setTo($user->email)
+				->setSubject('SimplyWishes : Reset Your Password')
+				->send();
+			}
+		}
+	}
+	public function actionResetPassword(){
+		
+	} */
 }

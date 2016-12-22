@@ -45,13 +45,15 @@ $this->params['breadcrumbs'][] = $this->title;
 			<?php if(is_null($model->granted_by) && !\Yii::$app->user->isGuest  && \Yii::$app->user->id!=$model->wished_by){ ?>
 				<form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
 				  <!-- Identify your business so that you can collect the payments. -->
-				  <input type="hidden" name="business" value="dency@abacies.com">
+				  <!--<input type="hidden" name="business" value="dency@abacies.com">-->
+				  <input type="hidden" name="business" value="<?=$model->wisher->email?>">
 				  <!-- Specify a Buy Now button. -->
 				  <input type="hidden" name="cmd" value="_xclick">
 				  <input type="hidden" name="return" value="<?=Url::to(['wish/fullfilled','w_id'=>$model->w_id],true)?>">
-				  <!--<input type="hidden" name="notify_url" value="<?php //Url::to(['wish/fullfilled','w_id'=>$model->w_id],true)?>">-->
+				  <input type="hidden" name="notify_url" value="<?=Url::to(['wish/verify-granted'],true)?>">
 				  <!-- Specify details about the item that buyers will purchase. -->
 				  <input type="hidden" name="item_name" value="<?=$model->wish_title?>">
+				  <input type="hidden" name="item_number" value="<?=$model->w_id?>">
 				  <input type="hidden" name="amount" value="<?=$model->expected_cost?>">
 				  <input type="hidden" name="currency_code" value="USD">
 
