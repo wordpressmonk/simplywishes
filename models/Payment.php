@@ -33,7 +33,6 @@ class Payment extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['item_name', 'item_number', 'payment_status', 'payment_amount', 'payment_currency', 'txn_id', 'receiver_email', 'payer_email'], 'required'],
             [['item_name', 'item_number', 'payment_status', 'txn_id', 'receiver_email', 'payer_email'], 'string', 'max' => 255],
             [['payment_amount', 'payment_currency'], 'string', 'max' => 25],
         ];
