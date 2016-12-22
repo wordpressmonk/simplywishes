@@ -45,7 +45,8 @@ $this->params['breadcrumbs'][] = $this->title;
 			<?php if(is_null($model->granted_by) && !\Yii::$app->user->isGuest  && \Yii::$app->user->id!=$model->wished_by){ ?>
 				<form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
 				  <!-- Identify your business so that you can collect the payments. -->
-				  <input type="hidden" name="business" value="dency@abacies.com">
+				  <!--<input type="hidden" name="business" value="dency@abacies.com">-->
+				  <input type="hidden" name="business" value="<?=$model->wisher->email?>">
 				  <!-- Specify a Buy Now button. -->
 				  <input type="hidden" name="cmd" value="_xclick">
 				  <input type="hidden" name="return" value="<?=Url::to(['wish/fullfilled','w_id'=>$model->w_id],true)?>">
