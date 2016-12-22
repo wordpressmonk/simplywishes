@@ -61,9 +61,9 @@ class PasswordResetRequestForm extends Model
                 ['html' => 'passwordResetToken-html'],
                 ['user' => $user]
             )
-            ->setFrom([Yii::$app->params['supportEmail'] => 'SimplyWise '])
+            ->setFrom([Yii::$app->params['supportEmail'] => 'SimplyWishes '])
             ->setTo($this->email)
-            ->setSubject('SimplyWise Please Reset Your Password');			
+            ->setSubject('SimplyWishes Please Reset Your Password');			
             
 		$message->getSwiftMessage()->getHeaders()->addTextHeader('MIME-version', '1.0\n');
 		$message->getSwiftMessage()->getHeaders()->addTextHeader('Content-Type', 'text/html');

@@ -26,18 +26,19 @@ class ResetPasswordForm extends Model
      * @param array $config name-value pairs that will be used to initialize the object properties
      * @throws \yii\base\InvalidParamException if token is empty or not valid
      */
-    public function __construct($token, $config = [])
+     public function __construct($token, $config = [])
     {
         if (empty($token) || !is_string($token)) {
-            throw new InvalidParamException('Password reset token cannot be blank.');
+            //throw new InvalidParamException('Password reset token cannot be blank.');
+			return null;	
         }
         $this->_user = User::findByPasswordResetToken($token);
         if (!$this->_user) {
-            throw new InvalidParamException('Wrong password reset token.');
-			 return $this->goHome();
+           //throw new InvalidParamException('Wrong password reset token.');
+			return null;		   
         }
         parent::__construct($config);
-    }
+    } 
 
     /**
      * @inheritdoc
@@ -78,7 +79,7 @@ class ResetPasswordForm extends Model
         }
         
         if (!User::isPasswordResetTokenValid($user->password_reset_token)) {
-            $user->generatePasswordResetToken();
+            $user->removePasswordResetToken();
 			$user->scenario = 'apply_forgotpassword';	
             if (!$user->save()) { 
                 return false;
