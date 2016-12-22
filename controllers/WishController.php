@@ -319,7 +319,7 @@ class WishController extends Controller
 	 * Ref: http://stackoverflow.com/questions/14015144/sample-php-code-to-integrate-paypal-ipn
 	 * Change the status back to not paid if not veified
 	 */
-	public function actionVerifyGranted($id){
+	public function actionVerifyGranted(){
 		// STEP 1: Read POST data
 
 		// reading posted data from directly from $_POST causes serialization 
@@ -387,7 +387,7 @@ class WishController extends Controller
 			$payment = new Payment();
 			// assign posted variables to local variables
 			$payment->item_name = $_POST['item_name'];
-			$payment->item_number = $id;
+			$payment->item_number = $_POST['item_number'];
 			$payment->payment_status = $_POST['payment_status'];
 			$payment->payment_amount = $_POST['mc_gross'];
 			$payment->payment_currency = $_POST['mc_currency'];
@@ -397,8 +397,9 @@ class WishController extends Controller
 			$payment->payment_date = $_POST['payment_date'];
 			$payment->save();
 			//check if success
-			if($payment->payment_status != "Completed"){
-				$wish = $this->findModel($id);
+			$wish = $this->findModel($_POST['item_number']);
+			//if not fully paid or if not successful, revert the granted status
+			if($payment->payment_status != "Completed" || $_POST['mc_gross'] != $wish->expected_cost){
 				$wish->granted_by = NULL;
 				$wish->save();
 			}
