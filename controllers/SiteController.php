@@ -220,4 +220,17 @@ class SiteController extends Controller
             'model' => $model,	
 			]);
 	}
+	
+	/**
+	 * Send test mail
+	 * Only for debugging purposes
+	 */
+	public function actionTestMail(){
+            Yii::$app->mailer->compose()
+                ->setTo('dency@abacies.com')
+                ->setFrom(['dency@abacies.com' => 'Dency G B'])
+                ->setSubject('Test mail from simplywishes')
+                ->setTextBody('Regards')
+                ->send();		
+	}
 }
