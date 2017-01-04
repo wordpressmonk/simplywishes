@@ -41,7 +41,7 @@ use yii\helpers\Url;
 			showLabel: false,
 			showCount: false,
 			shares: ["facebook", "twitter", "googleplus", "pinterest", "linkedin", "whatsapp"],
-			url : elem.attr("data_url"),
+			//url : elem.attr("data_url"),
 			text: elem.attr("data_text"),
 		});
 	});
