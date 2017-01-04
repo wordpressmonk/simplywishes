@@ -80,8 +80,8 @@ AppAsset::register($this);
 					<li><a href="<?=Yii::$app->homeUrl?>account/my-account"><i class="fa fa-user-circle-o fa-lg"></i> Account Info</a></li>
 					<li><a href="<?=Yii::$app->homeUrl?>/wish/create"><i class="fa fa-clone fa-lg"></i>Add Wish</a></li>
 					<li><a href="<?=Yii::$app->homeUrl?>account/my-account"><i class="fa fa-heart fa-lg"></i>My Wishes</a></li>
-					<li><a href="#"><i class="fa fa-commenting-o fa-lg"></i>Tell Your Story</a></li>
-					<li><a href="#"><i class="fa fa-smile-o fa-lg"></i>My Happy Story</a></li>
+					<li><a href="<?=Yii::$app->homeUrl?>happy-stories/create"><i class="fa fa-commenting-o fa-lg"></i>Tell Your Story</a></li>
+					<li><a href="<?=Yii::$app->homeUrl?>happy-stories/index"><i class="fa fa-smile-o fa-lg"></i>My Happy Story</a></li>
 					<li><a href="<?=Yii::$app->homeUrl?>account/my-saved"><i class="fa fa-save fa-lg"></i>Saved Wishes</a></li>
 				</ul>
 			</li>
@@ -100,14 +100,14 @@ AppAsset::register($this);
 	<footer class="container-fluid">
 	<div class="col-md-12">
 		<div class="col-md-4">
-		<p class="pull-right"> &copy; Simply Wishes 2016, ALL Rights Reserved</p>
+		<p class="pull-right"> &copy; SimplyWishes 2016, ALL Rights Reserved</p>
 		</div>
 		<div class="col-md-8">
 			<ul class="smp-footer-links">
 				<a href="<?=\Yii::$app->homeUrl?>page/view?id=1"><li>Privacy Policy</li></a>
 				<a href="<?=\Yii::$app->homeUrl?>page/view?id=2"><li>Terms Of Use</li></a>
 				<a href="<?=\Yii::$app->homeUrl?>page/view?id=3"><li>Community Guidelines</li></a>
-				<a href="<?=\Yii::$app->homeUrl?>site/about"><li>About Us</li></a>
+				<!--<a href="<?=\Yii::$app->homeUrl?>site/about"><li>About Us</li></a>-->
 				<a href="<?=\Yii::$app->homeUrl?>site/contact"><li>Contact Us</li></a>
 			</ul>
 		</div>

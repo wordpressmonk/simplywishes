@@ -2,7 +2,10 @@
 use yii\helpers\Url;
 ?>
 	
-	<div class="simply-head"><h3>Fullfilled Wishes</h3></div>
+<script src="<?= Yii::$app->request->baseUrl?>/assets/slider/slick.min.js" type="text/javascript"></script>
+<link href="<?= Yii::$app->request->baseUrl?>/assets/slider/slick.css" />
+<link href="<?= Yii::$app->request->baseUrl?>/assets/slider/slick-theme.css" />
+	<div class="simply-head"><h3 class="fnt-green">Fullfilled Wishes</h3></div>
 	<div class="container-fluid">    
 		<div class="col-md-1 arrow-links"><img src="<?=\Yii::$app->homeUrl?>/images/left-arrow.jpg" class="img-responsive" alt="Image"></div>
 		<div class="col-md-10">
@@ -34,7 +37,8 @@ use yii\helpers\Url;
 		<div class="col-md-1 arrow-links"><img src="<?=\Yii::$app->homeUrl?>/images/right-arrow.jpg" class="img-responsive" alt="Image"></div>
 	</div>
 	<div class="simply-head">
-		<a href="<?=\Yii::$app->homeUrl?>wish/popular"><button class="btn btn-smp-green smpl-brdr" type="button">SEE ALL POPULAR WISHES</button></a>
+		<!--<a href="<?=\Yii::$app->homeUrl?>wish/popular"><button class="btn btn-smp-green smpl-brdr" type="button">SEE ALL POPULAR WISHES</button></a>-->
+		<a href="<?=\Yii::$app->homeUrl?>wish/granted"><button class="btn btn-smp-green smpl-brdr" type="button">SEE MORE FULFILLED WISHES</button></a>
 	</div>
 <script>
 	$(".shareIcons").jsSocials({
@@ -77,4 +81,40 @@ use yii\helpers\Url;
 			}
 		});
 	});
+	
+	
+	
+	$('.smp_grid_slider').slick({
+	 dots: true,
+	 infinite: false,
+	 speed: 300,
+	 slidesToShow: 4,
+	 slidesToScroll: 2,
+	 responsive: [
+		{
+		 breakpoint: 1024,
+		 settings: {
+			slidesToShow: 3,
+			slidesToScroll: 1,
+			infinite: true,
+			dots: true
+		 }
+		},
+		{
+		 breakpoint: 600,
+		 settings: {
+			slidesToShow: 2,
+			slidesToScroll: 1
+		 }
+		},
+		{
+		 breakpoint: 480,
+		 settings: {
+			slidesToShow: 1,
+			slidesToScroll: 1
+		 }
+		}
+	 ]
+	});
+	
 </script>

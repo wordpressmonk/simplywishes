@@ -193,11 +193,13 @@ class AccountController extends Controller
 		$user = User::findOne(\Yii::$app->user->id);
 		$profile = UserProfile::find()->where(['user_id'=>\Yii::$app->user->id])->one();
 		$messages = $this->getThreads();
+		$senduser = UserProfile::find()->where(['!=','user_id',\Yii::$app->user->id])->all();
 		//print_r($messages);die;
 		return $this->render('messages', 
 						['user' => $user,
 						 'profile' => $profile,
 						 'messages' => $messages,
+						 'senduser' => $senduser,
 						]);		
 	}
 	public function getThreads(){
@@ -252,6 +254,25 @@ class AccountController extends Controller
 		arsort($threads);
 		return $threads;
 	}
+	
+	public function actionSendMessageInbox(){
+		
+		$from = \Yii::$app->request->post()['send_from'];
+		$to = \Yii::$app->request->post()['send_to'];
+		$msg = \Yii::$app->request->post()['msg'];
+		
+		if($from != '' && $to != '' && $msg != ''){
+			$message = new Message();
+			$message->sender_id = $from;
+			$message->recipient_id = $to;
+			$message->parent_id = 0;
+			$message->text = $msg;
+			if($message->save()){
+				Yii::$app->session->setFlash('messageSent');
+			}
+		}
+	}
+	
 /* 	public function actionSendResetPassword(){
 		if(isset(\Yii::$app->request->post()['email'])){
 			$user = User::find()->where(['email'=>\Yii::$app->request->post()['email']])->one();

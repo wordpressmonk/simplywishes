@@ -16,7 +16,7 @@ use dosamigos\ckeditor\CKEditor;
 
    
 		<?php
-		$user_id = \Yii::$app->user->identity->id;
+		$user_id = \Yii::$app->user->id;
 		$wish = ArrayHelper::map(Wish::find()->where(['wished_by'=>$user_id])->orderBy('wish_title')->all(), 'w_id', 'wish_title');
 			echo $form->field($model, 'wish_id')->dropDownList(
             $wish,           // Flat array ('id'=>'label')

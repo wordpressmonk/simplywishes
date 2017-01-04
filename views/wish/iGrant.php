@@ -3,7 +3,7 @@ use yii\helpers\Url;
 use app\models\UserProfile;
 ?>
 <div class="smp-igrant">
-<h3 class="smp-mg-bottom">iWish Our Grantors</h3>
+<h3 class="smp-mg-bottom fnt-green">iGrant our Wishers</h3>
 	<div class="col-md-12 smp-mg-bottom">
 	
 		<?php 

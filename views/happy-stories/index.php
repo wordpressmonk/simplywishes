@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
 	
 <div class="editorial-create">
 
-    <h1>Happy Wish Stories</h1>
+    <h1 class="fnt-green"  >Happy Wish Stories</h1>
 	
 		<a class='btn btn-success pull-right' href="<?=Yii::$app->homeUrl?>happy-stories/create">Tell Us Your Story</a> 
 	<?php

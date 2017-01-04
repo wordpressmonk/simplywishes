@@ -35,7 +35,7 @@ AppAsset::register($this);
 		<div class="row" style="padding:28px 0px;">
 		<?php if(\Yii::$app->user->isGuest){ ?> 
 			<div class="btn-group pull-right">
-			  <a href="<?=Yii::$app->homeUrl?>/site/login"><button class="btn btn-smp-blue smpl-brdr-left" type="button">
+			  <a href="<?=Yii::$app->homeUrl?>site/login"><button class="btn btn-smp-blue smpl-brdr-left" type="button">
 				Login
 			  </button></a>
 			  <a href="<?=Yii::$app->homeUrl?>site/sign-up"><button class="btn btn-smp-green smpl-brdr-right" type="button">
@@ -60,7 +60,7 @@ AppAsset::register($this);
 		  <ul class="nav nav-pills smp-pills">
 			<li><a href="<?=Yii::$app->homeUrl?>">Home</a></li>
 			<li><a href="<?=Yii::$app->homeUrl?>site/about">About Us</a></li>
-			<li><a href="<?=Yii::$app->homeUrl?>/wish/index">Find a Wish</a></li>
+			<li><a href="<?=Yii::$app->homeUrl?>wish/index">Find a Wish</a></li>
 
 			<li><a href="<?=Yii::$app->homeUrl?>wish/top-wishers">iWish</a></li>
 			<li><a href="<?=Yii::$app->homeUrl?>wish/top-granters">iGrant</a></li>
@@ -96,7 +96,7 @@ AppAsset::register($this);
 	<div class="container" style="padding: 25px 0px 50px 36px;">
 		<h1 class="slide_header">Make Someone </br>
 		Happy Today</h1>  
-		<button class="btn btn-smp-orange smpl-brdr" type="button">JOIN TODAY!</button>
+		<a href="<?=Yii::$app->homeUrl?>site/sign-up"><button class="btn btn-smp-orange smpl-brdr" type="button">JOIN TODAY!</button></a>
 	</div>
 </div> 
 <div class="container">
@@ -107,14 +107,14 @@ AppAsset::register($this);
 	<footer class="container-fluid">
 	<div class="col-md-12">
 		<div class="col-md-4">
-		<p class="pull-right"> &copy; Simply Wishes 2016, ALL Rights Reserved</p>
+		<p class="pull-right"> &copy; SimplyWishes 2016, ALL Rights Reserved</p>
 		</div>
 		<div class="col-md-8">
 			<ul class="smp-footer-links">
 				<a href="<?=\Yii::$app->homeUrl?>page/view?id=1"><li>Privacy Policy</li></a>
 				<a href="<?=\Yii::$app->homeUrl?>page/view?id=2"><li>Terms Of Use</li></a>
 				<a href="<?=\Yii::$app->homeUrl?>page/view?id=3"><li>Community Guidelines</li></a>
-				<a href="<?=\Yii::$app->homeUrl?>site/about"><li>About Us</li></a>
+				<!--<a href="<?=\Yii::$app->homeUrl?>site/about"><li>About Us</li></a>-->
 				<a href="<?=\Yii::$app->homeUrl?>site/contact"><li>Contact Us</li></a>
 			</ul>
 		</div>

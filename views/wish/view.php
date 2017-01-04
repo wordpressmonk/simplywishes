@@ -74,6 +74,7 @@ $this->params['breadcrumbs'][] = $this->title;
 		</div>
 	</div>
 </div>
+</div>
 <script>
 	$(".shareIcons").jsSocials({
 		showLabel: false,

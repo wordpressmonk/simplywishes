@@ -6,7 +6,7 @@ use yii\helpers\Url;
 <script src="<?= Yii::$app->request->baseUrl?>/src/imagesloaded.js" type="text/javascript"></script>
     <div class="col-md-12 smp-mg-bottom">
 		<div class="col-md-3">
-			<h3>Find A Wish</h3>
+			<h3 class="fnt-green" >Find A Wish</h3>
 			<ul class="nav list list-group">
 				<li class="list-group-item"><a href="<?=\Yii::$app->homeUrl?>wish/popular">Most Popular Wishes</a></li>
 				<li class="list-group-item"><a href="<?=\Yii::$app->homeUrl?>wish/granted">Fullfilled Wishes</a></li>
@@ -53,7 +53,7 @@ use yii\helpers\Url;
 					<h3 style="color:#006699;">Fullfilled Wishes</h3>
 				</div>
 				<div class="tab-pane active"  id="current">
-					<h3 style="color:#006699;">Current Wishes
+					<h3 class="fnt-green" >Current Wishes
 					<?php if($cat_id)
 						echo " : ".\app\models\Category::findOne($cat_id)->title; ?>
 					</h3>

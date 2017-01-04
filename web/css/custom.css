@@ -128,7 +128,8 @@ button:focus {outline:0 !important;}
     font-size: 18px;
 }
 .smp-foot{
-	background-color:#1e3a52;
+	/* background-color:#1e3a52; */
+	background-color:#006699;
 	padding:30px 0px;
 }
 .smp-head{

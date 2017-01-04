@@ -12,7 +12,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="editorial-create">
 
-    <h1>Editorial</h1>
+    <h1 class="fnt-green" >Editorial</h1>
 	
 	<?php
 	

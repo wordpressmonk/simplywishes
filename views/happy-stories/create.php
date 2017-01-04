@@ -12,7 +12,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="happy-stories-create">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1 class="fnt-green" ><?= Html::encode($this->title) ?></h1>
 
     <?= $this->render('_form', [
         'model' => $model,

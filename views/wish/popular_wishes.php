@@ -7,7 +7,7 @@ use yii\helpers\Url;
 <script src="<?= Yii::$app->request->baseUrl?>/src/imagesloaded.js" type="text/javascript"></script>
     <div class="col-md-12 smp-mg-bottom">
 		<div class="col-md-3">
-			<h3>Find A Wish</h3>
+			<h3 class="fnt-green" >Find A Wish</h3>
 			<ul class="nav list list-group">
 				<li class="active list-group-item"><a href="#mostpopular" data-toggle="tab">Most Popular Wishes</a></li>
 				<li class="list-group-item"><a href="<?=\Yii::$app->homeUrl?>wish/granted">Fullfilled Wishes</a></li>
@@ -41,7 +41,7 @@ use yii\helpers\Url;
 		<div class="col-md-9">
 			<div class="tab-content">
 				<div class="tab-pane active" id="mostpopular">
-					<h3 style="color:#006699;">Most Popular Wishes</h3>
+					<h3 class="fnt-green" >Most Popular Wishes</h3>
 					<div class="grid"  data-masonry='{ "itemSelector": ".grid-item" }'>
 					<?php
 

@@ -1,11 +1,26 @@
 <?php
+
 use yii\helpers\Html;
 use yii\helpers\Url;
+use yii\jui\AutoComplete;
+use yii\web\JsExpression;
 ?>	
+<?php 
+/* 
+  $data =  \app\models\Userprofile::find()->select(['CONCAT(firstname," ",lastname) as value', 'CONCAT(firstname," ",lastname) as  label','user_id as id'])->where(['!=','user_id',\Yii::$app->user->id])->asArray()->all();
+ 
+echo "<pre>";
+print_r($data);
+exit;
+  */
+?>
 	<?php echo $this->render('_profile',['user'=>$user,'profile'=>$profile])?>
 	<h3 class="smp-mg-bottom">Inbox</h3>
 	<div class="message">
 		<ul class="list-group">
+			<li class="list-group-item">
+				<a href="#messagemodalOne" id="sendmessage" data-toggle="modal"><button class="btn btn-warning">Send Message</button></a>
+			</li>
 		<?php 	
 			$current_user = \app\models\Userprofile::find()->where(['user_id'=>\Yii::$app->user->id])->one();
 			foreach($messages as $key=>$msg){
@@ -50,6 +65,76 @@ use yii\helpers\Url;
 
 		</ul>
 	</div>
+	
+	<!-- modal Starts -->
+	<div class="modal fade" id="messagemodalOne"  tabindex="-1" role="dialog">
+	  <div class="modal-dialog" role="document">
+	  <form id='project-form'>
+		<div class="modal-content">
+		  <div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			<h4 class="modal-title">Message</h4>
+		  </div>
+		  <div class="modal-body">
+			<div class="media">
+		
+			  <?php 
+			 $data =  \app\models\Userprofile::find()->select(['CONCAT(firstname," ",lastname) as value', 'CONCAT(firstname," ",lastname) as  label','user_id as id'])->where(['!=','user_id',\Yii::$app->user->id])->asArray()->all();	
+				
+					echo AutoComplete::widget([
+						'name' => 'adduser',
+						'id' => 'adduser',
+						'options' => ['class' => 'form-control','placeholder'=>'Search Name'],						
+						'clientOptions' => [
+						 'appendTo'=>'#project-form',
+							'source' => $data, 
+							'autoFill'=>true,
+							 'select' => new JsExpression("function( event, ui ) {
+									$('#senduserid').val(ui.item.id);			
+										}"),
+								],
+							]); 
+?>
+				
+<input type="hidden" name="senduserid" id="senduserid" />
+			</div>
+			</br>
+			<div class="form-group">
+			<label for="message">Enter Your Message</label>
+			<textarea id="msgOne" class="form-control" rows="4"></textarea>
+			</div>
+		  </div>
+		  <div class="modal-footer">
+			<button type="button" class="send-msgOne btn btn-primary">Send</button>
+			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		  </div>
+		</div>
+		  </form>
+	  </div>
+	</div>
+	<!-- modal Ends -->
+	<script>
+	$("#sendmessage").on("click",function(){
+		$("#addusers").val("");
+	});
+	
+		$(".send-msgOne").on("click",function(){
+			console.log($('#msgOne').val());
+			var msg = $('#msgOne').val();
+			var send_to = $("#senduserid").val();
+			var send_from = "<?=\Yii::$app->user->id?>";
+			$.ajax({
+				url : '<?=Url::to(['account/send-message-inbox'])?>',
+				type : 'POST',
+				data : {msg:msg,send_from:send_from,send_to:send_to},
+				success: function(response){
+					location.reload();
+				}
+			});
+		});
+	
+	</script>
+	
 	<script>
 	//jQuery(document).ready(function(){
 	$('ul.nav li.dropdown').hover(function() {
