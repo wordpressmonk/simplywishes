@@ -20,9 +20,13 @@ use yii\helpers\Url;
 					echo  '<span title="You liked it" data-w_id="'.$model->w_id.'" data-a_type="like" class="like-wish glyphicon glyphicon glyphicon-thumbs-up txt-smp-pink"></span></div>';
 				  //////////////////
 				  echo  '<div class="smp-wish-desc">';
-					echo  '<p>Name : <a href="'.Url::to(['account/profile','id'=>$model->wished_by]).'"><span>'.$model->wisherName.'</span></a></p>
-					<p>Wish For : <span>'.$model->wish_title.'</span></p>
-					<p>Location : <span>'.$model->location.'</span></p>
+					echo  '<p><div class="list-icon">
+							<img src="'.$model->wisherPic.'" alt="">
+							<a href="'.Url::to(['account/profile','id'=>$model->wished_by]).'"><span>'.$model->wisherName.'</span></a>
+						</div></p>
+					<!--<p>Wish For : <span>'.$model->wish_title.'</span></p>
+					<p>Location : <span>'.$model->location.'</span></p>-->
+					<p>'.substr($model->summary_title,0,100).'</p>
 					<p><a class="fnt-green" href="'.Url::to(['wish/view','id'=>$model->w_id]).'">Read More</a>
 					&nbsp;<i class="fa fa-thumbs-o-up fnt-blue"></i> '.$model->likesCount.' Likes</p>';
 				  echo  '</div>
