@@ -14,6 +14,7 @@ use yii\filters\AccessControl;
 use yii\helpers\ArrayHelper;
 use yii\web\UploadedFile;
 use yii\data\ActiveDataProvider;
+use yii\helpers\Url;
 
 use app\models\Payment;
 /**
@@ -143,6 +144,12 @@ class WishController extends Controller
      */
     public function actionView($id)
     {
+		$wish = $this->findModel($id);
+		\Yii::$app->view->registerMetaTag([
+			'og:title' => $wish->wish_title,
+			'description' => $wish->wish_description,
+			'og_image' => Url::to([$wish->primary_image],true),
+		]);
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);

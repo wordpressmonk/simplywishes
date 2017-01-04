@@ -40,6 +40,7 @@ use yii\helpers\Url;
 			elem.jsSocials({
 			showLabel: false,
 			showCount: false,
+			via: "simply_wishes",
 			shares: ["facebook", "twitter", "googleplus", "pinterest", "linkedin", "whatsapp"],
 			url : elem.attr("data_url"),
 			text: elem.attr("data_text"),
