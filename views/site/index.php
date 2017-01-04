@@ -26,7 +26,7 @@ use yii\helpers\Url;
 					<p><a class="fnt-green" href="'.Url::to(['wish/view','id'=>$model->w_id]).'">Read More</a>
 					&nbsp;<i class="fa fa-thumbs-o-up fnt-blue"></i> '.$model->likesCount.' Likes</p>';
 				  echo  '</div>
-				  <div class="shareIcons"></div>';
+				  <div class="shareIcons" for="'.$model->wish_title.'"></div>';
 				  echo  '</div>';
 			}?>
 		</section>
@@ -36,8 +36,10 @@ use yii\helpers\Url;
 	</div>
 <script>
 	$(".shareIcons").jsSocials({
+		
 		showLabel: false,
 		showCount: false,
+		text:'TO Be Tested',
 		shares: ["facebook", "twitter", "googleplus", "pinterest", "linkedin", "whatsapp"]
 	});
 	 $(document).on('click', '.like-wish, .fav-wish', function(){ 
