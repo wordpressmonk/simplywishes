@@ -19,12 +19,65 @@ $this->params['breadcrumbs'][] = $this->title;
 
     </p>
 	<div class="smp_about_slide">
-		<div class="about-arw-link"><img src="<?=\Yii::$app->homeUrl?>images/left-arrow.jpg"></div>
+		<section class="regular slider">
 		<?php foreach($dataProvider->models as $model){
 			$userProfile = UserProfile::find()->where(['user_id'=>$model->wished_by])->one();
-			echo '<a href="'.Url::to(['account/profile','id'=>$userProfile->user_id]).'"><img src="'.\Yii::$app->homeUrl.$userProfile->profile_image.'"/></a>';
+			echo '<div><a href="'.Url::to(['account/profile','id'=>$userProfile->user_id]).'"><img style="width: 200px; !important"  src="'.\Yii::$app->homeUrl.$userProfile->profile_image.'"/></a></div>';
 		}?>
-		<div class="about-arw-link"><img src="<?=\Yii::$app->homeUrl?>images/right-arrow.jpg"></div>
+		</section>
 	</div>
 
 </div>
+
+<!--------------- SLIDER CHECK Function ---------------------->
+  <link rel="stylesheet" type="text/css" href="<?= Yii::$app->request->baseUrl?>/slick/slick.css">
+  <link rel="stylesheet" type="text/css" href="<?= Yii::$app->request->baseUrl?>/slick/slick-theme.css"> 
+  <script src="<?= Yii::$app->request->baseUrl?>/slick/jquery-2.2.0.min.js" type="text/javascript"></script>
+  <script src="<?= Yii::$app->request->baseUrl?>/slick/slick.js" type="text/javascript" charset="utf-8"></script>
+  
+  
+  
+  <script type="text/javascript">
+  var js = $.noConflict();
+   js(document).on('ready', function() {
+      js(".regular").slick({
+         dots: false,
+	 infinite: false,
+	 speed: 300,
+	 slidesToShow: 5,
+	 slidesToScroll: 5,
+	 responsive: [
+		{
+		 breakpoint: 1024,
+		 settings: {
+			slidesToShow: 3,
+			slidesToScroll: 3,
+			infinite: true,
+			dots: false
+		 }
+		},
+		{
+		 breakpoint: 600,
+		 settings: {
+			slidesToShow: 2,
+			slidesToScroll: 2
+		 }
+		},
+		{
+		 breakpoint: 480,
+		 settings: {
+			slidesToShow: 1,
+			slidesToScroll: 1
+		 }
+		}
+	 ]
+      });
+     
+	 
+    });
+  </script>
+  
+ 
+  
+  <!--------------- SLIDER CHECK Function END ---------------->
+ 

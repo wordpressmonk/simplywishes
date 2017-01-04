@@ -1,14 +1,10 @@
 <?php 
 use yii\helpers\Url;
 ?>
-	
-<script src="<?= Yii::$app->request->baseUrl?>/assets/slider/slick.min.js" type="text/javascript"></script>
-<link href="<?= Yii::$app->request->baseUrl?>/assets/slider/slick.css" />
-<link href="<?= Yii::$app->request->baseUrl?>/assets/slider/slick-theme.css" />
+
 	<div class="simply-head"><h3 class="fnt-green">Fullfilled Wishes</h3></div>
 	<div class="container-fluid">    
-		<div class="col-md-1 arrow-links"><img src="<?=\Yii::$app->homeUrl?>/images/left-arrow.jpg" class="img-responsive" alt="Image"></div>
-		<div class="col-md-10">
+		<section class="regular slider">
 			<?php foreach($models as $model){
 				echo '<div class="smpl-wish-block thumbnail">';
 				echo '<div><img src="'.\Yii::$app->homeUrl.$model->primary_image.'" class="img-responsive" alt="Image"></div>';
@@ -33,11 +29,9 @@ use yii\helpers\Url;
 				  <div class="shareIcons"></div>';
 				  echo  '</div>';
 			}?>
-		</div>
-		<div class="col-md-1 arrow-links"><img src="<?=\Yii::$app->homeUrl?>/images/right-arrow.jpg" class="img-responsive" alt="Image"></div>
+		</section>
 	</div>
 	<div class="simply-head">
-		<!--<a href="<?=\Yii::$app->homeUrl?>wish/popular"><button class="btn btn-smp-green smpl-brdr" type="button">SEE ALL POPULAR WISHES</button></a>-->
 		<a href="<?=\Yii::$app->homeUrl?>wish/granted"><button class="btn btn-smp-green smpl-brdr" type="button">SEE MORE FULFILLED WISHES</button></a>
 	</div>
 <script>
@@ -46,7 +40,7 @@ use yii\helpers\Url;
 		showCount: false,
 		shares: ["facebook", "twitter", "googleplus", "pinterest", "linkedin", "whatsapp"]
 	});
-	$(document).on('click', '.like-wish, .fav-wish', function(){ 
+	 $(document).on('click', '.like-wish, .fav-wish', function(){ 
 	//$(".like-wish, .fav-wish").on("click",function(){
 		var wish_id = $(this).attr("data-w_id");
 		var type = $(this).attr("data-a_type");
@@ -79,32 +73,44 @@ use yii\helpers\Url;
 
 				console.log(data);
 			}
-		});
+		}); 		
 	});
 	
-	
-	
-	$('.smp_grid_slider').slick({
-	 dots: true,
+
+</script>
+
+<!--------------- SLIDER CHECK Function ----------------------------------->
+  <link rel="stylesheet" type="text/css" href="<?= Yii::$app->request->baseUrl?>/slick/slick.css">
+  <link rel="stylesheet" type="text/css" href="<?= Yii::$app->request->baseUrl?>/slick/slick-theme.css"> 
+  <script src="<?= Yii::$app->request->baseUrl?>/slick/jquery-2.2.0.min.js" type="text/javascript"></script>
+  <script src="<?= Yii::$app->request->baseUrl?>/slick/slick.js" type="text/javascript" charset="utf-8"></script>
+  
+
+  
+  <script type="text/javascript">
+  var js = $.noConflict();
+   js(document).on('ready', function() {
+      js(".regular").slick({
+         dots: false,
 	 infinite: false,
 	 speed: 300,
-	 slidesToShow: 4,
-	 slidesToScroll: 2,
+	 slidesToShow: 5,
+	 slidesToScroll: 5,
 	 responsive: [
 		{
 		 breakpoint: 1024,
 		 settings: {
 			slidesToShow: 3,
-			slidesToScroll: 1,
+			slidesToScroll: 3,
 			infinite: true,
-			dots: true
+			dots: false
 		 }
 		},
 		{
 		 breakpoint: 600,
 		 settings: {
 			slidesToShow: 2,
-			slidesToScroll: 1
+			slidesToScroll: 2
 		 }
 		},
 		{
@@ -115,6 +121,12 @@ use yii\helpers\Url;
 		 }
 		}
 	 ]
-	});
-	
-</script>
+      });
+     
+	 
+    });
+  </script>
+  
+  
+  
+  <!--------------- SLIDER CHECK Function END ----------------------------------->

@@ -69,12 +69,12 @@ class SiteController extends Controller
     public function actionIndex()
     {
 		$this->layout = "home";
-		$query = Wish::find()->where(['not', ['granted_by' => null]])->orderBy('w_id DESC');
+		$query = Wish::find()->where(['not', ['granted_by' => null]])->orderBy('w_id DESC');	
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
-            'pagination' => [
-                'pageSize'=>4
-            ]
+             'pagination' => [
+                'pageSize'=>10
+            ] 
         ]);
         return $this->render('index',['models'=>$dataProvider->models]);
     }
@@ -141,11 +141,12 @@ class SiteController extends Controller
     {
 		$query = Wish::find()->select(['wishes.wished_by,count(w_id) as total_wishes'])->orderBy('total_wishes DESC');
 		$query->groupBy('wished_by');
+		
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
-            'pagination' => [
-                'pageSize'=>50
-            ]
+	         'pagination' => [
+                'pageSize'=>10
+            ] 
         ]);
         return $this->render('about',[
 			'dataProvider' => $dataProvider,

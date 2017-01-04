@@ -320,3 +320,7 @@ ul.smp-footer-links a {
 	width:40px;
 	height:40px;
 }
+.slick-prev:before,
+    .slick-next:before {
+        color: black !important;
+    }
