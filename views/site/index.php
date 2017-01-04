@@ -26,7 +26,7 @@ use yii\helpers\Url;
 					<p><a class="fnt-green" href="'.Url::to(['wish/view','id'=>$model->w_id]).'">Read More</a>
 					&nbsp;<i class="fa fa-thumbs-o-up fnt-blue"></i> '.$model->likesCount.' Likes</p>';
 				  echo  '</div>
-				  <div class="shareIcons" for="'.$model->wish_title.'"></div>';
+				  <div class="shareIcons" data_text="'.$model->wish_title.'" data_url="'.Url::to(['wish/view','id'=>$model->w_id],true).'"></div>';
 				  echo  '</div>';
 			}?>
 		</section>
@@ -35,13 +35,22 @@ use yii\helpers\Url;
 		<a href="<?=\Yii::$app->homeUrl?>wish/granted"><button class="btn btn-smp-green smpl-brdr" type="button">SEE MORE FULFILLED WISHES</button></a>
 	</div>
 <script>
-	$(".shareIcons").jsSocials({
-		
-		showLabel: false,
-		showCount: false,
-		text:'TO Be Tested',
-		shares: ["facebook", "twitter", "googleplus", "pinterest", "linkedin", "whatsapp"]
+	$(".shareIcons").each(function(){
+		var elem = $(this);
+			elem.jsSocials({
+			showLabel: false,
+			showCount: false,
+			shares: ["facebook","googleplus", "pinterest", "linkedin", "whatsapp",
+			{
+				share: "twitter",           // name of share
+				via: "simply_wishes",       // custom twitter sharing param 'via' (optional)
+				hashtags: "simplywishes,dream_come_true"   // custom twitter sharing param 'hashtags' (optional)
+			}],
+			url : elem.attr("data_url"),
+			text: elem.attr("data_text"),
+		});
 	});
+
 	 $(document).on('click', '.like-wish, .fav-wish', function(){ 
 	//$(".like-wish, .fav-wish").on("click",function(){
 		var wish_id = $(this).attr("data-w_id");
