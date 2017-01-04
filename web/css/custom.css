@@ -152,9 +152,7 @@ footer{
 .smp-footer-links li:nth-child(n+5):after{
 	content: "";
 }
-.smp-logo img{
-	max-width:230px;
-}
+
 .smp-pills li a{
     border-radius: 0px;
 	color:#fff;
