@@ -266,7 +266,7 @@ class WishController extends Controller
 		//explicitly set up the granted_by to the user id
 		//listen to the IPN and change back to NULL if not success.
 		$wish->granted_by = \Yii::$app->user->id;
-		if($wish->save())
+		if($wish->save(false))
 			return $this->redirect(['wish/view','id'=>$w_id]);
 		
 	}
