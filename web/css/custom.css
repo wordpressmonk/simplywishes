@@ -117,7 +117,7 @@ button:focus {outline:0 !important;}
 .smp-wish-desc{
 	padding:5px;
 	font-family:'MavenproMedium';
-	min-height:170px;
+	min-height:120px; /*170 px*/
 }
 .grid .smp-wish-desc{
 	padding:5px;
@@ -226,6 +226,7 @@ li.selected a {
     width: 40px;
     border-radius: 50%;
 	height: 40px;
+	display: inline-block !important;
 }
 p.list-group-item-text {
     padding: 5px 0px 10px;
