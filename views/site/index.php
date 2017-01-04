@@ -45,6 +45,7 @@ use yii\helpers\Url;
 			showLabel: false,
 			showCount: false,
 			shares: ["facebook","googleplus", "pinterest", "linkedin", "whatsapp",
+			hashtags: "simplywishes,dream_come_true",
 			{
 				share: "twitter",           // name of share
 				via: "simply_wishes",       // custom twitter sharing param 'via' (optional)
