@@ -44,8 +44,8 @@ use yii\helpers\Url;
 			elem.jsSocials({
 			showLabel: false,
 			showCount: false,
-			shares: ["facebook","googleplus", "pinterest", "linkedin", "whatsapp",
 			hashtags: "simplywishes,dream_come_true",
+			shares: ["facebook","googleplus", "pinterest", "linkedin", "whatsapp",
 			{
 				share: "twitter",           // name of share
 				via: "simply_wishes",       // custom twitter sharing param 'via' (optional)
