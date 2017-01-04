@@ -14,8 +14,8 @@ $this->params['breadcrumbs'][] = $this->title;
   <div class="container my-profile">
 	<div class="col-md-12 smp-mg-bottom">
 	<h3 class="smp-mg-bottom"><?=$this->title?></h3>
-		<div class="col-md-3">
-			<div class="">
+		<div class="col-md-3 happystory">
+			
 				<img src="<?=\Yii::$app->homeUrl.$model->primary_image?>"  class="img-responsive" alt="my-profile-Image"><br>
 				<p><i class="fa fa-thumbs-o-up fnt-blue"></i> <?=$model->likesCount?> Likes &nbsp;
 				<?php
@@ -32,7 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
 				<!--<i class="fa fa-save txt-smp-orange"></i> &nbsp;
 				<i class="fa fa-thumbs-o-up txt-smp-green"></i>--> </p>
 				<div class="shareIcons"></div>
-			</div>
+			
 		</div>
 		<div class="col-md-8">
 			<p>Name : <span><a href="<?=Url::to(['account/profile','id'=>$model->wished_by])?>"><span><?=$model->wisherName?></span></a></span></p>

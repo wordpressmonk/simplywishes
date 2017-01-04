@@ -28,8 +28,8 @@ $this->params['breadcrumbs'][] = $this->title;
 		<?php if(\Yii::$app->user->id == $model->user_id){ ?>
 			 <?= Html::a('Update', ['update', 'id' => $model->hs_id], ['class' => 'btn btn-warning pull-right','style'=>"margin-top: 20px;"]) ?>
 		<?php } ?>
-		<div class="col-md-3">
-			<div class="">
+		<div class="col-md-3 happystory">
+			
 				<img src="<?=Yii::$app->homeUrl?><?php echo $model->story_image; ?>"   class="img-responsive" alt="my-profile-Image"><br>
 				<p><i class="fa fa-thumbs-o-up fnt-green"></i> <?=$model->likesCount?> Likes &nbsp;
 				<?php
@@ -42,7 +42,7 @@ $this->params['breadcrumbs'][] = $this->title;
 				<!--<i class="fa fa-save txt-smp-orange"></i> &nbsp;
 				<i class="fa fa-thumbs-o-up txt-smp-green"></i>--> </p>
 				<div class="shareIcons"></div>
-			</div>
+			
 		</div>
 		<div class="col-md-8">
 			<p><?php echo $model->story_text; ?></p>
