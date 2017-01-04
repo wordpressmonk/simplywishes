@@ -80,10 +80,10 @@ use yii\helpers\Url;
 </script>
 
 <!--------------- SLIDER CHECK Function ----------------------------------->
-  <link rel="stylesheet" type="text/css" href="<?= Yii::$app->request->baseUrl?>/slick/slick.css">
-  <link rel="stylesheet" type="text/css" href="<?= Yii::$app->request->baseUrl?>/slick/slick-theme.css"> 
-  <script src="<?= Yii::$app->request->baseUrl?>/slick/jquery-2.2.0.min.js" type="text/javascript"></script>
-  <script src="<?= Yii::$app->request->baseUrl?>/slick/slick.js" type="text/javascript" charset="utf-8"></script>
+  <link rel="stylesheet" type="text/css" href="<?= Yii::$app->homeUrl?>src/slick/slick.css">
+  <link rel="stylesheet" type="text/css" href="<?= Yii::$app->homeUrl?>src/slick/slick-theme.css"> 
+  <script src="<?= Yii::$app->homeUrl?>src/slick/jquery-2.2.0.min.js" type="text/javascript"></script>
+  <script src="<?= Yii::$app->homeUrl?>src/slick/slick.js" type="text/javascript" charset="utf-8"></script>
   
 
   
