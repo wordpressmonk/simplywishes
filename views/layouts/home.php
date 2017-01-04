@@ -29,7 +29,8 @@ AppAsset::register($this);
 <div class="row smp-head">
 	<div class="container">
 		<div class="col-md-4 smp-logo">
-		<img src="<?=Yii::$app->homeUrl?>images/logo.png" >
+		<a href="<?=Yii::$app->homeUrl?>"><img src="<?=Yii::$app->homeUrl?>images/logo.png" ></a>
+
 		</div>
 		<div class="col-md-8">
 		<div class="row" style="padding:4px 0px;">
@@ -131,6 +132,7 @@ $('ul.nav li.dropdown').hover(function() {
 		}, function() {
 		$(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
 	});
+			
 });
 </script>
 </html>
