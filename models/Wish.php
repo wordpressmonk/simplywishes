@@ -178,7 +178,7 @@ class Wish extends \yii\db\ActiveRecord
             <p><a class="fnt-green" href="'.Url::to(['wish/view','id'=>$this->w_id]).'">Read More</a>
             &nbsp;<i class="fa fa-thumbs-o-up fnt-blue"></i> '.$this->likesCount.' Likes</p>';
           $str .=  '</div>
-          <div class="shareIcons"></div>';
+          <div class="shareIcons" data_text="'.$this->wish_title.'" data_url="'.Url::to(['wish/view','id'=>$this->w_id],true).'" ></div>';
           $str .=  '</div></div>';	
 			
 		echo $str;

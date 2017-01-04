@@ -89,11 +89,22 @@ use yii\helpers\Url;
   					$newElems.imagesLoaded(function(){
   						$newElems.animate({ opacity: 1 });
   						$(".grid").append(el);
-						$(".shareIcons").jsSocials({
-							showLabel: false,
-							showCount: false,
-							shares: ["facebook", "twitter", "googleplus", "pinterest", "linkedin", "whatsapp"]
-						});
+							$(".shareIcons").each(function(){
+								var elem = $(this);
+									elem.jsSocials({
+									showLabel: false,
+									showCount: false,
+									shares: ["facebook","googleplus", "pinterest", "linkedin", "whatsapp",
+									{
+										share: "twitter",           // name of share
+										via: "simply_wishes",       // custom twitter sharing param 'via' (optional)
+										hashtags: "simplywishes,dream_come_true"   // custom twitter sharing param 'hashtags' (optional)
+									}],
+									url : elem.attr("data_url"),
+									text: elem.attr("data_text"),
+								});
+							});
+	
 						$(".grid").masonry( 'appended', el, true )
   					});
 					if(html == '')
@@ -110,11 +121,23 @@ use yii\helpers\Url;
 		});
 
 	});
-	$(".shareIcons").jsSocials({
-		showLabel: false,
-		showCount: false,
-		shares: ["facebook", "twitter", "googleplus", "pinterest", "linkedin", "whatsapp"]
+	
+		$(".shareIcons").each(function(){
+		var elem = $(this);
+			elem.jsSocials({
+			showLabel: false,
+			showCount: false,
+			shares: ["facebook","googleplus", "pinterest", "linkedin", "whatsapp",
+			{
+				share: "twitter",           // name of share
+				via: "simply_wishes",       // custom twitter sharing param 'via' (optional)
+				hashtags: "simplywishes,dream_come_true"   // custom twitter sharing param 'hashtags' (optional)
+			}],
+			url : elem.attr("data_url"),
+			text: elem.attr("data_text"),
+		});
 	});
+	
 	$(document).on('click', '.like-wish, .fav-wish', function(){ 
 	//$(".like-wish, .fav-wish").on("click",function(){
 		var wish_id = $(this).attr("data-w_id");

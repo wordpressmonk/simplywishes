@@ -13,6 +13,22 @@ $profile = UserProfile::find()->where(['user_id'=>$model->user_id])->one();
 $this->title = 'My Happy Story';
 $this->params['breadcrumbs'][] = ['label' => 'Editorials', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
+
+	    \Yii::$app->view->registerMetaTag([
+			'name' => 'og:title',
+			'property' => 'og:title',
+			'content' =>"Happy Story"
+		]);
+		\Yii::$app->view->registerMetaTag([
+			'name' => 'og:description',
+			'property' => 'og:description',
+			'content' =>$model->story_text
+		]);
+		\Yii::$app->view->registerMetaTag([
+			'name' => 'og:image',
+			'property' => 'og:image',
+			'content' =>Url::to([$model->story_image],true)
+		])
 ?>
 
 <div class="wish-view">
@@ -41,8 +57,10 @@ $this->params['breadcrumbs'][] = $this->title;
 				?>
 				<!--<i class="fa fa-save txt-smp-orange"></i> &nbsp;
 				<i class="fa fa-thumbs-o-up txt-smp-green"></i>--> </p>
-				<div class="shareIcons"></div>
-			
+				
+			<div class="shareIcons" data_text="Happy Story" data_url="<?= Url::to(['happy-stories/story-details','id'=>$model->hs_id],true)?>" ></div>
+
+
 		</div>
 		<div class="col-md-8">
 			<p><?php echo $model->story_text; ?></p>
@@ -51,11 +69,29 @@ $this->params['breadcrumbs'][] = $this->title;
 </div>
 </div>
 <script>
-	$(".shareIcons").jsSocials({
+/* 	$(".shareIcons").jsSocials({
 		showLabel: false,
 		showCount: false,
 		shares: ["facebook", "twitter", "googleplus", "pinterest", "linkedin", "whatsapp"]
 	});
+	 */
+	$(".shareIcons").each(function(){
+		var elem = $(this);
+		elem.jsSocials({
+		showLabel: false,
+		showCount: false,
+		hashtags: "simplywishes,dream_come_true", 
+		shares: ["facebook","googleplus", "pinterest", "linkedin", "whatsapp",
+		{
+			share: "twitter",           // name of share
+			via: "simply_wishes",       // custom twitter sharing param 'via' (optional)
+			hashtags: "simplywishes,dream_come_true"   // custom twitter sharing param 'hashtags' (optional)
+		}],
+		url : elem.attr("data_url"),
+		text: elem.attr("data_text"),
+		});
+	});
+	
 	$(document).on('click', '.like-wish', function(){ 
 	//$(".like-wish, .fav-wish").on("click",function(){
 		var s_id = $(this).attr("data-w_id");
