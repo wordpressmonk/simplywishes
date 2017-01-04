@@ -146,9 +146,19 @@ class WishController extends Controller
     {
 		$wish = $this->findModel($id);
 		\Yii::$app->view->registerMetaTag([
-			'og:title' => $wish->wish_title,
-			'description' => $wish->wish_description,
-			'og_image' => Url::to([$wish->primary_image],true),
+			'name' => 'og:title',
+			'property' => 'og:title',
+			'content' =>$wish->wish_title
+		]);
+		\Yii::$app->view->registerMetaTag([
+			'name' => 'og:description',
+			'property' => 'og:description',
+			'content' =>$wish->summary_title
+		]);
+		\Yii::$app->view->registerMetaTag([
+			'name' => 'og:image',
+			'property' => 'og:image',
+			'content' =>Url::to([$wish->primary_image],true)
 		]);
         return $this->render('view', [
             'model' => $this->findModel($id),
