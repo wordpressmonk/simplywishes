@@ -14,39 +14,34 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 	
-<div class="editorial-create">
+<div class="editorial-create smp-mg-bottom">
 
-    <h1 class="fnt-green"  >Happy Wish Stories</h1>
+    <h3 class="fnt-green smp-mg-bottom"  >Happy Wish Stories</h3>
 	
 		<a class='btn btn-success pull-right' href="<?=Yii::$app->homeUrl?>happy-stories/create">Tell Us Your Story</a> 
-	<?php
+		<?php
 	
-		if(isset($model) && !empty($model))
+		foreach($stories as $story)
 		{
-			foreach($model as $user)
-			{
-				$profile = UserProfile::find()->where(['user_id'=>$user->user_id])->one();
-			
-					
-				?>
-				
-			<div class="row">		
-				<div class="form-group col-md-2">			
-					<img src="<?=Yii::$app->homeUrl?><?= $user->story_image; ?>" height="100px"/>				
+		$profile = UserProfile::find()->where(['user_id'=>$story->user_id])->one();				
+		?>
+			<div class="col-md-10 happystory smp-mg-bottom">
+				<div class="media"> 
+					<div class="media-left"> 
+						<img alt="64x64" src="<?=Yii::$app->homeUrl?><?= $story->story_image; ?>" class="media-object"   style="width: 200px;">
+						<span class="fnt-green"><i class="fa fa-thumbs-o-up fa-3x fnt-green"></i><?=$story->likesCount?>  likes</span>
+					</div> 
+					<div class="media-body"> 
+						<!--<h4 class="media-heading">Top aligned media</h4>-->
+						<a href="<?= Url::to(["account/profile","id"=>$story->user_id]) ?>">Author: <?= $story->author->fullname; ?></a>
+						<p> <?=substr($story->story_text,0,450)?>..!</p>
+						<a href="<?=Yii::$app->homeUrl?>happy-stories/story-details?id=<?= $story->hs_id; ?>" ><h5>Read More>></h5></a>
+					</div> 
 				</div>
-				<div class="form-group col-md-8">
-					
-				<p> <?php echo substr($user->story_text,0,250)?>..!</p>
-				<a href="<?= Url::to(["account/profile","id"=>$user->user_id]) ?>">By <?= $profile->firstname; ?> >></a>
-				<a href="<?=Yii::$app->homeUrl?>happy-stories/story-details?id=<?= $user->hs_id; ?>" >Read More</a>
-				
-				</div>
-				
-				
-			</div> 
-			<?php
-			}
+			</div>
+
+		<?php
 		}
-	?>
+		?>
 	
 </div>
