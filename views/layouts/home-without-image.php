@@ -29,7 +29,7 @@ AppAsset::register($this);
 <div class="row smp-head">
 	<div class="container">
 		<div class="col-md-4 smp-logo">
-		<img src="<?=Yii::$app->homeUrl?>images/logo.jpg" >
+		<img src="<?=Yii::$app->homeUrl?>images/logo.png" >
 		</div>
 		<div class="col-md-8">
 
