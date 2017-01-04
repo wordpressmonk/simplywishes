@@ -172,7 +172,7 @@ class Wish extends \yii\db\ActiveRecord
             $str .=  '<span title="You liked it" data-w_id="'.$this->w_id.'" data-a_type="like" class="like-wish glyphicon glyphicon glyphicon-thumbs-up txt-smp-pink"></span></div>';
           //////////////////
           $str .=  '<div class="smp-wish-desc">';
-            $str .=  '<p>Name : <span>'.$this->wisherName.'</span></p>
+            $str .=  '<p>Name : <a href="'.Url::to(['account/profile','id'=>$this->wished_by]).'"><span>'.$this->wisherName.'</span></a></p>
             <p>Wish For : <span>'.$this->wish_title.'</span></p>
             <p>Location : <span>'.$this->location.'</span></p>
             <p><a class="fnt-green" href="'.Url::to(['wish/view','id'=>$this->w_id]).'">Read More</a>

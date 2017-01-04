@@ -35,7 +35,7 @@ $this->params['breadcrumbs'][] = $this->title;
 			</div>
 		</div>
 		<div class="col-md-8">
-			<p>Name : <span><?=$model->summary_title?></span></p>
+			<p>Name : <span><a href="<?=Url::to(['account/profile','id'=>$model->wished_by])?>"><span><?=$model->wisherName?></span></a></span></p>
 			<p>Wish Description : <span><?=$model->wish_description?></span></p>
 			<p>Iam Located In : <span><?=$model->location?></span></p>
 			<p>Expected Date : <span><?=$model->expected_date?></span></p>

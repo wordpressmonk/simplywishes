@@ -5,13 +5,14 @@ namespace app\controllers;
 use Yii;
 use yii\web\UploadedFile;
 use app\models\HappyStories;
+use app\models\StoryActivity;
 
 class HappyStoriesController extends \yii\web\Controller
 {
     public function actionIndex()
     {		
-		$model = HappyStories::find()->orderBy('hs_id Desc')->all();				
-        return $this->render('index', ['model' => $model]);
+		$stories = HappyStories::find()->orderBy('hs_id Desc')->all();				
+        return $this->render('index', ['stories' => $stories]);
 	
     }
 
@@ -77,4 +78,46 @@ class HappyStoriesController extends \yii\web\Controller
             ]);
         }
     }
+	
+	/**
+	 * Like a story
+	 * User has to be logged in to like a wish
+	 * Param: wish id
+	 * @return boolean
+	 */
+	public function actionLike($s_id,$type)
+	{
+		if(\Yii::$app->user->isGuest)
+			return $this->redirect(['site/login','red_url'=>Yii::$app->request->referrer]);
+		$story = $this->findModel($s_id);
+		$activity = StoryActivity::find()->where(['story_id'=>$story->hs_id,'activity'=>$type,'user_id'=>\Yii::$app->user->id])->one();
+		if($activity != null){
+			$activity->delete();
+			return "removed";
+		}
+			$activity = new StoryActivity();
+		$activity->story_id = $story->hs_id;
+		$activity->activity = $type;
+		$activity->user_id = \Yii::$app->user->id;
+		if($activity->save())
+			return "added";
+		else return false;
+	}
+	
+    /**
+     * Finds the story model based on its primary key value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     * @param integer $id
+     * @return Wish the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    protected function findModel($id)
+    {
+        if (($model = HappyStories::findOne($id)) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
+	
 }

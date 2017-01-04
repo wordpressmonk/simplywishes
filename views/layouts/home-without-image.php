@@ -29,11 +29,11 @@ AppAsset::register($this);
 <div class="row smp-head">
 	<div class="container">
 		<div class="col-md-4 smp-logo">
-		<a href="<?=Yii::$app->homeUrl?>"><img src="<?=Yii::$app->homeUrl?>images/logo.jpg" ></a>
+		<a href="<?=Yii::$app->homeUrl?>"><img src="<?=Yii::$app->homeUrl?>images/logo.png" ></a>
 		</div>
 		<div class="col-md-8">
 
-		<div class="row" style="padding:28px 0px;">
+		<div class="row" style="padding:4px 0px;">
 		<?php if(\Yii::$app->user->isGuest){ ?>
 			<div class="btn-group pull-right">
 			  <a href="<?=Yii::$app->homeUrl?>site/login"><button class="btn btn-smp-blue smpl-brdr-left" type="button">
