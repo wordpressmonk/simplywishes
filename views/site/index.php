@@ -45,14 +45,18 @@ use yii\helpers\Url;
 			showLabel: false,
 			showCount: false,
 			hashtags: "simplywishes,dream_come_true",
-			shares: ["facebook","googleplus", "pinterest", "linkedin", "whatsapp",
+			shares: ["googleplus", "pinterest", "linkedin", "whatsapp",
 			{
 				share: "twitter",           // name of share
 				via: "simply_wishes",       // custom twitter sharing param 'via' (optional)
 				hashtags: "simplywishes,dream_come_true"   // custom twitter sharing param 'hashtags' (optional)
+			},{
+				share: "facebook",           // name of share
+				via: "simply_wishes",       // custom twitter sharing param 'via' (optional)
+				hashtags: "simplywishes,dream_come_true"   // custom twitter sharing param 'hashtags' 			
 			}],
 			url : elem.attr("data_url"),
-			text: elem.attr("data_text")+" #simplywishes",
+			text: elem.attr("data_text"),
 		});
 	});
 
