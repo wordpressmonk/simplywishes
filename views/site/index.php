@@ -52,7 +52,7 @@ use yii\helpers\Url;
 				hashtags: "simplywishes,dream_come_true"   // custom twitter sharing param 'hashtags' (optional)
 			}],
 			url : elem.attr("data_url"),
-			text: elem.attr("data_text"),
+			text: elem.attr("data_text")+" #simplywishes",
 		});
 	});
 
