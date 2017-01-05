@@ -80,7 +80,6 @@ $this->params['breadcrumbs'][] = $this->title;
 		elem.jsSocials({
 		showLabel: false,
 		showCount: false,
-		hashtags: "simplywishes,dream_come_true", 
 		shares: ["facebook","googleplus", "pinterest", "linkedin", "whatsapp",
 		{
 			share: "twitter",           // name of share
