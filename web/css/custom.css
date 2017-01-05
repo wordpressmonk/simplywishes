@@ -332,4 +332,12 @@ ul.smp-footer-links a {
 .happystory>img{
 	border: solid 2px #66cc66;
 }
+.a-button {
+    border: none !important;
+    background-color: transparent !important;
+    outline: none !important;
+}
+.a-button:focus {
+    border: none !important;
+}
 

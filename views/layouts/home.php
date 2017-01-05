@@ -26,7 +26,7 @@ AppAsset::register($this);
 <body>
 <?php $this->beginBody() ?>
 <!--***** Header Starts*****-->
-<div class="row smp-head">
+<div class="smp-head">
 	<div class="container">
 		<div class="col-md-4 smp-logo">
 		<a href="<?=Yii::$app->homeUrl?>"><img src="<?=Yii::$app->homeUrl?>images/logo.png" ></a>
@@ -77,13 +77,21 @@ AppAsset::register($this);
 			<?php if(!\Yii::$app->user->isGuest){  ?>
 			<li class="dropdown"><a href="#">Hello,<?php echo substr(\Yii::$app->user->identity->username,0,5)?>..!</a>
 				<ul class="dropdown-menu nav nav-stacked">
-					<li><a href="<?=Yii::$app->homeUrl?>account/inbox"><i class="fa fa-inbox fa-lg"></i> Inbox</a></li>
-					<li><a href="<?=Yii::$app->homeUrl?>account/my-account"><i class="fa fa-user-circle-o fa-lg"></i> Account Info</a></li>
 					<li><a href="<?=Yii::$app->homeUrl?>wish/create"><i class="fa fa-clone fa-lg"></i>Add Wish</a></li>
+					<li><a href="<?=Yii::$app->homeUrl?>account/inbox"><i class="fa fa-inbox fa-lg"></i> Inbox</a></li>
 					<li><a href="<?=Yii::$app->homeUrl?>account/my-account"><i class="fa fa-heart fa-lg"></i>My Wishes</a></li>
-					<li><a href="#"><i class="fa fa-commenting-o fa-lg"></i>Tell Your Story</a></li>
-					<li><a href="#"><i class="fa fa-smile-o fa-lg"></i>My Happy Story</a></li>
 					<li><a href="<?=Yii::$app->homeUrl?>account/my-saved"><i class="fa fa-save fa-lg"></i>Saved Wishes</a></li>
+					<li><a href="<?=Yii::$app->homeUrl?>happy-stories/create"><i class="fa fa-commenting-o fa-lg"></i>Tell Your Story</a></li>
+					<li><a href="<?=Yii::$app->homeUrl?>happy-stories/index"><i class="fa fa-smile-o fa-lg"></i>My Happy Story</a></li>
+					<li><a href="<?=Yii::$app->homeUrl?>account/my-account"><i class="fa fa-user-circle-o fa-lg"></i> Account Info</a></li>
+					<li><a href="#" >
+						<?php  echo Html::beginForm(['/site/logout'], 'post')
+									. Html::submitButton(
+										'<i class="fa fa-sign-out fa-lg"></i>Logout',
+										['class' => 'a-button']
+										)
+									. Html::endForm();  ?>
+						</a></li>	
 				</ul>			
 			</li>
 			<?php } ?>			
@@ -108,7 +116,7 @@ AppAsset::register($this);
 	<footer class="container-fluid">
 	<div class="col-md-12">
 		<div class="col-md-4">
-		<p class="pull-right"> &copy; SimplyWishes 2016, ALL Rights Reserved</p>
+		<p class="pull-right"> &copy; SimplyWishes 2016, All Rights Reserved</p>
 		</div>
 		<div class="col-md-8">
 			<ul class="smp-footer-links">
@@ -135,6 +143,7 @@ $('ul.nav li.dropdown').hover(function() {
 			
 });
 </script>
+
 </html>
 <?php $this->endPage() ?>
 

@@ -65,7 +65,7 @@ $this->params['breadcrumbs'][] = $this->title;
 				  src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" >
 				</form>
 			<?php } else if(!is_null($model->granted_by)&& \Yii::$app->user->isGuest){ ?>
-				<a href="<?=Url::to(['site/login'])?>"><button class="btn btn-success">Click Here To Grant</button></a>
+				<a href="<?=Url::to(['site/login'])?>"><button class="btn btn-success">Grant this Wish</button></a>
 			<?php } ?>
 			
 			<?php if(is_null($model->granted_by) && !\Yii::$app->user->isGuest && \Yii::$app->user->id==$model->wished_by)
