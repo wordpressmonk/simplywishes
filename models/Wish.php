@@ -159,7 +159,7 @@ class Wish extends \yii\db\ActiveRecord
 	public function getWishAsCard(){
 		  $str = '';
           $str .= '<div class="grid-item col-md-4"><div class="thumbnail">';
-          $str .= '<img src="'.\Yii::$app->homeUrl.$this->primary_image.'" class="img-responsive" alt="Image">';
+          $str .= '<a href="'.Url::to(['wish/view','id'=>$this->w_id]).'"><img src="'.\Yii::$app->homeUrl.$this->primary_image.'" class="img-responsive" alt="Image"></a>';
           /////activities///
           if(!$this->isFaved(\Yii::$app->user->id))
             $str .=  '<div class="smp-links"><span title="Save this wish" data-w_id="'.$this->w_id.'" data-a_type="fav" class="fav-wish fa fa-save txt-smp-orange"></span></br>';
