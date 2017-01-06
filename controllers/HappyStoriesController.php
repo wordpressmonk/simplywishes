@@ -17,6 +17,13 @@ class HappyStoriesController extends \yii\web\Controller
     }
 
 	
+	 public function actionMyStory()
+    {			
+		$stories = HappyStories::find()->where(['user_id'=>\Yii::$app->user->id])->orderBy('hs_id Desc')->all();
+		return $this->render('my-story', ['stories' => $stories]);
+		
+    }
+	
 	public function actionCreate()
     {
 		 $model = new HappyStories();

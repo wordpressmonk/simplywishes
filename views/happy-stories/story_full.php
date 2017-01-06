@@ -42,7 +42,7 @@ $this->params['breadcrumbs'][] = $this->title;
 	<?php endif; ?>	
 	<h3 class="smp-mg-bottom"><?=$this->title?></h3>
 		<?php if(\Yii::$app->user->id == $model->user_id){ ?>
-			 <?= Html::a('Update', ['update', 'id' => $model->hs_id], ['class' => 'btn btn-warning pull-right','style'=>"margin-top: 20px;"]) ?>
+			 <?= Html::a('<i class="fa fa-pencil" aria-hidden="true"></i> Update', ['update', 'id' => $model->hs_id], ['class' => 'btn btn-warning pull-right','style'=>"margin-top: 20px;"]) ?>
 		<?php } ?>
 		<div class="col-md-3 happystory">
 			

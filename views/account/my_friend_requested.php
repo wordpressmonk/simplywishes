@@ -22,9 +22,9 @@ $this->params['breadcrumbs'][] = $this->title;
 	  <li role="presentation" class="active">
 		 <a  role="tab" >Friend Requests</a>
 	  </li>
-	  <li role="presentation">
+	  <!--<li role="presentation">
 		 <a href="<?=\Yii::$app->homeUrl?>account/my-follow" role="tab" >Following</a>
-	  </li>
+	  </li>-->
 	</ul>
 	
 	<div class="tab-content">

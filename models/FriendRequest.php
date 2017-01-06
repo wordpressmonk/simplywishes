@@ -50,4 +50,44 @@ class FriendRequest extends \yii\db\ActiveRecord
             'updated_at' => 'Updated At',
         ];
     }
+	
+	 public function sendEmail($to)
+    {
+        /* @var $user User */
+         $user = User::findOne([
+            'status' => User::STATUS_ACTIVE,
+            'id' => $to,
+        ]); 
+		
+		
+		 $fromuser = UserProfile::findOne([
+            'user_id' => \Yii::$app->user->id,
+        ]); 
+		
+        if (!$user) {
+            return false;
+        }
+		
+		if (!$fromuser) {
+            return false;
+        }
+		
+        $message = Yii::$app
+            ->mailer
+            ->compose(
+                ['html' => 'friendRequest-html'],
+                ['user' => $user ,'fromuser'=>$fromuser]
+                
+            )
+            ->setFrom([Yii::$app->params['supportEmail'] => 'SimplyWishes '])
+            ->setTo($user->email)
+            ->setSubject('SimplyWishes Friend Requested Notification ');			
+            
+		$message->getSwiftMessage()->getHeaders()->addTextHeader('MIME-version', '1.0\n');
+		$message->getSwiftMessage()->getHeaders()->addTextHeader('Content-Type', 'text/html');
+		$message->getSwiftMessage()->getHeaders()->addTextHeader('charset', ' iso-8859-1\n');
+		
+		return $message->send();
+    }
+	
 }

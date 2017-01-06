@@ -13,6 +13,7 @@ class FriendController extends \yii\web\Controller
 {
 	public function actionFriendRequest()
     {		
+		$model = new FriendRequest();
         $from = \Yii::$app->request->post()['send_from'];
 		$to = \Yii::$app->request->post()['send_to'];
 		
@@ -23,16 +24,19 @@ class FriendController extends \yii\web\Controller
 			{
 				$checkdata->updated_at = date('Y-m-d H:i:s');
 				$checkdata->save();
-				$friend_request_id = $checkdata->f_id;
+				//$friend_request_id = $checkdata->f_id;
 			}	
 			else
 			{
 				$request = new FriendRequest();
 				$request->requested_by = $from;
 				$request->requested_to = $to ;			
-				$request->save();
-				$friend_request_id = $request->f_id;
+				//$request->save();
+				//$friend_request_id = $request->f_id;
 			}	
+			
+			 $model->sendEmail($to);
+			
 			
 /* 			$profile = UserProfile::find()->where(['user_id'=>$to])->one();			
 			$msg = $profile->firstname.' '.$profile->lastname.' Send Friend Request to you <a style="color:#337ab7 !important"  href="'.Url::to(['friend/request-accepted','id'=>$friend_request_id]).'"><u>Accept</u></a>';
