@@ -344,4 +344,11 @@ ul.smp-footer-links a {
 .a-button:focus {
     border: none !important;
 }
-
+.smp-pills li a:hover{
+	background-color:transparent;
+	color:#fff;
+}
+.webShareIcons.jssocials {
+    float: right;
+    font-size: x-large;
+}
