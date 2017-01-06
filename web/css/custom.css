@@ -117,7 +117,11 @@ button:focus {outline:0 !important;}
 .smp-wish-desc{
 	padding:5px;
 	font-family:'MavenproMedium';
-	min-height:120px; /*170 px*/
+	/*min-height:120px; /*170 px*/
+}
+.smp-wish-desc .desc{
+	height:42px;
+	overflow:hidden;
 }
 .grid .smp-wish-desc{
 	padding:5px;
@@ -296,7 +300,7 @@ li.media.media_button{
 	cursor:pointer;	
 }
 .smpl-wish-block.thumbnail>div:first-child {
-   max-height: 115px;
+   height: 115px;
    overflow: hidden;
 }
 .smp_about_slide {
