@@ -27,7 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
 	  </li>-->
 	</ul>
 	
-	<div class="tab-content">
+	<div class="tab-content smp-mg-bottom">
 		<div role="tabpanel" class="tab-pane" id="activewish">
 		</div>
 		<div role="tabpanel" class="tab-pane active grid" id="fullfilledwish">
@@ -60,7 +60,7 @@ $this->params['breadcrumbs'][] = $this->title;
 			</div>
 			  
 			<?php } } else {
-				echo "Sorry, No more Friend Requested !!!.";
+				echo "Sorry, No new Friend Requested !!!.";
 			} ?>	
 		</div>
 	  </div>

@@ -31,7 +31,7 @@ class FriendController extends \yii\web\Controller
 				$request = new FriendRequest();
 				$request->requested_by = $from;
 				$request->requested_to = $to ;			
-				//$request->save();
+				$request->save();
 				//$friend_request_id = $request->f_id;
 			}	
 			
