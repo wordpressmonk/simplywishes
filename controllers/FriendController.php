@@ -52,6 +52,23 @@ class FriendController extends \yii\web\Controller
     }
 	
 	public function actionRequestAccepted()
+    {	
+		
+	  $requestid = \Yii::$app->request->post()['requestid'];
+	  if($requestid)
+	  {
+		$user_id = \Yii::$app->user->id;
+		$checkdata = FriendRequest::find()->where(["requested_to"=>$user_id,"status"=>0,"f_id"=>$requestid])->one();		
+		if($checkdata)
+		{
+			$checkdata->status = 1;
+			$checkdata->save();
+			return true;
+		}	
+	  }	
+	}
+	
+/* 	public function actionRequestAccepted()
     {		
 		$id = \Yii::$app->request->get()['id'];
 		$user_id = \Yii::$app->user->id;
@@ -63,9 +80,8 @@ class FriendController extends \yii\web\Controller
 		}	
 		
 		return $this->redirect(['account/friend-requested']);
-	}
+	} */
 	
-		
 	public function actionMyFriend(){
 		$user = User::findOne(\Yii::$app->user->id);		
 		$profile = UserProfile::find()->where(['user_id'=>\Yii::$app->user->id])->one();

@@ -310,7 +310,7 @@ class AccountController extends Controller
 	public function actionFriendRequested(){
 		$user = User::findOne(\Yii::$app->user->id);		
 		$profile = UserProfile::find()->where(['user_id'=>\Yii::$app->user->id])->one();
-		$myfriend = FriendRequest::find()->Where(["requested_to"=>\Yii::$app->user->id])->andWhere(["status"=>0])->all();	
+		$myfriend = FriendRequest::find()->Where(["requested_to"=>\Yii::$app->user->id])->andWhere(["status"=>0])->orderBy("f_id DESC")->all();	
 		
 		return $this->render('my_friend_requested', 
 						[

@@ -12,6 +12,11 @@ use app\models\UserProfile;
 $this->title = 'My Friends';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+
+    <div class="alert alert-success" style="display:none">
+            <span><?= ucfirst($profile->firstname)." ".ucfirst($profile->lastname) ?></span> and <span id="alert-name" ></span> are friends now!!!.
+    </div>
+		
 <div class="site-contact">
 		<?php echo $this->render('_profile',['user'=>$user,'profile'=>$profile])?>
 		
@@ -40,24 +45,24 @@ $this->params['breadcrumbs'][] = $this->title;
 					else
 						$user_id = $userid->requested_by;	
 					
-					$profile = UserProfile::find()->where(['user_id'=>$user_id])->one();					
+					$frd_profile = UserProfile::find()->where(['user_id'=>$user_id])->one();					
 				?>
 
-			 <div class="col-md-6 grid-item"> 
+			 <div class="col-md-6 grid-item" id="parent_div_<?= $userid->f_id; ?>" > 
 				<div class="smp_inline thumbnail">
 					<?php 
-					if($profile->profile_image!='') 
-						echo '<img  src="'.\Yii::$app->homeUrl.$profile->profile_image.'" class="img-responsive" alt="my-profile-Image">';
+					if($frd_profile->profile_image!='') 
+						echo '<img  src="'.\Yii::$app->homeUrl.$frd_profile->profile_image.'" class="img-responsive" alt="my-profile-Image">';
 					else 
 						echo '<img  src="'.\Yii::$app->homeUrl.'images/default_profile.png"   class="img-responsive" alt="my-profile-Image">';
 						?>	
 						
 				</div>
 				<div class="smp_inline">
-					<p><span><?= Html::a($profile->firstname.' '.$profile->lastname, Url::to(['account/profile','id'=>$profile->user_id],true)) ?></span></p>						
-					<p><a href="<?= Url::to(['friend/request-accepted','id'=>$userid->f_id]) ?>" ><span class="btn btn-info pull-right" >Accept</span>	</p>
+					<p><span id="name_<?= $userid->f_id; ?>"  for="<?= $frd_profile->firstname.' '.$frd_profile->lastname ?>" ><?= Html::a($frd_profile->firstname.' '.$frd_profile->lastname, Url::to(['account/profile','id'=>$frd_profile->user_id],true)) ?></span></p>						
+					<p><a class="acceptfriendrequest" for="<?= $userid->f_id; ?>" ><span class="btn btn-info pull-right" >Accept</span></a>	</p>
 				</div>
-			</div>
+			 </div>
 			  
 			<?php } } else {
 				echo "Sorry, No new Friend Requested !!!.";
@@ -69,5 +74,35 @@ $this->params['breadcrumbs'][] = $this->title;
 </div>
 
 
+	<script>
 
+	$(".acceptfriendrequest").on("click",function(){	
+			var request_id = $(this).attr("for");
+			var friend_name = $("#name_"+request_id).attr("for");
+			$.ajax({
+				url : '<?=Url::to(['friend/request-accepted'])?>',
+				type : 'POST',
+				data : {requestid:request_id},
+				success: function(response){					
+					console.log("response");
+					if(response == true)
+					{					   					  
+					   $("#parent_div_"+request_id).remove();
+					   $("#alert-name").html(friend_name);
+					   $(".alert").show();
+					} else{
+					   $(".alert").hide();
+					}						
+				}
+			});
+			
+			var listcount = $(".grid .grid-item").length;
+			 if( parseInt($.trim(listcount)) <= 1 ){
+					$(".grid").html("Sorry, No new Friend Requested !!!."); 
+				} 
+		
+		});
+		
+	</script>
+	
 
