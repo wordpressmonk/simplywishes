@@ -59,18 +59,18 @@ AppAsset::register($this);
 		<hr style="border-color:#1085bf;">
 		<nav>
 		  <ul class="nav nav-pills smp-pills">
-			<li><a href="<?=Yii::$app->homeUrl?>">Home</a></li>
-			<li><a href="<?=Yii::$app->homeUrl?>site/about">About Us</a></li>
-			<li><a href="<?=Yii::$app->homeUrl?>wish/index">Find a Wish</a></li>
+			<li id="home"><a href="<?=Yii::$app->homeUrl?>#home">Home</a></li>
+			<li id="abt"><a href="<?=Yii::$app->homeUrl?>site/about#abt">About Us</a></li>
+			<li id="search_wish"><a href="<?=Yii::$app->homeUrl?>wish/index#search_wish">Find a Wish</a></li>
 
-			<li><a href="<?=Yii::$app->homeUrl?>wish/top-wishers">iWish</a></li>
-			<li><a href="<?=Yii::$app->homeUrl?>wish/top-granters">iGrant</a></li>
-			<li><a href="<?=Yii::$app->homeUrl?>happy-stories/index">Happy stories</a></li>
-			<li> 
+			<li id="top_wishers"><a href="<?=Yii::$app->homeUrl?>wish/top-wishers#top_wishers">iWish</a></li>
+			<li id="i_grant"><a href="<?=Yii::$app->homeUrl?>wish/top-granters#i_grant">iGrant</a></li>
+			<li id="i_wish"><a href="<?=Yii::$app->homeUrl?>happy-stories/index#i_wish">Happy stories</a></li>
+			<li id="edt"> 
 				<?php if(isset(\Yii::$app->user->identity->role) && (\Yii::$app->user->identity->role == 'admin')){ ?>
-					<a href="<?=Yii::$app->homeUrl?>editorial/index">Editorial</a>
+					<a href="<?=Yii::$app->homeUrl?>editorial/index#edt">Editorial</a>
 				<?php } else { ?> 
-					<a href="<?=Yii::$app->homeUrl?>editorial/editorial">Editorial</a>
+					<a href="<?=Yii::$app->homeUrl?>editorial/editorial#edt">Editorial</a>
 				<?php } ?>			
 			</li>
 
@@ -110,6 +110,7 @@ AppAsset::register($this);
 	</div>
 </div> 
 <div class="container">
+<div class="webShareIcons" data_text="SimplyWishes" data_url="<?=\Yii::$app->homeUrl?>"></div>
 	<?=$content?>
 </div>
 <!--***** Footer Starts*****-->
@@ -141,7 +142,27 @@ $('ul.nav li.dropdown').hover(function() {
 		}, function() {
 		$(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
 	});
-			
+
+	var hash = window.location.hash;
+	hash = hash.replace('#', '');
+	console.log(hash);
+	$("#"+hash).addClass("active");
+	
+	$(".webShareIcons").each(function(){
+		var elem = $(this);
+			elem.jsSocials({
+			showLabel: false,
+			showCount: false,
+			shares: ["facebook","googleplus", "pinterest", "linkedin", "whatsapp",
+			{
+				share: "twitter",           // name of share
+				via: "simply_wishes",       // custom twitter sharing param 'via' (optional)
+				hashtags: "simplywishes,dream_come_true"   // custom twitter sharing param 'hashtags' (optional)
+			}],
+			url : elem.attr("data_url"),
+			text: elem.attr("data_text"),
+		});
+	});		
 });
 </script>
 
