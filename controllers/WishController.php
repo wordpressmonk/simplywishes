@@ -429,4 +429,17 @@ class WishController extends Controller
 			// log for manual investigation
 		}		
 	}
+	
+	public function actionRemoveWish($wish_id)
+	{
+		if(\Yii::$app->user->isGuest)
+			return $this->redirect(['site/login','red_url'=>Yii::$app->request->referrer]);
+		$wish = $this->findModel($wish_id);
+		$activity = Activity::find()->where(['wish_id'=>$wish->w_id,'activity'=>'fav','user_id'=>\Yii::$app->user->id])->one();
+		if($activity != null){
+			$activity->delete();
+		}
+		
+		 return $this->redirect(['account/my-saved']);
+	}
 }

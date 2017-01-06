@@ -189,18 +189,42 @@ class Wish extends \yii\db\ActiveRecord
 	}
 	public function getHtmlForProfile(){
 		echo '<div class="col-md-6 grid-item"> 
-				<div class="smp_inline thumbnail">
-					<img src="'.\Yii::$app->homeUrl.$this->primary_image.'"  class="img-responsive" alt="Image">
+				<div class="smp_inline thumbnail">					
+					<a href="'.Url::to(['wish/view','id'=>$this->w_id]).'"><img src="'.\Yii::$app->homeUrl.$this->primary_image.'"  class="img-responsive" alt="Image"></a> 					
 				</div>
+				
 				<div class="smp_inline">
 					<p>Wish Title : <span>'.$this->wish_title.'</span></p>
 					<p>Wish Description : <span>'.substr($this->wish_description,0,25).'..</span></p>
 					<p>Location : <span>'.$this->location.'</span></p>
 					<p>Category : <span>'.$this->categoryName.'</span></p>
 					<p><a class="fnt-green" href="'.Url::to(['wish/view','id'=>$this->w_id]).'">Read More >></a> </p>
+					
+					
 				</div>
 			</div>';
 	}
+	
+		public function getHtmlForProfileSaved(){
+		echo '<div class="col-md-6 grid-item"> 
+				<div class="smp_inline thumbnail">					
+					<a href="'.Url::to(['wish/view','id'=>$this->w_id]).'"><img src="'.\Yii::$app->homeUrl.$this->primary_image.'"  class="img-responsive" alt="Image"></a>
+					<br>
+					<p><a style="margin-left:10px" class="fnt-danger" href="'.Url::to(['wish/remove-wish','wish_id'=>$this->w_id]).'"><i class="fa fa-trash" aria-hidden="true"></i> Remove</a> </p>
+				</div>
+				
+				<div class="smp_inline">
+					<p>Wish Title : <span>'.$this->wish_title.'</span></p>
+					<p>Wish Description : <span>'.substr($this->wish_description,0,25).'..</span></p>
+					<p>Location : <span>'.$this->location.'</span></p>
+					<p>Category : <span>'.$this->categoryName.'</span></p>
+					<p><a class="fnt-green" href="'.Url::to(['wish/view','id'=>$this->w_id]).'">Read More >></a> </p>
+					
+					
+				</div>
+			</div>';
+	}
+	
     /**
      * @returns the location of the wish
      */	
