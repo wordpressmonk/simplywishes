@@ -11,6 +11,7 @@ use app\models\UserProfile;
 use yii\web\UploadedFile;
 use app\models\search\SearchWish;
 use app\models\Message;
+use app\models\FriendRequest;
 
 class AccountController extends Controller
 {
@@ -291,4 +292,46 @@ class AccountController extends Controller
 	public function actionResetPassword(){
 		
 	} */
+	
+	public function actionMyFriend(){
+		$user = User::findOne(\Yii::$app->user->id);		
+		$profile = UserProfile::find()->where(['user_id'=>\Yii::$app->user->id])->one();
+		$myfriend = FriendRequest::find()->where(["requested_by"=>\Yii::$app->user->id])->orWhere(["requested_to"=>\Yii::$app->user->id])->andWhere(["status"=>1])->all();	
+		
+		return $this->render('my_friend', 
+						[
+						 'user' => $user,	
+						 'profile' => $profile,
+						 'myfriend' => $myfriend,
+						]);		
+	}
+	
+	
+	public function actionFriendRequested(){
+		$user = User::findOne(\Yii::$app->user->id);		
+		$profile = UserProfile::find()->where(['user_id'=>\Yii::$app->user->id])->one();
+		$myfriend = FriendRequest::find()->Where(["requested_to"=>\Yii::$app->user->id])->andWhere(["status"=>0])->orderBy("f_id DESC")->all();	
+		
+		return $this->render('my_friend_requested', 
+						[
+						 'user' => $user,	
+						 'profile' => $profile,
+						 'myfriend' => $myfriend,
+						]);		
+	}
+	
+	
+	public function actionMyFollow(){
+		$user = User::findOne(\Yii::$app->user->id);		
+		$profile = UserProfile::find()->where(['user_id'=>\Yii::$app->user->id])->one();
+		$myfriend = FriendRequest::find()->where(["requested_by"=>\Yii::$app->user->id])->orWhere(["requested_to"=>\Yii::$app->user->id])->andWhere(["status"=>1])->all();	
+		
+		return $this->render('my_follow', 
+						[
+						 'user' => $user,	
+						 'profile' => $profile,
+						 'myfriend' => $myfriend,
+						]);		
+	}
+	
 }
