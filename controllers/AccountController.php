@@ -106,7 +106,8 @@ class AccountController extends Controller
         ]);			
 	}
 	public function actionEditAccount()
-	{		
+	{	
+		$id = \Yii::$app->user->id;
 		$user = User::findOne(\Yii::$app->user->id);
 		$profile = UserProfile::find()->where(['user_id'=>\Yii::$app->user->id])->one();
 		$countries = \yii\helpers\ArrayHelper::map(\app\models\Country::find()->all(),'id','name');	
@@ -115,11 +116,41 @@ class AccountController extends Controller
 		
 		$current_image = $profile->profile_image;
 		if ($user->load(Yii::$app->request->post()) && $profile->load(Yii::$app->request->post())){
+			
 			if($user->password)
 				$user->setPassword($user->password);
 			//print_r($user);die;
 			if($user->save()){
-				$profile->user_id = $user->id;
+				
+					$profile->user_id = $user->id;
+					
+				/************* Image Upload Part Begin ********************/
+
+		
+		
+		/* if(!empty($profile->profile_image))
+		{
+		$file_path=Yii::$app->basePath.'/web/uploads/';
+		$image =  json_decode($profile->profile_image);
+		
+		if (strpos($image->data, 'data:image/jpeg;base64,') !== false) {
+			$img = str_replace('data:image/jpeg;base64,', '', $image->data);
+		}
+		if (strpos($image->data, 'data:image/png;base64,') !== false) {
+			$img = str_replace('data:image/png;base64,', '', $image->data);
+		}	
+		
+
+		
+		$img = str_replace(' ', '+', $img);
+	    $image_data = base64_decode($img);
+	    $profile->profile_image = 'uploads/'.$image_name='rand_'.rand(0000,9999).'time_'.time().'.JPG';
+	    $file = $file_path .$image_name;
+	    $success = file_put_contents($file, $image_data); */
+				
+				/************* Image Upload Part End ********************/
+			
+			
 				//save profile image here
 				$profile->profile_image = UploadedFile::getInstance($profile, 'profile_image');
 				//print_r($profile);die;

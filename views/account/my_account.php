@@ -11,6 +11,10 @@ use yii\captcha\Captcha;
 $this->title = 'My Account';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+
+<!--<script src="<?= Yii::$app->request->baseUrl?>/image_upload/html5imageupload.js" type="text/javascript"></script>
+ <link href="<?= Yii::$app->request->baseUrl?>/image_upload/html5imageupload.css" rel="stylesheet">-->
+ 
 <div class="site-contact">
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -66,8 +70,26 @@ $this->params['breadcrumbs'][] = $this->title;
 					</div>
 					<img src="<?= \Yii::$app->homeUrl.$profile->profile_image;?>" width="150" height="150" />
 					
-					<?= $form->field($profile, 'profile_image')->fileInput(['class' => 'form-control'])->label('Upload Profile Image') ?>
+					<?php  echo $form->field($profile, 'profile_image')->fileInput(['class' => 'form-control'])->label('Upload Profile Image')   ?>
 					
+					
+		<!--<div class="form-group field-userprofile-profile_image">
+		<label class="control-label" for="userprofile-profile_image">Upload Profile Image</label>
+		<br></br>
+		<input type="hidden" name="UserProfile[profile_image]" value="">
+
+		
+		
+		 <div class="dropzone" data-smaller="true" data-canvas-image-only="true" data-button-done="true"  data-originalsize="false" id="for_image" data-width="300" data-ajax="false" data-height="300" data-button-zoomout="false">
+           <input type="file"  id="userprofile-profile_image" class="form-control" name="UserProfile[profile_image]"  />
+		   
+		  
+		</div>
+	
+		<p class="help-block help-block-error"></p>
+	 </div>-->
+	 
+	 
 					</br>
       <span>Or Choose One</span>         
       <div class="gravatar thumbnail">
@@ -109,6 +131,12 @@ $('.profilelogo').click(function(){
   $(this).find( "img" ).addClass('selected'); 
   $("#userprofile-dulpicate_image").val(val);
 });
+
+
+/* 
+$('.dropzone').html5imageupload({
+		ghost: false,
+	}); */
 
 </script>
 

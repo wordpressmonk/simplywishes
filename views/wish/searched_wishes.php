@@ -10,6 +10,7 @@ use yii\helpers\Url;
 			<ul class="nav list list-group">
 				<li class="list-group-item"><a href="<?=\Yii::$app->homeUrl?>wish/popular">Most Popular Wishes</a></li>
 				<li class="list-group-item"><a href="<?=\Yii::$app->homeUrl?>wish/granted">Fullfilled Wishes</a></li>
+				<li class="list-group-item"><a href="<?=\Yii::$app->homeUrl?>wish/index">Current Wishes</a></li>
 				<li class="list-group-item dropdown">
 					<a data-toggle="collapse" data-target="#demo">Recipient 
 						<i class="fa fa-plus text-success pull-right"></i>

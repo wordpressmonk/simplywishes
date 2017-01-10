@@ -109,6 +109,7 @@ button:focus {outline:0 !important;}
     max-width: 200px;
     margin: 0 10px;
 }
+
 .arrow-links>img{
 	position:relative;
 	bottom:-140px;
@@ -300,6 +301,11 @@ li.media.media_button{
 	cursor:pointer;	
 }
 .smpl-wish-block.thumbnail>div:first-child {
+   height: 115px;
+   overflow: hidden;
+}
+
+.smpl-wish-block1.thumbnail>div:first-child {
    height: 115px;
    overflow: hidden;
 }

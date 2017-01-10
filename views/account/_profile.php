@@ -44,11 +44,11 @@ use app\models\FriendRequest;
 							$checkfriendlist = FriendRequest::find()->where(["requested_by"=>\Yii::$app->user->id,"requested_to"=>$user->id])->orWhere(["requested_to"=>\Yii::$app->user->id,"requested_by"=>$user->id])->one();
 							
 							if(!$checkfriendlist)
-								echo '<a class="btn btn-info friendrequest ">+ Add Friend</a>';
+								echo '<a class="btn btn-info friendrequest ">Add as Friend</a>';
 							else if($checkfriendlist->status == 0 && $checkfriendlist->requested_by == \Yii::$app->user->id )
 								echo '<a class="btn btn-info friendrequest ">Friend Request Sent</a>';
 							else if($checkfriendlist->status == 0 && $checkfriendlist->requested_to == \Yii::$app->user->id )
-								echo '<a class="btn btn-info friendrequest ">+ Add Friend</a>';
+								echo '<a class="btn btn-info friendrequest ">Add as Friend</a>';
 							else if($checkfriendlist->status == 1)
 								echo '<a class="btn btn-success">Friends</a>';
 							

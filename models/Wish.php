@@ -158,8 +158,8 @@ class Wish extends \yii\db\ActiveRecord
      */		
 	public function getWishAsCard(){
 		  $str = '';
-          $str .= '<div class="grid-item col-md-4"><div class="thumbnail">';
-          $str .= '<a href="'.Url::to(['wish/view','id'=>$this->w_id]).'"><img src="'.\Yii::$app->homeUrl.$this->primary_image.'" class="img-responsive" alt="Image"></a>';
+          $str .= '<div class="grid-item col-md-4"><div class=" smpl-wish-block1 thumbnail">';
+          $str .= '<div><a href="'.Url::to(['wish/view','id'=>$this->w_id]).'"><img src="'.\Yii::$app->homeUrl.$this->primary_image.'" class="img-responsive" alt="Image"></a></div>';
           /////activities///
           if(!$this->isFaved(\Yii::$app->user->id))
             $str .=  '<div class="smp-links"><span title="Save this wish" data-w_id="'.$this->w_id.'" data-a_type="fav" class="fav-wish fa fa-save txt-smp-orange"></span></br>';
@@ -178,7 +178,7 @@ class Wish extends \yii\db\ActiveRecord
 						</div></p>
             <!--<p>Wish For : <span>'.$this->wish_title.'</span></p>
             <p>Location : <span>'.$this->location.'</span></p>-->
-			<p>'.substr($this->summary_title,0,100).'</p>
+			<p class="desc" >'.substr($this->summary_title,0,50).'</p>
             <p><a class="fnt-green" href="'.Url::to(['wish/view','id'=>$this->w_id]).'">Read More</a>
             &nbsp;<i class="fa fa-thumbs-o-up fnt-blue"></i> '.$this->likesCount.' Likes</p>';
           $str .=  '</div>

@@ -43,17 +43,17 @@ AppAsset::register($this);
 				Join Today
 			  </button></a>
 			</div>
-		<?php  } else { ?>
-			<div class="btn-group pull-right">
+		<?php  } ?>
+			<!--<div class="btn-group pull-right">
 			  <?php
-			  echo Html::beginForm(['/site/logout'], 'post')
+			/*   echo Html::beginForm(['/site/logout'], 'post')
                 . Html::submitButton(
                     'Logout',
                     ['class' => 'btn btn-smp-green smpl-brdr']
                 )
-                . Html::endForm(); ?>
-			</div>		
-		<?php } ?>
+                . Html::endForm();  */?>
+			</div>-->		
+	
 		</div>
 		
 		<hr style="border-color:#1085bf;">
@@ -75,7 +75,7 @@ AppAsset::register($this);
 			</li>
 
 			<?php if(!\Yii::$app->user->isGuest){  ?>
-			<li class="dropdown"><a href="#">Hello,<?php echo substr(\Yii::$app->user->identity->username,0,5)?>..!</a>
+			<li class="dropdown"><a href="#">Hello,<?php echo substr(\Yii::$app->user->identity->username,0,4)?>..!</a>
 				<ul class="dropdown-menu nav nav-stacked">
 					<li><a href="<?=Yii::$app->homeUrl?>wish/create"><i class="fa fa-clone fa-lg"></i>Add Wish</a></li>
 					<li><a href="<?=Yii::$app->homeUrl?>account/inbox"><i class="fa fa-inbox fa-lg"></i> Inbox</a></li>
