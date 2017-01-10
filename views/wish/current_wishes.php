@@ -66,6 +66,7 @@ use yii\helpers\Url;
 ?>
 					</div>
 				</div>
+				<div style="display:none" align="center" id="loader_img" ><img src="<?= Yii::$app->homeUrl?>uploads/loading2.gif"></div>
 				<div class="tab-pane" id="recent">
 					<h3 style="color:#006699;">Recipient</h3>
 				</div>
@@ -87,6 +88,7 @@ use yii\helpers\Url;
 		if(page){
   		if ($(document).height() - win.height()-1 == scroll_top ) {
 			console.log("scrolld");
+			$("#loader_img").show();
   			$.ajax({
   				url: '<?=Url::to(['wish/scroll','cat_id'=>$cat_id], true);?>',
   				dataType: 'html',
@@ -123,6 +125,7 @@ use yii\helpers\Url;
   				error:function(){
   				}
   			});
+			$("#loader_img").hide();
   			//$container.masonry();
   			//page = page+1;
 	}}
