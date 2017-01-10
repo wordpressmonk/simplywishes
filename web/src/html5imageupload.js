@@ -11,10 +11,10 @@
 	"use strict";
 	
 	$.html5imageupload = function html5imageupload(options, element) {
-            
+
 		this.element		= element; 
 		this.options		= $.extend(true, {}, $.html5imageupload.defaults, options, $(this.element).data());
-		this.input		= $(this.element).find('input[type=file]');
+		this.input			= $(this.element).find('input[type=file]');
 		
 		var $window 		= $(window);
 		var _self	 		= this;
@@ -24,17 +24,16 @@
 		
 		//buttons
 		this.button				= {}
-		this.button.edit		= '<div class="btn btn-info btn-edit" style="display:block !important" title="' + (this.options.editTitle || 'Edit') + '"><i class="glyphicon glyphicon-pencil"></i></div>'
+		this.button.edit		= '<div class="btn btn-info btn-edit" title="' + (this.options.editTitle || 'Edit') + '"><i class="glyphicon glyphicon-pencil"></i></div>'
 		this.button.saving		= '<div class="btn btn-warning saving">' + (this.options.saveLabel || 'Saving...') + ' <i class="glyphicon glyphicon-time"></i></div>';
 		this.button.zoomin		= '<div class="btn btn-default btn-zoom-in" title="' + (this.options.zoominTitle || 'Zoom in') + '"><i class="glyphicon glyphicon-resize-full"></i></div>';
 		this.button.zoomout		= '<div class="btn btn-default btn-zoom-out" title="' + (this.options.zoomoutTitle || 'Zoom out') + '"><i class="glyphicon glyphicon-resize-small"></i></div>';
 		this.button.zoomreset	= '<div class="btn btn-default btn-zoom-reset" title="' + (this.options.zoomresetTitle || 'Fullsize') + '"><i class="glyphicon glyphicon-fullscreen"></i></div>';
 //		this.button.rotatecw	= '<div class="btn btn-default btn-rotate-cw" title="' + (this.options.cwTitle || 'Rotate clockwise') + '"><i class="glyphicon glyphicon-share"></i></div>';
 //		this.button.rotateccw	= '<div class="btn btn-default btn-rotate-ccw" title="' + (this.options.ccwTitle || 'Rotate counter clockwise') + '"><i class="glyphicon glyphicon-share icon-flipped"></i></div>';
-		this.button.cancel		= '<div class="btn btn-danger btn-cancel" title="' + (this.options.cancelTitle || 'Cancel') + '"><i class="glyphicon glyphicon-remove "></i></div>';
-		this.button.done		= '<div style="display:none" class="btn btn-success btn-ok" title="' + (this.options.okTitle || 'Ok') + '"><i class="glyphicon glyphicon-ok save-pic"></i></div>';
-		//this.button.done = '<div class="col-sm-6 col-md-6 on-off"><div class="switch"><input id="cmn-toggle-3" class="cmn-toggle cmn-toggle-round" type="checkbox"><label for="cmn-toggle-3"></label></div><span>Use this Image</span></div>';
-		this.button.del			= '<div class="btn btn-danger btn-del img_del" title="' + (this.options.delTitle || 'Delete') + '"><i class="glyphicon glyphicon-trash"></i></div>';
+		this.button.cancel		= '<div class="btn btn-danger btn-cancel" title="' + (this.options.cancelTitle || 'Cancel') + '"><i class="glyphicon glyphicon-remove"></i></div>';
+		this.button.done		= '<div class="btn btn-success btn-ok" title="' + (this.options.okTitle || 'Ok') + '"><i class="glyphicon glyphicon-ok"></i></div>';
+		this.button.del			= '<div class="btn btn-danger btn-del" title="' + (this.options.delTitle || 'Delete') + '"><i class="glyphicon glyphicon-trash"></i></div>';
 		
 		this.button.download	= '<a class="btn btn-warning download"><i class="glyphicon glyphicon-download"></i> ' + (this.options.downloadLabel || 'Download') + '</a>';
 		
@@ -58,7 +57,7 @@
 		ajax:				true,
 		resize: 			false,
 		dimensionsonly:		false,
-		editstart:			true,
+		editstart:			false,
 		saveOriginal:		false,
 		save:				true,
 		download:			false,
@@ -292,7 +291,6 @@
 			var _self		= this;
 			var options		= this.options; 
 			var element		= this.element;
-		//	var element		= $('#working_div');
 		    _self.drag		= false;
 			
 			var img 		= new Image;
@@ -347,27 +345,6 @@
 
     			//place the images
     			$(element).append($('<div class="cropWrapper"></div>').append($(_self.image)));
-				//Mouse zoom-n/zoom-out events
-/*  				$(element).bind("mousewheel DOMMouseScroll MozMousePixelScroll",function(e){
-					e.stopImmediatePropagation();
-					e.stopPropagation();
-					e.preventDefault();
-					if(e.originalEvent.wheelDelta > 0 || e.originalEvent.detail > 0) {					
-						setTimeout(function(){ 
-							_self.imageZoom(-20); 
-						},1);		
-						if (_self.options.onAfterZoomImage) _self.options.onAfterZoomImage.call(_self,_self);
-					}
-					else{
-						setTimeout(function(){ 
-							_self.imageZoom(20); 
-						},1);	
-						if (_self.options.onAfterZoomImage) _self.options.onAfterZoomImage.call(_self,_self);
-
-					}					
-				}); */ 
-				//console.log(_self.image[0].currentSrc);
-				//$("#working_div .bgimg-block").css("background-image","url("+_self.image[0].currentSrc+")");
     			if (!empty(_self.imageGhost)) {
     				$(element).append(_self.imageGhost);
     			}
@@ -437,20 +414,6 @@
 						top:	imgTop,
 						left:	imgLeft
 					})
-					var el_width = "385px";
-					var el_height = $("#working_div .bgimg-block").height();
-					console.log("el_width:"+el_width);
-					console.log("el_height:"+el_height);
-					console.log("imgLeft:"+imgLeft);
-					console.log("imgTop:"+imgTop);
-					imgTop =  parseInt(el_height)-parseInt(imgTop);
-					imgLeft =  parseInt(el_width) -parseInt(imgLeft) ;
-					if(imgLeft == 0 && imgTop == 0){
-						return;
-					}
-						
-					//$("#working_div .bgimg-block").css("background-position","right "+imgLeft+"px bottom "+imgTop+"px");
-					
 					_self._ghost();
 				},
 				'dragend mouseup touchend': function() {
@@ -525,33 +488,6 @@
 			}
 			image.css({width: newWidth, height: newHeight, top: newTop, left: newLeft })
 			_self._ghost();
-			var total_background_size = parseInt(newTop) + parseInt(newLeft);
-			var background_size = total_background_size/2;
-			background_size = Math.abs(background_size);
-			if(background_size > 300){
-				background_size = 300;
-			}
-			if(background_size < 100){
-				background_size = 100;
-			}
-					var el_width = "385px";
-					var el_height = $("#working_div .bgimg-block").height();
-					console.log("el_width:"+el_width);
-					console.log("el_height:"+el_height);
-					console.log("newLeft:"+newLeft);
-					console.log("newTop:"+newTop);
-					newTop =  parseInt(el_height)-parseInt(newTop);
-					newLeft =  parseInt(el_width) -parseInt(newLeft) ;
-					
-			if(newLeft == 0 && newTop == 0){
-				console.log(newLeft);
-						return;
-			}
-			//$("#working_div .bgimg-block").css("background-size",newLeft+"px "+ newTop+"px");
-			//$("#working_div .bgimg-block").css("background-position","left "+newLeft+"px top "+newTop+"px");
-			//background-size: 126%;
-			//background-position: left -574px top -247px;
-
 			
 
 		},
@@ -698,11 +634,6 @@
 					$(input).after($('<input type="text" name="' + $(input).attr('name') + '_values" class="final" />').val(json));
 				}
 			}
-			var total_background_size = parseInt(finalTop) + parseInt(finalLeft);
-			var background_size = total_background_size/2;
-			background_size = Math.abs(background_size);
-		//	$("#working_div .bgimg-block").css("background-size",background_size+"%");
-		//	$("#working_div .bgimg-block").css("background-position","left "+finalLeft+"px top "+finalTop+"px");
 		},
 		_ajax: function(obj) {
 			var _self				= this;
@@ -751,7 +682,7 @@
 			var image			= _self.image;
 			var element			= _self.element;
 			
-			$(image).css({width: 'auto', height: '100%', top: '0px', left: '25%'})
+			$(image).css({width: image.data('useWidth'), height: image.data('useHeight'), top: image.data('top'), left: image.data('left')})
 			_self._ghost();
 			
 			if (_self.options.onAfterResetImage) _self.options.onAfterResetImage.call(_self,_self);
@@ -948,13 +879,12 @@
 						window.clearInterval(_self.interval);
 						if (_self.options.onAfterZoomImage) _self.options.onAfterZoomImage.call(_self,_self);
 					}
-
 				}));
 			}
 			
 			//zoomreset button (set the image to the "original" size, same size as when selecting the image
 			if (options.buttonZoomreset != false) {
-				$('#file_id').html($(_self.button.zoomreset).on({
+				$(tools).append($(_self.button.zoomreset).on({
 					'touchstart click': function(e) {
 						e.preventDefault();
 						_self.imageReset();
@@ -1010,19 +940,13 @@
 			if (options.buttonDone != false) {
 				$(tools).append($(_self.button.done).on({
 					'touchstart click': function(e) { 
-						
 						e.preventDefault();
-						_self.imageCrop(); 
-						console.log("image addded");
-					
-						
-						setTimeout("add_block(true,false);",1000);
-//						setInterval(function(){add_block();},1000);
+						_self.imageCrop() 
 					}
 				}));
 			}
+			
 			$(element).append($(tools));
-			//$('#file_id').html($(tools));
 			
 		},
 		_clearTimers: function() {

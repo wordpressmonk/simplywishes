@@ -11,8 +11,8 @@ use yii\captcha\Captcha;
 $this->title = 'Join Today';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<!--<script src="<?= Yii::$app->request->baseUrl?>/image_upload/html5imageupload.js" type="text/javascript"></script>
- <link href="<?= Yii::$app->request->baseUrl?>/image_upload/html5imageupload.css" rel="stylesheet">-->
+<!--<script src="<?= Yii::$app->request->baseUrl?>/js/html5imageupload.js" type="text/javascript"></script>
+ <link href="<?= Yii::$app->request->baseUrl?>/css/html5imageupload.css" rel="stylesheet">-->
  
 <div class="row page-header">
   <div class="container join-taday">
