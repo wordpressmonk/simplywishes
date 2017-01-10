@@ -75,7 +75,7 @@ AppAsset::register($this);
 			</li>
 
 			<?php if(!\Yii::$app->user->isGuest){  ?>
-			<li class="dropdown"><a href="#">Hello,<?php echo substr(\Yii::$app->user->identity->username,0,4)?>..!</a>
+			<li class="dropdown"><a href="#">Hello,<?php echo substr(\Yii::$app->user->identity->username,0,5)?>..!</a>
 				<ul class="dropdown-menu nav nav-stacked">
 					<li><a href="<?=Yii::$app->homeUrl?>wish/create"><i class="fa fa-clone fa-lg"></i>Add Wish</a></li>
 					<li><a href="<?=Yii::$app->homeUrl?>account/inbox"><i class="fa fa-inbox fa-lg"></i> Inbox</a></li>
