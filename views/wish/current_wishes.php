@@ -121,11 +121,14 @@ use yii\helpers\Url;
 						page = false;
 					else
 						page = page+1;
+					
+					$("#loader_img").hide();
   				},
   				error:function(){
+					$("#loader_img").hide();
   				}
   			});
-			$("#loader_img").hide();
+			
   			//$container.masonry();
   			//page = page+1;
 	}}
