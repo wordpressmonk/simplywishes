@@ -66,7 +66,7 @@ use yii\helpers\Url;
 ?>
 					</div>
 				</div>
-				<div style="display:none" align="center" id="loader_img" ><img src="<?= Yii::$app->homeUrl?>uploads/loading2.gif"></div>
+				<div style="display:none" align="center" id="loader_img" ><img src="<?= Yii::$app->homeUrl?>images/loading2.gif"></div>
 				<div class="tab-pane" id="recent">
 					<h3 style="color:#006699;">Recipient</h3>
 				</div>
