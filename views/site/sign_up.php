@@ -100,16 +100,16 @@ $this->params['breadcrumbs'][] = $this->title;
    
 	<div class="checkbox">
 	
-		<label class="checkbox-inline"><input data-toggle="modal" data-target="#termsmodal" type="checkbox" required class="terms" value="">
-			Terms Of Use
+		<label class="checkbox-inline"><input  type="checkbox" required class="terms" value="">
+			<span data-toggle="modal" data-target="#termsmodal" >Terms Of Use</span>
 		</label>
 
-		<label  class="checkbox-inline"><input data-toggle="modal" data-target="#communitymodal" type="checkbox" required class="community" value="">
-			Community Guidlines
+		<label  class="checkbox-inline"><input  type="checkbox" required class="community" value="">
+			<span data-toggle="modal" data-target="#communitymodal" >Community Guidlines</span>
 		
 		</label>
-		<label  class="checkbox-inline"><input data-toggle="modal" data-target="#policymodal"  type="checkbox" required class="policy" value="">
-			Privacy Policy	
+		<label  class="checkbox-inline"><input   type="checkbox" required class="policy" value="">
+			<span data-toggle="modal" data-target="#policymodal" >Privacy Policy</span>	
 		</label>
 	</div></br>
 	

@@ -26,13 +26,13 @@ AppAsset::register($this);
 <body>
 <?php $this->beginBody() ?>
 <!--***** Header Starts*****-->
-<div class="smp-head">
+<div class="smp-head" style="top:0px;" >
 	<div class="container">
 		<div class="col-md-4 smp-logo">
 		<a href="<?=Yii::$app->homeUrl?>"><img src="<?=Yii::$app->homeUrl?>images/logo.png" ></a>
-
 		</div>
 		<div class="col-md-8">
+		
 		<div class="row" style="padding:4px 0px;">
 		<?php if(\Yii::$app->user->isGuest){ ?> 
 			<div class="btn-group pull-right">
@@ -43,30 +43,30 @@ AppAsset::register($this);
 				Join Today
 			  </button></a>
 			</div>
-		<?php  } ?>
+		<?php  } //else { ?>
 			<!--<div class="btn-group pull-right">
 			  <?php
-			/*   echo Html::beginForm(['/site/logout'], 'post')
+			 /*  echo Html::beginForm(['/site/logout'], 'post')
                 . Html::submitButton(
                     'Logout',
                     ['class' => 'btn btn-smp-green smpl-brdr']
                 )
                 . Html::endForm();  */?>
 			</div>-->		
-	
+		<?php // } ?>
 		</div>
 		
 		<hr style="border-color:#1085bf;">
 		<nav>
 		  <ul class="nav nav-pills smp-pills">
-			<li id="home"><a href="<?=Yii::$app->homeUrl?>#home">Home</a></li>
-			<li id="abt"><a href="<?=Yii::$app->homeUrl?>site/about#abt">About Us</a></li>
-			<li id="search_wish"><a href="<?=Yii::$app->homeUrl?>wish/index#search_wish">Find a Wish</a></li>
+			<li data-id="home"><a href="<?=Yii::$app->homeUrl?>site/index#home">Home</a></li>
+			<li data-id="abt"><a href="<?=Yii::$app->homeUrl?>site/about#abt">About Us</a></li>
+			<li data-id="search_wish"><a href="<?=Yii::$app->homeUrl?>wish/index#search_wish">Find a Wish</a></li>
 
-			<li id="top_wishers"><a href="<?=Yii::$app->homeUrl?>wish/top-wishers#top_wishers">iWish</a></li>
-			<li id="i_grant"><a href="<?=Yii::$app->homeUrl?>wish/top-granters#i_grant">iGrant</a></li>
-			<li id="i_wish"><a href="<?=Yii::$app->homeUrl?>happy-stories/index#i_wish">Happy stories</a></li>
-			<li id="edt"> 
+			<li data-id="top_wishers"><a href="<?=Yii::$app->homeUrl?>wish/top-wishers#top_wishers">iWish</a></li>
+			<li data-id="i_grant"><a href="<?=Yii::$app->homeUrl?>wish/top-granters#i_grant">iGrant</a></li>
+			<li data-id="i_wish"><a href="<?=Yii::$app->homeUrl?>happy-stories/index#i_wish">Happy Stories</a></li>
+			<li data-id="edt"> 
 				<?php if(isset(\Yii::$app->user->identity->role) && (\Yii::$app->user->identity->role == 'admin')){ ?>
 					<a href="<?=Yii::$app->homeUrl?>editorial/index#edt">Editorial</a>
 				<?php } else { ?> 
@@ -75,7 +75,7 @@ AppAsset::register($this);
 			</li>
 
 			<?php if(!\Yii::$app->user->isGuest){  ?>
-			<li class="dropdown"><a href="#">Hello,<?php echo substr(\Yii::$app->user->identity->username,0,5)?>..!</a>
+			<li class="dropdown" class="active"><a href="#">Hello,<?php echo substr(\Yii::$app->user->identity->username,0,5)?>..!</a>
 				<ul class="dropdown-menu nav nav-stacked">
 					<li><a href="<?=Yii::$app->homeUrl?>wish/create"><i class="fa fa-clone fa-lg"></i>Add Wish</a></li>
 					<li><a href="<?=Yii::$app->homeUrl?>account/inbox"><i class="fa fa-inbox fa-lg"></i> Inbox</a></li>
@@ -146,8 +146,8 @@ $('ul.nav li.dropdown').hover(function() {
 	var hash = window.location.hash;
 	hash = hash.replace('#', '');
 	console.log(hash);
-	$("#"+hash).addClass("active");
-	
+	$("li[data-id="+hash+"]").addClass("active");
+		
 	$(".webShareIcons").each(function(){
 		var elem = $(this);
 			elem.jsSocials({

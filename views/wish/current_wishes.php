@@ -86,7 +86,8 @@ use yii\helpers\Url;
 		console.log(scroll_top,"top");
   		// End of the document reached?
 		if(page){
-  		if ($(document).height() - win.height()-1 == scroll_top ) {
+  		//if ($(document).height() - win.height()-1 == scroll_top ) {
+		if($(win).scrollTop() + $(win).height() == $(document).height()){
 			console.log("scrolld");
 			$("#loader_img").show();
   			$.ajax({
