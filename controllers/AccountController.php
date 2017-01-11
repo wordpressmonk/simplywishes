@@ -111,8 +111,8 @@ class AccountController extends Controller
 		$user = User::findOne(\Yii::$app->user->id);
 		$profile = UserProfile::find()->where(['user_id'=>\Yii::$app->user->id])->one();
 		$countries = \yii\helpers\ArrayHelper::map(\app\models\Country::find()->all(),'id','name');	
-		$states = \yii\helpers\ArrayHelper::map(\app\models\State::find()->all(),'id','name');	
-		$cities = \yii\helpers\ArrayHelper::map(\app\models\City::find()->all(),'id','name');	
+		$states = \yii\helpers\ArrayHelper::map(\app\models\State::find()->where(['country_id'=>$profile->country])->all(),'id','name');	
+		$cities = \yii\helpers\ArrayHelper::map(\app\models\City::find()->where(['state_id'=>$profile->state])->all(),'id','name');	
 		
 		$current_image = $profile->profile_image;
 		if ($user->load(Yii::$app->request->post()) && $profile->load(Yii::$app->request->post())){

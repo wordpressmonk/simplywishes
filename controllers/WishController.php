@@ -189,7 +189,7 @@ class WishController extends Controller
 			$model->wished_by = \Yii::$app->user->id;
 			//print_r($model);die;
 			$model->save();
-            return $this->redirect(['index']);
+            return $this->redirect(['account/my-account']);
         } else {
             return $this->render('create', [
                 'model' => $model,
