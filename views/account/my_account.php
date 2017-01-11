@@ -3,7 +3,7 @@
 /* @var $this yii\web\View */
 /* @var $form yii\bootstrap\ActiveForm */
 /* @var $model app\models\ContactForm */
-
+use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use yii\captcha\Captcha;
@@ -42,6 +42,7 @@ $this->params['breadcrumbs'][] = $this->title;
 					<div class="col-lg-4">
 						<?= $form->field($profile, 'country')->dropDownList($countries,[
 							'prompt'=>'--Select Country--',
+							'id' => 'country_select',
 							'onchange'=>'$.post( "'.Yii::$app->urlManager->createUrl('site/get-states?country_id=').'"+$(this).val(), function( data ) 
 							{
 								$( "select#state_select" ).html( data ).change();
