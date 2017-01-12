@@ -103,14 +103,14 @@ AppAsset::register($this);
 </div>
 <!--***** Header Ends*****-->
 <div class="container">
-	<?=$content?>
+	<?=$content?>	
 </div>
 <!--***** Footer Starts*****-->
 <div class="smp-foot">
 	<footer class="container-fluid">
 	<div class="col-md-12">
 		<div class="col-md-4">
-		<p class="pull-right"> &copy; SimplyWishes 2016, All Rights Reserved</p>
+		<p class="pull-right"> &copy; SimplyWishes 2016, All Rights Reserved <?php echo "homeweq"; ?></p>
 		</div>
 		<div class="col-md-8">
 			<ul class="smp-footer-links">

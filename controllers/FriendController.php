@@ -68,6 +68,23 @@ class FriendController extends \yii\web\Controller
 	  }	
 	}
 	
+	public function actionCancelFriend()
+    {	
+		
+	  $requestid = \Yii::$app->request->post()['requestid'];
+	  if($requestid)
+	  {
+		$user_id = \Yii::$app->user->id;
+		$checkdata = FriendRequest::find()->where(["status"=>1,"f_id"=>$requestid])->one();	
+		if(($checkdata->requested_by == $user_id) || ($checkdata->requested_to == $user_id))
+		{
+			$checkdata->delete();
+			return true;
+		}			
+		
+	  }	
+	}
+	
 /* 	public function actionRequestAccepted()
     {		
 		$id = \Yii::$app->request->get()['id'];

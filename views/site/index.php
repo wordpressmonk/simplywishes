@@ -95,15 +95,16 @@ use yii\helpers\Url;
 </script>
 
 <!--------------- SLIDER CHECK Function ----------------------------------->
-  <link rel="stylesheet" type="text/css" href="<?= Yii::$app->homeUrl?>src/slick/slick.css">
-  <link rel="stylesheet" type="text/css" href="<?= Yii::$app->homeUrl?>src/slick/slick-theme.css"> 
-  <script src="<?= Yii::$app->homeUrl?>src/slick/jquery-2.2.0.min.js" type="text/javascript"></script>
-  <script src="<?= Yii::$app->homeUrl?>src/slick/slick.js" type="text/javascript" charset="utf-8"></script>
-  
 
+ <link rel="stylesheet" type="text/css" href="<?= Yii::$app->homeUrl?>src/slick/slick.css">
+ <link rel="stylesheet" type="text/css" href="<?= Yii::$app->homeUrl?>src/slick/slick-theme.css"> 
+ <script src="<?= Yii::$app->homeUrl?>src/slick/jquery-2.2.0.min.js" type="text/javascript"></script>
+ <script src="<?= Yii::$app->homeUrl?>src/slick/slick.js" type="text/javascript" charset="utf-8"></script>
+ 
   
-  <script type="text/javascript">
-  var js = $.noConflict();
+ <script type="text/javascript">
+ // var js = $.noConflict();
+  var js = jQuery.noConflict(true);
    js(document).on('ready', function() {
       js(".regular").slick({
          dots: false,

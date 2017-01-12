@@ -32,16 +32,16 @@ $this->params['breadcrumbs'][] = $this->title;
 		<div role="tabpanel" class="tab-pane active grid" id="fullfilledwish">
 			<?php if(isset($myfriend) && !empty($myfriend))
 			{
-				foreach($myfriend as $userid)
+				foreach($myfriend as $user)
 				{	
-					if($userid->requested_by == \Yii::$app->user->id)
-						$userid = $userid->requested_to;
+					if($user->requested_by == \Yii::$app->user->id)
+						$userid = $user->requested_to;
 					else
-						$userid = $userid->requested_by;	
+						$userid = $user->requested_by;	
 					
 					$profile = UserProfile::find()->where(['user_id'=>$userid])->one();					
 				?>
-			 <div class="col-md-6 grid-item"> 
+			 <div class="col-md-6 grid-item" id="parent_div_<?= $user->f_id; ?>"> 
 				<div class="smp_inline thumbnail">
 					<?php 
 					if($profile->profile_image!='') 
@@ -52,7 +52,9 @@ $this->params['breadcrumbs'][] = $this->title;
 				</div>
 				<div class="smp_inline">
 					<p><span><?= Html::a($profile->firstname.' '.$profile->lastname, Url::to(['account/profile','id'=>$profile->user_id],true)) ?></span></p>						
-					<p><span class="btn btn-smp-green pull-right" ><i class='fa fa-check fa-lg'></i> Friends</span>	</p>
+					<p><span class="btn btn-smp-green pull-left" ><i class='fa fa-check fa-lg'></i> Friends</span>	
+						<span class="btn btn-warning pull-right remove-unfriend" for="<?php echo $user->f_id ?>"><i class='fa fa-times fa-lg'></i> Unfriend</span>
+					</p>
 				</div>
 			</div>
 			  
@@ -64,6 +66,33 @@ $this->params['breadcrumbs'][] = $this->title;
 
 </div>
 
-
+<script>
+$(document).ready(function(){
+	$(".remove-unfriend").click(function(){
+		var check = confirm( "Are sure to Un-friend from the Friend List? ");
+		if(check)
+		{
+			var request_id = $(this).attr("for");
+			
+			$.ajax({
+				url : '<?=Url::to(['friend/cancel-friend'])?>',
+				type : 'POST',
+				data : {requestid:request_id},
+				success: function(response){					
+					console.log("response");
+					if(response == true)
+					{					   					  
+					   $("#parent_div_"+request_id).remove();					
+					}						
+				}
+			});
+			
+			
+		} else {
+			return false;
+		}
+	});
+});
+</script>
 
 
