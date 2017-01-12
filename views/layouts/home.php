@@ -8,6 +8,7 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
+use yii\helpers\Url;
 
 AppAsset::register($this);
 ?>
@@ -110,7 +111,7 @@ AppAsset::register($this);
 	</div>
 </div> 
 <div class="container">
-<div class="webShareIcons" data_text="SimplyWishes" data_url="<?=\Yii::$app->homeUrl?>"></div>
+<div class="webShareIcons" data_text="SimplyWishes" data_url="<?= Url::to([''],true); ?>"></div>
 <br>
 	<?=$content?>	
 </div>
@@ -147,8 +148,11 @@ $('ul.nav li.dropdown').hover(function() {
 	var hash = window.location.hash;
 	hash = hash.replace('#', '');
 	console.log(hash);
-	$("li[data-id="+hash+"]").addClass("active");
-		
+	if($.trim(hash) != "")
+	{
+		$("li[data-id="+hash+"]").addClass("active");
+	}
+	
 	$(".webShareIcons").each(function(){
 		var elem = $(this);
 			elem.jsSocials({

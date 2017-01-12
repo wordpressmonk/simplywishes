@@ -110,7 +110,7 @@ AppAsset::register($this);
 	<footer class="container-fluid">
 	<div class="col-md-12">
 		<div class="col-md-4">
-		<p class="pull-right"> &copy; SimplyWishes 2016, All Rights Reserved <?php echo "homeweq"; ?></p>
+		<p class="pull-right"> &copy; SimplyWishes 2016, All Rights Reserved</p>
 		</div>
 		<div class="col-md-8">
 			<ul class="smp-footer-links">
@@ -138,8 +138,10 @@ $('ul.nav li.dropdown').hover(function() {
 	var hash = window.location.hash;
 	hash = hash.replace('#', '');
 	console.log(hash);
-	$("li[data-id="+hash+"]").addClass("active");
-			
+	if($.trim(hash) != "")
+	{
+		$("li[data-id="+hash+"]").addClass("active");
+	}		
 });
 
 
