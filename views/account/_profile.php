@@ -14,7 +14,11 @@ use app\models\FriendRequest;
 	<?php endif; ?>
 	<!-- end alert messages -->
 	
-	<h3>Profile 
+	<h3><?php if (!Yii::$app->user->isGuest && Yii::$app->user->id == $user->id)
+				echo "My Profile";
+			  else
+				echo $profile->firstname."'s Profile"; 
+			?>  
 		<?php if (!Yii::$app->user->isGuest && Yii::$app->user->id == $user->id): ?> 
 			<a href="<?=\Yii::$app->homeUrl?>account/edit-account"><button class="btn btn-info">Edit Profile</button></a>
 		<?php endif; ?>

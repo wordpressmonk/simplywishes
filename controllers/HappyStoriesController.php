@@ -39,7 +39,7 @@ class HappyStoriesController extends \yii\web\Controller
 				}
 				
 				if($model->save())
-				    return $this->redirect(['index']);
+				    return $this->redirect(['my-story']);
 				else 
 					return $this->render('create', ['model' => $model]);
 					
@@ -74,7 +74,8 @@ class HappyStoriesController extends \yii\web\Controller
 					$model->story_image = $current_image;
 				if($model->save())
 				{	Yii::$app->session->setFlash('success_happystory');
-					return $this->redirect(['story-details', 'id' => $model->hs_id]);
+					//return $this->redirect(['story-details', 'id' => $model->hs_id]);
+					return $this->redirect(['my-story']);
 				} else {
 					
 					return $this->render('update', ['model' => $model,]);

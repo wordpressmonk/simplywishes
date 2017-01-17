@@ -56,7 +56,8 @@ use dosamigos\ckeditor\CKEditor;
 	</div>
 	<div class="row">
 			<div class="col-lg-6">
-				<?=DatePicker::widget([
+		<?php //echo '<label class="control-label" for="wish-expected_date">Issue Date</label>'; ?>
+				<?php /*DatePicker::widget([
 						'model' => $model, 
 						'attribute' => 'expected_date',
 						'options' => ['placeholder' => 'Select issue date ...'],
@@ -64,7 +65,20 @@ use dosamigos\ckeditor\CKEditor;
 							'format' => 'dd-mm-yyyy',
 							'todayHighlight' => true
 						]
-					])?>
+					]) */ ?>
+					
+			<?= $form->field($model, 'expected_date')->widget(
+                    DatePicker::className(),
+                    [
+						'attribute' => 'expected_date',
+						'options' => ['placeholder' => 'Select issue date ...'],
+                        'pluginOptions' => [
+                            'format' => 'dd-mm-yyyy',
+							'todayHighlight' => true
+                        ]
+                    ]
+                ); ?>
+				
 			</div>
 			<div class="col-lg-6">
 				<?= $form->field($model, 'expected_cost')?>

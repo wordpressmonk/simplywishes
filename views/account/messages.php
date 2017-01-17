@@ -168,7 +168,7 @@ exit;
 					var data = $.parseJSON(response);
 					//console.log(response.status);
 					if(data.status){
-						
+						$('#'+send_to+'_msg').val("");
 						var html = '<li class="media"><div class="media-left list-icon"><img src="'+prof_image+'" alt=""></div><div class="media-body"><h4 class="media-heading">'+fullname+'</h4><p class="list-group-item-text">'+msg+'<span class="label label-primary pull-right">Date:Now</span></p></div></li>';
 					//$(elem).parent('li').append(html);
 						$( html ).insertAfter( $(elem).parent('li'));

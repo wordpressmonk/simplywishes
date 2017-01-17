@@ -69,7 +69,7 @@ class Wish extends \yii\db\ActiveRecord
             'country' => 'Country',
             'city' => 'City',
 			'expected_cost'=>'Expected Cost(USD)',
-			'expected_date'=>'Expected Date',
+			'expected_date'=>'Issue Date',
 			'in_return'=>'What Do I Give In Return',
 			'who_can'=>'Who Can Potentialy Help me',
         ];

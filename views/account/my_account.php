@@ -22,9 +22,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
             <div class="col-lg-8">
 		<?php if(Yii::$app->session->getFlash('success')!='') {?>
-			<div class="alert alert-success" role="alert">
+			<!--<div class="alert alert-success" role="alert">
 				<strong> <?= Yii::$app->session->getFlash('success'); ?>.</strong>
-			</div>
+			</div>-->
 	
 		<?php }
 					$form = ActiveForm::begin(['id' => 'contact-form','options' => ['enctype'=>'multipart/form-data']]); ?>

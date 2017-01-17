@@ -30,7 +30,7 @@ use yii\helpers\Url;
 			</br>
 			<p>Search By Keyword Or Location</p>
 			<div class="input-group">
-				<input type="text" class="form-control" placeholder="City, State, Country.....other">
+				<input name="searh_field" type="text" class="form-control" placeholder="City, State, Country.....other">
 				<span class="input-group-btn">
 				  <button class="search-wish btn btn-default" type="button">
 					<span class="glyphicon glyphicon-search"></span>
@@ -180,4 +180,17 @@ use yii\helpers\Url;
 			}
 		});
 	});
+	
+		//search srcipt
+	$(".search-wish").on("click",function(){		
+		if($("input[name=searh_field]").val() != ''){
+			var url = "<?=Url::to(['wish/search'])?>";
+			window.location.href = url+"?match="+$("input[name=searh_field]").val();
+		}
+		else{
+			var url = "<?=Url::to(['wish/granted'])?>";
+			window.location.href = url;			
+		}		
+	});
+	
 	</script>

@@ -9,8 +9,8 @@ use yii\helpers\Url;
 
 $profile = UserProfile::find()->where(['user_id'=>$model->user_id])->one();
 			
-//$this->title = $profile->firstname.' Wish Stories';
-$this->title = 'My Happy Story';
+$this->title = ucfirst($profile->firstname)."'s".' Happy Story ';
+//$this->title = 'My Happy Story';
 $this->params['breadcrumbs'][] = ['label' => 'Editorials', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 

@@ -18,6 +18,13 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h3 class="fnt-green smp-mg-bottom"  > My Happy Stories</h3>
 	
+	<?php if (Yii::$app->session->hasFlash('success_happystory')): ?>
+
+        <div class="alert alert-success" style="margin-top: 20px;">
+            Your Story is Updated Successfully!!!.
+        </div>
+	<?php endif; ?>	
+	
 		<a class='btn btn-success pull-right' href="<?=Yii::$app->homeUrl?>happy-stories/create">Tell Us Your Story</a> 
 		<?php
 	if(isset($stories) && !empty($stories))
