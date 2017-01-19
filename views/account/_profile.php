@@ -52,7 +52,7 @@ use app\models\FriendRequest;
 							else if($checkfriendlist->status == 0 && $checkfriendlist->requested_by == \Yii::$app->user->id )
 								echo '<a class="btn btn-info friendrequest ">Friend Request Sent</a>';
 							else if($checkfriendlist->status == 0 && $checkfriendlist->requested_to == \Yii::$app->user->id )
-								echo '<a class="btn btn-info friendrequest ">Add as Friend</a>';
+								echo '<a class="btn btn-info friendrequest ">Accept</a>';
 							else if($checkfriendlist->status == 1)
 								echo '<a class="btn btn-success">Friends</a>';
 							
