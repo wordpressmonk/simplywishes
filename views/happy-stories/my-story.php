@@ -41,7 +41,11 @@ $this->params['breadcrumbs'][] = $this->title;
 					</div> 
 					<div class="media-body"> 
 		<?php if(\Yii::$app->user->id == $story->user_id){ ?>
-			 <?= Html::a('<i class="fa fa-pencil" aria-hidden="true"></i> Update', ['update', 'id' => $story->hs_id], ['class' => 'btn btn-warning pull-right']) ?>
+			<div class="pull-right" >
+			 <?= Html::a('<i class="fa fa-pencil" aria-hidden="true"></i> Update', ['update', 'id' => $story->hs_id], ['class' => 'btn btn-warning']) ?>
+			 
+			 <?= Html::a('<i class="fa fa-trash" aria-hidden="true"></i> Delete', ['delete', 'id' => $story->hs_id], ['class' => 'btn btn-danger deletecheck']) ?>
+			</div> 
 		<?php } ?>
 						<!--<h4 class="media-heading">Top aligned media</h4>-->
 						<a href="<?= Url::to(["account/profile","id"=>$story->user_id]) ?>">Author: <?= $story->author->fullname; ?></a>
@@ -59,3 +63,11 @@ $this->params['breadcrumbs'][] = $this->title;
 		?>
 	
 </div>
+</div>
+<script type="text/javascript">
+$(document).on('click', '.deletecheck', function(){ 
+	if(confirm("Are Sure To Delete this Happy Story ?"))	
+		else
+			return false;		
+	});
+</script>

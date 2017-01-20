@@ -78,7 +78,7 @@ AppAsset::register($this);
 			<?php if(!\Yii::$app->user->isGuest){  ?>
 			<li class="dropdown" class="active"><a href="#">Hello,<?php echo substr(\Yii::$app->user->identity->username,0,5)?>..!</a>
 				<ul class="dropdown-menu nav nav-stacked">
-					<li><a href="<?=Yii::$app->homeUrl?>wish/create"><i class="fa fa-clone fa-lg"></i>Add Wish</a></li>
+					<li><a href="<?=Yii::$app->homeUrl?>wish/create"><i class="fa fa-clone fa-lg"></i>Add a Wish</a></li>
 					<li><a href="<?=Yii::$app->homeUrl?>account/inbox"><i class="fa fa-inbox fa-lg"></i> Inbox</a></li>
 					<li><a href="<?=Yii::$app->homeUrl?>account/my-account"><i class="fa fa-heart fa-lg"></i>My Wishes</a></li>
 					<li><a href="<?=Yii::$app->homeUrl?>account/my-friend"><i class="fa fa-users fa-lg"></i>Friends</a></li>
@@ -103,13 +103,14 @@ AppAsset::register($this);
 	</div>
 </div>
 <!--***** Header Ends*****-->
-<div  style="background-image:url('<?=Yii::$app->homeUrl?>images/bgimage.jpg');">
+<div  style="background-image:url('<?=Yii::$app->homeUrl?>images/bgimage.jpg');">	
 	<div class="container" style="padding: 25px 0px 50px 36px;">
 		<h1 class="slide_header">Make Someone </br>
 		Happy Today</h1>  
 		<a href="<?=Yii::$app->homeUrl?>site/sign-up"><button class="btn btn-smp-orange smpl-brdr" type="button">JOIN TODAY!</button></a>
 	</div>
 </div> 
+
 <div class="container">
 <div class="webShareIcons" data_text="SimplyWishes" data_url="<?= Url::to([''],true); ?>"></div>
 <br>

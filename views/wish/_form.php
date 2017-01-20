@@ -24,7 +24,7 @@ use dosamigos\ckeditor\CKEditor;
     ]); ?>
 
 
-    <?= $form->field($model, 'primary_image')->fileInput() ?>
+    <?= $form->field($model, 'primary_image')->fileInput(['class' => 'form-control']) ?>
 	<div class="row">
 					<div class="col-lg-4">
 						<?= $form->field($model, 'country')->dropDownList($countries,[

@@ -14,7 +14,7 @@ use app\models\FriendRequest;
 	<?php endif; ?>
 	<!-- end alert messages -->
 	
-	<h3><?php if (!Yii::$app->user->isGuest && Yii::$app->user->id == $user->id)
+	<h3 class="fnt-green" ><?php if (!Yii::$app->user->isGuest && Yii::$app->user->id == $user->id)
 				echo "My Profile";
 			  else
 				echo $profile->firstname."'s Profile"; 
@@ -52,7 +52,7 @@ use app\models\FriendRequest;
 							else if($checkfriendlist->status == 0 && $checkfriendlist->requested_by == \Yii::$app->user->id )
 								echo '<a class="btn btn-info friendrequest ">Friend Request Sent</a>';
 							else if($checkfriendlist->status == 0 && $checkfriendlist->requested_to == \Yii::$app->user->id )
-								echo '<a class="btn btn-info friendrequest ">Accept</a>';
+								echo '<a id="accept_fnds" class="btn btn-info" for="'. $checkfriendlist->f_id.'">Accept</a>';
 							else if($checkfriendlist->status == 1)
 								echo '<a class="btn btn-success">Friends</a>';
 							
@@ -127,6 +127,30 @@ use app\models\FriendRequest;
 					$(".friendrequest").html("Friend Request Sent");					
 				}
 			});
+		});
+		
+		
+		
+	$("#accept_fnds").on("click",function(){	
+			var request_id = $(this).attr("for");
+			if($.trim(request_id) == "")
+				return false;
+			 $.ajax({
+				url : '<?=Url::to(['friend/request-accepted'])?>',
+				type : 'POST',
+				data : {requestid:request_id},
+				success: function(response){					
+					console.log("response");
+					if(response == true)
+					{					   					  
+					 $("#accept_fnds").html("Friends");
+					 $("#accept_fnds").removeAttr("for");
+					 $("#accept_fnds").removeClass("btn-info");
+					 $("#accept_fnds").addClass('btn-success');
+					 
+					}						
+				}
+			});		 
 		});
 		
 	</script>

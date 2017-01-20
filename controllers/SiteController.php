@@ -203,6 +203,8 @@ class SiteController extends Controller
 				}
 							
 				$profile->save();
+				$profile->sendEmail($user->email);
+				
 				\Yii::$app->user->login($user,0);
 				return $this->redirect('index');
 			}

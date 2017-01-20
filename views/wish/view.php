@@ -71,6 +71,9 @@ $this->params['breadcrumbs'][] = $this->title;
 			<?php if(is_null($model->granted_by) && !\Yii::$app->user->isGuest && \Yii::$app->user->id==$model->wished_by)
 				echo '<a href="'.Url::to(['wish/update','id'=>$model->w_id]).'"><button class="btn btn-info">Update Wish</button></a>';
 			?>
+				<?php if(is_null($model->granted_by) && !\Yii::$app->user->isGuest && \Yii::$app->user->id==$model->wished_by)
+				echo '<button class="btn btn-danger deletecheck">Delete </button>';
+			?>
 		</div>
 	</div>
 </div>
@@ -115,5 +118,23 @@ $this->params['breadcrumbs'][] = $this->title;
 				console.log(data);
 			}
 		});
+	});
+	
+	$(document).on('click', '.deletecheck', function(){ 
+		if(confirm("Are Sure To Delete this Wish ?"))
+		{
+			$.ajax({
+			url : '<?=Url::to(['wish/ajax-delete'])?>',
+			type: 'POST',
+			data: {id:<?= $model->w_id ?>},
+			success:function(data){				
+						window.location.href="<?= Url::to(['account/my-account'],true); ?>"; 
+				}	
+			});
+		
+		}
+		else{
+			return false;
+		}
 	});
 </script>

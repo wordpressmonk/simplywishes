@@ -31,6 +31,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
                     <?= $form->field($model, 'email') ?>
 
+                    <?= $form->field($model, 'phone_number')->label("Phone Number"); ?>
+					
                     <?= $form->field($model, 'subject') ?>
 
                     <?= $form->field($model, 'body')->textarea(['rows' => 6]) ?>

@@ -247,11 +247,17 @@ class WishController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
-
-        return $this->redirect(['index']);
+         $this->findModel($id)->delete();
+        return $this->redirect(['index']); 
     }
 
+	
+	public function actionAjaxDelete()
+    {
+		$id = Yii::$app->request->post('id');
+		$this->findModel($id)->delete();
+    }
+	
 	/**
 	 * Like a wish
 	 * User has to be logged in to like a wish

@@ -40,9 +40,15 @@ $this->params['breadcrumbs'][] = $this->title;
             Your Story is Updated Successfully!!!.
         </div>
 	<?php endif; ?>	
-	<h3 class="smp-mg-bottom"><?=$this->title?></h3>
+	<h3 class="smp-mg-bottom fnt-green"><?=$this->title?></h3>
+	
 		<?php if(\Yii::$app->user->id == $model->user_id){ ?>
-			 <?= Html::a('<i class="fa fa-pencil" aria-hidden="true"></i> Update', ['update', 'id' => $model->hs_id], ['class' => 'btn btn-warning pull-right','style'=>"margin-top: 20px;"]) ?>
+			<div class="pull-right" >
+			 <?= Html::a('<i class="fa fa-pencil" aria-hidden="true"></i> Update', ['update', 'id' => $model->hs_id], ['class' => 'btn btn-warning ','style'=>"margin-top: 20px;"]) ?>
+			 
+			 
+			 <?= Html::a('<i class="fa fa-trash" aria-hidden="true"></i> Delete', ['delete', 'id' => $model->hs_id], ['class' => 'btn btn-danger deletecheck','style'=>"margin-top: 20px;"]) ?>
+			</div>			 
 		<?php } ?>
 		<div class="col-md-3 happystory">
 			
@@ -126,4 +132,12 @@ $this->params['breadcrumbs'][] = $this->title;
 			}
 		});
 	});
+	
+	
+	$(document).on('click', '.deletecheck', function(){ 
+		if(confirm("Are Sure To Delete this Happy Story ?"))	
+		else
+			return false;		
+	});
+	
 </script>
