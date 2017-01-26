@@ -179,6 +179,9 @@ class WishController extends Controller
 		$states = \yii\helpers\ArrayHelper::map(\app\models\State::find()->all(),'id','name');	
 		$cities = \yii\helpers\ArrayHelper::map(\app\models\City::find()->all(),'id','name');	
 		
+		/* $states = "";
+		$cities = "";
+		 */
 		$categories =  ArrayHelper::map(Category::find()->all(), 'cat_id', 'title');
         if ($model->load(Yii::$app->request->post())) {
 			$model->primary_image = UploadedFile::getInstance($model, 'primary_image');
@@ -187,6 +190,7 @@ class WishController extends Controller
 					return;
 			}
 			$model->wished_by = \Yii::$app->user->id;
+			
 			//print_r($model);die;
 			$model->save();
             return $this->redirect(['account/my-account']);
@@ -210,6 +214,7 @@ class WishController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+		$model->scenario = 'update';
 		$categories =  ArrayHelper::map(Category::find()->all(), 'cat_id', 'title');
 		$countries = \yii\helpers\ArrayHelper::map(\app\models\Country::find()->all(),'id','name');	
 		$states = \yii\helpers\ArrayHelper::map(\app\models\State::find()->all(),'id','name');	
@@ -225,6 +230,7 @@ class WishController extends Controller
 			else
 				$model->primary_image = $current_image;
 			//save model
+			
 			$model->wished_by = \Yii::$app->user->id;
 			$model->save();
             return $this->redirect(['view', 'id' => $model->w_id]);

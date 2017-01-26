@@ -41,7 +41,7 @@ $this->params['breadcrumbs'][] = $this->title;
 			<p>Expected Date : <span><?=$model->expected_date?></span></p>
 			<p>What Do I Give In Return : <span><?=$model->in_return?> </span></p>
 			<p>Who Can Potentialy Help me : <span><?=$model->who_can?> </span></p>
-			<p>Category : <span><?=$model->categoryName?></span></p>
+			<p>Category : <span><?=$model->categoryName?></span></p>	
 			<?php if(is_null($model->granted_by) && !\Yii::$app->user->isGuest  && \Yii::$app->user->id!=$model->wished_by){ ?>
 				<form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
 				  <!-- Identify your business so that you can collect the payments. -->

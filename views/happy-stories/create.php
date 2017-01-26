@@ -6,7 +6,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Editorial */
 
-$this->title = 'Tell us Your Story';
+$this->title = 'Tell Your Story';
 $this->params['breadcrumbs'][] = ['label' => 'Editorials', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

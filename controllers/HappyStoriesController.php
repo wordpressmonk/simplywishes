@@ -6,9 +6,38 @@ use Yii;
 use yii\web\UploadedFile;
 use app\models\HappyStories;
 use app\models\StoryActivity;
+use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
+
 
 class HappyStoriesController extends \yii\web\Controller
 {
+	 /**
+     * @inheritdoc
+     */
+    public function behaviors()
+    {
+        return [
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'delete' => ['POST'],
+                ],
+            ],
+            'access' => [
+                'class' => AccessControl::className(), 
+				'except' => ['index','story-details','like'],	
+                'rules' => [
+                    [
+                        'actions' => ['create','update','my-story','delete'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
+        ];
+    }
+	
     public function actionIndex()
     {		
 		$stories = HappyStories::find()->orderBy('hs_id Desc')->all();				

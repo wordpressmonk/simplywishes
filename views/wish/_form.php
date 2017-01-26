@@ -50,7 +50,7 @@ use dosamigos\ckeditor\CKEditor;
 					<div class="col-lg-4">
 						<?= $form->field($model, 'city')->dropDownList($cities,[
 							'id' => 'city_select',
-							'prompt'=>'--Select State--',
+							'prompt'=>'--Select City--',
 						]); ?>
 					</div>
 	</div>
@@ -81,7 +81,7 @@ use dosamigos\ckeditor\CKEditor;
 				
 			</div>
 			<div class="col-lg-6">
-				<?= $form->field($model, 'expected_cost')?>
+				<?= $form->field($model, 'expected_cost')->textInput(['maxlength' => true])?>
 			</div>
 	</div>
 	<?= $form->field($model, 'who_can')->textArea()?>

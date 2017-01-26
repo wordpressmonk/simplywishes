@@ -3,7 +3,7 @@ use yii\helpers\Url;
 use app\models\UserProfile;
 ?>
 <div class="smp-igrant">
-<h3 class="smp-mg-bottom fnt-green">iWish Our Wishers</h3>
+<h3 class="smp-mg-bottom fnt-green">Our Wishers</h3>
 	<div class="col-md-12 smp-mg-bottom">
 		<?php foreach($dataProvider->models as $model){
 			$userProfile = UserProfile::find()->where(['user_id'=>$model->wished_by])->one();

@@ -36,11 +36,12 @@ class Wish extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['category', 'wish_title','state', 'country', 'city','expected_cost','expected_date'], 'required'],
+            //[['category', 'wish_title','state', 'country', 'city','expected_cost','expected_date'], 'required'],
+            [['category', 'wish_title','state', 'country', 'city','expected_date'], 'required'],
 			['primary_image', 'required', 'message' => '{attribute} can\'t be blank', 'on'=>'create'],
             [['wished_by', 'granted_by', 'category', 'state', 'country', 'city'], 'integer'],
             [['wish_description'], 'string'],
-			[['primary_image'], 'file','extensions' => 'jpg,png', 'skipOnEmpty' => true],
+			[['primary_image'], 'file','extensions' => 'jpg, jpeg, png, bmp, gif, tif, tiff', 'skipOnEmpty' => true],
             [['wish_title'], 'string', 'max' => 100],
             [['summary_title','who_can'], 'string', 'max' => 150],
 			[['in_return'], 'string', 'max' => 1500],
@@ -49,6 +50,7 @@ class Wish extends \yii\db\ActiveRecord
 	public function scenarios() {
         $scenarios = parent::scenarios();
         $scenarios['create'] = ['category', 'wish_title','summary_title', 'wish_description','primary_image','state', 'country', 'city','expected_cost','expected_date','in_return','who_can'];
+		 $scenarios['update'] = ['category', 'wish_title','summary_title', 'wish_description','state', 'country', 'city','expected_cost','expected_date','in_return','who_can'];
         return $scenarios;
     }
     /**
@@ -62,7 +64,7 @@ class Wish extends \yii\db\ActiveRecord
             'granted_by' => 'Granted By',
             'category' => 'Category',
             'wish_title' => 'Wish Title',
-            'summary_title' => 'Summary Title',
+            'summary_title' => 'Wish Summary',
             'wish_description' => 'Wish Description',
             'primary_image' => 'Primary Image',
             'state' => 'State',
