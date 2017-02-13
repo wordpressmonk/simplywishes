@@ -30,7 +30,7 @@ use yii\helpers\Url;
 			</br>
 			<p>Search By Keyword Or Location</p>
 			<div class="input-group">
-				<input name="searh_field" type="text" class="form-control" placeholder="City, State, Country.....other">
+				<input name="searh_field" id="searh_field" type="text" class="form-control" placeholder="City, State, Country.....other">
 				<span class="input-group-btn">
 				  <button class="search-wish btn btn-default" type="button">
 					<span class="glyphicon glyphicon-search"></span>
@@ -192,5 +192,12 @@ use yii\helpers\Url;
 			window.location.href = url;			
 		}		
 	});
+	
+	$('#searh_field').keypress(function (e) {
+		  if (e.which == 13) {
+				$( ".search-wish" ).trigger( "click" );
+		  }
+	});
+	
 	
 	</script>

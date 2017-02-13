@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
  <link href="<?= Yii::$app->request->baseUrl?>/css/html5imageupload.css" rel="stylesheet">-->
  
 <div class="site-contact">
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1 class="fnt-green" ><?= Html::encode($this->title) ?></h1>
 
         <div class="row">
 

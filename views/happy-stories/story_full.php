@@ -8,9 +8,12 @@ use yii\helpers\Url;
 /* @var $model app\models\Editorial */
 
 $profile = UserProfile::find()->where(['user_id'=>$model->user_id])->one();
-			
-$this->title = ucfirst($profile->firstname)."'s".' Happy Story ';
-//$this->title = 'My Happy Story';
+
+if(\Yii::$app->user->id == $model->user_id)	
+	$this->title = 'My Happy Story';
+else	
+	$this->title = ucfirst($profile->firstname)."'s".' Happy Story ';
+
 $this->params['breadcrumbs'][] = ['label' => 'Editorials', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 

@@ -26,7 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
 	 
 	   <?= $form->field($profile, 'firstname')->label('First Name') ?>
 
-	   <?= $form->field($profile, 'lastname')->label('last Name') ?>
+	   <?= $form->field($profile, 'lastname')->label('Last Name') ?>
 	
 	   <?= $form->field($profile, 'about')->textarea(['rows' => 6])?>
 		
