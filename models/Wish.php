@@ -199,7 +199,7 @@ class Wish extends \yii\db\ActiveRecord
 					<p>Wish Title : <span>'.$this->wish_title.'</span></p>
 					<p>Wish Description : <span>'.substr($this->wish_description,0,25).'..</span></p>
 					<p>Location : <span>'.$this->location.'</span></p>
-					<p>Category : <span>'.$this->categoryName.'</span></p>
+					<p>Recipient : <span>'.$this->categoryName.'</span></p>
 					<p><a class="fnt-green" href="'.Url::to(['wish/view','id'=>$this->w_id]).'">Read More >></a> </p>
 					
 					
@@ -219,7 +219,7 @@ class Wish extends \yii\db\ActiveRecord
 					<p>Wish Title : <span>'.$this->wish_title.'</span></p>
 					<p>Wish Description : <span>'.substr($this->wish_description,0,25).'..</span></p>
 					<p>Location : <span>'.$this->location.'</span></p>
-					<p>Category : <span>'.$this->categoryName.'</span></p>
+					<p>Recipient : <span>'.$this->categoryName.'</span></p>
 					<p><a class="fnt-green" href="'.Url::to(['wish/view','id'=>$this->w_id]).'">Read More >></a> </p>
 					
 					

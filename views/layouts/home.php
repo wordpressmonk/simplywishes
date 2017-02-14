@@ -107,7 +107,9 @@ AppAsset::register($this);
 	<div class="container" style="padding: 25px 0px 50px 36px;">
 		<h1 class="slide_header">Make Someone </br>
 		Happy Today</h1>  
+		<?php if(\Yii::$app->user->isGuest){ ?> 
 		<a href="<?=Yii::$app->homeUrl?>site/sign-up"><button class="btn btn-smp-orange smpl-brdr" type="button">JOIN TODAY!</button></a>
+		<?php } ?>
 	</div>
 </div> 
 
