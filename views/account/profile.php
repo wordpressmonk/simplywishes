@@ -12,8 +12,9 @@ use yii\helpers\Url;
 	
 		<?php } ?>
 		
-	<?php echo $this->render('_profile',['user'=>$user,'profile'=>$profile])?>
+	<?php echo $this->render('_profilenew',['user'=>$user,'profile'=>$profile])?>
 	<!-- To replace tab as link remove data-toggle=tab and replace href with link-->
+<div class="col-md-8" >
 	<ul class="nav nav-tabs smp-mg-bottom" role="tablist">
 	  <li role="presentation" class="active">
 		<a href="#activewish" role="tab" data-toggle="tab">My Active Wishes</a>
@@ -35,6 +36,8 @@ use yii\helpers\Url;
 			
 		</div>
 	  </div>
+	</div>
+</div>
 	<script>
 	var $container = $('.grid');
   	$container.masonry();

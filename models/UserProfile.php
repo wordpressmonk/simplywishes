@@ -81,7 +81,26 @@ class UserProfile extends \yii\db\ActiveRecord
 		$state = State::findOne($this->state);
 		$city = City::findOne($this->city);
 		
-		return "$state->name , $country->name";
+		$location  = "";
+		
+		 /* if(isset($state) && !empty($state))
+			$location  .= $state->name;
+		if(isset($state) && !empty($state) && isset($city->name) && !empty($city->name))
+			$location  .= ", ".$city->name;
+		else 
+			$location  .= $city->name;
+		if(isset($state) && !empty($state) && isset($city->name) && !empty($city->name))
+			$location  .= ", ".$country->name;
+		else if(isset($city->name) && !empty($city->name))
+			$location  .= ", ".$country->name;
+		else if(isset($state) && !empty($state))
+			$location  .= ", ".$country->name;
+		else
+			$location  .= $country->name; */
+		 
+		
+		return "$location";
+		//return "$state->name , $city->name , $country->name";
 	}
 	
 	public function getFullname(){

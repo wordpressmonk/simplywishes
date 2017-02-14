@@ -100,7 +100,14 @@ $this->params['breadcrumbs'][] = $this->title;
    
 	<div class="checkbox">
 	
-		<label class="checkbox-inline"><input  type="checkbox" required class="terms" value="">
+	<label class="checkbox-inline"><input  type="checkbox" required class="terms" value="">I Agree to the 
+			<a data-toggle="modal" data-target="#termsmodal" >Terms Of Use</a> , 
+			<a data-toggle="modal" data-target="#communitymodal" >Community Guidlines</a> and 
+			<a data-toggle="modal" data-target="#policymodal" >Privacy Policy</a>	
+			
+		</label>
+		
+		<!--<label class="checkbox-inline"><input  type="checkbox" required class="terms" value="">
 			<span data-toggle="modal" data-target="#termsmodal" >Terms Of Use</span>
 		</label>
 
@@ -110,7 +117,7 @@ $this->params['breadcrumbs'][] = $this->title;
 		</label>
 		<label  class="checkbox-inline"><input   type="checkbox" required class="policy" value="">
 			<span data-toggle="modal" data-target="#policymodal" >Privacy Policy</span>	
-		</label>
+		</label>-->
 	</div></br>
 	
 	<!-- Terms modal Starts -->
@@ -128,9 +135,9 @@ $this->params['breadcrumbs'][] = $this->title;
 			By using the Site and the services available via the Site accesses or uses the Site with crawlers, 
 			robots, data mining or extraction tools or any other functionality.</p>
 		  </div>
-		  <div class="modal-footer">
+		   <!--<div class="modal-footer">
 			<button type="button" class="btn btn-primary agree" data-cat="terms" data-id="#termsmodal">Agree</button>
-		  </div>
+		  </div>-->
 		</div>
 	  </div>
 	</div>
@@ -151,9 +158,9 @@ $this->params['breadcrumbs'][] = $this->title;
 			incorporated herein by reference and any reference to these Terms of Use herein shall be deemed to reference 
 			and include the Terms of Use.</p>
 		  </div>
-		  <div class="modal-footer">
+		  <!--<div class="modal-footer">
 			<button type="button" class="btn btn-primary agree" data-cat="community" data-id="#communitymodal">Agree</button>
-		  </div>
+		  </div>-->
 		</div>
 	  </div>
 	</div>
@@ -173,9 +180,9 @@ $this->params['breadcrumbs'][] = $this->title;
 			of Use, located at <a href="http://www.simplywishes.com">http://www.simplywishes.com</a>, which is incorporated herein by reference and any 
 			reference to these Terms of Use herein shall be deemed to reference and include the Terms of Use.</p>
 		  </div>
-		  <div class="modal-footer">
+		   <!--<div class="modal-footer">
 			<button type="button" class="btn btn-primary agree" data-cat="policy" data-id="#policymodal">Agree</button>
-		  </div>
+		  </div>-->
 		</div>
 	  </div>
 	</div>

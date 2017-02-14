@@ -6,6 +6,8 @@ use Yii;
 use yii\web\UploadedFile;
 use app\models\HappyStories;
 use app\models\StoryActivity;
+use app\models\User;
+use app\models\UserProfile;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 
@@ -56,7 +58,9 @@ class HappyStoriesController extends \yii\web\Controller
 	public function actionCreate()
     {
 		 $model = new HappyStories();
-	
+		$user = User::findOne(\Yii::$app->user->id);
+		$profile = UserProfile::find()->where(['user_id'=>\Yii::$app->user->id])->one();
+		
 		  
          if ($model->load(Yii::$app->request->post())) {
 			
@@ -70,11 +74,14 @@ class HappyStoriesController extends \yii\web\Controller
 				if($model->save())
 				    return $this->redirect(['my-story']);
 				else 
-					return $this->render('create', ['model' => $model]);
+					return $this->render('create', ['model' => $model,'user' => $user,
+			'profile' => $profile,]);
 					
         } else {
             return $this->render('create', [
                 'model' => $model,
+				'user' => $user,
+				'profile' => $profile,
             ]);
         }
     }
@@ -91,6 +98,10 @@ class HappyStoriesController extends \yii\web\Controller
         $model = HappyStories::findOne($id);
 		$current_image = $model->story_image;
 		$model->scenario = 'update_by_happystory_user';
+		
+		$user = User::findOne(\Yii::$app->user->id);
+		$profile = UserProfile::find()->where(['user_id'=>\Yii::$app->user->id])->one();
+		
         if ($model->load(Yii::$app->request->post())){
 			
 			/**		Image Uploaded for Update function Line 
@@ -107,11 +118,14 @@ class HappyStoriesController extends \yii\web\Controller
 					return $this->redirect(['my-story']);
 				} else {
 					
-					return $this->render('update', ['model' => $model,]);
+					return $this->render('update', ['model' => $model,'user' => $user,
+				'profile' => $profile,]);
 			}
         } else {
             return $this->render('update', [
                 'model' => $model,
+				'user' => $user,
+				'profile' => $profile,
             ]);
         }
     }

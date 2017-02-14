@@ -208,10 +208,22 @@ class Wish extends \yii\db\ActiveRecord
 	}
 	
 		public function getHtmlForProfileSaved(){
+			
+			$str = "";
+			$str .=  '<div class="smp-wish-desc">';
+            $str .=  '<p><div class="list-icon">
+							<img src="'.$this->wisherPic.'" alt="">
+							<a href="'.Url::to(['account/profile','id'=>$this->wished_by]).'"><span>'.$this->wisherName.'</span></a>
+						</div></p>';
+          
+          $str .=  '</div>';
+		  
 		echo '<div class="col-md-6 grid-item"> 
 				<div class="smp_inline thumbnail">					
 					<a href="'.Url::to(['wish/view','id'=>$this->w_id]).'"><img src="'.\Yii::$app->homeUrl.$this->primary_image.'"  class="img-responsive" alt="Image"></a>
-					<br>
+					<br>'.$str.'
+					
+
 					<p><a style="margin-left:10px" class="fnt-danger" href="'.Url::to(['wish/remove-wish','wish_id'=>$this->w_id]).'"><i class="fa fa-trash" aria-hidden="true"></i> Remove</a> </p>
 				</div>
 				
