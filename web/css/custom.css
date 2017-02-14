@@ -358,3 +358,72 @@ ul.smp-footer-links a {
     float: right;
     font-size: x-large;
 }
+
+
+
+/******* Styles Added for New Template ******/
+.fa-10x{
+	font-size:10em !important;
+}
+.fa-6x {
+    font-size: 6em !important;
+}
+.my-profile{
+	background-color:#eee;
+}
+.link-thumb a{
+	font-size:12px;
+	text-decoration:none;
+	color:#000;
+}
+.link-thumb a i {
+    display: block;
+	background-color: #fff;
+    padding: 4px 0px;
+}
+.link-thumb {
+    margin-bottom: 10px;
+	text-align:center;
+	display:inline-block;
+}
+.fnt-grey {
+    color: grey;
+}
+.fnt-orange{
+	color:orange;
+}
+.fnt-pink {
+    color: #bf65ab;
+}
+.fnt-grn-yellow {
+    color: #c1c14d;
+}
+.fnt-brown {
+    color: #923e54;
+}
+.fnt-sea{
+	color:#7880e8;
+}
+.link-thumb-contain {
+    background-color: #fff;
+    padding: 15px 5px;
+}
+.link-thumb-contain a i{
+	display:block;
+}
+.link-thumb-contain a{
+	text-decoration:none;
+	color:#000;
+}
+.link-thumb-contain>div {
+    text-align: center;
+    margin-bottom: 20px;
+	display:inline-block;
+}
+@media(max-width:500px){
+	.link-thumb,.link-thumb-contain>div{
+		display:block!important;
+	}
+}
+
+/******* Styles Added for New Template END POINT ******/

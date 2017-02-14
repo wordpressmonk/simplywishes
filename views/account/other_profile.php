@@ -4,8 +4,9 @@ use yii\helpers\Url;
 ?>
 <script src="<?= Yii::$app->request->baseUrl?>/src/masonry.js" type="text/javascript"></script>
 <script src="<?= Yii::$app->request->baseUrl?>/src/imagesloaded.js" type="text/javascript"></script>	
-	<?php echo $this->render('_profile',['user'=>$user,'profile'=>$profile])?>
+	<?php echo $this->render('_profilenew',['user'=>$user,'profile'=>$profile])?>
 	<!-- To replace tab as link remove data-toggle=tab and replace href with link-->
+<div >
 	<ul class="nav nav-tabs smp-mg-bottom" role="tablist">
 	  <li role="presentation" class="active">
 		<a href="#activewish" role="tab" data-toggle="tab">Active Wishes</a>
@@ -24,6 +25,8 @@ use yii\helpers\Url;
 			
 		</div>
 	  </div>
+  </div>
+  </div>
 	<script>
 	var $container = $('.grid');
   	$container.masonry();

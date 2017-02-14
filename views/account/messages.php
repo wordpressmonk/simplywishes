@@ -14,8 +14,8 @@ print_r($data);
 exit;
   */
 ?>
-	<?php echo $this->render('_profile',['user'=>$user,'profile'=>$profile])?>
-	<h3 class="smp-mg-bottom">Inbox</h3>
+	<?php echo $this->render('_profilenew',['user'=>$user,'profile'=>$profile])?>
+	<h3 class="smp-mg-bottom fnt-green">Inbox</h3>
 	<div class="message">
 		<ul class="list-group">
 			<li class="list-group-item">
@@ -63,7 +63,7 @@ exit;
 
 		</ul>
 	</div>
-	
+	</div>
 	<!-- modal Starts -->
 	<div class="modal fade" id="messagemodalOne"  tabindex="-1" role="dialog">
 	  <div class="modal-dialog" role="document">

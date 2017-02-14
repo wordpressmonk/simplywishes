@@ -20,8 +20,8 @@ use dosamigos\ckeditor\CKEditor;
 		$wish = ArrayHelper::map(Wish::find()->where(['wished_by'=>$user_id])->orderBy('wish_title')->all(), 'w_id', 'wish_title');
 			echo $form->field($model, 'wish_id')->dropDownList(
             $wish,           // Flat array ('id'=>'label')
-            ['prompt'=>'--Wish List--']    // options
-        )->label('Wish List');  ?>
+            ['prompt'=>'--Wishes List--']    // options
+        )->label('Wishes');  ?>
 		
 		 
 		<?= $form->field($model, 'story_text')->widget(CKEditor::className(), [

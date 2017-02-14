@@ -15,6 +15,8 @@ $this->params['breadcrumbs'][] = $this->title;
 <!--<script src="<?= Yii::$app->request->baseUrl?>/js/html5imageupload.js" type="text/javascript"></script>
  <link href="<?= Yii::$app->request->baseUrl?>/css/html5imageupload.css" rel="stylesheet">-->
  
+<?php echo $this->render('_profilenew',['user'=>$user,'profile'=>$profile])?>
+ 
 <div class="site-contact">
     <h1 class="fnt-green" ><?= Html::encode($this->title) ?></h1>
 
@@ -122,6 +124,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
             </div>
         </div>
+
+</div>
 
 </div>
 

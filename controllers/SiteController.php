@@ -310,4 +310,18 @@ class SiteController extends Controller
 			->send();		
 	}
 
+	
+	/**
+     * Lists all Wish models.
+     * @return mixed
+     */
+	public function actionIndexHome()
+    {
+	  $user = User::findOne(\Yii::$app->user->id);
+	  $profile = UserProfile::find()->where(['user_id'=>\Yii::$app->user->id])->one();
+		
+	  return $this->render('index_home',['user' => $user,
+			'profile' => $profile ]);
+    }
+	
 }

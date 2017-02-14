@@ -62,7 +62,7 @@ class Wish extends \yii\db\ActiveRecord
             'w_id' => 'W ID',
             'wished_by' => 'Wished By',
             'granted_by' => 'Granted By',
-            'category' => 'Category',
+            'category' => 'Recipient',
             'wish_title' => 'Wish Title',
             'summary_title' => 'Wish Summary',
             'wish_description' => 'Wish Description',
