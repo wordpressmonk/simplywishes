@@ -83,22 +83,22 @@ class UserProfile extends \yii\db\ActiveRecord
 		
 		$location  = "";
 		
-		 /* if(isset($state) && !empty($state))
+		if(!empty($state))
 			$location  .= $state->name;
-		if(isset($state) && !empty($state) && isset($city->name) && !empty($city->name))
+		if(!empty($state) && !empty($city))
 			$location  .= ", ".$city->name;
-		else 
+		else if(!empty($city))
 			$location  .= $city->name;
-		if(isset($state) && !empty($state) && isset($city->name) && !empty($city->name))
-			$location  .= ", ".$country->name;
-		else if(isset($city->name) && !empty($city->name))
-			$location  .= ", ".$country->name;
-		else if(isset($state) && !empty($state))
-			$location  .= ", ".$country->name;
-		else
-			$location  .= $country->name; */
-		 
 		
+		if(!empty($state) && !empty($city) && !empty($country))
+			$location  .= ", ".$country->name;
+		else if(!empty($city) && !empty($country))
+			$location  .= ", ".$country->name;
+		else if(!empty($state) && !empty($country))
+			$location  .= ", ".$country->name;
+		else if(!empty($country))
+			$location  .= $country->name; 
+		 
 		return "$location";
 		//return "$state->name , $city->name , $country->name";
 	}

@@ -13,7 +13,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="wish-view">
   <div class="container my-profile">
 	<div class="col-md-12 smp-mg-bottom">
-	<h3 class="smp-mg-bottom"><?=$this->title?></h3>
+	<h3 class="smp-mg-bottom fnt-green "><?=$this->title?></h3>
 		<div class="col-md-3 happystory">
 			
 				<img src="<?=\Yii::$app->homeUrl.$model->primary_image?>"  class="img-responsive" alt="my-profile-Image"><br>
@@ -41,7 +41,11 @@ $this->params['breadcrumbs'][] = $this->title;
 			<p>Expected Date : <span><?=$model->expected_date?></span></p>
 			<p>What Do I Give In Return : <span><?=$model->in_return?> </span></p>
 			<p>Who Can Potentialy Help me : <span><?=$model->who_can?> </span></p>
-			<p>Recipient : <span><?=$model->categoryName?></span></p>	
+			<p>Recipient : <span><?=$model->categoryName?></span></p>
+			<?php if(!is_null($model->granted_by)){ ?>	
+			<p>Wish granted on : <span><?=$model->granted_date ?></span></p>			
+			<p>Wish granted by : <span><a href="<?=Url::to(['account/profile','id'=>$model->granted_by])?>"><span><?=$model->GrantedWisherName?></span></a></span></p>		
+			<?php } ?>			
 			<?php if(is_null($model->granted_by) && !\Yii::$app->user->isGuest  && \Yii::$app->user->id!=$model->wished_by){ ?>
 				<form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
 				  <!-- Identify your business so that you can collect the payments. -->

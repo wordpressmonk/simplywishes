@@ -282,5 +282,17 @@ class Wish extends \yii\db\ActiveRecord
 			return Yii::$app->homeUrl.$profile->profile_image;
 		
 		else return Yii::$app->homeUrl."images/default_profile.png";
+	}	
+
+	/**
+     * @returns the name of the Granted wisher
+     */	
+	public function getGrantedWisherName(){
+		
+		$profile = UserProfile::find()->where(['user_id'=>$this->granted_by])->one();
+		if(!$profile)
+			return "";
+		
+		return "$profile->firstname $profile->lastname";
 	}		
 }
