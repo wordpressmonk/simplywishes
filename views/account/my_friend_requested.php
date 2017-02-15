@@ -18,8 +18,8 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
 		
 <div class="site-contact">
-		<?php echo $this->render('_profile',['user'=>$user,'profile'=>$profile])?>
-		
+		<?php echo $this->render('_profilenew',['user'=>$user,'profile'=>$profile])?>
+<div class="col-md-8" >		
 	<ul class="nav nav-tabs smp-mg-bottom" role="tablist">
 		<li role="presentation" >
 			<a href="<?=\Yii::$app->homeUrl?>account/my-friend" role="tab" >Friends</a>
@@ -71,8 +71,9 @@ $this->params['breadcrumbs'][] = $this->title;
 	  </div>
 		
 
+	</div>
 </div>
-
+</div>
 
 	<script>
 

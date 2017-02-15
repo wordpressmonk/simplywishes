@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
 				<div class="media"> 
 					<div class="media-left"> 
 						<img alt="64x64" src="<?=Yii::$app->homeUrl?><?= $story->story_image; ?>" class="media-object"   style="width: 200px;border: solid 2px #0cb370;">
-						<span><i class="fa fa-thumbs-o-up fnt-green"></i> <?=$story->likesCount?>  Likes</span>
+						<span><i class="fa fa-thumbs-o-up fnt-blue"></i> <?=$story->likesCount?>  Likes</span>
 					</div> 
 					<div class="media-body"> 
 						<!--<h4 class="media-heading">Top aligned media</h4>-->

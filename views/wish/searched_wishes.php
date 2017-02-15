@@ -29,7 +29,7 @@ use yii\helpers\Url;
 			</br>
 			<p>Search By Keyword Or Location</p>
 			<div class="input-group">
-				<input name="searh_field" type="text" class="form-control" placeholder="City, State, Country.....other" value="<?=$_GET['match']?>">
+				<input id="searh_field"  name="searh_field" type="text" class="form-control" placeholder="City, State, Country.....other" value="<?=$_GET['match']?>">
 				<span class="input-group-btn">
 				  <button class="search-wish btn btn-default" type="button">
 					<span class="glyphicon glyphicon-search"></span>
@@ -49,6 +49,7 @@ use yii\helpers\Url;
 					</h3>
 					<div class="grid"  data-masonry='{ "itemSelector": ".grid-item" }' id="current">
 					<?php
+						
 					if(count($dataProvider->models) == 0)
 						echo "No wishes found";
 					else
@@ -180,4 +181,12 @@ use yii\helpers\Url;
 		}
 			
 	});
+	
+	
+	$('#searh_field').keypress(function (e) {
+		  if (e.which == 13) {
+				$( ".search-wish" ).trigger( "click" );
+		  }
+	});
+	
 	</script>

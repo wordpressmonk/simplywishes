@@ -35,16 +35,16 @@ $this->params['breadcrumbs'][] = $this->title;
 			
 		</div>
 		<div class="col-md-8">
-			<p>Name : <span><a href="<?=Url::to(['account/profile','id'=>$model->wished_by])?>"><span><?=$model->wisherName?></span></a></span></p>
-			<p>Wish Description : <span><?=$model->wish_description?></span></p>
-			<p>Iam Located In : <span><?=$model->location?></span></p>
-			<p>Expected Date : <span><?=$model->expected_date?></span></p>
-			<p>What Do I Give In Return : <span><?=$model->in_return?> </span></p>
-			<p>Who Can Potentialy Help me : <span><?=$model->who_can?> </span></p>
-			<p>Recipient : <span><?=$model->categoryName?></span></p>
+			<p><b>Name : </b><span><a href="<?=Url::to(['account/profile','id'=>$model->wished_by])?>"><span><?=$model->wisherName?></span></a></span></p>
+			<p><b>Wish Description : </b><span><?=$model->wish_description?></span></p>
+			<p><b>Iam Located In : </b><span><?=$model->location?></span></p>
+			<p><b>Expected Date : </b><span><?=$model->expected_date?></span></p>
+			<p><b>What Do I Give In Return : </b><span><?=$model->in_return?> </span></p>
+			<p><b>Who Can Potentialy Help me : </b><span><?=$model->who_can?> </span></p>
+			<p><b>Recipient : </b><span><?=$model->categoryName?></span></p>
 			<?php if(!is_null($model->granted_by)){ ?>	
-			<p>Wish granted on : <span><?=$model->granted_date ?></span></p>			
-			<p>Wish granted by : <span><a href="<?=Url::to(['account/profile','id'=>$model->granted_by])?>"><span><?=$model->GrantedWisherName?></span></a></span></p>		
+			<p><b>Wish granted on : </b><span><?=$model->granted_date ?></span></p>			
+			<p><b>Wish granted by : </b><span><a href="<?=Url::to(['account/profile','id'=>$model->granted_by])?>"><span><?=$model->GrantedWisherName?></span></a></span></p>		
 			<?php } ?>			
 			<?php if(is_null($model->granted_by) && !\Yii::$app->user->isGuest  && \Yii::$app->user->id!=$model->wished_by){ ?>
 				<form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">

@@ -50,8 +50,12 @@ class HappyStoriesController extends \yii\web\Controller
 	
 	 public function actionMyStory()
     {			
+		$user = User::findOne(\Yii::$app->user->id);
+		$profile = UserProfile::find()->where(['user_id'=>\Yii::$app->user->id])->one();
+		
 		$stories = HappyStories::find()->where(['user_id'=>\Yii::$app->user->id])->orderBy('hs_id Desc')->all();
-		return $this->render('my-story', ['stories' => $stories]);
+		return $this->render('my-story', ['stories' => $stories,'user' => $user,
+			'profile' => $profile]);
 		
     }
 	

@@ -7,6 +7,8 @@ use app\models\Wish;
 use app\models\Activity;
 use app\models\Category;
 use app\models\search\SearchWish;
+use app\models\User;
+use app\models\UserProfile;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -179,6 +181,9 @@ class WishController extends Controller
 		$states = \yii\helpers\ArrayHelper::map(\app\models\State::find()->all(),'id','name');	
 		$cities = \yii\helpers\ArrayHelper::map(\app\models\City::find()->all(),'id','name');	
 		
+		$user = User::findOne(\Yii::$app->user->id);
+		$profile = UserProfile::find()->where(['user_id'=>\Yii::$app->user->id])->one();
+		
 		/* $states = "";
 		$cities = "";
 		 */
@@ -200,7 +205,10 @@ class WishController extends Controller
 				'categories' => $categories,
 				'countries' => $countries,
 				'states' => $states,
-				'cities' => $cities
+				'cities' => $cities,
+				'user' => $user ,
+				'profile' => $profile
+				
             ]);
         }
     }
@@ -220,6 +228,10 @@ class WishController extends Controller
 		$states = \yii\helpers\ArrayHelper::map(\app\models\State::find()->all(),'id','name');	
 		$cities = \yii\helpers\ArrayHelper::map(\app\models\City::find()->all(),'id','name');	
 		$current_image = $model->primary_image;
+		
+		$user = User::findOne(\Yii::$app->user->id);
+		$profile = UserProfile::find()->where(['user_id'=>\Yii::$app->user->id])->one();
+		
         if ($model->load(Yii::$app->request->post())) {
 			//check for a new image
 			$model->primary_image = UploadedFile::getInstance($model, 'primary_image');
@@ -240,7 +252,9 @@ class WishController extends Controller
 				'categories' => $categories,
 				'countries' => $countries,
 				'states' => $states,
-				'cities' => $cities
+				'cities' => $cities,
+				'user' => $user ,
+				'profile' => $profile
             ]);
         }
     }
@@ -294,10 +308,15 @@ class WishController extends Controller
 		$wish = $this->findModel($w_id);
 		//explicitly set up the granted_by to the user id
 		//listen to the IPN and change back to NULL if not success.
+		
 		$wish->granted_by = \Yii::$app->user->id;
 		$wish->granted_date = date('d-m-Y');
+
 		if($wish->save(false))
+		{			
+			$this->sendEmail($wish->wished_by);		
 			return $this->redirect(['wish/view','id'=>$w_id]);
+		}
 		
 	}
     /**
@@ -455,4 +474,33 @@ class WishController extends Controller
 		
 		 return $this->redirect(['account/my-saved']);
 	}
+	
+	public function sendEmail($id)
+    {
+        /* @var $user User */
+        $user = User::findOne([
+            'status' => User::STATUS_ACTIVE,
+            'id' => $id,
+        ]);
+			
+        if (!$user) {
+            return false;
+        }
+      
+        $message = Yii::$app
+            ->mailer
+            ->compose(
+                ['html' => 'grantedSuccess-html'],
+                ['user' => $user]
+            )
+            ->setFrom([Yii::$app->params['supportEmail'] => 'SimplyWishes '])
+            ->setTo($user->email)
+            ->setSubject('SimplyWishes Grant for your Wishe');			
+            
+		$message->getSwiftMessage()->getHeaders()->addTextHeader('MIME-version', '1.0\n');
+		$message->getSwiftMessage()->getHeaders()->addTextHeader('charset', ' iso-8859-1\n');
+		
+		return $message->send();
+    }
+	
 }

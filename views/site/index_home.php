@@ -1,9 +1,18 @@
-
+<?php if(Yii::$app->session->getFlash('success')!='') {?>
+			<div class="alert alert-success" role="alert">
+				<strong> <?= Yii::$app->session->getFlash('success'); ?>.</strong>
+			</div>
+	
+		<?php } ?>
+		
 <div class="row page-header">
   <div class="container my-profile">
 	<div class="col-md-12">
-	<h3 class="fnt-green" >My Profile</h3>
+	
+	
+			<h3 class="fnt-green" style="margin-left:75px" >My Profile</h3>
 		<div class="col-md-3">
+	
 			<div class="thumbnail">
 				<?php 
 			if($profile->profile_image!='') 
@@ -15,9 +24,9 @@
 		</div>
 		<div class="col-md-8">
 			<div class="">
-				<p>Name : <span><?=$profile->firstname." ".$profile->lastname?></span></p>
-				<p>Location : <span><?=$profile->location?></span></p>
-				<p>About Me : <span><?=$profile->about?> </span></p>	
+				<p><b>Name : </b><span><?=$profile->firstname." ".$profile->lastname?></span></p>
+				<p><b>Location : </b><span><?=$profile->location?></span></p>
+				<p><b>About Me : </b><span><?=$profile->about?> </span></p>	
 			</div>
 		</div>
 	</div>

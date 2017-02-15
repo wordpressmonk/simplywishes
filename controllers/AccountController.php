@@ -12,6 +12,7 @@ use yii\web\UploadedFile;
 use app\models\search\SearchWish;
 use app\models\Message;
 use app\models\FriendRequest;
+use app\models\FollowRequest;
 
 class AccountController extends Controller
 {
@@ -168,8 +169,12 @@ class AccountController extends Controller
 					
 				}
 				$profile->save();
+				/* \Yii::$app->getSession()->setFlash('success', 'Account details have been changed successfully');
+				return $this->redirect('my-account'); */
+				
 				\Yii::$app->getSession()->setFlash('success', 'Account details have been changed successfully');
-				return $this->redirect('my-account');
+				return $this->redirect(['site/index-home']);
+				
 			}
 		}		
 		else return $this->render('my_account', [
@@ -323,7 +328,7 @@ class AccountController extends Controller
 	public function actionResetPassword(){
 		
 	} */
-	
+	/*     // Friend Function is hide 
 	public function actionMyFriend(){
 		$user = User::findOne(\Yii::$app->user->id);		
 		$profile = UserProfile::find()->where(['user_id'=>\Yii::$app->user->id])->one();
@@ -334,6 +339,21 @@ class AccountController extends Controller
 						 'user' => $user,	
 						 'profile' => $profile,
 						 'myfriend' => $myfriend,
+						]);		
+	} */
+	
+	
+		
+	public function actionMyFriend(){
+		$user = User::findOne(\Yii::$app->user->id);		
+		$profile = UserProfile::find()->where(['user_id'=>\Yii::$app->user->id])->one();
+		$myfollow = FollowRequest::find()->where(["requested_by"=>\Yii::$app->user->id])->all();	
+		
+		return $this->render('my_follow', 
+						[
+						 'user' => $user,	
+						 'profile' => $profile,
+						 'myfollow' => $myfollow,
 						]);		
 	}
 	

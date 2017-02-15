@@ -10,7 +10,7 @@ use dosamigos\ckeditor\CKEditor;
 ?>
 
 <div class="row">
-<div class="col-md-8">
+<div class="col-md-12">
     <?php $form = ActiveForm::begin(); ?>
 
     <?= $form->field($model, 'category')->dropDownlist($categories,['prompt'=>'--Select--']) ?>

@@ -14,7 +14,7 @@ use app\models\FriendRequest;
 	<?php endif; ?>
 	<!-- end alert messages -->
 	
-	<h3 class="fnt-green" ><?php if (!Yii::$app->user->isGuest && Yii::$app->user->id == $user->id)
+	<h3 class="fnt-green" style="margin-left:75px" ><?php if (!Yii::$app->user->isGuest && Yii::$app->user->id == $user->id)
 				echo "My Profile";
 			  else
 				echo $profile->firstname."'s Profile"; 

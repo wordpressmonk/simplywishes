@@ -50,7 +50,7 @@ class SearchWish extends Wish
 		$query->innerJoinWith('cityModel as cities');
 		
 		foreach($keywords as $key=>$search){
-			
+			$search = trim($search);
 			//if there are multiple searches, we are `and`ing the `or` queries
 			if($key>0)
 				$query->andFilterWhere(['or',
@@ -65,6 +65,7 @@ class SearchWish extends Wish
 					->orFilterWhere(['like', 'cities.name', $search]);					
 					
 		}
+		
         return $dataProvider;
 	}
 	

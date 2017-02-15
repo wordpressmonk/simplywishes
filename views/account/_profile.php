@@ -2,6 +2,7 @@
 use yii\helpers\Html;
 use yii\helpers\Url;
 use app\models\FriendRequest;
+use app\models\FollowRequest;
 ?>	
 
 	<div class="col-md-12">
@@ -36,15 +37,15 @@ use app\models\FriendRequest;
 		</div>
 		<div class="col-md-8">
 			<div class="">
-				<p>Name : <span><?=$profile->firstname." ".$profile->lastname?></span></p>
-				<p>Location : <span><?=$profile->location?></span></p>
-				<p>About Me : <span><?=$profile->about?> </span></p>
+				<p><b>Name : </b><span><?=$profile->firstname." ".$profile->lastname?></span></p>
+				<p><b>Location : </b><span><?=$profile->location?></span></p>
+				<p><b>About Me : </b><span><?=$profile->about?> </span></p>
 				<?php if (!Yii::$app->user->isGuest && $user->id != \Yii::$app->user->id){ ?>
 				<a href="#messagemodal" data-toggle="modal"><button class="btn btn-warning">Send Me A Message</button></a>
 				<?php } else if ($user->id != \Yii::$app->user->id){ ?>
 				<a href="<?=\Yii::$app->homeUrl?>/site/login" data-toggle="modal"><button class="btn btn-warning">Send Me A Message</button></a>
 				<?php } ?>
-				<?php if (!Yii::$app->user->isGuest && $user->id != \Yii::$app->user->id){ 
+				<?php /* if (!Yii::$app->user->isGuest && $user->id != \Yii::$app->user->id){ 
 							$checkfriendlist = FriendRequest::find()->where(["requested_by"=>\Yii::$app->user->id,"requested_to"=>$user->id])->orWhere(["requested_to"=>\Yii::$app->user->id,"requested_by"=>$user->id])->one();
 							
 							if(!$checkfriendlist)
@@ -56,7 +57,17 @@ use app\models\FriendRequest;
 							else if($checkfriendlist->status == 1)
 								echo '<a class="btn btn-success">Friends</a>';
 							
-						} ?>
+						} */ ?>
+						
+				<?php if (!Yii::$app->user->isGuest && $user->id != \Yii::$app->user->id){ 
+							$checkfollowlist = FollowRequest::find()->where(["requested_by"=>\Yii::$app->user->id,"requested_to"=>$user->id])->one();
+							
+							if(!$checkfollowlist)
+								echo '<a class="btn btn-success followrequest ">Follow</a>';
+							else if($checkfollowlist->status == 0)
+								echo '<a class="btn btn-danger followrequest ">UnFollow</a>';
+							
+						} ?>		
 				
 			</div>
 		</div>
@@ -151,6 +162,32 @@ use app\models\FriendRequest;
 					}						
 				}
 			});		 
+		});
+		
+		
+		$(".followrequest").on("click",function(){			
+			var send_to = "<?=$user->id?>";
+			var send_from = "<?=\Yii::$app->user->id?>";
+			$.ajax({
+				url : '<?=Url::to(['follow/follow-request'])?>',
+				type : 'POST',
+				data : {send_from:send_from,send_to:send_to},
+				success: function(response){					
+					console.log("response");
+					if($.trim(response) == "follow")
+					{
+						$(".followrequest").html("UnFollow");
+						$( ".followrequest" ).removeClass( "btn-success" );
+						$( ".followrequest" ).addClass( "btn-danger" );						
+					}	
+					else if($.trim(response) == "unfollow")	
+					{
+						$(".followrequest").html("Follow");	
+						$( ".followrequest" ).removeClass( "btn-danger" );
+						$( ".followrequest" ).addClass( "btn-success" );
+					}
+				}
+			});
 		});
 		
 	</script>

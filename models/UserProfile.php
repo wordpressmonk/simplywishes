@@ -83,21 +83,24 @@ class UserProfile extends \yii\db\ActiveRecord
 		
 		$location  = "";
 		
-		if(!empty($state))
-			$location  .= $state->name;
-		if(!empty($state) && !empty($city))
-			$location  .= ", ".$city->name;
-		else if(!empty($city))
+		if(!empty($city))
 			$location  .= $city->name;
+		if(!empty($state) && !empty($city))
+			$location  .= ", ".$state->name;
+		else if(!empty($state))
+			$location  .= $state->name;
 		
-		if(!empty($state) && !empty($city) && !empty($country))
+		if((!empty($state) || !empty($city)) && !empty($country))
+			$location  .= ", ".$country->name;
+		else if(!empty($country))
+			$location  .= $country->name;  
+		
+		/* else if(!empty($state) && !empty($country))
 			$location  .= ", ".$country->name;
 		else if(!empty($city) && !empty($country))
 			$location  .= ", ".$country->name;
-		else if(!empty($state) && !empty($country))
-			$location  .= ", ".$country->name;
 		else if(!empty($country))
-			$location  .= $country->name; 
+			$location  .= $country->name;  */
 		 
 		return "$location";
 		//return "$state->name , $city->name , $country->name";
@@ -130,7 +133,6 @@ class UserProfile extends \yii\db\ActiveRecord
             ->setSubject('SimplyWishes Please Reset Your Password');			
             
 		$message->getSwiftMessage()->getHeaders()->addTextHeader('MIME-version', '1.0\n');
-		$message->getSwiftMessage()->getHeaders()->addTextHeader('Content-Type', 'text/html');
 		$message->getSwiftMessage()->getHeaders()->addTextHeader('charset', ' iso-8859-1\n');
 		
 		return $message->send();

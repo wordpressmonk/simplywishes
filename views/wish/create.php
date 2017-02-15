@@ -10,7 +10,10 @@ $this->title = 'Add a Wish';
 $this->params['breadcrumbs'][] = ['label' => 'Wishes', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="wish-create">
+
+<?php echo $this->render('@app/views/account/_profilenew',['user'=>$user,'profile'=>$profile])?>
+
+<div class= " col-md-8 wish-create">
 
     <h1  class="fnt-green" ><?= Html::encode($this->title) ?></h1>
 
@@ -22,4 +25,5 @@ $this->params['breadcrumbs'][] = $this->title;
 		'cities' => $cities
     ]) ?>
 
+</div>
 </div>

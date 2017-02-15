@@ -182,7 +182,7 @@ class Wish extends \yii\db\ActiveRecord
             <p>Location : <span>'.$this->location.'</span></p>-->
 			<p class="desc" >'.substr($this->summary_title,0,50).'</p>
             <p><a class="fnt-green" href="'.Url::to(['wish/view','id'=>$this->w_id]).'">Read More</a>
-            &nbsp;<i class="fa fa-thumbs-o-up fnt-blue"></i> '.$this->likesCount.' Likes</p>';
+            &nbsp;<i class="fa fa-thumbs-o-up fa-1x fnt-blue"></i> '.$this->likesCount.' Likes</p>';
           $str .=  '</div>
           <div class="shareIcons" data_text="'.$this->wish_title.'" data_url="'.Url::to(['wish/view','id'=>$this->w_id],true).'" ></div>';
           $str .=  '</div></div>';	
@@ -192,14 +192,15 @@ class Wish extends \yii\db\ActiveRecord
 	public function getHtmlForProfile(){
 		echo '<div class="col-md-6 grid-item"> 
 				<div class="smp_inline thumbnail">					
-					<a href="'.Url::to(['wish/view','id'=>$this->w_id]).'"><img src="'.\Yii::$app->homeUrl.$this->primary_image.'"  class="img-responsive" alt="Image"></a> 					
+					<a href="'.Url::to(['wish/view','id'=>$this->w_id]).'"><img src="'.\Yii::$app->homeUrl.$this->primary_image.'"  class="img-responsive" alt="Image"></a> 	
+							
 				</div>
 				
 				<div class="smp_inline">
-					<p>Wish Title : <span>'.$this->wish_title.'</span></p>
-					<p>Wish Description : <span>'.substr($this->wish_description,0,25).'..</span></p>
-					<p>Location : <span>'.$this->location.'</span></p>
-					<p>Recipient : <span>'.$this->categoryName.'</span></p>
+					<p><b>Wish Title : </b><span>'.$this->wish_title.'</span></p>
+					<p><b>Wish Description : </b><span>'.substr($this->wish_description,0,25).'..</span></p>
+					<p><b>Location : </b><span>'.$this->location.'</span></p>
+					<p><b>Recipient : </b><span>'.$this->categoryName.'</span></p>
 					<p><a class="fnt-green" href="'.Url::to(['wish/view','id'=>$this->w_id]).'">Read More >></a> </p>
 					
 					
@@ -214,6 +215,7 @@ class Wish extends \yii\db\ActiveRecord
             $str .=  '<p><div class="list-icon">
 							<img src="'.$this->wisherPic.'" alt="">
 							<a href="'.Url::to(['account/profile','id'=>$this->wished_by]).'"><span>'.$this->wisherName.'</span></a>
+							<p class="desc">'.substr($this->summary_title,0,50).'..</p>		
 						</div></p>';
           
           $str .=  '</div>';
@@ -228,10 +230,10 @@ class Wish extends \yii\db\ActiveRecord
 				</div>
 				
 				<div class="smp_inline">
-					<p>Wish Title : <span>'.$this->wish_title.'</span></p>
-					<p>Wish Description : <span>'.substr($this->wish_description,0,25).'..</span></p>
-					<p>Location : <span>'.$this->location.'</span></p>
-					<p>Recipient : <span>'.$this->categoryName.'</span></p>
+					<p><b>Wish Title : </b><span>'.$this->wish_title.'</span></p>
+					<p><b>Wish Description : </b><span>'.substr($this->wish_description,0,25).'..</span></p>
+					<p><b>Location : </b><span>'.$this->location.'</span></p>
+					<p><b>Recipient : </b><span>'.$this->categoryName.'</span></p>
 					<p><a class="fnt-green" href="'.Url::to(['wish/view','id'=>$this->w_id]).'">Read More >></a> </p>
 					
 					
@@ -247,9 +249,27 @@ class Wish extends \yii\db\ActiveRecord
 		$country = Country::findOne($this->country);
 		$state = State::findOne($this->state);
 		$city = City::findOne($this->city);
-		if(!$country || !$state)
+		if(!$country && !$state && !$city)
 			return "Unknown";
-		else return "$state->name , $country->name";
+		
+		
+		$location  = "";
+		
+		if(!empty($city))
+			$location  .= $city->name;
+		if(!empty($state) && !empty($city))
+			$location  .= ", ".$state->name;
+		else if(!empty($state))
+			$location  .= $state->name;
+		
+		if((!empty($state) || !empty($city)) && !empty($country))
+			$location  .= ", ".$country->name;
+		else if(!empty($country))
+			$location  .= $country->name; 
+		
+		return "$location";
+		
+		//else return "$state->name , $country->name";
 	}
     /**
      * @returns the location of the wish

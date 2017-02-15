@@ -13,8 +13,9 @@ $this->params['breadcrumbs'][] = ['label' => 'Editorials', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
+<?php echo $this->render('@app/views/account/_profilenew',['user'=>$user,'profile'=>$profile])?>
 	
-<div class="editorial-create smp-mg-bottom">
+<div class="col-md-8 editorial-create smp-mg-bottom">
 
     <h3 class="fnt-green smp-mg-bottom"  > My Happy Stories</h3>
 	
@@ -25,7 +26,8 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
 	<?php endif; ?>	
 	
-		<a class='btn btn-success pull-right' href="<?=Yii::$app->homeUrl?>happy-stories/create">Tell Us Your Story</a> 
+		<a class='btn btn-success pull-right newtest' style="margin-top: -50px;" href="<?=Yii::$app->homeUrl?>happy-stories/create">Tell Us Your Story</a> 
+		
 		<?php
 	if(isset($stories) && !empty($stories))
 	{
@@ -33,11 +35,11 @@ $this->params['breadcrumbs'][] = $this->title;
 		{
 		$profile = UserProfile::find()->where(['user_id'=>$story->user_id])->one();				
 		?>
-			<div class="col-md-10 happystory smp-mg-bottom">
+			<div class="col-md-12 happystory smp-mg-bottom">
 				<div class="media"> 
 					<div class="media-left"> 
 						<img alt="64x64" src="<?=Yii::$app->homeUrl?><?= $story->story_image; ?>" class="media-object"   style="width: 200px;border: solid 2px #0cb370;">
-						<span class="fnt-green"><i class="fa fa-thumbs-o-up fa-3x fnt-green"></i><?=$story->likesCount?>  likes</span>
+						<span ><i class="fa fa-thumbs-o-up fnt-green"></i>  <?=$story->likesCount?>  Likes </span>
 					</div> 
 					<div class="media-body"> 
 		<?php if(\Yii::$app->user->id == $story->user_id){ ?>

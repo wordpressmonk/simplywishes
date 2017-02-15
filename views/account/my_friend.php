@@ -13,8 +13,8 @@ $this->title = 'My Friends';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-contact">
-		<?php echo $this->render('_profile',['user'=>$user,'profile'=>$profile])?>
-		
+		<?php echo $this->render('_profilenew',['user'=>$user,'profile'=>$profile])?>
+<div class="col-md-8" >		
 	<ul class="nav nav-tabs smp-mg-bottom" role="tablist">
 		<li role="presentation" class="active">
 			<a href="#activewish" role="tab" data-toggle="tab">Friends</a>
@@ -64,6 +64,8 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
        </div>
 
+   </div>
+</div>
 </div>
 
 <script>

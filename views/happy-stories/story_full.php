@@ -56,7 +56,7 @@ $this->params['breadcrumbs'][] = $this->title;
 		<div class="col-md-3 happystory">
 			
 				<img src="<?=Yii::$app->homeUrl?><?php echo $model->story_image; ?>"   class="img-responsive" alt="my-profile-Image"><br>
-				<p><i class="fa fa-thumbs-o-up fnt-green"></i> <?=$model->likesCount?> Likes &nbsp;
+				<p><i class="fa fa-thumbs-o-up fnt-blue"></i> <?=$model->likesCount?> Likes &nbsp;
 				<?php
 
 				  if(!$model->isLiked(\Yii::$app->user->id))
