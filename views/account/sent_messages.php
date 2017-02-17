@@ -9,50 +9,50 @@ use yii\web\JsExpression;
 	<?php echo $this->render('_profilenew',['user'=>$user,'profile'=>$profile])?>
 	<div class="col-md-8">
 		<ul class="nav nav-tabs smp-mg-bottom" role="tablist">
-		  <li role="presentation" class="active">
-			<a href="#inboxmailtab" role="tab" data-toggle="tab">Inbox</a>
-		  </li>
 		  <li role="presentation" >
-			<a href="#sentmailtab" role="tab" data-toggle="tab">Sent Mail</a>
+			<a href="<?=\Yii::$app->homeUrl?>account/inbox-message"  role="tab">Inbox</a>
+		  </li>
+		  <li role="presentation" class="active" >
+			<a>Sent Mail</a>
 		  </li>
 		</ul>
-	   <div class="tab-content">
-		<div role="tabpanel" class="tab-pane  active grid" id="inboxmailtab">
+	   <div class="tab-content" >
+		<div role="tabpanel" class="tab-pane " id="inboxmailtab">
 		
+		</div>
+		<div role="tabpanel" class="tab-pane active grid" id="sentmailtab">		
 		<div class="message">
 		<ul class="list-group">
 			<li class="list-group-item">
 				<a href="#messagemodalOne" id="sendmessage" data-toggle="modal"><button class="btn btn-warning">Send Message</button></a>
+				<button class="btn btn-danger pull-right" id="multi_delete" >Multi Delete</button>
 			</li>
 		<?php 	
 			$current_user = \app\models\Userprofile::find()->where(['user_id'=>\Yii::$app->user->id])->one();
+			
 			foreach($messages as $key=>$msg){
-				$profile = \app\models\Userprofile::find()->where(['user_id'=>$key])->one();
-				echo '<li class="list-group-item">
-					<a class="smp_expand" data-toggle="collapse" title="Click here To View Conversation">
+				$profile = \app\models\Userprofile::find()->where(['user_id'=>$msg->recipient_id])->one();
+				echo '<li class="list-group-item" id="li_list_'.$msg->m_id.'" >		
+						<input type="checkbox" name="selection[]" value="'.$msg->m_id.'" ></input>					
+						 <span style="cursor:pointer" class="pull-right remove_delete" title="Remove"  for="'.$msg->m_id.'"><i class="fa fa-trash-o" aria-hidden="true"> </i></span>
+					<a  class="smp_expand" data-toggle="collapse" title="Click here To View Conversation">
+					
 						<div class="list-icon">
-							<img src="'.\Yii::$app->homeUrl.$profile->profile_image.'" alt="">
+							To:  <img src="'.\Yii::$app->homeUrl.$profile->profile_image.'" alt="">
 						</div>
 						<div class="list-group-item-heading">'.$profile->fullname.'</div>
 						<p class="list-group-item-text">
-						<span class="label label-primary pull-right">Date:'.$msg['created_at'].'</span></p>
+						
+						<span class="label label-primary pull-right">Date:'.$msg->created_at.'</span></p>
 					</a>
-					<ul class="collapse detail">';
-					/*	echo '<li class="media media_textbox">
-							<div class="form-group">
-								<label for="message">Enter Your Message</label>
-								<textarea id="'.$key.'_msg" class="form-control" rows="2"></textarea>
-							</div>
-						</li>
-						<li class="media media_button"><button type="button" data-send_to="'.$key.'" class="send-msg btn btn-primary ">Reply</button></li>';   */
-						arsort($msg['threads']);
-					foreach($msg['threads'] as $thread){
+					<ul class="collapse detail">';					
+					
 						echo '<li class="media">						  
 						  <div class="media-body">						
-							<p class="list-group-item-text">'.$thread['text'].'</p>							
+							<p class="list-group-item-text">'.$msg->text.'</p>							
 						  </div>
 						</li>';
-					}						
+				
 					echo '</ul>
 					</li>';
 			}
@@ -60,64 +60,13 @@ use yii\web\JsExpression;
 
 		</ul>
 	 </div>
-		</div>
-		<div role="tabpanel" class="tab-pane" id="sentmailtab">
-		
+	 
 		</div>
 	</div>
    </div>
 </div>
 	
 	
-	<!--<h3 class="smp-mg-bottom fnt-green">Inbox</h3>
-	<div class="message">
-		<ul class="list-group">
-			<li class="list-group-item">
-				<a href="#messagemodalOne" id="sendmessage" data-toggle="modal"><button class="btn btn-warning">Send Message</button></a>
-			</li>
-		<?php 	
-			$current_user = \app\models\Userprofile::find()->where(['user_id'=>\Yii::$app->user->id])->one();
-			foreach($messages as $key=>$msg){
-				$profile = \app\models\Userprofile::find()->where(['user_id'=>$key])->one();
-				echo '<li class="list-group-item">
-					<a class="smp_expand" data-toggle="collapse" title="Click here To View Conversation">
-						<div class="list-icon">
-							<img src="'.\Yii::$app->homeUrl.$profile->profile_image.'" alt="">
-						</div>
-						<div class="list-group-item-heading">'.$profile->fullname.'</div>
-						<p class="list-group-item-text">
-						<span class="label label-primary pull-right">Date:'.$msg['created_at'].'</span></p>
-					</a>
-					<ul class="collapse detail">';
-						echo '<li class="media media_textbox">
-							<div class="form-group">
-								<label for="message">Enter Your Message</label>
-								<textarea id="'.$key.'_msg" class="form-control" rows="2"></textarea>
-							</div>
-						</li>
-						<li class="media media_button"><button type="button" data-send_to="'.$key.'" class="send-msg btn btn-primary ">Reply</button></li>';
-						arsort($msg['threads']);
-					foreach($msg['threads'] as $thread){
-						$profile = \app\models\Userprofile::find()->where(['user_id'=>$thread['send_by']])->one();
-						echo '<li class="media">
-						  <div class="media-left list-icon">
-							 <img src="'.\Yii::$app->homeUrl.$profile->profile_image.'" alt="">
-						  </div>
-						  <div class="media-body">
-							<h4 class="media-heading">'.$profile->fullname.'</h4>
-							<p class="list-group-item-text">'.$thread['text'].'<span class="label label-primary pull-right">Date:'.$thread['created_at'].'</span></p>
-							
-						  </div>
-						</li>';
-					}						
-					echo '</ul>
-					</li>';
-			}
-		?>
-
-		</ul>
-	</div>  
-	</div>-->
 	<!-- modal Starts -->
 	<div class="modal fade" id="messagemodalOne"  tabindex="-1" role="dialog">
 	  <div class="modal-dialog" role="document">
@@ -185,6 +134,41 @@ use yii\web\JsExpression;
 			});
 		});
 	
+	
+		$("#multi_delete").click(function(){				 
+		    var r = confirm("Are you Sure To Delete!");
+		    if (r == true) {
+				var msg_id = $.map($('input[name="selection[]"]:checked'), function(c){return c.value; })
+				if($.trim(msg_id) === "")
+				 {
+					alert("Please Select the Checkbox to Delete!!!.");
+					return false;
+				  }				
+				 $.ajax({
+				   url: '<?=Yii::$app->homeUrl."account/multi-delete-send-message"?>',
+				   type: 'POST',
+				   data: {  msg_id: msg_id,
+				   },
+				   success: function(data) {		
+						location.reload();
+				   }
+				 }); 
+				}		
+			 });
+		$(".remove_delete").click(function(){	
+			 var msg_id = $(this).attr("for");
+			 
+			 $.ajax({
+				   url: '<?=Yii::$app->homeUrl."account/delete-send-message"?>',
+				   type: 'POST',
+				   data: {  msg_id: msg_id,
+				   },
+				   success: function(data) {		
+						$("#li_list_"+msg_id).hide();
+				   }
+				 }); 
+				 
+		});		
 	</script>
 	
 	<script>
@@ -201,9 +185,9 @@ use yii\web\JsExpression;
 		});
 		$(".smp_expand").on( "click", function() {
 			$(this).next().slideToggle(200);
-			$(this).parent().siblings().children().next().slideUp();
+			//$(this).parent().siblings().children().next().slideUp(); Arivazahgan test
 			$('li').removeClass('active');
-			$(this).parent('li').addClass('active');
+			$(this).parent('li').addClass('active'); 
 		});
 
 		$(".send-msg").on("click",function(){			

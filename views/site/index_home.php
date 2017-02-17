@@ -42,7 +42,7 @@
 			<a href="<?=Yii::$app->homeUrl?>wish/create"><i class="fa fa-pencil-square-o fa-10x fnt-pink" aria-hidden="true"></i>Add Wish</a>
 		</div>
 		<div class="col-md-3">
-			<a href="<?=Yii::$app->homeUrl?>account/inbox"><i class="fa fa-comments-o fa-10x fnt-orange" aria-hidden="true"></i>Inbox</a>
+			<a href="<?=Yii::$app->homeUrl?>account/inbox-message"><i class="fa fa-comments-o fa-10x fnt-orange" aria-hidden="true"></i>Inbox</a>
 		</div>
 		<div class="col-md-3">
 			<a href="<?=Yii::$app->homeUrl?>account/my-account"><i class="fa fa-tasks fa-10x fnt-blue" aria-hidden="true"></i>My Wishes</a>

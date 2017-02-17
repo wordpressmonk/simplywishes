@@ -226,7 +226,7 @@ class AccountController extends Controller
 				]);
 		}
 	}	
- 	public function actionInbox(){
+/* 	public function actionInbox(){
 		$user = User::findOne(\Yii::$app->user->id);
 		$profile = UserProfile::find()->where(['user_id'=>\Yii::$app->user->id])->one();
 		$messages = $this->getThreads();
@@ -238,8 +238,8 @@ class AccountController extends Controller
 						 'messages' => $messages,
 						 'senduser' => $senduser,
 						]);		
-	} 
-	public function getThreads(){
+	} */
+/* 	public function getThreads(){
 		//first send
 		$threads = [];
 		$send_messages = Message::find()->where(['sender_id'=>\Yii::$app->user->id])->orderBy('m_id DESC')->all();
@@ -290,7 +290,7 @@ class AccountController extends Controller
 		}
 		arsort($threads);
 		return $threads;
-	}
+	} */
 	
 	public function actionSendMessageInbox(){
 		
@@ -406,19 +406,129 @@ class AccountController extends Controller
 						]);		
 	}
 	
-	/* public function actionInbox(){
+	public function actionInboxMessage(){
 		$user = User::findOne(\Yii::$app->user->id);
 		$profile = UserProfile::find()->where(['user_id'=>\Yii::$app->user->id])->one();
-		$messages = $this->getThreads();
+		///$messages = $this->getInboxThreads();
+		$messages = Message::find()->where(['recipient_id'=>\Yii::$app->user->id,'recipient_del' => 0])->orderBy('m_id DESC')->all();
+		
 		$senduser = UserProfile::find()->where(['!=','user_id',\Yii::$app->user->id])->all();
 		//print_r($messages);die;
-		return $this->render('messagesnew', 
+		return $this->render('inbox_messages', 
 						['user' => $user,
 						 'profile' => $profile,
 						 'messages' => $messages,
 						 'senduser' => $senduser,
 						]);		
 	}
-	 */
+	
+	public function actionSentMessage(){
+		$user = User::findOne(\Yii::$app->user->id);
+		$profile = UserProfile::find()->where(['user_id'=>\Yii::$app->user->id])->one();
+		$messages = Message::find()->where(['sender_id'=>\Yii::$app->user->id,'sender_del'=>0])->orderBy('m_id DESC')->all();
+		//$messages = $this->getSentThreads();
+		
+		$senduser = UserProfile::find()->where(['!=','user_id',\Yii::$app->user->id])->all();
+		//print_r($messages);die;
+		
+		return $this->render('sent_messages', 
+						['user' => $user,
+						 'profile' => $profile,
+						 'messages' => $messages,
+						 'senduser' => $senduser,
+						]);		
+	}
+	
+	/**
+     * Multiple Deletes an existing User for company admin model.
+     * If deletion is successful, the browser will be redirected to the 'index' page.
+     * @param integer $id
+     * @return mixed
+     */
+	 
+	 public function actionMultiDeleteSendMessage()
+	 {    
+			$msg_id = Yii::$app->request->post()['msg_id'];	
+			if($msg_id)
+			{
+				 foreach($msg_id as $tmp)
+				 {					
+					$message =  Message::find()->where(['sender_id'=>\Yii::$app->user->id,'m_id'=>$tmp ])->one();
+					if($message)
+					{
+						$message->sender_del = 1;
+						$message->save(); 						
+					}
+				 }
+			}  			
+		}
+		
+	public function actionDeleteSendMessage()
+	 {    
+			$msg_id = Yii::$app->request->post()['msg_id'];	
+			if($msg_id)
+			{							
+				$message =  Message::find()->where(['sender_id'=>\Yii::$app->user->id,'m_id'=>$msg_id ])->one();
+				if($message)
+				{
+						$message->sender_del = 1;
+						$message->save(); 						
+				}				 
+			}  			
+		}
+
+		
+		/**
+     * Multiple Deletes an existing User for company admin model.
+     * If deletion is successful, the browser will be redirected to the 'index' page.
+     * @param integer $id
+     * @return mixed
+     */
+	 
+	 public function actionMultiDeleteInboxMessage()
+	 {    
+			$msg_id = Yii::$app->request->post()['msg_id'];	
+			if($msg_id)
+			{
+				 foreach($msg_id as $tmp)
+				 {					
+					$message =  Message::find()->where(['recipient_id'=>\Yii::$app->user->id,'m_id'=>$tmp ])->one();
+					if($message)
+					{
+						$message->recipient_del = 1;
+						$message->save(); 						
+					}
+				 }
+			}  			
+		}
+		
+	public function actionDeleteInboxMessage()
+	 {    
+			$msg_id = Yii::$app->request->post()['msg_id'];	
+			if($msg_id)
+			{							
+				$message =  Message::find()->where(['recipient_id'=>\Yii::$app->user->id,'m_id'=>$msg_id ])->one();
+				if($message)
+				{
+						$message->recipient_del = 1;
+						$message->save(); 						
+				}				 
+			}  			
+		}
+
+		
+		public function actionReadInboxMessage()
+	 {    
+			$msg_id = Yii::$app->request->post()['msg_id'];	
+			if($msg_id)
+			{							
+				$message =  Message::find()->where(['recipient_id'=>\Yii::$app->user->id,'m_id'=>$msg_id ])->one();
+				if($message)
+				{
+						$message->read_text = 1;
+						$message->save(); 						
+				}				 
+			}  			
+		}
 	 
 }
