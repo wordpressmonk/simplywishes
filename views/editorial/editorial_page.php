@@ -37,13 +37,10 @@ $this->params['breadcrumbs'][] = $this->title;
 			
 			<div class="row edit">
 				<div class="form-group col-md-8">
-					<p>Compassionate Acts</p>
-					<p><img src="<?=Yii::$app->homeUrl?><?php echo $tmp->e_image; ?>" height="100px"/></a>Author:Lella & Irina</p>
-					<p>Date:2/17/2017</p>
-					<p>"Not all of us can do great things.But, we can do small things with great love."(Mother Teresa)</p>
-					<p>Throughout her life, Mother Teresa was guided by compassion which she embodled through serving
-					"the poorest of the people" Throughout her life, Mother Teresa was guided by compassion which she embodled through serving.
-					</p>
+					<p><?php echo $tmp->e_title; ?></p>
+					<p><img src="<?=Yii::$app->homeUrl?><?php echo $tmp->e_image; ?>" height="100px"/></a>Author: Lella & Irina</p>
+					<p>Date: 	<?php echo date("d/m/Y",strtotime($tmp->created_at)); ?></p>					
+					<p><?php echo substr($tmp->e_text,0,250)?></p>
 					<a href="<?=Yii::$app->homeUrl?>editorial/editorial-page?id=<?php echo $tmp->e_id; ?>">Read More...!</a>
 				</div>
 				<div class="form-group col-md-1"></div>
