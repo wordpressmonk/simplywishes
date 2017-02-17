@@ -226,7 +226,7 @@ class AccountController extends Controller
 				]);
 		}
 	}	
-	public function actionInbox(){
+ 	public function actionInbox(){
 		$user = User::findOne(\Yii::$app->user->id);
 		$profile = UserProfile::find()->where(['user_id'=>\Yii::$app->user->id])->one();
 		$messages = $this->getThreads();
@@ -238,7 +238,7 @@ class AccountController extends Controller
 						 'messages' => $messages,
 						 'senduser' => $senduser,
 						]);		
-	}
+	} 
 	public function getThreads(){
 		//first send
 		$threads = [];
@@ -344,16 +344,37 @@ class AccountController extends Controller
 	
 	
 		
-	public function actionMyFriend(){
+	public function actionMyFriend($findfriends=""){
 		$user = User::findOne(\Yii::$app->user->id);		
 		$profile = UserProfile::find()->where(['user_id'=>\Yii::$app->user->id])->one();
-		$myfollow = FollowRequest::find()->where(["requested_by"=>\Yii::$app->user->id])->all();	
+		$followlist = [];
+		if($findfriends)
+		{
+			$myfollow =  \app\models\Userprofile::find()->select(['user_id'])->where(['!=','user_id',\Yii::$app->user->id])->andWhere(['or',['like','firstname',$findfriends],['like','lastname',$findfriends] ])->all();
+			
+			$foll = FollowRequest::find()->select("requested_to")->where(["requested_by"=>\Yii::$app->user->id])->all();
+			if($foll)
+			{
+				foreach( $foll  as $tmp )
+					array_push($followlist,$tmp->requested_to);
+			}
+		} else {
+			$myfollow = FollowRequest::find()->where(["requested_by"=>\Yii::$app->user->id])->all();
+			$foll = FollowRequest::find()->select("requested_to")->where(["requested_by"=>\Yii::$app->user->id])->all();	
+			if($foll)
+			{
+				foreach( $foll  as $tmp )
+					array_push($followlist,$tmp->requested_to);
+			}			
+		}
 		
 		return $this->render('my_follow', 
 						[
 						 'user' => $user,	
 						 'profile' => $profile,
 						 'myfollow' => $myfollow,
+						 'findfriends'=>$findfriends,
+						 'followlist'=>$followlist,
 						]);		
 	}
 	
@@ -385,4 +406,19 @@ class AccountController extends Controller
 						]);		
 	}
 	
+	/* public function actionInbox(){
+		$user = User::findOne(\Yii::$app->user->id);
+		$profile = UserProfile::find()->where(['user_id'=>\Yii::$app->user->id])->one();
+		$messages = $this->getThreads();
+		$senduser = UserProfile::find()->where(['!=','user_id',\Yii::$app->user->id])->all();
+		//print_r($messages);die;
+		return $this->render('messagesnew', 
+						['user' => $user,
+						 'profile' => $profile,
+						 'messages' => $messages,
+						 'senduser' => $senduser,
+						]);		
+	}
+	 */
+	 
 }

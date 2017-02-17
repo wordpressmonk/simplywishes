@@ -12,15 +12,13 @@ use yii\helpers\Url;
 class FollowController extends \yii\web\Controller
 {
 	public function actionFollowRequest()
-    {
-		
+    {		
 		$model = new FollowRequest();
         $from = \Yii::$app->request->post()['send_from'];
 		$to = \Yii::$app->request->post()['send_to'];
 		
 		if($from != '' && $to != '' ){
-			$checkdata = FollowRequest::find()->where(["requested_by"=>$from,"requested_to"=>$to])->one();	
-			
+			$checkdata = FollowRequest::find()->where(["requested_by"=>$from,"requested_to"=>$to])->one();				
 			if($checkdata)
 			{				
 				$checkdata->delete();
@@ -34,13 +32,9 @@ class FollowController extends \yii\web\Controller
 				$request->save();	
 				echo "follow";				
 			}	
-			
-		
-		
 		}
     }
 
-	
 	public function actionCancelFollow()
     {	
 		
@@ -48,8 +42,8 @@ class FollowController extends \yii\web\Controller
 	  if($requestid)
 	  {
 		$user_id = \Yii::$app->user->id;
-		$checkdata = FollowRequest::find()->where(["foll_id"=>$requestid])->one();	
-		if(($checkdata->requested_by == $user_id))
+		$checkdata = FollowRequest::find()->where(["requested_to"=>$requestid ,"requested_by" =>$user_id ])->one();	
+		if($checkdata)
 		{
 			$checkdata->delete();
 			return true;

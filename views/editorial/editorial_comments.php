@@ -14,7 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="editorial-create">
 
-    <h1>Editorial</h1>
+    <h1 class="fnt-green" >Editorial</h1>
     <?php if (Yii::$app->session->hasFlash('error_comments')): ?>
 
         <div class="alert alert-success">
@@ -67,7 +67,7 @@ $this->params['breadcrumbs'][] = $this->title;
 			</div>
 			
 			<div class="row">
-			<h3 class="left" >Comments:</h3>
+			<h3 class="left fnt-green" >Comments:</h3>
 				
 			<?php $form = ActiveForm::begin(['action' =>['editorial/editorial-comments']]); ?>
 				 
@@ -122,7 +122,7 @@ $this->params['breadcrumbs'][] = $this->title;
 							<img src="<?=Yii::$app->homeUrl?><?= $replyprofile->profile_image; ?>" height="50px"/>				
 						</div>
 						<div class="form-group col-md-10">	
-							<h5><?= $replyprofile->firstname.' '.$replyprofile->lastname ?></h5>						
+							<h5><?= $replyprofile->firstname.' '.$replyprofile->lastname; ?></h5>						
 							<p><?= $replyuser->comments ?></p>
 						</div>	
 						</div>	
