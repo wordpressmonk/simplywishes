@@ -86,7 +86,7 @@ $this->params['breadcrumbs'][] = $this->title;
 	$(".shareIcons").jsSocials({
 		showLabel: false,
 		showCount: false,
-		shares: ["facebook", "twitter", "googleplus", "pinterest", "linkedin", "whatsapp"]
+		shares: ["facebook", "twitter", "googleplus", "pinterest", "linkedin" ]
 	});
 	$(document).on('click', '.like-wish, .fav-wish', function(){ 
 	//$(".like-wish, .fav-wish").on("click",function(){

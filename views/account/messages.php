@@ -143,7 +143,7 @@ exit;
 		$(".shareIcons").jsSocials({
 			showLabel: false,
 			showCount: false,
-			shares: ["facebook", "twitter", "googleplus", "pinterest", "linkedin", "whatsapp"]
+			shares: ["facebook", "twitter", "googleplus", "pinterest", "linkedin"]
 		});
 		$(".smp_expand").on( "click", function() {
 			$(this).next().slideToggle(200);

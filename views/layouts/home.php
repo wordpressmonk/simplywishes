@@ -127,6 +127,16 @@ AppAsset::register($this);
 <div class="container">
 <div class="webShareIcons" data_text="SimplyWishes" data_url="<?= Url::to([''],true); ?>"></div>
 <br>
+
+<!--
+
+<a href="http://reddit.com/submit?url=http://referpy.com &amp; title=Logisieqa login" target="_blank">
+        <img src="//www.redditstatic.com/spreddit1.gif" alt="Reddit" />
+</a>
+
+-->
+
+<br>
 	<?=$content?>	
 </div>
 <!--***** Footer Starts*****-->
@@ -172,7 +182,7 @@ $('ul.nav li.dropdown').hover(function() {
 			elem.jsSocials({
 			showLabel: false,
 			showCount: false,
-			shares: ["facebook","googleplus", "pinterest", "linkedin", "whatsapp",
+			shares: ["facebook","googleplus", "pinterest", "linkedin", 
 			{
 				share: "twitter",           // name of share
 				via: "simply_wishes",       // custom twitter sharing param 'via' (optional)

@@ -26,6 +26,18 @@ $this->params['breadcrumbs'][] = $this->title;
 		<div role="tabpanel" class="tab-pane active grid" id="fullfilledwish">
 			<?php if(isset($myfollow) && !empty($myfollow))
 			{
+		?>
+
+		<!-- <div class="input-group col-md-6" style="margin-bottom:10px" >
+				<input name="searh_field" id="searh_field" type="text" class="form-control" placeholder="Search for your friends">
+				<span class="input-group-btn">
+				  <button class="search-wish btn btn-default" type="button">
+					<span class="glyphicon glyphicon-search"></span>
+				  </button>
+				</span>
+		</div> -->
+			
+		<?php  
 				foreach($myfollow as $user)
 				{	
 					if($user->requested_by == \Yii::$app->user->id)
