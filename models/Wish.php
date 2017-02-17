@@ -191,7 +191,7 @@ class Wish extends \yii\db\ActiveRecord
 	}
 	public function getHtmlForProfile(){
 		echo '<div class="col-md-6 grid-item"> 
-				<div class="smp_inline thumbnail">					
+				<div class="smp_inline thumbnail wishimgsize">					
 					<a href="'.Url::to(['wish/view','id'=>$this->w_id]).'"><img src="'.\Yii::$app->homeUrl.$this->primary_image.'"  class="img-responsive" alt="Image"></a> 	
 							
 				</div>
@@ -221,7 +221,7 @@ class Wish extends \yii\db\ActiveRecord
           $str .=  '</div>';
 		  
 		echo '<div class="col-md-6 grid-item"> 
-				<div class="smp_inline thumbnail">					
+				<div class="smp_inline thumbnail wishimgsize">					
 					<a href="'.Url::to(['wish/view','id'=>$this->w_id]).'"><img src="'.\Yii::$app->homeUrl.$this->primary_image.'"  class="img-responsive" alt="Image"></a>
 					<br>'.$str.'
 					

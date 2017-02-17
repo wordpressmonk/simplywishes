@@ -33,7 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
 		if(isset($model) && !empty($model))
 		{			
 				?>
-			<div class="row">		
+			<!---<div class="row">		
 				<div class="form-group col-md-2">
 					<img src="<?=Yii::$app->homeUrl?><?= $model->e_image; ?>" height="100px"/>				
 				</div>
@@ -41,8 +41,30 @@ $this->params['breadcrumbs'][] = $this->title;
 				<h4><?= $model->e_title; ?></h4>
 				<p><?= $model->e_text ?></p>				
 				</div>
-			</div>
+			</div>-->
 			
+			
+			<div class="row edit">
+				<div class="form-group col-md-8">
+					<p>Compassionate Acts</p>
+					<p><img src="<?=Yii::$app->homeUrl?><?php echo $model->e_image; ?>" height="100px"/></a>Author:Lella & Irina</p>
+					<p>Date:2/17/2017</p>
+					<p>"Not all of us can do great things.But, we can do small things with great love."(Mother Teresa)</p>
+					<p>Throughout her life, Mother Teresa was guided by compassion which she embodled through serving
+					"the poorest of the people" Throughout her life, Mother Teresa was guided by compassion which she embodled through serving
+					"the poorest of the people" Throughout her life, Mother Teresa was guided by compassion which she embodled through serving
+					"the poorest of the people"</p>
+				</div>
+				<div class="form-group col-md-1"></div>
+				<div class="form-group col-md-2">				
+					<a href="<?=Yii::$app->homeUrl?>editorial/editorial-page?id=<?php echo $model->e_id; ?>">
+					<div class="shareIcons" data_text="" data_url=""></div>
+					<div class="editrightimg">
+					<img src="<?=Yii::$app->homeUrl?><?php echo $model->e_image; ?>" height="100px"/></a>	
+					</div>
+				</div>
+				
+			</div>
 			
 			<div class="row">
 			<h3 class="left fnt-green" >Comments:</h3>
@@ -133,5 +155,21 @@ $(document).ready(function(){
     });
 });
 </script>
-
+<script>
+	$(".shareIcons").each(function(){
+		var elem = $(this);
+			elem.jsSocials({
+			showLabel: false,
+			showCount: false,
+			shares: ["facebook","googleplus", "pinterest", "linkedin",
+			{
+				share: "twitter",           // name of share
+				via: "simply_wishes",       // custom twitter sharing param 'via' (optional)
+				hashtags: "simplywishes,dream_come_true"   // custom twitter sharing param 'hashtags' (optional)
+			}],
+			url : elem.attr("data_url"),
+			text: elem.attr("data_text"),
+		});
+	});
+</script>
 
