@@ -60,7 +60,7 @@ $this->params['breadcrumbs'][] = $this->title;
 								?>							
 						</div>
 						<div class="smp_inline">
-							<p><span><?= Html::a($profile->firstname.' '.$profile->lastname, Url::to(['account/profile','id'=>$profile->user_id],true)) ?></span></p>						
+							<p><span class="left-space"><?= Html::a($profile->firstname.' '.$profile->lastname, Url::to(['account/profile','id'=>$profile->user_id],true)) ?></span></p>						
 							<p>
 								<?php 
 								  if(empty($findfriends))
