@@ -166,6 +166,9 @@ footer{
 .smp-pills li ul li a{
 	color:#808080;
 }
+.smp-pills li ul li a:hover{
+	color: #66cc66;
+}
 .smp-pills li ul li a i{
 	color:#006699;
 	padding-right:10px;
@@ -174,7 +177,7 @@ footer{
 	border-bottom:solid 1px #ddd;
 }
 .smp-pills li.active{
-	border-bottom: solid 3px #f3ae1a;
+	border-bottom: solid 3px #66cc66;
 }
 .smp-pills li a:hover{
 	color:#000;
@@ -195,6 +198,9 @@ li.list-group-item.active a {
 	width: 46%;
 	float: left;
 	margin-left: 10px;
+}
+.smp_inline span {
+    margin-left: 43px;
 }
 .smp-mg-bottom{
 	margin-bottom:30px;
@@ -225,7 +231,16 @@ li.selected a {
     color: #555 !important;
 }
 #demo li a:hover{
-	color:#555 !important;
+	color: #66cc66;
+	border-bottom: 3px solid #66cc66;
+	background-color: transparent;
+	width: -moz-fit-content;
+}
+#demo li a{
+	padding: 10px 0px;
+}
+.text-success {
+    color: #66cc66;
 }
 .list-icon>img {
     width: 40px;
@@ -334,13 +349,18 @@ ul.smp-footer-links a {
         color: black !important;
     }
 
-.happystory{
+.edit{
 	background-color:#f5f5f5;
 	border: 1px solid #e3e3e3;
 	padding: 20px;
 }
-.happystory>img{
+.edit>img{
 	border: solid 2px #66cc66;
+}
+.edit{
+	background-color: #f5f5f5;
+	border: 1px solid #e3e3e3;
+	margin-bottom: 30px;
 }
 .a-button {
     border: none !important;
@@ -424,6 +444,45 @@ ul.smp-footer-links a {
 	.link-thumb,.link-thumb-contain>div{
 		display:block!important;
 	}
+}
+ .edit a {
+    color: #66cc66;
+    text-decoration: none;
+}
+ .edit p:nth-child(1) {
+    font-weight:bold;
+	font-size: 20px;
+}
+.edit p:nth-child(2) img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+.social-icons-edit i{
+	padding-right:10px;
+	text-decoration:none;
+}
+.socialimg {
+    margin-top: 39px;
+}
+.wishimgsize a > img {
+    min-height: 153px;
+    width: 100%;
+}
+
+.happystory{
+    background-color:#f5f5f5;
+    border: 1px solid #e3e3e3;
+    padding: 20px;
+}
+.happystory>img{
+    border: solid 2px #66cc66;
+}
+.shareIcons {
+    margin-top: 70px;
+}
+.editrightimg img {
+    border: 1px solid #66cc66;
 }
 
 /******* Styles Added for New Template END POINT ******/
