@@ -108,7 +108,7 @@ use yii\helpers\Url;
    js(document).on('ready', function() {
       js(".regular").slick({
          dots: false,
-	 infinite: false,
+	 infinite: true,
 	 speed: 300,
 	 slidesToShow: 5,
 	 slidesToScroll: 5,

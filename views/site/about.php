@@ -14,7 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
 	   people from around the globe or around the corner to partner with one another in fulfilling wishes. If you have a wish,post it! There’s no dream too little or too big. If you find joy in enhancing the lives of others, then browse through our list of wishes and start making someone’s dream a reality!
 	</p>
 	<p>
-	   We are environmentalists, journalists, urbane villagers, entrepreneurs, inventors, physicists, engineers, software gurus, soccer-players, roller derby dolls, cat lovers, dog admirers, bee keepers, natives, immigrants, travelers,
+	   We are environmentalists, journalists, urbane, villagers, entrepreneurs, inventors, physicists, engineers, software gurus, soccer-players, roller derby dolls, cat lovers, dog admirers, bee keepers, natives, immigrants, travelers,
 	   homesteaders, do gooders, Well Wishers!
 
     </p>
@@ -42,7 +42,7 @@ $this->params['breadcrumbs'][] = $this->title;
    js(document).on('ready', function() {
       js(".regular").slick({
          dots: false,
-	 infinite: false,
+	 infinite: true,
 	 speed: 300,
 	 slidesToShow: 5,
 	 slidesToScroll: 5,
