@@ -115,18 +115,16 @@ AppAsset::register($this);
 </div>
 <!--***** Header Ends*****-->
 <div  style="background-image:url('<?=Yii::$app->homeUrl?>images/bgimage.jpg');">	
-<?php if(\Yii::$app->user->isGuest){ ?> 
+
 	<div class="container" style="padding: 25px 0px 50px 36px;">
 	
 		<h1 class="slide_header">Make Someone </br>
 		Happy Today</h1>  
-		
+	<?php if(\Yii::$app->user->isGuest){ ?> 
 		<a href="<?=Yii::$app->homeUrl?>site/sign-up"><button class="btn btn-smp-orange smpl-brdr" type="button">JOIN TODAY!</button></a>
-		
+		<?php } ?>
 	</div>
-	<?php } else { ?>
-		<div class="container" style="padding: 240px 0px 50px 36px;"></div>
-	<?php } ?>
+	
 </div> 
 
 <div class="container">

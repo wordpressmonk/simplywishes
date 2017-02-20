@@ -39,13 +39,36 @@ use yii\helpers\Url;
 	</div>
 </div>
 	<script>
-	var $container = $('.grid');
+	
+			var $container = $('.grid');
+  					$container.imagesLoaded(function(){
+  						$container.animate({ opacity: 1 });
+						$(".shareIcons").each(function(){
+								var elem = $(this);
+									elem.jsSocials({
+									showLabel: false,
+									showCount: false,
+									shares: ["facebook","googleplus", "pinterest", "linkedin", 
+									{
+										share: "twitter",           // name of share
+										via: "simply_wishes",       // custom twitter sharing param 'via' (optional)
+										hashtags: "simplywishes,dream_come_true"   // custom twitter sharing param 'hashtags' (optional)
+									}],
+									url : elem.attr("data_url"),
+									text: elem.attr("data_text"),
+								});
+							});
+							$container.masonry();
+  					});
+					
+	/* var $container = $('.grid');
   	$container.masonry();
+	
 	$(".shareIcons").jsSocials({
 		showLabel: false,
 		showCount: false,
 		shares: ["facebook", "twitter", "googleplus", "pinterest", "linkedin"]
-	});
+	}); */
 	$(document).on('click', '.like-wish, .fav-wish', function(){ 
 	//$(".like-wish, .fav-wish").on("click",function(){
 		var wish_id = $(this).attr("data-w_id");
