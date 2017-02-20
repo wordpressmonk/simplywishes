@@ -16,6 +16,7 @@ use yii\data\ActiveDataProvider;
 use app\models\Wish;
 use app\models\PasswordResetRequestForm;
 use app\models\ResetPasswordForm;
+use app\models\Page;
 
 class SiteController extends Controller
 {
@@ -159,6 +160,11 @@ class SiteController extends Controller
 		$user->scenario = 'sign-up';
 		$profile = new UserProfile();
 		$countries = \yii\helpers\ArrayHelper::map(\app\models\Country::find()->all(),'id','name');	
+	
+		$privacy_policy = \app\models\Page::find()->where(['p_id'=>1])->one();		
+		$terms = \app\models\Page::find()->where(['p_id'=>2])->one();		
+		$community_guidelines = \app\models\Page::find()->where(['p_id'=>3])->one();		
+		
 		if ($user->load(Yii::$app->request->post()) && $profile->load(Yii::$app->request->post())){			
 			$user->setPassword($user->password);
 			$user->generateAuthKey();
@@ -212,12 +218,18 @@ class SiteController extends Controller
             'user' => $user,
 			'profile' => $profile,
 			'countries' => $countries,
+			'privacy_policy' => $privacy_policy,
+			'terms' => $terms,
+			'community_guidelines' => $community_guidelines,
 			]);
 		}
         else return $this->render('sign_up', [
             'user' => $user,
 			'profile' => $profile,
 			'countries' => $countries,
+			'privacy_policy' => $privacy_policy,
+			'terms' => $terms,
+			'community_guidelines' => $community_guidelines,
         ]);
 	}
 	public function actionGetStates($country_id){

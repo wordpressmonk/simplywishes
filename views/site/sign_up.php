@@ -129,11 +129,12 @@ $this->params['breadcrumbs'][] = $this->title;
 			<h4 class="modal-title">Acceptance of Terms of Use; Modifications</h4>
 		  </div>
 		  <div class="modal-body">
-			<p>SimplyWishes, Inc. (“SimplyWishes” “we” or “us” or “our”) owns and operates the website, 
+			<!--<p>SimplyWishes, Inc. (“SimplyWishes” “we” or “us” or “our”) owns and operates the website, 
 			<a href="http://www.simplywishes.com">http://www.simplywishes.com</a>, the mobile and touch version and any websites or mobile applications 
 			we have now or in the future that reference these Terms of Use (collectively, “Site”). 
 			By using the Site and the services available via the Site accesses or uses the Site with crawlers, 
-			robots, data mining or extraction tools or any other functionality.</p>
+			robots, data mining or extraction tools or any other functionality.</p>-->
+				<p><?= $terms->content  ?></p>
 		  </div>
 		   <!--<div class="modal-footer">
 			<button type="button" class="btn btn-primary agree" data-cat="terms" data-id="#termsmodal">Agree</button>
@@ -152,11 +153,12 @@ $this->params['breadcrumbs'][] = $this->title;
 			<h4 class="modal-title">Acceptance of Community Guidelines; Modifications</h4>
 		  </div>
 		  <div class="modal-body">
-			<p>By using the Site and the services available via the Site, you agree to this Privacy Policy 
+			<!--<p>By using the Site and the services available via the Site, you agree to this Privacy Policy 
 			and any additional terms applicable to certain programs in which you may elect to participate. You also 
 			agree to the SimplyWishesTerms of Use, located at <a href="http://www.simplywishes.com/termsofuse">http://www.simplywishes.com/termsofuse</a>, which is 
 			incorporated herein by reference and any reference to these Terms of Use herein shall be deemed to reference 
-			and include the Terms of Use.</p>
+			and include the Terms of Use.</p>-->
+			<p><?= $community_guidelines->content  ?></p>
 		  </div>
 		  <!--<div class="modal-footer">
 			<button type="button" class="btn btn-primary agree" data-cat="community" data-id="#communitymodal">Agree</button>
@@ -175,10 +177,13 @@ $this->params['breadcrumbs'][] = $this->title;
 			<h4 class="modal-title">Acceptance of Privacy Modifications</h4>
 		  </div>
 		  <div class="modal-body">
-			<p>By using the Site and the services available via the Site, you agree to this Privacy Policy and any additional
+			<!--<p>By using the Site and the services available via the Site, you agree to this Privacy Policy and any additional
 			terms applicable to certain programs in which you may elect to participate. You also agree to the SimplyWishesTerms
 			of Use, located at <a href="http://www.simplywishes.com">http://www.simplywishes.com</a>, which is incorporated herein by reference and any 
-			reference to these Terms of Use herein shall be deemed to reference and include the Terms of Use.</p>
+			reference to these Terms of Use herein shall be deemed to reference and include the Terms of Use.</p>-->
+			
+			<p><?= $privacy_policy->content ?></p>
+			
 		  </div>
 		   <!--<div class="modal-footer">
 			<button type="button" class="btn btn-primary agree" data-cat="policy" data-id="#policymodal">Agree</button>

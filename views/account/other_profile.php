@@ -17,7 +17,7 @@ use yii\helpers\Url;
 	<div class="tab-content">
 		<div role="tabpanel" class="tab-pane active grid" id="activewish">
 			<?php foreach($dataProvider->models as $wish){
-				echo $wish->htmlForProfile;;
+				echo $wish->htmlForProfileOther;
 			}?>
 		</div>
 		<div role="tabpanel" class="tab-pane" id="fullfilledwish">

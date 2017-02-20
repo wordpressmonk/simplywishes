@@ -190,6 +190,59 @@ class Wish extends \yii\db\ActiveRecord
 		echo $str;
 	}
 	public function getHtmlForProfile(){
+		
+		$str = "";
+			$str .=  '<div class="smp-wish-desc">';
+            $str .=  '<p><div class="list-icon">
+							<img src="'.$this->wisherPic.'" alt="">
+							<a href="'.Url::to(['account/profile','id'=>$this->wished_by]).'"><span>'.$this->wisherName.'</span></a>
+							<p class="desc" >'.substr($this->summary_title,0,50).'</p>
+						<p><a class="fnt-green" href="'.Url::to(['wish/view','id'=>$this->w_id]).'">Read More</a>
+						&nbsp;<i class="fa fa-thumbs-o-up fa-1x fnt-blue"></i> '.$this->likesCount.' Likes</p>
+						</div></p>';
+          
+          $str .=  '</div>';
+		  
+		echo '<div class="grid-item col-md-4 "> 
+				<div class="smpl-wish-block1 thumbnail">	
+					<div>				
+					<a href="'.Url::to(['wish/view','id'=>$this->w_id]).'"><img src="'.\Yii::$app->homeUrl.$this->primary_image.'"  class="img-responsive" alt="Image"></a></div>
+				
+				<br>'.$str.'
+				
+				</div>
+			</div>';
+	}
+	
+	
+		public function getHtmlForProfileOther(){
+		
+		$str = "";
+			$str .=  '<div class="smp-wish-desc">';
+            $str .=  '<p><div class="list-icon">
+							<img src="'.$this->wisherPic.'" alt="">
+							<a href="'.Url::to(['account/profile','id'=>$this->wished_by]).'"><span>'.$this->wisherName.'</span></a>
+							<p class="desc" >'.substr($this->summary_title,0,50).'</p>
+						<p><a class="fnt-green" href="'.Url::to(['wish/view','id'=>$this->w_id]).'">Read More</a>
+						&nbsp;<i class="fa fa-thumbs-o-up fa-1x fnt-blue"></i> '.$this->likesCount.' Likes</p>
+						</div></p>';
+          
+          $str .=  '</div>';
+		  
+		echo '<div class="grid-item col-md-3 "> 
+				<div class="smpl-wish-block1 thumbnail">	
+					<div>				
+					<a href="'.Url::to(['wish/view','id'=>$this->w_id]).'"><img src="'.\Yii::$app->homeUrl.$this->primary_image.'"  class="img-responsive" alt="Image"></a></div>
+				
+				<br>'.$str.'
+				
+				</div>
+			</div>';
+	}
+	
+	/*    old Formate data displayed 
+	
+		public function getHtmlForProfile(){
 		echo '<div class="col-md-6 grid-item"> 
 				<div class="smp_inline thumbnail wishimgsize">					
 					<a href="'.Url::to(['wish/view','id'=>$this->w_id]).'"><img src="'.\Yii::$app->homeUrl.$this->primary_image.'"  class="img-responsive" alt="Image"></a> 	
@@ -207,7 +260,37 @@ class Wish extends \yii\db\ActiveRecord
 				</div>
 			</div>';
 	}
+	 */
 	
+		public function getHtmlForProfileSaved(){
+			
+			$str = "";
+			$str .=  '<div class="smp-wish-desc">';
+            $str .=  '<p><div class="list-icon">
+							<img src="'.$this->wisherPic.'" alt="">
+							<a href="'.Url::to(['account/profile','id'=>$this->wished_by]).'"><span>'.$this->wisherName.'</span></a>
+							<p class="desc" >'.substr($this->summary_title,0,50).'</p>
+						<p><a class="fnt-green" href="'.Url::to(['wish/view','id'=>$this->w_id]).'">Read More</a>
+						&nbsp;<i class="fa fa-thumbs-o-up fa-1x fnt-blue"></i> '.$this->likesCount.' Likes</p>
+						</div></p>';
+          
+          $str .=  '</div>';
+		  
+		echo '<div class="grid-item col-md-4"> 
+					
+				<div class="smpl-wish-block1 thumbnail">	
+					<div>
+					<a href="'.Url::to(['wish/view','id'=>$this->w_id]).'"><img src="'.\Yii::$app->homeUrl.$this->primary_image.'"  class="img-responsive" alt="Image"></a> </div>
+					<br>'.$str.'
+					
+
+					<p><a style="margin-left:10px" class="fnt-danger" href="'.Url::to(['wish/remove-wish','wish_id'=>$this->w_id]).'"><i class="fa fa-trash" aria-hidden="true"></i> Remove</a> </p>
+				</div>				
+			</div>';
+	}
+	
+	
+	/*   Old Formate 
 		public function getHtmlForProfileSaved(){
 			
 			$str = "";
@@ -240,6 +323,7 @@ class Wish extends \yii\db\ActiveRecord
 				</div>
 			</div>';
 	}
+	 */
 	
     /**
      * @returns the location of the wish
