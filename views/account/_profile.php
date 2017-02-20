@@ -65,7 +65,7 @@ use app\models\FollowRequest;
 							if(!$checkfollowlist)
 								echo '<a class="btn btn-success followrequest ">Follow</a>';
 							else if($checkfollowlist->status == 0)
-								echo '<a class="btn btn-danger followrequest ">UnFollow</a>';
+								echo '<a class="btn btn-danger followrequest ">Unfollow</a>';
 							
 						} ?>		
 				
@@ -176,7 +176,7 @@ use app\models\FollowRequest;
 					console.log("response");
 					if($.trim(response) == "follow")
 					{
-						$(".followrequest").html("UnFollow");
+						$(".followrequest").html("Unfollow");
 						$( ".followrequest" ).removeClass( "btn-success" );
 						$( ".followrequest" ).addClass( "btn-danger" );						
 					}	
