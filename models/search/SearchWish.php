@@ -80,7 +80,7 @@ class SearchWish extends Wish
      */
     public function search($params,$cat_id=null)
     {
-        $query = Wish::find()->orderBy('w_id DESC');
+        $query = Wish::find()->where(['granted_by' => null])->orderBy('w_id DESC');
 		if($cat_id)
 			$query->andWhere(['category'=>$cat_id]);
         // add conditions that should always apply here
@@ -122,7 +122,6 @@ class SearchWish extends Wish
 
 	public function searchPopular($params){
         $query = Wish::find()->select(['wishes.*,count(a_id) as likes' ])->orderBy('likes DESC');
-
 
         // add conditions that should always apply here
 
