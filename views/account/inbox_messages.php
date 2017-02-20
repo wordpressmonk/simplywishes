@@ -22,6 +22,7 @@ use yii\web\JsExpression;
 		<div class="message">
 		<ul class="list-group">
 			<li class="list-group-item">
+			<input type="checkbox" id="select_all" style="margin-right:10px"  ></input>	
 				<a href="#messagemodalOne" id="sendmessage" data-toggle="modal"><button class="btn btn-warning">Send Message</button></a>
 				<button class="btn btn-danger pull-right" id="multi_delete" >Multi Delete</button>
 			</li>
@@ -31,7 +32,7 @@ use yii\web\JsExpression;
 			foreach($messages as $msg){
 				$profile = \app\models\Userprofile::find()->where(['user_id'=>$msg->sender_id])->one();
 				echo '<li class="list-group-item"  id="li_list_'.$msg->m_id.'" >
-					<input type="checkbox" name="selection[]" value="'.$msg->m_id.'" ></input>	
+					<input type="checkbox" class="checkBoxClass" name="selection[]" value="'.$msg->m_id.'" ></input>	
 					<span style="cursor:pointer" class="pull-right remove_delete" title="Remove"  for="'.$msg->m_id.'"><i class="fa fa-trash-o" aria-hidden="true"> </i></span>
 					
 					<a class="smp_expand" data-toggle="collapse" title="Click here To View Conversation">
@@ -127,6 +128,11 @@ use yii\web\JsExpression;
 		$("#addusers").val("");
 	});
 	
+	$("#select_all").click(function () {
+			$(".checkBoxClass").prop('checked', $(this).prop('checked'));
+		});
+
+	
 		$(".send-msgOne").on("click",function(){
 			console.log($('#msgOne').val());
 			var msg = $('#msgOne').val();
@@ -165,6 +171,8 @@ use yii\web\JsExpression;
 				}		
 			 });
 		$(".remove_delete").click(function(){	
+		 var r = confirm("Are you Sure To Delete!");
+		   if (r == true) {
 			 var msg_id = $(this).attr("for");			 
 			 $.ajax({
 				   url: '<?=Yii::$app->homeUrl."account/delete-inbox-message"?>',
@@ -174,7 +182,8 @@ use yii\web\JsExpression;
 				   success: function(data) {		
 						$("#li_list_"+msg_id).hide();
 				   }
-				 }); 				 
+				 }); 
+		   }				 
 		});	
 			
 		$(".newmsg").click(function(){	
@@ -241,12 +250,4 @@ use yii\web\JsExpression;
 
 	//});
 	</script>
-	<style>
-	.newmsg{
-		font-weight:800;
-	}
-	.newmsg span{
-		color: red;
-		margin-left: 100px;
-	}
-	</style>
+	

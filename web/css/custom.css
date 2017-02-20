@@ -487,4 +487,25 @@ ul.smp-footer-links a {
 	margin-left: 43px;
 }
 
+
+/*shareicon css*/
+
+.shareiconhover img {
+    float: right;
+    margin-top: 16px;
+    margin-left: 13px;
+	cursor:pointer;
+}
+
+
+.newmsg{
+		font-weight:800;
+	}
+.newmsg span{
+		color: red;
+		margin-left: 100px;
+	}
+	
+/*shareicon css*/
+
 /******* Styles Added for New Template END POINT ******/

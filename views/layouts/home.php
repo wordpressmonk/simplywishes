@@ -128,7 +128,11 @@ AppAsset::register($this);
 </div> 
 
 <div class="container">
-<div class="webShareIcons" data_text="SimplyWishes" data_url="<?= Url::to([''],true); ?>"></div>
+<div class="shareiconhover">
+		<img src="<?=Yii::$app->homeUrl?>images/Share-Icon.png" alt="" id="shareicons" />
+	</div>
+	
+<div style="display: none;"  class="webShareIcons" data_text="SimplyWishes" data_url="<?= Url::to([''],true); ?>"></div>
 <br>
 
 <!--
@@ -197,6 +201,15 @@ $('ul.nav li.dropdown').hover(function() {
 	});		
 });
 </script>
+
+<script>
+$(document).ready(function(){
+    $("#shareicons").click(function(){
+        $(".webShareIcons").toggle();
+    });
+});
+</script>
+
 
 </html>
 <?php $this->endPage() ?>
