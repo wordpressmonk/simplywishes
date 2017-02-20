@@ -74,7 +74,8 @@ class EditorialController extends Controller
 					if(!$model->uploadImage())
 						return;
 				}
-				
+			$model->created_by = \Yii::$app->user->id;
+			
 				if($model->save())
 				    return $this->redirect(['view', 'id' => $model->e_id]);
 				else 
@@ -108,6 +109,10 @@ class EditorialController extends Controller
 						return;
 				}else
 					$model->e_image = $current_image;
+				
+				$model->updated_by = \Yii::$app->user->id;
+				$model->updated_at = date('Y-m-d H:i:s');
+				
 				if($model->save())
 				{	
 					return $this->redirect(['view', 'id' => $model->e_id]);

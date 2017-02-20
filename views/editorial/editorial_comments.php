@@ -31,7 +31,8 @@ $this->params['breadcrumbs'][] = $this->title;
 	<?php
 	
 		if(isset($model) && !empty($model))
-		{			
+		{		
+			$profile = UserProfile::find()->where(['user_id'=>$model->created_by])->one();		
 				?>
 			<!---<div class="row">		
 				<div class="form-group col-md-2">
@@ -47,7 +48,7 @@ $this->params['breadcrumbs'][] = $this->title;
 			<div class="row edit">
 				<div class="form-group col-md-8">
 					<p><?= $model->e_title; ?></p>
-					<p><img src="<?=Yii::$app->homeUrl?><?php echo $model->e_image; ?>" height="100px"/></a>Author:Lella & Irina</p>
+					<p><img src="<?=Yii::$app->homeUrl?><?php echo $profile->profile_image; ?>" height="100px"/></a>Author: <?php echo $profile->Fullname; ?></p>
 					<p>Date: <?php echo date("d/m/Y",strtotime($model->created_at)); ?></p>
 					<p><?= $model->e_text ?></p>					
 				</div>
