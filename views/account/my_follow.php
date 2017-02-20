@@ -66,14 +66,14 @@ $this->params['breadcrumbs'][] = $this->title;
 								  if(empty($findfriends))
 								  {
 								?>
-									<span id="frd_<?=$profile->user_id  ?>" class="btn btn-danger pull-right remove-unfollow" for="<?php echo $profile->user_id ?>"><i class='fa fa-times fa-lg'></i> UnFollow</span>
+									<span id="frd_<?=$profile->user_id  ?>" class="btn btn-danger pull-right remove-unfollow" for="<?php echo $profile->user_id ?>"><i class='fa fa-times fa-lg'></i> Unfollow</span>
 									
 								  <?php } else { ?>
 									<?php 							
 									  if(in_array($userid,$followlist))
 									  {
 									?>
-									<span id="frd_<?=$profile->user_id  ?>" class="btn btn-danger pull-right followfrd" for="<?php echo $profile->user_id ?>"><i class='fa fa-times fa-lg'></i> UnFollow</span>
+									<span id="frd_<?=$profile->user_id  ?>" class="btn btn-danger pull-right followfrd" for="<?php echo $profile->user_id ?>"><i class='fa fa-times fa-lg'></i> Unfollow</span>
 									<?php } else { ?>
 									<span id="frd_<?=$profile->user_id  ?>" class="btn btn-success pull-right followfrd" for="<?php echo $profile->user_id ?>"><i class='fa fa-check fa-lg'></i> Follow</span>								
 								  <?php }  } ?>
@@ -98,7 +98,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <script>
 $(document).ready(function(){
 	$(".remove-unfollow").click(function(){
-		var check = confirm( "Are sure to Un-Follow from the Follow List? ");
+		var check = confirm( "Are sure to Unfollow from the Follow List? ");
 		if(check)
 		{
 			var request_id = $(this).attr("for");
@@ -139,7 +139,7 @@ $(document).ready(function(){
 					{
 						$("#"+frd_id).removeClass("btn-success");
 						$("#"+frd_id).addClass("btn-danger");
-						$("#"+frd_id).html("<i class='fa fa-times fa-lg'></i> UnFollow ");	
+						$("#"+frd_id).html("<i class='fa fa-times fa-lg'></i> Unfollow ");	
 					}
 					else if(response == 'unfollow')
 					{

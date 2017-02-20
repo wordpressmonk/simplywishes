@@ -26,7 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
 	<?php endif; ?>	
 	
-		<a class='btn btn-success pull-right newtest' style="margin-top: -50px;" href="<?=Yii::$app->homeUrl?>happy-stories/create">Tell Us Your Story</a> 
+		<a class='btn btn-success pull-right newtest' style="margin-top: -50px;" href="<?=Yii::$app->homeUrl?>happy-stories/create">Tell Your Story</a> 
 		
 		<?php
 	if(isset($stories) && !empty($stories))
@@ -46,7 +46,9 @@ $this->params['breadcrumbs'][] = $this->title;
 			<div class="pull-right" >
 			 <?= Html::a('<i class="fa fa-pencil" aria-hidden="true"></i> Update', ['update', 'id' => $story->hs_id], ['class' => 'btn btn-warning']) ?>
 			 
-			 <?= Html::a('<i class="fa fa-trash" aria-hidden="true"></i> Delete', ['delete', 'id' => $story->hs_id], ['class' => 'btn btn-danger deletecheck']) ?>
+			 <?php /* = Html::a('<i class="fa fa-trash" aria-hidden="true"></i> Delete', ['delete', 'id' => $story->hs_id], ['class' => 'btn btn-danger deletecheck'])  */?>
+			 
+			 <button class="btn btn-danger deletecheck" for="<?= $story->hs_id ?>" ><i class="fa fa-trash" aria-hidden="true"></i> Delete </button>
 			</div> 
 		<?php } ?>
 						<!--<h4 class="media-heading">Top aligned media</h4>-->
@@ -68,8 +70,19 @@ $this->params['breadcrumbs'][] = $this->title;
 </div>
 <script type="text/javascript">
 $(document).on('click', '.deletecheck', function(){ 
-	if(confirm("Are Sure To Delete this Happy Story ?"))	
-		else
-			return false;		
+		var checkmsg = confirm("Are Sure To Delete this Happy Story ?");	
+		if(checkmsg == false)
+		{
+			return false;
+		}	
+		var id = $(this).attr('for');
+		$.ajax({
+			url : '<?=Url::to(['happy-stories/delete'])?>',
+			type: 'POST',
+			data: { id:id },
+			success:function(data){
+				location.reload();
+			}
+		});
 	});
 </script>

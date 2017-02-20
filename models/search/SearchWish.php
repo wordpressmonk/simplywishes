@@ -55,11 +55,13 @@ class SearchWish extends Wish
 			if($key>0)
 				$query->andFilterWhere(['or',
 				['like', 'wish_title',$search],
+				['like', 'summary_title',$search],
 				['like', 'countries.name', $search],
 				['like', 'states.name', $search],
 				['like', 'cities.name', $search]]);		
 			else
 				$query->where(['like', 'wish_title',$search])
+					->orFilterWhere(['like', 'summary_title', $search])
 					->orFilterWhere(['like', 'countries.name', $search])
 					->orFilterWhere(['like', 'states.name', $search])
 					->orFilterWhere(['like', 'cities.name', $search]);					

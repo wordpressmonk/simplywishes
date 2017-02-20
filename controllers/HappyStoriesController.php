@@ -175,10 +175,13 @@ class HappyStoriesController extends \yii\web\Controller
         }
     }
 	
-	 public function actionDelete($id)
+	public function actionDelete()
     {
-         $this->findModel($id)->delete();
-        return $this->redirect(['my-story']); 
+		$id  = \Yii::$app->request->post()['id'];	
+		if($id)	
+			$this->findModel($id)->delete(); 
+		
+        //return $this->redirect(['my-story']);  
     }
 	
 	

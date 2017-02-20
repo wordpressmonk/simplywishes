@@ -47,10 +47,12 @@ $this->params['breadcrumbs'][] = $this->title;
 	
 		<?php if(\Yii::$app->user->id == $model->user_id){ ?>
 			<div class="pull-right" >
-			 <?= Html::a('<i class="fa fa-pencil" aria-hidden="true"></i> Update', ['update', 'id' => $model->hs_id], ['class' => 'btn btn-warning ','style'=>"margin-top: 20px;"]) ?>
+			 <?= Html::a('<i class="fa fa-pencil" aria-hidden="true"></i> Update', ['update', 'id' => $model->hs_id], ['class' => 'btn btn-warning ']) ?>
 			 
 			 
-			 <?= Html::a('<i class="fa fa-trash" aria-hidden="true"></i> Delete', ['delete', 'id' => $model->hs_id], ['class' => 'btn btn-danger deletecheck','style'=>"margin-top: 20px;"]) ?>
+			 <?php  /* Html::a('<i class="fa fa-trash" aria-hidden="true"></i> Delete', ['delete', 'id' => $model->hs_id], ['class' => 'btn btn-danger deletecheck','style'=>"margin-top: 20px;"]) */ ?>
+			 
+			  <button class="btn btn-danger deletecheck" for="<?= $model->hs_id ?>" ><i class="fa fa-trash" aria-hidden="true"></i> Delete </button>
 			</div>			 
 		<?php } ?>
 		<div class="col-md-3 happystory">
@@ -72,18 +74,15 @@ $this->params['breadcrumbs'][] = $this->title;
 
 		</div>
 		<div class="col-md-8">
-			<p><?php echo $model->story_text; ?></p>
+			<p style="float:left;margin-right: 10px;"> My name is <?php echo Html::a($profile->fullname, ['account/profile', 'id' => $model->user_id])?> . <?php echo $model->story_text; ?> </p>
 		</div>
 	</div>
 </div>
 </div>
-<script>
-/* 	$(".shareIcons").jsSocials({
-		showLabel: false,
-		showCount: false,
-		shares: ["facebook", "twitter", "googleplus", "pinterest", "linkedin", "whatsapp"]
-	});
-	 */
+<script type="text/javascript" >
+
+$(document).ready(function(){
+	
 	$(".shareIcons").each(function(){
 		var elem = $(this);
 		elem.jsSocials({
@@ -100,8 +99,8 @@ $this->params['breadcrumbs'][] = $this->title;
 		});
 	});
 	
+	
 	$(document).on('click', '.like-wish', function(){ 
-	//$(".like-wish, .fav-wish").on("click",function(){
 		var s_id = $(this).attr("data-w_id");
 		var type = $(this).attr("data-a_type");
 		var elem = $(this);
@@ -136,11 +135,38 @@ $this->params['breadcrumbs'][] = $this->title;
 		});
 	});
 	
+	$(document).on('click', '.deletecheck', function(){ 
+		var checkmsg = confirm("Are Sure To Delete this Happy Story ?");	
+		if(checkmsg == false)
+		{
+			return false;
+		}
+		
+		var id = $(this).attr('for');
+		$.ajax({
+			url : '<?=Url::to(['happy-stories/delete'])?>',
+			type: 'POST',
+			data: { id:id },
+			success:function(data){
+				window.location.href = "<?= Url::to('my-story')?>"
+			}
+		});
+		
+	}); 
 	
+	
+});
+
+ 
+	
+	/*		
 	$(document).on('click', '.deletecheck', function(){ 
 		if(confirm("Are Sure To Delete this Happy Story ?"))	
 		else
 			return false;		
 	});
+	
+	
+	 */
 	
 </script>
