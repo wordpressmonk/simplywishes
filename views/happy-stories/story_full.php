@@ -74,7 +74,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 		</div>
 		<div class="col-md-8">
-			<p><?php echo Html::a('Author: '.$profile->fullname, ['account/profile', 'id' => $model->user_id])?> . <?php echo $model->story_text; ?> </p>
+			<p><?php echo Html::a('Author: '.$profile->fullname, ['account/profile', 'id' => $model->user_id])?> <?php echo $model->story_text; ?> </p>
 		</div>
 	</div>
 </div>

@@ -68,6 +68,7 @@ use yii\helpers\Url;
   $(window).load(function() {
   	var win = $(window);
   	var page = 1;
+  	var page2 = 1;
   	var $container = $('.grid');
   	$container.masonry();
   	// Each time the user scrolls
@@ -76,11 +77,13 @@ use yii\helpers\Url;
 		var scroll_top = Math.round(win.scrollTop());
 		console.log(scroll_top,"top");
   		// End of the document reached?
-		if(page){
+		if(parseInt(page) == parseInt(page2)){
   		//if ($(document).height() - win.height()-1 == scroll_top ) {
 		if($(win).scrollTop() + $(win).height() == $(document).height()){
 			console.log("scrolld");
+			page2 = page2+1;
 			$("#loader_img").show();
+			
   			$.ajax({
   				url: '<?=Url::to(['wish/scroll-popular'], true);?>',
   				dataType: 'html',
