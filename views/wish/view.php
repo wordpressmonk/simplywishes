@@ -18,6 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
 			
 				<img src="<?=\Yii::$app->homeUrl.$model->primary_image?>"  class="img-responsive" alt="my-profile-Image"><br>
 				<p><i class="fa fa-thumbs-o-up fnt-blue"></i> <?=$model->likesCount?> Likes &nbsp;
+				&nbsp;<a class="report-img" title="Report" data-id="<?= $model->w_id ?>"><img  src="<?= Yii::$app->homeUrl ?>images/report.png" alt=""></a>
 				<?php
 				  if(!$model->isFaved(\Yii::$app->user->id))
 					echo '<span title="Save this wish" data-w_id="'.$model->w_id.'" data-a_type="fav" class="fav-wish fa fa-save txt-smp-orange"></span>&nbsp;';
@@ -162,5 +163,25 @@ $(document).on("click", ".listesinside", function() {
 	});
  
 });
+
+$(document).on("click", ".report-img", function() {
+	var wish_id = $(this).attr("data-id");
+	 if($.trim(wish_id) !== "" )
+	 {
+		$.ajax({
+			url : '<?=Url::to(['wish/report'])?>',
+			type: 'GET',
+			data: {w_id:wish_id},
+			success:function(data){
+				if($.trim(data) == "added")
+				{
+					alert(" Thanks For your Report. ");
+				}
+				console.log(data);
+			}
+		});
+	 }
+});
+
 </script>
 

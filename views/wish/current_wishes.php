@@ -214,19 +214,6 @@ use yii\helpers\Url;
 	</script>
 	
 	<script>
-/* $(document).on('ready', function(){
-	$(function(){
-		$('.listesinside').popover({   
-			html: true,
-			content: function () {
-				var clone = $($(this).parents(".sharefull-list").find(".shareIcons")).clone(true).removeClass('hide');
-				return clone;
-			}
-		}).click(function(e) { 
-			e.preventDefault();
-		});
-	}); 
-}); */
 
 $(document).on("click", ".listesinside", function() {
 	$(function(){
@@ -239,6 +226,25 @@ $(document).on("click", ".listesinside", function() {
 		});
 	});
  
+});
+
+$(document).on("click", ".report-img", function() {
+	var wish_id = $(this).attr("data-id");
+	 if($.trim(wish_id) !== "" )
+	 {
+		$.ajax({
+			url : '<?=Url::to(['wish/report'])?>',
+			type: 'GET',
+			data: {w_id:wish_id},
+			success:function(data){
+				if($.trim(data) == "added")
+				{
+					alert(" Thanks For your Report. ");
+				}
+				console.log(data);
+			}
+		});
+	 }
 });
 
 </script>

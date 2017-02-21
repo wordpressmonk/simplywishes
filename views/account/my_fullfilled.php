@@ -109,4 +109,25 @@ $(document).on("click", ".listesinside", function() {
 	});
  
 });
+
+
+$(document).on("click", ".report-img", function() {
+	var wish_id = $(this).attr("data-id");
+	 if($.trim(wish_id) !== "" )
+	 {
+		$.ajax({
+			url : '<?=Url::to(['wish/report'])?>',
+			type: 'GET',
+			data: {w_id:wish_id},
+			success:function(data){
+				if($.trim(data) == "added")
+				{
+					alert(" Thanks For your Report. ");
+				}
+				console.log(data);
+			}
+		});
+	 }
+});
+
 </script>

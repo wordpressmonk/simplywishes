@@ -251,4 +251,42 @@ class SearchWish extends Wish
         ]);
 		return $dataProvider;	
 	}
+	
+	
+	 /**
+     * Creates data provider instance with search query applied
+     *
+     * @param array $params
+     *
+     * @return ActiveDataProvider
+     */
+    public function searchReport($params)
+    {
+        $query = Wish::find()->all();
+		
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+            'pagination' => [
+                'pageSize'=>5
+            ]
+        ]);
+
+        $this->load($params);
+
+        if (!$this->validate()) {
+            return $dataProvider;
+        }
+
+        // grid filtering conditions
+        $query->andFilterWhere([
+            'w_id' => $this->w_id     
+        ]);
+
+        $query->andFilterWhere(['like', 'wish_title', $this->wish_title]);
+
+        return $dataProvider;
+    }
+	
+
+	
 }

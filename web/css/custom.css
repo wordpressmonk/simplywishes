@@ -505,7 +505,13 @@ ul.smp-footer-links a {
 		color: red;
 		margin-left: 100px;
 	}
-	
+
+.report-img img{
+    float: right;
+    margin-right: 10px !important;
+    width: 20px;
+	cursor:pointer;
+}	
 /*shareicon css*/
 
 /******* Styles Added for New Template END POINT ******/

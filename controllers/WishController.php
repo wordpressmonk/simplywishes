@@ -5,8 +5,10 @@ namespace app\controllers;
 use Yii;
 use app\models\Wish;
 use app\models\Activity;
+use app\models\ReportWishes;
 use app\models\Category;
 use app\models\search\SearchWish;
+use app\models\search\SearchReportWishes;
 use app\models\User;
 use app\models\UserProfile;
 use yii\web\Controller;
@@ -278,6 +280,8 @@ class WishController extends Controller
 		$this->findModel($id)->delete();
     }
 	
+	
+	
 	/**
 	 * Like a wish
 	 * User has to be logged in to like a wish
@@ -502,5 +506,68 @@ class WishController extends Controller
 		
 		return $message->send();
     }
+	
+	public function actionReport($w_id)
+	{
+		if(\Yii::$app->user->isGuest)
+			return $this->redirect(['site/login','red_url'=>Yii::$app->request->referrer]);
+		$wish = $this->findModel($w_id);
+		$activity = ReportWishes::find()->where(['w_id'=>$wish->w_id])->one();
+		if($activity){
+			$activity->count = $activity->count + 1;
+			$activity->save();
+			return "added";			
+		} else {
+		$activity = new ReportWishes();
+		$activity->w_id = $wish->w_id;
+		$activity->count = 1;	
+		$activity->save();
+			return "added";
+		}
+	}	
+	
+	public function actionReportAction()
+	{
+	 if(isset(\Yii::$app->user->identity->role) && (\Yii::$app->user->identity->role == 'admin')){ 
+		$searchModel = new SearchReportWishes();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        return $this->render('report_view', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider
+        ]);
+	 } else {
+		 return $this->redirect(['site/index']);
+	 }
+	}
+	
+	
+	public function actionReportActionView($id)
+    {
+		if(isset(\Yii::$app->user->identity->role) && (\Yii::$app->user->identity->role == 'admin')){ 
+			$wish = Wish::find()->where(['w_id'=>$id])->one();		
+			if($wish)
+			{			
+				return $this->render('report_full_view', ['model' => $this->findModel($id) ]);
+			} else {
+					return $this->redirect('report-action');
+			}	
+		} else {
+				 return $this->redirect(['site/index']);
+			 }		
+    }
+
+	
+	public function actionReportDelete()
+    {
+	  if(isset(\Yii::$app->user->identity->role) && (\Yii::$app->user->identity->role == 'admin')){ 
+			$id = Yii::$app->request->post('id');
+			$this->findModel($id)->delete();
+			$model = ReportWishes::find()->where(['w_id'=>$id])->one();
+			$model->delete();
+		 } else {
+		 return $this->redirect(['site/index']);
+	  }
+    }
+	
 	
 }

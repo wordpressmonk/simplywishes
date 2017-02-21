@@ -187,7 +187,8 @@ class Wish extends \yii\db\ActiveRecord
             <p>Location : <span>'.$this->location.'</span></p>-->
 			<p class="desc" >'.substr($this->summary_title,0,50).'</p>
             <p><a class="fnt-green" href="'.Url::to(['wish/view','id'=>$this->w_id]).'">Read More</a>
-            &nbsp;<i class="fa fa-thumbs-o-up fa-1x fnt-blue"></i> '.$this->likesCount.' Likes</p>';
+            &nbsp;<span><i class="fa fa-thumbs-o-up fa-1x fnt-blue"></i> '.$this->likesCount.' Likes </span>
+			&nbsp;<a class="report-img" title="Report" data-id="'.$this->w_id.'"><img  src="'.\Yii::$app->homeUrl.'images/report.png" alt=""></a> </p>';
           $str .=  '</div>';
           $str .=  '</div></div>';	
 			
@@ -219,7 +220,8 @@ class Wish extends \yii\db\ActiveRecord
 							<a href="'.Url::to(['account/profile','id'=>$this->wished_by]).'"><span>'.$this->wisherName.'</span></a>
 							<p></p><p class="desc" >'.substr($this->summary_title,0,50).'</p>
 						<p><a class="fnt-green" href="'.Url::to(['wish/view','id'=>$this->w_id]).'">Read More</a>
-						&nbsp;<i class="fa fa-thumbs-o-up fa-1x fnt-blue"></i> '.$this->likesCount.' Likes</p>
+						&nbsp;<i class="fa fa-thumbs-o-up fa-1x fnt-blue"></i> '.$this->likesCount.' Likes
+						&nbsp;<a class="report-img" title="Report" data-id="'.$this->w_id.'"><img  src="'.\Yii::$app->homeUrl.'images/report.png" alt=""></a> </p>
 						</div></p>';
           // $str .=  '<div class="shareIcons" data_text="'.$this->wish_title.'" data_url="'.Url::to(['wish/view','id'=>$this->w_id],true).'" ></div>';
 		   
@@ -263,7 +265,8 @@ class Wish extends \yii\db\ActiveRecord
 							<a href="'.Url::to(['account/profile','id'=>$this->wished_by]).'"><span>'.$this->wisherName.'</span></a>
 							<p></p><p class="desc" >'.substr($this->summary_title,0,50).'</p>
 						<p><a class="fnt-green" href="'.Url::to(['wish/view','id'=>$this->w_id]).'">Read More</a>
-						&nbsp;<i class="fa fa-thumbs-o-up fa-1x fnt-blue"></i> '.$this->likesCount.' Likes</p>
+						&nbsp;<i class="fa fa-thumbs-o-up fa-1x fnt-blue"></i> '.$this->likesCount.' Likes
+						&nbsp;<a class="report-img" title="Report" data-id="'.$this->w_id.'"><img  src="'.\Yii::$app->homeUrl.'images/report.png" alt=""></a> </p>
 						</div></p>';
 						
          //  $str .=  '<div class="shareIcons" data_text="'.$this->wish_title.'" data_url="'.Url::to(['wish/view','id'=>$this->w_id],true).'" ></div>';
@@ -327,7 +330,8 @@ class Wish extends \yii\db\ActiveRecord
 							<a href="'.Url::to(['account/profile','id'=>$this->wished_by]).'"><span>'.$this->wisherName.'</span></a>
 							<p></p><p class="desc" >'.substr($this->summary_title,0,50).'</p>
 						<p><a class="fnt-green" href="'.Url::to(['wish/view','id'=>$this->w_id]).'">Read More</a>
-						&nbsp;<i class="fa fa-thumbs-o-up fa-1x fnt-blue"></i> '.$this->likesCount.' Likes</p>
+						&nbsp;<i class="fa fa-thumbs-o-up fa-1x fnt-blue"></i> '.$this->likesCount.' Likes
+						&nbsp;<a class="report-img" title="Report" data-id="'.$this->w_id.'"><img  src="'.\Yii::$app->homeUrl.'images/report.png" alt=""></a> </p>
 						</div></p>';
 			// $str .=  '<div class="shareIcons" data_text="'.$this->wish_title.'" data_url="'.Url::to(['wish/view','id'=>$this->w_id],true).'" ></div>';
 			 
