@@ -28,8 +28,7 @@ $this->params['breadcrumbs'][] = 'Update';
 		
 		<?= $form->field($model, 'wish_id')->textInput(['maxlength' => true,'readonly'=> true,'value'=>$wish->wish_title])->label('Wishes') ?>
 		  
-		<?= $form->field($model, 'story_text')->widget(CKEditor::className(), ['options' => ['rows' => 6],'preset' => 'basic',
-		]); ?>		 
+		<?= $form->field($model, 'story_text')->widget(CKEditor::className(), ['options' => ['rows' => 6,'readonly' => true ],'preset' => 'basic' ]); ?>		 
    
 
    
