@@ -12,6 +12,11 @@ use app\models\HappyStories;
  */
 class SearchHappyStories extends HappyStories
 {
+	
+
+public $fullname;
+public $wishtitle;
+
     /**
      * @inheritdoc
      */
@@ -19,7 +24,7 @@ class SearchHappyStories extends HappyStories
     {
         return [
             [['hs_id', 'status','user_id','wish_id'], 'integer'],
-            [['story_text', 'story_image', 'created_at'], 'safe'],
+            [['story_text', 'story_image', 'created_at','fullname','wishtitle'], 'safe'],
         ];
     }
 
@@ -48,7 +53,8 @@ class SearchHappyStories extends HappyStories
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
-
+		$query->joinWith(['author as user_profile']);	
+		$query->joinWith(['wish as wishes']);	
         $this->load($params);
 
         if (!$this->validate()) {
@@ -61,14 +67,17 @@ class SearchHappyStories extends HappyStories
         $query->andFilterWhere([
             'hs_id' => $this->hs_id,
             'user_id' => $this->user_id,
-            'hs_id' => $this->hs_id,
             'status' => $this->status,
             'created_at' => $this->created_at,
         ]);
 
         $query->andFilterWhere(['like', 'story_text', $this->story_text])
-            ->andFilterWhere(['like', 'story_image', $this->story_image]);
-
+        ->andFilterWhere(['like', 'wishes.wish_title', $this->wishtitle])   
+		->andFilterWhere(['or',
+            ['like','user_profile.firstname',$this->fullname],
+            ['like','user_profile.lastname',$this->fullname]]);
+            
+           
         return $dataProvider;
     }
 }

@@ -19,8 +19,9 @@ $this->params['breadcrumbs'][] = $this->title;
     <h3 class="fnt-green smp-mg-bottom"  >Happy Wish Stories</h3>
 	
 		<a class='btn btn-success pull-right' href="<?=Yii::$app->homeUrl?>happy-stories/create">Tell Your Story</a> 
-		<?php
-	
+	<?php
+	if(!empty($stories))
+	{
 		foreach($stories as $story)
 		{
 		$profile = UserProfile::find()->where(['user_id'=>$story->user_id])->one();				
@@ -42,6 +43,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
 		<?php
 		}
+	} else {
+			echo "Oops, No More Happy Stories...!";
+	}	
 		?>
 	
 </div>

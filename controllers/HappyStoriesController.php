@@ -43,7 +43,7 @@ class HappyStoriesController extends \yii\web\Controller
 	
     public function actionIndex()
     {		
-		$stories = HappyStories::find()->orderBy('hs_id Desc')->all();				
+		$stories = HappyStories::find()->where(['status'=>0])->orderBy('hs_id Desc')->all();				
         return $this->render('index', ['stories' => $stories]);
 	
     }
@@ -54,7 +54,7 @@ class HappyStoriesController extends \yii\web\Controller
 		$user = User::findOne(\Yii::$app->user->id);
 		$profile = UserProfile::find()->where(['user_id'=>\Yii::$app->user->id])->one();
 		
-		$stories = HappyStories::find()->where(['user_id'=>\Yii::$app->user->id])->orderBy('hs_id Desc')->all();
+		$stories = HappyStories::find()->where(['user_id'=>\Yii::$app->user->id,'status'=>0])->orderBy('hs_id Desc')->all();
 		return $this->render('my-story', ['stories' => $stories,'user' => $user,
 			'profile' => $profile]);
 		
@@ -77,11 +77,15 @@ class HappyStoriesController extends \yii\web\Controller
 				}
 				
 				if($model->save())
+				{
+					Yii::$app->session->setFlash('success_adminhappystory');
 				    return $this->redirect(['my-story']);
-				else 
-					return $this->render('create', ['model' => $model,'user' => $user,
-			'profile' => $profile,]);
-					
+				}	
+				else
+				{					
+					return $this->render('create', ['model' => $model,'user' => $user,'profile' => $profile,]);
+				}	
+				
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -192,7 +196,7 @@ class HappyStoriesController extends \yii\web\Controller
 	
 		$searchModel = new SearchHappyStories();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
+		
         return $this->render('index_new', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -220,15 +224,16 @@ class HappyStoriesController extends \yii\web\Controller
 		$model->scenario = 'update_by_happystory_adminuser';
 		
         if ($model->load(Yii::$app->request->post())){
-			
+		
 				if($model->save())
-				{	Yii::$app->session->setFlash('success_happystory');
-					//return $this->redirect(['story-details', 'id' => $model->hs_id]);
-					return $this->redirect(['my-story']);
+				{	
+					return $this->redirect(['view', 'id' => $model->hs_id]);
 				} else {
-					
-					return $this->render('update_new', ['model' => $model]);
+			
+				return $this->render('update_new', ['model' => $model]);
 			}
+			
+			
         } else {
             return $this->render('update_new', ['model' => $model,]);
         }

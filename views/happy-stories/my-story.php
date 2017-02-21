@@ -26,6 +26,13 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
 	<?php endif; ?>	
 	
+	<?php if (Yii::$app->session->hasFlash('success_adminhappystory')): ?>
+
+        <div class="alert alert-success" style="margin-top: 20px;">
+            Your Story is Created Successfully waiting for Site Approvel !!!.
+        </div>
+	<?php endif; ?>	
+
 		<a class='btn btn-success pull-right newtest' style="margin-top: -50px;" href="<?=Yii::$app->homeUrl?>happy-stories/create">Tell Your Story</a> 
 		
 		<?php

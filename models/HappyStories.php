@@ -33,7 +33,8 @@ class HappyStories extends \yii\db\ActiveRecord
         return [
             [['user_id', 'wish_id', 'story_text'], 'required','except' => 'update_by_happystory_adminuser'],
 			[['story_image'], 'required','except' => 'update_by_happystory_user'], 
-            [['user_id', 'wish_id', 'status'], 'integer','except' => 'update_by_happystory_adminuser'],
+            [['user_id', 'wish_id'], 'integer','except' => 'update_by_happystory_adminuser'],
+            [['status'], 'integer','on' => 'update_by_happystory_adminuser'],
             [['story_text'], 'string'],
             [['created_at'], 'safe'],          
 			[['story_image'], 'file','extensions' => 'jpg,png'],
