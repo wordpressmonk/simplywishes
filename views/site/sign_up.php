@@ -124,7 +124,7 @@ $this->params['breadcrumbs'][] = $this->title;
 	
 	<!-- Terms modal Starts -->
 	<div class="modal fade" id="termsmodal" tabindex="-1" role="dialog">
-	  <div class="modal-dialog" role="document">
+	  <div class="modal-dialog" role="document" style=" width: 80% !important;">
 		<div class="modal-content">
 		  <div class="modal-header">
 			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -148,7 +148,7 @@ $this->params['breadcrumbs'][] = $this->title;
 	
 	<!-- Community modal Starts -->
 	<div class="modal fade" id="communitymodal" tabindex="-1" role="dialog">
-	  <div class="modal-dialog" role="document">
+	  <div class="modal-dialog" role="document" style=" width: 80% !important;" >
 		<div class="modal-content">
 		  <div class="modal-header">
 			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -172,7 +172,7 @@ $this->params['breadcrumbs'][] = $this->title;
 	
 	<!-- Privacy Policy Modal Starts -->
 	<div class="modal fade" id="policymodal" tabindex="-1" role="dialog">
-	  <div class="modal-dialog" role="document">
+	  <div class="modal-dialog" role="document" style=" width: 80% !important;">
 		<div class="modal-content">
 		  <div class="modal-header">
 			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
