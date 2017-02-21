@@ -8,6 +8,7 @@ use app\models\HappyStories;
 use app\models\StoryActivity;
 use app\models\User;
 use app\models\UserProfile;
+use app\models\search\SearchHappyStories;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 
@@ -31,7 +32,7 @@ class HappyStoriesController extends \yii\web\Controller
 				'except' => ['index','story-details','like'],	
                 'rules' => [
                     [
-                        'actions' => ['create','update','my-story','delete'],
+                        'actions' => ['create','update','my-story','delete','permission','view','update-new'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -184,5 +185,53 @@ class HappyStoriesController extends \yii\web\Controller
         //return $this->redirect(['my-story']);  
     }
 	
+	 public function actionPermission()
+    {		
+		/* $stories = HappyStories::find()->orderBy('hs_id Desc')->all();				
+        return $this->render('index', ['stories' => $stories]); */
+	
+		$searchModel = new SearchHappyStories();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('index_new', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+		
+    }
+	
+	
+	 /**
+     * Displays a single Editorial model.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionView($id)
+    {
+        return $this->render('view', [
+            'model' => $this->findModel($id),
+        ]);
+    }
+	
+	
+	public function actionUpdateNew($id)
+    {
+        $model = HappyStories::findOne($id);
+		$model->scenario = 'update_by_happystory_adminuser';
+		
+        if ($model->load(Yii::$app->request->post())){
+			
+				if($model->save())
+				{	Yii::$app->session->setFlash('success_happystory');
+					//return $this->redirect(['story-details', 'id' => $model->hs_id]);
+					return $this->redirect(['my-story']);
+				} else {
+					
+					return $this->render('update_new', ['model' => $model]);
+			}
+        } else {
+            return $this->render('update_new', ['model' => $model,]);
+        }
+    }
 	
 }

@@ -84,6 +84,7 @@ AppAsset::register($this);
 					<li><a href="<?=Yii::$app->homeUrl?>account/my-saved"><i class="fa fa-save fa-lg"></i>Saved Wishes</a></li>
 					<li><a href="<?=Yii::$app->homeUrl?>happy-stories/create"><i class="fa fa-commenting-o fa-lg"></i>Tell Your Story</a></li>
 					<li><a href="<?=Yii::$app->homeUrl?>happy-stories/my-story"><i class="fa fa-smile-o fa-lg"></i>My Happy Story</a></li>
+					<!--<li><a href="<?=Yii::$app->homeUrl?>happy-stories/permission"><i class="fa fa-smile-o fa-lg"></i>Happy Premission</a></li>-->
 					<li><a href="<?=Yii::$app->homeUrl?>account/edit-account"><i class="fa fa-user-circle-o fa-lg"></i> Account Info</a></li>
 					<li><a href="#" >
 						<?php  echo Html::beginForm(['/site/logout'], 'post')

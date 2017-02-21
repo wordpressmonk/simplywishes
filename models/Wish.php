@@ -217,7 +217,7 @@ class Wish extends \yii\db\ActiveRecord
             $str .=  '<p><div class="list-icon">
 							<img src="'.$this->wisherPic.'" alt="">
 							<a href="'.Url::to(['account/profile','id'=>$this->wished_by]).'"><span>'.$this->wisherName.'</span></a>
-							<p class="desc" >'.substr($this->summary_title,0,50).'</p>
+							<p></p><p class="desc" >'.substr($this->summary_title,0,50).'</p>
 						<p><a class="fnt-green" href="'.Url::to(['wish/view','id'=>$this->w_id]).'">Read More</a>
 						&nbsp;<i class="fa fa-thumbs-o-up fa-1x fnt-blue"></i> '.$this->likesCount.' Likes</p>
 						</div></p>';
@@ -230,7 +230,7 @@ class Wish extends \yii\db\ActiveRecord
 					<div>				
 					<a href="'.Url::to(['wish/view','id'=>$this->w_id]).'"><img src="'.\Yii::$app->homeUrl.$this->primary_image.'"  class="img-responsive" alt="Image"></a></div>
 				
-				<br>'.$str.'
+					'.$str.'
 				
 				</div>
 			</div>';
@@ -261,7 +261,7 @@ class Wish extends \yii\db\ActiveRecord
             $str .=  '<p><div class="list-icon">
 							<img src="'.$this->wisherPic.'" alt="">
 							<a href="'.Url::to(['account/profile','id'=>$this->wished_by]).'"><span>'.$this->wisherName.'</span></a>
-							<p class="desc" >'.substr($this->summary_title,0,50).'</p>
+							<p></p><p class="desc" >'.substr($this->summary_title,0,50).'</p>
 						<p><a class="fnt-green" href="'.Url::to(['wish/view','id'=>$this->w_id]).'">Read More</a>
 						&nbsp;<i class="fa fa-thumbs-o-up fa-1x fnt-blue"></i> '.$this->likesCount.' Likes</p>
 						</div></p>';
@@ -275,7 +275,7 @@ class Wish extends \yii\db\ActiveRecord
 					<div>				
 					<a href="'.Url::to(['wish/view','id'=>$this->w_id]).'"><img src="'.\Yii::$app->homeUrl.$this->primary_image.'"  class="img-responsive" alt="Image"></a></div>
 				
-				<br>'.$str.'
+				'.$str.'
 				
 				</div>
 			</div>';
@@ -325,7 +325,7 @@ class Wish extends \yii\db\ActiveRecord
             $str .=  '<p><div class="list-icon">
 							<img src="'.$this->wisherPic.'" alt="">
 							<a href="'.Url::to(['account/profile','id'=>$this->wished_by]).'"><span>'.$this->wisherName.'</span></a>
-							<p class="desc" >'.substr($this->summary_title,0,50).'</p>
+							<p></p><p class="desc" >'.substr($this->summary_title,0,50).'</p>
 						<p><a class="fnt-green" href="'.Url::to(['wish/view','id'=>$this->w_id]).'">Read More</a>
 						&nbsp;<i class="fa fa-thumbs-o-up fa-1x fnt-blue"></i> '.$this->likesCount.' Likes</p>
 						</div></p>';
@@ -338,7 +338,7 @@ class Wish extends \yii\db\ActiveRecord
 				<div class="smpl-wish-block1 thumbnail">	
 					<div>
 					<a href="'.Url::to(['wish/view','id'=>$this->w_id]).'"><img src="'.\Yii::$app->homeUrl.$this->primary_image.'"  class="img-responsive" alt="Image"></a> </div>
-					<br>'.$str.'
+					'.$str.'
 					
 
 					<p><a style="margin-left:10px" class="fnt-danger" href="'.Url::to(['wish/remove-wish','wish_id'=>$this->w_id]).'"><i class="fa fa-trash" aria-hidden="true"></i> Remove</a> </p>

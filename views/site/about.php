@@ -45,7 +45,7 @@ $this->params['breadcrumbs'][] = $this->title;
 	 infinite: true,
 	 speed: 300,
 	 slidesToShow: 5,
-	 slidesToScroll: 5,
+	 slidesToScroll: 4,
 	 responsive: [
 		{
 		 breakpoint: 1024,

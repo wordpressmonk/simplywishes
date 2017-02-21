@@ -85,7 +85,7 @@ $this->params['breadcrumbs'][] = $this->title;
 	  </br>
       <span>Or Choose One</span>         
       <div class="gravatar thumbnail">
-       <a class="profilelogo" for="images/lady1.jpg" ><img class="selected" src="<?=Yii::$app->homeUrl?>images/lady1.jpg"/></a>
+        <a class="profilelogo" for="images/lady1.jpg" ><img class="selected" src="<?=Yii::$app->homeUrl?>images/lady1.jpg"/></a>
 		<a class="profilelogo" for="images/man1.jpg" ><img src="<?=Yii::$app->homeUrl?>images/man1.jpg"/></a>
 		<a class="profilelogo" for="images/lady2.jpg" ><img src="<?=Yii::$app->homeUrl?>images/lady2.jpg"/></a>
 		<a class="profilelogo" for="images/man2.jpg" ><img src="<?=Yii::$app->homeUrl?>images/man2.jpg"/></a>
@@ -94,6 +94,8 @@ $this->params['breadcrumbs'][] = $this->title;
 		<a class="profilelogo" for="images/lady4.jpg" ><img src="<?=Yii::$app->homeUrl?>images/lady4.jpg"/></a>
 		<a class="profilelogo" for="images/man4.jpg" ><img src="<?=Yii::$app->homeUrl?>images/man4.jpg"/></a>
 		<a class="profilelogo" for="images/lady5.jpg" ><img src="<?=Yii::$app->homeUrl?>images/lady5.jpg"/></a>
+		
+		
 	  </div>
 	
    <?= $form->field($profile, 'dulpicate_image')->hiddenInput(['value'=>'images/lady1.jpg'])->label(false) ?>	
