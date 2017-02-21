@@ -14,7 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
   <div class="container my-profile">
 	<div class="col-md-12 smp-mg-bottom">
 	<h3 class="smp-mg-bottom fnt-green "><?=$this->title?></h3>
-		<div class="col-md-3 happystory">
+		<div class="col-md-3 happystory sharefull-list">
 			
 				<img src="<?=\Yii::$app->homeUrl.$model->primary_image?>"  class="img-responsive" alt="my-profile-Image"><br>
 				<p><i class="fa fa-thumbs-o-up fnt-blue"></i> <?=$model->likesCount?> Likes &nbsp;
@@ -30,8 +30,13 @@ $this->params['breadcrumbs'][] = $this->title;
 					echo  '<span title="You liked it" data-w_id="'.$model->w_id.'" data-a_type="like" class="like-wish glyphicon glyphicon glyphicon-thumbs-up txt-smp-pink"></span>';
 				?>
 				<!--<i class="fa fa-save txt-smp-orange"></i> &nbsp;
-				<i class="fa fa-thumbs-o-up txt-smp-green"></i>--> </p>
-				<div class="shareIcons"></div>
+				<i class="fa fa-thumbs-o-up txt-smp-green"></i>--> 
+				<span  data-placement="top"  data-popover-content=""><img data-placement="top" class="listesinside"  src="<?= Yii::$app->homeUrl ?>images/Share-Icon.png"  /></span>					
+				<div class="shareIcons hide" ></div>
+				
+				</p>
+				<!--<div class="shareIcons"></div> -->
+
 			
 		</div>
 		<div class="col-md-8">
@@ -86,7 +91,7 @@ $this->params['breadcrumbs'][] = $this->title;
 	$(".shareIcons").jsSocials({
 		showLabel: false,
 		showCount: false,
-		shares: ["facebook", "twitter", "googleplus", "pinterest", "linkedin" ]
+		shares: ["facebook", "googleplus", "pinterest", "linkedin" ,"twitter" ]
 	});
 	$(document).on('click', '.like-wish, .fav-wish', function(){ 
 	//$(".like-wish, .fav-wish").on("click",function(){
@@ -142,3 +147,20 @@ $this->params['breadcrumbs'][] = $this->title;
 		}
 	});
 </script>
+
+
+	<script>	
+$(document).on("click", ".listesinside", function() {
+	$(function(){
+		$('.listesinside').popover({   
+			html: true,
+			content: function () {
+				var clone = $($(this).parents(".sharefull-list").find(".shareIcons")).clone(true).removeClass('hide');
+				return clone;
+			}
+		});
+	});
+ 
+});
+</script>
+

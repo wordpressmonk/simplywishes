@@ -34,27 +34,7 @@ AppAsset::register($this);
 		</div>
 		<div class="col-md-8" style="width: 70.667%;" >
 		
-		<div class="row" style="padding:4px 0px;">
-		<?php if(\Yii::$app->user->isGuest){ ?> 
-			<!--<div class="btn-group pull-right">
-			  <a href="<?=Yii::$app->homeUrl?>site/login"><button class="btn btn-smp-blue smpl-brdr-left" type="button">
-				Login
-			  </button></a>
-			  <a href="<?=Yii::$app->homeUrl?>site/sign-up"><button class="btn btn-smp-green smpl-brdr-right" type="button">
-				Join Today
-			  </button></a>
-			</div>-->
-		<?php  } //else { ?>
-			<!--<div class="btn-group pull-right">
-			  <?php
-			 /*  echo Html::beginForm(['/site/logout'], 'post')
-                . Html::submitButton(
-                    'Logout',
-                    ['class' => 'btn btn-smp-green smpl-brdr']
-                )
-                . Html::endForm();  */?>
-			</div>-->		
-		<?php // } ?>
+		<div class="row" style="padding:4px 0px;">		
 		</div>
 		
 		<hr style="border-color:#1085bf;">
@@ -129,10 +109,12 @@ AppAsset::register($this);
 
 <div class="container">
 <div class="shareiconhover">
-		<img src="<?=Yii::$app->homeUrl?>images/Share-Icon.png" alt="" id="shareicons" />
-	</div>
-	
-<div style="display: none;"  class="webShareIcons" data_text="SimplyWishes" data_url="<?= Url::to([''],true); ?>"></div>
+			
+	<div  class="webShareIcons" data_text="SimplyWishes" data_url="<?= Url::to([''],true); ?>"></div>
+
+</div>
+
+
 <br>
 
 <!--
@@ -202,13 +184,9 @@ $('ul.nav li.dropdown').hover(function() {
 });
 </script>
 
-<script>
-$(document).ready(function(){
-    $("#shareicons").click(function(){
-        $(".webShareIcons").toggle();
-    });
-});
-</script>
+<script src="<?=\Yii::$app->homeUrl?>assets/js/core/source/AppVendor.js"></script>
+
+
 
 
 </html>

@@ -44,14 +44,14 @@ $this->params['breadcrumbs'][] = $this->title;
 					<p><img src="<?=Yii::$app->homeUrl?><?php echo $profile->profile_image; ?>" height="100px"/></a>Author: <?php echo $profile->Fullname ?></p>
 					<p>Date: 	<?php echo date("d/m/Y",strtotime($tmp->created_at)); ?></p>					
 					<p><?php echo substr($tmp->e_text,0,250)?></p>
-					<a href="<?=Yii::$app->homeUrl?>editorial/editorial-page?id=<?php echo $tmp->e_id; ?>">Read More...!</a>
+					<a href="<?=Yii::$app->homeUrl?>editorial/editorial-page?id=<?php echo $tmp->e_id; ?>"><h5>Read More...!</h5></a>
 				</div>
-				<div class="form-group col-md-1"></div>
-				<div class="form-group col-md-2">				
-					<a href="<?=Yii::$app->homeUrl?>editorial/editorial-page?id=<?php echo $tmp->e_id; ?>">
+		
+				<div class="form-group col-md-3">				
+					
 					<div class="shareIcons" data_text="" data_url=""></div>
 					<div class="editrightimg">
-					<img src="<?=Yii::$app->homeUrl?><?php echo $tmp->e_image; ?>" height="100px"/></a>	
+						<center><a href="<?=Yii::$app->homeUrl?>editorial/editorial-page?id=<?php echo $tmp->e_id; ?>"><img src="<?=Yii::$app->homeUrl?><?php echo $tmp->e_image; ?>" height="100px"/></a></center>	
 					</div>					
 				</div>
 				

@@ -55,10 +55,10 @@ $this->params['breadcrumbs'][] = $this->title;
 			  <button class="btn btn-danger deletecheck" for="<?= $model->hs_id ?>" ><i class="fa fa-trash" aria-hidden="true"></i> Delete </button>
 			</div>			 
 		<?php } ?>
-		<div class="col-md-3 happystory">
+		<div class="col-md-3 happystory sharefull-list">
 			
 				<img src="<?=Yii::$app->homeUrl?><?php echo $model->story_image; ?>"   class="img-responsive" alt="my-profile-Image"><br>
-				<p><i class="fa fa-thumbs-o-up fnt-blue"></i> <?=$model->likesCount?> Likes &nbsp;
+				<p class="" ><i class="fa fa-thumbs-o-up fnt-blue"></i> <?=$model->likesCount?> Likes &nbsp;
 				<?php
 
 				  if(!$model->isLiked(\Yii::$app->user->id))
@@ -67,10 +67,18 @@ $this->params['breadcrumbs'][] = $this->title;
 					echo  '<span title="You liked it" data-w_id="'.$model->hs_id.'" data-a_type="like" class="like-wish glyphicon glyphicon glyphicon-thumbs-up txt-smp-pink"></span>';
 				?>
 				<!--<i class="fa fa-save txt-smp-orange"></i> &nbsp;
-				<i class="fa fa-thumbs-o-up txt-smp-green"></i>--> </p>
+				<i class="fa fa-thumbs-o-up txt-smp-green"></i>--> 
 				
-			<div class="shareIcons" data_text="Happy Story" data_url="<?= Url::to(['happy-stories/story-details','id'=>$model->hs_id],true)?>" ></div>
-
+				<span  data-placement="top"  data-popover-content=""><img data-placement="top" class="listesinside"  src="<?= Yii::$app->homeUrl ?>images/Share-Icon.png"  /></span>					
+				<div class="shareIcons hide" data_text="Happy Story" data_url="<?= Url::to(['happy-stories/story-details','id'=>$model->hs_id],true)?>" ></div>
+				
+				
+				</p>
+				
+			<!--<div class="shareIcons" data_text="Happy Story" data_url="<?= Url::to(['happy-stories/story-details','id'=>$model->hs_id],true)?>" ></div>-->
+		
+			
+			
 
 		</div>
 		<div class="col-md-8">
@@ -169,4 +177,20 @@ $(document).ready(function(){
 	
 	 */
 	
+</script>
+
+<script>
+$(document).ready(function(){	
+	$(function(){
+		$('.listesinside').popover({   
+			html: true,
+			content: function () {
+				var clone = $($(this).parents(".sharefull-list").find(".shareIcons")).clone(true).removeClass('hide');
+				return clone;
+			}
+		}).click(function(e) {
+			e.preventDefault();
+		});
+	});
+});
 </script>

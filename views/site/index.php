@@ -3,6 +3,7 @@ use yii\helpers\Url;
 ?>
 
 	<div class="simply-head"><h3 class="fnt-green">Fullfilled Wishes</h3></div>
+	
 	<div class="container-fluid">    
 		<section class="regular slider">
 			<?php foreach($models as $model){
@@ -10,15 +11,22 @@ use yii\helpers\Url;
 				echo '<div><a href="'.Url::to(['wish/view','id'=>$model->w_id]).'"><img src="'.\Yii::$app->homeUrl.$model->primary_image.'" class="img-responsive" alt="Image"></a></div>';
 				  /////activities///
 				  if(!$model->isFaved(\Yii::$app->user->id))
-					echo  '<div class="smp-links"><span title="Save this wish" data-w_id="'.$model->w_id.'" data-a_type="fav" class="fav-wish fa fa-save txt-smp-orange"></span></br>';
+					echo  '<div class="smp-links sharefull-list"><span title="Save this wish" data-w_id="'.$model->w_id.'" data-a_type="fav" class="fav-wish fa fa-save txt-smp-orange"></span></br>';
 				  else
-					echo  '<div class="smp-links"><span title="You saved it" data-w_id="'.$model->w_id.'" data-a_type="fav" class="fav-wish fa fa-save txt-smp-blue"></span></br>';
+					echo  '<div class="smp-links sharefull-list"><span title="You saved it" data-w_id="'.$model->w_id.'" data-a_type="fav" class="fav-wish fa fa-save txt-smp-blue"></span></br>';
 
 				  if(!$model->isLiked(\Yii::$app->user->id))
-					echo  '<span title="Like it" data-w_id="'.$model->w_id.'" data-a_type="like" class="like-wish glyphicon glyphicon glyphicon-thumbs-up txt-smp-green"></span></div>';
+					echo  '<span title="Like it" data-w_id="'.$model->w_id.'" data-a_type="like" class="like-wish glyphicon glyphicon glyphicon-thumbs-up txt-smp-green"></span>';
 				  else
-					echo  '<span title="You liked it" data-w_id="'.$model->w_id.'" data-a_type="like" class="like-wish glyphicon glyphicon glyphicon-thumbs-up txt-smp-pink"></span></div>';
-				  //////////////////
+					echo  '<span title="You liked it" data-w_id="'.$model->w_id.'" data-a_type="like" class="like-wish glyphicon glyphicon glyphicon-thumbs-up txt-smp-pink"></span>';
+				  ///////////////////////////////////
+				  /** Share Icon Display   ***/
+				  
+				  echo '<span  data-placement="right"  data-popover-content=""><img data-placement="right" class="listesinside"  src="'.\Yii::$app->homeUrl.'images/Share-Icon.png"  /></span>					
+							<div class="shareIcons hide" data_text="'.$model->wish_title.'" data_url="'.Url::to(['wish/view','id'=>$model->w_id],true).'"></div>
+						 </div>';
+				  
+				  ////////////////////////////
 				  echo  '<div class="smp-wish-desc">';
 					echo  '<p><div class="list-icon">
 							<img src="'.$model->wisherPic.'" alt="">
@@ -29,8 +37,11 @@ use yii\helpers\Url;
 					<p class="desc">'.substr($model->summary_title,0,50).'..</p>
 					<p><a class="fnt-green" href="'.Url::to(['wish/view','id'=>$model->w_id]).'">Read More</a>
 					&nbsp;<i class="fa fa-thumbs-o-up fnt-blue"></i> '.$model->likesCount.' Likes</p>';
-				  echo  '</div>
-				  <div class="shareIcons" data_text="'.$model->wish_title.'" data_url="'.Url::to(['wish/view','id'=>$model->w_id],true).'"></div>';
+					
+				  echo  '</div>';
+				  
+					
+					
 				  echo  '</div>';
 			}?>
 		</section>
@@ -94,6 +105,22 @@ use yii\helpers\Url;
 
 </script>
 
+<script>
+$(document).ready(function(){	
+	$(function(){
+		$('.listesinside').popover({   
+			html: true,
+			content: function () {
+				var clone = $($(this).parents(".sharefull-list").find(".shareIcons")).clone(true).removeClass('hide');
+				return clone;
+			}
+		}).click(function(e) {
+			e.preventDefault();
+		});
+	});
+});
+</script>
+
 <!--------------- SLIDER CHECK Function ----------------------------------->
 
  <link rel="stylesheet" type="text/css" href="<?= Yii::$app->homeUrl?>src/slick/slick.css">
@@ -146,3 +173,5 @@ use yii\helpers\Url;
   
   
   <!--------------- SLIDER CHECK Function END ----------------------------------->
+  
+  

@@ -105,3 +105,17 @@ use yii\helpers\Url;
 		});
 	});
 	</script>
+	<script>	
+$(document).on("click", ".listesinside", function() {
+	$(function(){
+		$('.listesinside').popover({   
+			html: true,
+			content: function () {
+				var clone = $($(this).parents(".sharefull-list").find(".shareIcons")).clone(true).removeClass('hide');
+				return clone;
+			}
+		});
+	});
+ 
+});
+</script>

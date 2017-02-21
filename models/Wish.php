@@ -164,15 +164,20 @@ class Wish extends \yii\db\ActiveRecord
           $str .= '<div><a href="'.Url::to(['wish/view','id'=>$this->w_id]).'"><img src="'.\Yii::$app->homeUrl.$this->primary_image.'" class="img-responsive" alt="Image"></a></div>';
           /////activities///
           if(!$this->isFaved(\Yii::$app->user->id))
-            $str .=  '<div class="smp-links"><span title="Save this wish" data-w_id="'.$this->w_id.'" data-a_type="fav" class="fav-wish fa fa-save txt-smp-orange"></span></br>';
+            $str .=  '<div class="smp-links sharefull-list"><span title="Save this wish" data-w_id="'.$this->w_id.'" data-a_type="fav" class="fav-wish fa fa-save txt-smp-orange"></span></br>';
           else
-            $str .=  '<div class="smp-links"><span title="You saved it" data-w_id="'.$this->w_id.'" data-a_type="fav" class="fav-wish fa fa-save txt-smp-blue"></span></br>';
+            $str .=  '<div class="smp-links sharefull-list"><span title="You saved it" data-w_id="'.$this->w_id.'" data-a_type="fav" class="fav-wish fa fa-save txt-smp-blue"></span></br>';
 
           if(!$this->isLiked(\Yii::$app->user->id))
-            $str .=  '<span title="Like it" data-w_id="'.$this->w_id.'" data-a_type="like" class="like-wish glyphicon glyphicon glyphicon-thumbs-up txt-smp-green"></span></div>';
+            $str .=  '<span title="Like it" data-w_id="'.$this->w_id.'" data-a_type="like" class="like-wish glyphicon glyphicon glyphicon-thumbs-up txt-smp-green"></span>';
           else
-            $str .=  '<span title="You liked it" data-w_id="'.$this->w_id.'" data-a_type="like" class="like-wish glyphicon glyphicon glyphicon-thumbs-up txt-smp-pink"></span></div>';
+            $str .=  '<span title="You liked it" data-w_id="'.$this->w_id.'" data-a_type="like" class="like-wish glyphicon glyphicon glyphicon-thumbs-up txt-smp-pink"></span>';
           //////////////////
+		  
+		 $str .= '<br><span  data-placement="right"  data-popover-content=""><img data-placement="right" class="listesinside"  src="'.\Yii::$app->homeUrl.'images/Share-Icon.png"  /></span>
+		  <div class="shareIcons hide" data_text="'.$this->wish_title.'" data_url="'.Url::to(['wish/view','id'=>$this->w_id],true).'" ></div>
+		  </div>';
+		  
           $str .=  '<div class="smp-wish-desc">';
             $str .=  '<p><div class="list-icon">
 							<img src="'.$this->wisherPic.'" alt="">
@@ -183,8 +188,7 @@ class Wish extends \yii\db\ActiveRecord
 			<p class="desc" >'.substr($this->summary_title,0,50).'</p>
             <p><a class="fnt-green" href="'.Url::to(['wish/view','id'=>$this->w_id]).'">Read More</a>
             &nbsp;<i class="fa fa-thumbs-o-up fa-1x fnt-blue"></i> '.$this->likesCount.' Likes</p>';
-          $str .=  '</div>
-          <div class="shareIcons" data_text="'.$this->wish_title.'" data_url="'.Url::to(['wish/view','id'=>$this->w_id],true).'" ></div>';
+          $str .=  '</div>';
           $str .=  '</div></div>';	
 			
 		echo $str;
@@ -195,15 +199,20 @@ class Wish extends \yii\db\ActiveRecord
 		
 		
 			 if(!$this->isFaved(\Yii::$app->user->id))
-            $str .=  '<div class="smp-links"><span title="Save this wish" data-w_id="'.$this->w_id.'" data-a_type="fav" class="fav-wish fa fa-save txt-smp-orange"></span></br>';
+            $str .=  '<div class="smp-links sharefull-list"><span title="Save this wish" data-w_id="'.$this->w_id.'" data-a_type="fav" class="fav-wish fa fa-save txt-smp-orange"></span></br>';
           else
-            $str .=  '<div class="smp-links"><span title="You saved it" data-w_id="'.$this->w_id.'" data-a_type="fav" class="fav-wish fa fa-save txt-smp-blue"></span></br>';
+            $str .=  '<div class="smp-links sharefull-list"><span title="You saved it" data-w_id="'.$this->w_id.'" data-a_type="fav" class="fav-wish fa fa-save txt-smp-blue"></span></br>';
 
           if(!$this->isLiked(\Yii::$app->user->id))
-            $str .=  '<span title="Like it" data-w_id="'.$this->w_id.'" data-a_type="like" class="like-wish glyphicon glyphicon glyphicon-thumbs-up txt-smp-green"></span></div>';
+            $str .=  '<span title="Like it" data-w_id="'.$this->w_id.'" data-a_type="like" class="like-wish glyphicon glyphicon glyphicon-thumbs-up txt-smp-green"></span>';
           else
-            $str .=  '<span title="You liked it" data-w_id="'.$this->w_id.'" data-a_type="like" class="like-wish glyphicon glyphicon glyphicon-thumbs-up txt-smp-pink"></span></div>';
+            $str .=  '<span title="You liked it" data-w_id="'.$this->w_id.'" data-a_type="like" class="like-wish glyphicon glyphicon glyphicon-thumbs-up txt-smp-pink"></span>';
 		
+		
+		    $str .= '<br><span  data-placement="right"  data-popover-content=""><img data-placement="right" class="listesinside"  src="'.\Yii::$app->homeUrl.'images/Share-Icon.png"  /></span>
+		  <div class="shareIcons hide" data_text="'.$this->wish_title.'" data_url="'.Url::to(['wish/view','id'=>$this->w_id],true).'" ></div>
+		  </div>';
+		  
 			$str .=  '<div class="smp-wish-desc">';
             $str .=  '<p><div class="list-icon">
 							<img src="'.$this->wisherPic.'" alt="">
@@ -212,7 +221,7 @@ class Wish extends \yii\db\ActiveRecord
 						<p><a class="fnt-green" href="'.Url::to(['wish/view','id'=>$this->w_id]).'">Read More</a>
 						&nbsp;<i class="fa fa-thumbs-o-up fa-1x fnt-blue"></i> '.$this->likesCount.' Likes</p>
 						</div></p>';
-           $str .=  '<div class="shareIcons" data_text="'.$this->wish_title.'" data_url="'.Url::to(['wish/view','id'=>$this->w_id],true).'" ></div>';
+          // $str .=  '<div class="shareIcons" data_text="'.$this->wish_title.'" data_url="'.Url::to(['wish/view','id'=>$this->w_id],true).'" ></div>';
 		   
           $str .=  '</div>';
 		  
@@ -234,14 +243,19 @@ class Wish extends \yii\db\ActiveRecord
 		
 		
 			 if(!$this->isFaved(\Yii::$app->user->id))
-            $str .=  '<div class="smp-links"><span title="Save this wish" data-w_id="'.$this->w_id.'" data-a_type="fav" class="fav-wish fa fa-save txt-smp-orange"></span></br>';
+            $str .=  '<div class="smp-links sharefull-list"><span title="Save this wish" data-w_id="'.$this->w_id.'" data-a_type="fav" class="fav-wish fa fa-save txt-smp-orange"></span></br>';
           else
-            $str .=  '<div class="smp-links"><span title="You saved it" data-w_id="'.$this->w_id.'" data-a_type="fav" class="fav-wish fa fa-save txt-smp-blue"></span></br>';
+            $str .=  '<div class="smp-links sharefull-list"><span title="You saved it" data-w_id="'.$this->w_id.'" data-a_type="fav" class="fav-wish fa fa-save txt-smp-blue"></span></br>';
 
           if(!$this->isLiked(\Yii::$app->user->id))
-            $str .=  '<span title="Like it" data-w_id="'.$this->w_id.'" data-a_type="like" class="like-wish glyphicon glyphicon glyphicon-thumbs-up txt-smp-green"></span></div>';
+            $str .=  '<span title="Like it" data-w_id="'.$this->w_id.'" data-a_type="like" class="like-wish glyphicon glyphicon glyphicon-thumbs-up txt-smp-green"></span>';
           else
-            $str .=  '<span title="You liked it" data-w_id="'.$this->w_id.'" data-a_type="like" class="like-wish glyphicon glyphicon glyphicon-thumbs-up txt-smp-pink"></span></div>';
+            $str .=  '<span title="You liked it" data-w_id="'.$this->w_id.'" data-a_type="like" class="like-wish glyphicon glyphicon glyphicon-thumbs-up txt-smp-pink"></span>';
+		
+		 $str .= '<br><span  data-placement="right"  data-popover-content=""><img data-placement="right" class="listesinside"  src="'.\Yii::$app->homeUrl.'images/Share-Icon.png"  /></span>
+		  <div class="shareIcons hide" data_text="'.$this->wish_title.'" data_url="'.Url::to(['wish/view','id'=>$this->w_id],true).'" ></div>
+		  </div>';
+		  
 		
 			$str .=  '<div class="smp-wish-desc">';
             $str .=  '<p><div class="list-icon">
@@ -252,7 +266,7 @@ class Wish extends \yii\db\ActiveRecord
 						&nbsp;<i class="fa fa-thumbs-o-up fa-1x fnt-blue"></i> '.$this->likesCount.' Likes</p>
 						</div></p>';
 						
-           $str .=  '<div class="shareIcons" data_text="'.$this->wish_title.'" data_url="'.Url::to(['wish/view','id'=>$this->w_id],true).'" ></div>';
+         //  $str .=  '<div class="shareIcons" data_text="'.$this->wish_title.'" data_url="'.Url::to(['wish/view','id'=>$this->w_id],true).'" ></div>';
 		   
           $str .=  '</div>';
 		  
@@ -294,15 +308,19 @@ class Wish extends \yii\db\ActiveRecord
 			$str = "";
 			
 			 if(!$this->isFaved(\Yii::$app->user->id))
-            $str .=  '<div class="smp-links"><span title="Save this wish" data-w_id="'.$this->w_id.'" data-a_type="fav" class="fav-wish fa fa-save txt-smp-orange"></span></br>';
+            $str .=  '<div class="smp-links sharefull-list"><span title="Save this wish" data-w_id="'.$this->w_id.'" data-a_type="fav" class="fav-wish fa fa-save txt-smp-orange"></span></br>';
           else
-            $str .=  '<div class="smp-links"><span title="You saved it" data-w_id="'.$this->w_id.'" data-a_type="fav" class="fav-wish fa fa-save txt-smp-blue"></span></br>';
+            $str .=  '<div class="smp-links sharefull-list"><span title="You saved it" data-w_id="'.$this->w_id.'" data-a_type="fav" class="fav-wish fa fa-save txt-smp-blue"></span></br>';
 
           if(!$this->isLiked(\Yii::$app->user->id))
-            $str .=  '<span title="Like it" data-w_id="'.$this->w_id.'" data-a_type="like" class="like-wish glyphicon glyphicon glyphicon-thumbs-up txt-smp-green"></span></div>';
+            $str .=  '<span title="Like it" data-w_id="'.$this->w_id.'" data-a_type="like" class="like-wish glyphicon glyphicon glyphicon-thumbs-up txt-smp-green"></span>';
           else
-            $str .=  '<span title="You liked it" data-w_id="'.$this->w_id.'" data-a_type="like" class="like-wish glyphicon glyphicon glyphicon-thumbs-up txt-smp-pink"></span></div>';
+            $str .=  '<span title="You liked it" data-w_id="'.$this->w_id.'" data-a_type="like" class="like-wish glyphicon glyphicon glyphicon-thumbs-up txt-smp-pink"></span>';
 		
+		$str .= '<br><span  data-placement="right"  data-popover-content=""><img data-placement="right" class="listesinside"  src="'.\Yii::$app->homeUrl.'images/Share-Icon.png"  /></span>
+		  <div class="shareIcons hide" data_text="'.$this->wish_title.'" data_url="'.Url::to(['wish/view','id'=>$this->w_id],true).'" ></div>
+		  </div>';
+		  
 			$str .=  '<div class="smp-wish-desc">';
             $str .=  '<p><div class="list-icon">
 							<img src="'.$this->wisherPic.'" alt="">
@@ -311,7 +329,7 @@ class Wish extends \yii\db\ActiveRecord
 						<p><a class="fnt-green" href="'.Url::to(['wish/view','id'=>$this->w_id]).'">Read More</a>
 						&nbsp;<i class="fa fa-thumbs-o-up fa-1x fnt-blue"></i> '.$this->likesCount.' Likes</p>
 						</div></p>';
-			 $str .=  '<div class="shareIcons" data_text="'.$this->wish_title.'" data_url="'.Url::to(['wish/view','id'=>$this->w_id],true).'" ></div>';
+			// $str .=  '<div class="shareIcons" data_text="'.$this->wish_title.'" data_url="'.Url::to(['wish/view','id'=>$this->w_id],true).'" ></div>';
 			 
           $str .=  '</div>';
 		  

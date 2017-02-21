@@ -52,12 +52,11 @@ $this->params['breadcrumbs'][] = $this->title;
 					<p>Date: <?php echo date("d/m/Y",strtotime($model->created_at)); ?></p>
 					<p><?= $model->e_text ?></p>					
 				</div>
-				<div class="form-group col-md-1"></div>
-				<div class="form-group col-md-2">				
-					<a href="<?=Yii::$app->homeUrl?>editorial/editorial-page?id=<?php echo $model->e_id; ?>">
+				<div class="form-group col-md-4">				
+				
 					<div class="shareIcons" data_text="" data_url=""></div>
 					<div class="editrightimg">
-					<img src="<?=Yii::$app->homeUrl?><?php echo $model->e_image; ?>" height="100px"/></a>	
+					<center><img src="<?=Yii::$app->homeUrl?><?php echo $model->e_image; ?>" height="180px"/></center>
 					</div>
 				</div>
 				
