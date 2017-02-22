@@ -87,7 +87,7 @@ AppAsset::register($this);
 					<?php if(isset(\Yii::$app->user->identity->role) && (\Yii::$app->user->identity->role == 'admin')){ ?>
 					<li><a href="<?=Yii::$app->homeUrl?>happy-stories/permission"><i class="fa fa-list-alt fa-lg"></i>
 </i>Happy Premission</a></li>
-					<li><a href="<?=Yii::$app->homeUrl?>wish/report-action"><i class="fa fa-flag-checkered fa-lg" ></i>Report Action</a></li>
+					<!-- <li><a href="<?=Yii::$app->homeUrl?>wish/report-action"><i class="fa fa-flag-checkered fa-lg" ></i>Report Action</a></li>  -->
 					<?php } ?>
 					<li><a href="<?=Yii::$app->homeUrl?>account/edit-account"><i class="fa fa-user-circle-o fa-lg"></i> Account Info</a></li>
 					<li><a href="#" >

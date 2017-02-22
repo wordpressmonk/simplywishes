@@ -58,7 +58,7 @@ $this->params['breadcrumbs'][] = $this->title;
 		<div class="col-md-3 happystory sharefull-list">
 			
 				<img src="<?=Yii::$app->homeUrl?><?php echo $model->story_image; ?>"   class="img-responsive" alt="my-profile-Image"><br>
-				<p class="" ><i class="fa fa-thumbs-o-up fnt-blue"></i> <?=$model->likesCount?> Likes &nbsp;
+				<p class="" ><i class="fa fa-thumbs-o-up fnt-blue"></i> <span id="likecmt_<?= $model->hs_id ?>">  <?=$model->likesCount?> </span> Likes &nbsp;
 				<?php
 
 				  if(!$model->isLiked(\Yii::$app->user->id))
@@ -125,6 +125,9 @@ $(document).ready(function(){
 					if(type=="like"){
 						elem.removeClass("txt-smp-green");
 						elem.addClass("txt-smp-pink");
+						var likecmt = $("#likecmt_"+s_id).text();
+						likecmt = parseInt(likecmt) + parseInt(1);
+						$("#likecmt_"+s_id).text(likecmt);
 					}
 				}
 				if(data == "removed"){
@@ -135,6 +138,9 @@ $(document).ready(function(){
 					if(type=="like"){
 						elem.addClass("txt-smp-green");
 						elem.removeClass("txt-smp-pink");
+						var likecmt = $("#likecmt_"+s_id).text();
+						likecmt = parseInt(likecmt) - parseInt(1);
+						$("#likecmt_"+s_id).text(likecmt);
 					}
 				}
 

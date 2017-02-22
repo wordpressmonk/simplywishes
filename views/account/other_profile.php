@@ -72,6 +72,9 @@ use yii\helpers\Url;
 					if(type=="like"){
 						elem.removeClass("txt-smp-green");
 						elem.addClass("txt-smp-pink");
+						var likecmt = $("#likecmt_"+wish_id).text();
+						likecmt = parseInt(likecmt) + parseInt(1);
+						$("#likecmt_"+wish_id).text(likecmt);
 					}
 				}
 				if(data == "removed"){
@@ -82,6 +85,9 @@ use yii\helpers\Url;
 					if(type=="like"){
 						elem.addClass("txt-smp-green");
 						elem.removeClass("txt-smp-pink");
+						var likecmt = $("#likecmt_"+wish_id).text();
+						likecmt = parseInt(likecmt) - parseInt(1);
+						$("#likecmt_"+wish_id).text(likecmt);
 					}
 				}
 
@@ -104,7 +110,7 @@ $(document).on("click", ".listesinside", function() {
  
 });
 
-$(document).on("click", ".report-img", function() {
+/* $(document).on("click", ".report-img", function() {
 	var wish_id = $(this).attr("data-id");
 	 if($.trim(wish_id) !== "" )
 	 {
@@ -121,5 +127,5 @@ $(document).on("click", ".report-img", function() {
 			}
 		});
 	 }
-});
+}); */
 	</script>

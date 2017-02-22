@@ -17,8 +17,9 @@ $this->params['breadcrumbs'][] = $this->title;
 		<div class="col-md-3 happystory sharefull-list">
 			
 				<img src="<?=\Yii::$app->homeUrl.$model->primary_image?>"  class="img-responsive" alt="my-profile-Image"><br>
-				<p><i class="fa fa-thumbs-o-up fnt-blue"></i> <?=$model->likesCount?> Likes &nbsp;
-				&nbsp;<a class="report-img" title="Report" data-id="<?= $model->w_id ?>"><img  src="<?= Yii::$app->homeUrl ?>images/report.png" alt=""></a>
+				<p><i class="fa fa-thumbs-o-up fnt-blue"></i><span id="likecmt_<?= $model->w_id ?>"> <?=$model->likesCount?> </span> Likes &nbsp;
+				<!--<a class="report-img" title="Report" data-id="<?= $model->w_id ?>"><img  src="<?= Yii::$app->homeUrl ?>images/report.png" alt="">-->
+				</a>
 				<?php
 				  if(!$model->isFaved(\Yii::$app->user->id))
 					echo '<span title="Save this wish" data-w_id="'.$model->w_id.'" data-a_type="fav" class="fav-wish fa fa-save txt-smp-orange"></span>&nbsp;';
@@ -112,6 +113,9 @@ $this->params['breadcrumbs'][] = $this->title;
 					if(type=="like"){
 						elem.removeClass("txt-smp-green");
 						elem.addClass("txt-smp-pink");
+						var likecmt = $("#likecmt_"+wish_id).text();
+						likecmt = parseInt(likecmt) + parseInt(1);
+						$("#likecmt_"+wish_id).text(likecmt);
 					}
 				}
 				if(data == "removed"){
@@ -122,6 +126,9 @@ $this->params['breadcrumbs'][] = $this->title;
 					if(type=="like"){
 						elem.addClass("txt-smp-green");
 						elem.removeClass("txt-smp-pink");
+						var likecmt = $("#likecmt_"+wish_id).text();
+						likecmt = parseInt(likecmt) - parseInt(1);
+						$("#likecmt_"+wish_id).text(likecmt);
 					}
 				}
 
@@ -164,7 +171,7 @@ $(document).on("click", ".listesinside", function() {
  
 });
 
-$(document).on("click", ".report-img", function() {
+/* $(document).on("click", ".report-img", function() {
 	var wish_id = $(this).attr("data-id");
 	 if($.trim(wish_id) !== "" )
 	 {
@@ -181,7 +188,7 @@ $(document).on("click", ".report-img", function() {
 			}
 		});
 	 }
-});
+}); */
 
 </script>
 

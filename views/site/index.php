@@ -36,8 +36,8 @@ use yii\helpers\Url;
 					<p>Location : <span>'.$model->location.'</span></p>-->
 					<p class="desc">'.substr($model->summary_title,0,50).'..</p>
 					<p><a class="fnt-green" href="'.Url::to(['wish/view','id'=>$model->w_id]).'">Read More</a>
-					&nbsp;<i class="fa fa-thumbs-o-up fnt-blue"></i> '.$model->likesCount.' Likes
-					&nbsp;<a class="report-img" title="Report" data-id="'.$model->w_id.'"><img style="margin-right: 0px !important;" src="'.\Yii::$app->homeUrl.'images/report.png" alt=""></a>
+					&nbsp;<i class="fa fa-thumbs-o-up fnt-blue"></i> <span id="likecmt_'.$model->w_id.'"  >'.$model->likesCount.'</span> Likes
+					</a>
 					</p>';
 					
 				  echo  '</div>';
@@ -86,6 +86,9 @@ use yii\helpers\Url;
 					if(type=="like"){
 						elem.removeClass("txt-smp-green");
 						elem.addClass("txt-smp-pink");
+						var likecmt = $("#likecmt_"+wish_id).text();
+						likecmt = parseInt(likecmt) + parseInt(1);
+						$("#likecmt_"+wish_id).text(likecmt);					
 					}
 				}
 				if(data == "removed"){
@@ -96,6 +99,10 @@ use yii\helpers\Url;
 					if(type=="like"){
 						elem.addClass("txt-smp-green");
 						elem.removeClass("txt-smp-pink");
+						var likecmt = $("#likecmt_"+wish_id).text();
+						likecmt = parseInt(likecmt) - parseInt(1);
+						$("#likecmt_"+wish_id).text(likecmt);
+
 					}
 				}
 
@@ -122,7 +129,7 @@ $(document).ready(function(){
 	});
 });
 
-
+/* 
 $(document).on("click", ".report-img", function() {
 	var wish_id = $(this).attr("data-id");
 	 if($.trim(wish_id) !== "" )
@@ -140,7 +147,7 @@ $(document).on("click", ".report-img", function() {
 			}
 		});
 	 }
-});
+}); */
 
 </script>
 
