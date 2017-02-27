@@ -99,27 +99,61 @@ Report Action</a></li> -->
 	</div>
 </div>
 <!--***** Header Ends*****-->
-<div  style="background-image:url('<?=Yii::$app->homeUrl?>images/bgimage.jpg');">	
+<?php if(!\Yii::$app->user->isGuest){  ?>
+<div  style="background-image:url('<?=Yii::$app->homeUrl?>uploads/icon/login_banner.jpg');">	
 
 	<div class="container" style="padding: 25px 0px 50px 36px;">
 	
 		<h1 class="slide_header">Make Someone </br>
 		Happy Today</h1>  
-	<?php if(\Yii::$app->user->isGuest){ ?> 
-		<a href="<?=Yii::$app->homeUrl?>site/sign-up"><button class="btn btn-smp-orange smpl-brdr" type="button">JOIN TODAY!</button></a>
-		<?php } ?>
+
 	</div>
 	
-</div> 
+</div>
+<?php } else { ?> 
+<div  style="background-image:url('<?=Yii::$app->homeUrl?>images/bgimage.jpg');">	
 
-<div class="container">
-<div class="shareiconhover">
-			
-	<div  class="webShareIcons" data_text="SimplyWishes" data_url="<?= Url::to([''],true); ?>"></div>
-
+	<div class="container" style="padding: 25px 0px 50px 36px;">
+	
+		<h1 class="slide_header">Make Someone </br>
+		Happy Today</h1>  	
+		<a href="<?=Yii::$app->homeUrl?>site/sign-up"><button class="btn btn-smp-orange smpl-brdr" type="button">JOIN TODAY!</button></a>
+	
+	</div>
+	
 </div>
 
+<?php } ?>
 
+<div class="container">			
+	<!--<div  class="webShareIcons" data_text="SimplyWishes" data_url="<?= Url::to([''],true); ?>"></div>-->
+	<div class="pull-right" style="margin-top:5px" >
+		<a style="text-decoration: none;" href="https://www.facebook.com/SimplyWishescom-1121671277927963/" target="_blank">
+			<img style="width:35px" src="<?=Yii::$app->homeUrl?>uploads/icon/facebook.png" alt="Facebook" />
+		</a>	
+		<a style="text-decoration: none;"  href="https://plus.google.com/u/0/105910024848420550192" target="_blank">
+			<img style="width:30px" src="<?=Yii::$app->homeUrl?>uploads/icon/Google-plus.png" alt="Google-plus" />
+		</a>
+		<a style="text-decoration: none;"  href="https://www.instagram.com/simplywishes2016" target="_blank">
+			<img style="width:35px" src="<?=Yii::$app->homeUrl?>uploads/icon/instagram.png" alt="Instagram" />
+		</a>	
+		<a style="text-decoration: none;"  href="https://www.linkedin.com/in/simply-wishes/" target="_blank">
+			<img style="width:40px" src="<?=Yii::$app->homeUrl?>uploads/icon/Linkedin.png" alt="Linkedin" />
+		</a>
+		<a style="text-decoration: none;"  href="https://www.pinterest.com/simplywishe5244/" target="_blank">
+			<img style="width:30px" src="<?=Yii::$app->homeUrl?>uploads/icon/Pinterest.png" alt="Pinterest" />
+		</a>	
+		<a style="text-decoration: none;"  href="http://www.reditte.com/user/simplywishes/" target="_blank">
+			<img style="width:30px" src="<?=Yii::$app->homeUrl?>uploads/icon/reddit.png" alt="Reddit" />
+		</a>
+		<a style="text-decoration: none;"  href="https://twitter.com/simply_wishes" target="_blank">
+			<img style="width:40px" src="<?=Yii::$app->homeUrl?>uploads/icon/twitter.png" alt="Twitter" />
+		</a>	
+		<a style="text-decoration: none;"  href="https://www.youtube.com/channel/UC9oY1A49aO1ZQxjdGyJ3Z3Q" target="_blank">
+			<img style="width:30px" src="<?=Yii::$app->homeUrl?>uploads/icon/youtube-icon.png" alt="Youtube" />
+		</a>
+			
+	</div>
 <br>
 
 <!--
@@ -176,7 +210,7 @@ $('ul.nav li.dropdown').hover(function() {
 			elem.jsSocials({
 			showLabel: false,
 			showCount: false,
-			shares: ["facebook","googleplus", "pinterest", "linkedin", 
+			shares: ["facebook","googleplus", "pinterest", "linkedin",
 			{
 				share: "twitter",           // name of share
 				via: "simply_wishes",       // custom twitter sharing param 'via' (optional)

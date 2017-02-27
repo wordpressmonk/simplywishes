@@ -110,6 +110,10 @@ $(document).on("click", ".listesinside", function() {
  
 });
 
+$(document).on('click','.jssocials-shares',function(){
+		 $('.listesinside').popover('hide');
+	});
+	
 /* $(document).on("click", ".report-img", function() {
 	var wish_id = $(this).attr("data-id");
 	 if($.trim(wish_id) !== "" )

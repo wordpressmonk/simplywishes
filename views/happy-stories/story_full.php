@@ -198,5 +198,9 @@ $(document).ready(function(){
 			e.preventDefault();
 		});
 	});
+	
+	$(document).on('click','.jssocials-shares',function(){
+		 $('.listesinside').popover('hide');
+	});
 });
 </script>
