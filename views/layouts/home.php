@@ -100,7 +100,7 @@ Report Action</a></li> -->
 </div>
 <!--***** Header Ends*****-->
 <?php if(!\Yii::$app->user->isGuest){  ?>
-<div  style="background-image:url('<?=Yii::$app->homeUrl?>uploads/icon/login_banner.jpg');">	
+<div  style="background-image:url('<?=Yii::$app->homeUrl?>images/login_banner.jpg');">	
 
 	<div class="container" style="padding: 25px 0px 50px 36px;">
 	
@@ -129,28 +129,28 @@ Report Action</a></li> -->
 	<!--<div  class="webShareIcons" data_text="SimplyWishes" data_url="<?= Url::to([''],true); ?>"></div>-->
 	<div class="pull-right" style="margin-top:5px" >
 		<a style="text-decoration: none;" href="https://www.facebook.com/SimplyWishescom-1121671277927963/" target="_blank">
-			<img style="width:35px" src="<?=Yii::$app->homeUrl?>uploads/icon/facebook.png" alt="Facebook" />
+			<img style="width:35px" src="<?=Yii::$app->homeUrl?>images/icon/facebook.png" alt="Facebook" />
 		</a>	
 		<a style="text-decoration: none;"  href="https://plus.google.com/u/0/105910024848420550192" target="_blank">
-			<img style="width:30px" src="<?=Yii::$app->homeUrl?>uploads/icon/Google-plus.png" alt="Google-plus" />
+			<img style="width:30px" src="<?=Yii::$app->homeUrl?>images/icon/Google-plus.png" alt="Google-plus" />
 		</a>
 		<a style="text-decoration: none;"  href="https://www.instagram.com/simplywishes2016" target="_blank">
-			<img style="width:35px" src="<?=Yii::$app->homeUrl?>uploads/icon/instagram.png" alt="Instagram" />
+			<img style="width:35px" src="<?=Yii::$app->homeUrl?>images/icon/instagram.png" alt="Instagram" />
 		</a>	
 		<a style="text-decoration: none;"  href="https://www.linkedin.com/in/simply-wishes/" target="_blank">
-			<img style="width:40px" src="<?=Yii::$app->homeUrl?>uploads/icon/Linkedin.png" alt="Linkedin" />
+			<img style="width:40px" src="<?=Yii::$app->homeUrl?>images/icon/Linkedin.png" alt="Linkedin" />
 		</a>
 		<a style="text-decoration: none;"  href="https://www.pinterest.com/simplywishe5244/" target="_blank">
-			<img style="width:30px" src="<?=Yii::$app->homeUrl?>uploads/icon/Pinterest.png" alt="Pinterest" />
+			<img style="width:30px" src="<?=Yii::$app->homeUrl?>images/icon/Pinterest.png" alt="Pinterest" />
 		</a>	
 		<a style="text-decoration: none;"  href="http://www.reditte.com/user/simplywishes/" target="_blank">
-			<img style="width:30px" src="<?=Yii::$app->homeUrl?>uploads/icon/reddit.png" alt="Reddit" />
+			<img style="width:30px" src="<?=Yii::$app->homeUrl?>images/icon/reddit.png" alt="Reddit" />
 		</a>
 		<a style="text-decoration: none;"  href="https://twitter.com/simply_wishes" target="_blank">
-			<img style="width:40px" src="<?=Yii::$app->homeUrl?>uploads/icon/twitter.png" alt="Twitter" />
+			<img style="width:40px" src="<?=Yii::$app->homeUrl?>images/icon/twitter.png" alt="Twitter" />
 		</a>	
 		<a style="text-decoration: none;"  href="https://www.youtube.com/channel/UC9oY1A49aO1ZQxjdGyJ3Z3Q" target="_blank">
-			<img style="width:30px" src="<?=Yii::$app->homeUrl?>uploads/icon/youtube-icon.png" alt="Youtube" />
+			<img style="width:30px" src="<?=Yii::$app->homeUrl?>images/icon/youtube-icon.png" alt="Youtube" />
 		</a>
 			
 	</div>
