@@ -210,6 +210,9 @@ use yii\helpers\Url;
 	
 	</script>
 <script>	
+var isVisible = false;
+var clickedAway = false;
+
 $(document).on("click", ".listesinside", function() {
 	$(function(){
 		$('.listesinside').popover({   
@@ -218,14 +221,28 @@ $(document).on("click", ".listesinside", function() {
 				var clone = $($(this).parents(".sharefull-list").find(".shareIcons")).clone(true).removeClass('hide');
 				return clone;
 			}
+		}).click(function(e) {
+			e.preventDefault();
+			clickedAway = false;
+			isVisible = true;
 		});
 	});
  
 });
 
-$(document).on('click','.jssocials-shares',function(){
+$(document).click(function (e) {
+    if (isVisible & clickedAway) {
+        $('.listesinside').popover('hide');
+        isVisible = clickedAway = false;
+    } else {
+        clickedAway = true;
+    }
+});
+
+
+/* $(document).on('click','.jssocials-shares',function(){
 		 $('.listesinside').popover('hide');
-	});
+	}); */
 	
 /* $(document).on("click", ".report-img", function() {
 	var wish_id = $(this).attr("data-id");

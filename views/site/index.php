@@ -116,6 +116,9 @@ use yii\helpers\Url;
 
 <script>
 $(document).ready(function(){	
+var isVisible = false;
+var clickedAway = false;
+	
 	$(function(){
 		$('.listesinside').popover({   
 			html: true,
@@ -125,11 +128,24 @@ $(document).ready(function(){
 			}
 		}).click(function(e) {
 			e.preventDefault();
+			clickedAway = false;
+			isVisible = true;
 		});
 	});
-	$(document).on('click','.jssocials-shares',function(){
+	/* $(document).on('click','.jssocials-shares',function(){
 		 $('.listesinside').popover('hide');
-	});
+	}); */
+	
+	
+$(document).click(function (e) {
+    if (isVisible & clickedAway) {
+        $('.listesinside').popover('hide');
+        isVisible = clickedAway = false;
+    } else {
+        clickedAway = true;
+    }
+});
+
 });
 
 /* 
