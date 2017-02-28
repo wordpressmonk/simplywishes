@@ -28,7 +28,21 @@ $this->params['breadcrumbs'][] = $this->title;
 		<div role="tabpanel" class="tab-pane active grid" id="fullfilledwish">
 		
 		<div class="input-group col-md-6" style="margin-bottom:10px" >
-				<input name="searh_field" id="searh_field" type="text" class="form-control" value="<?= $findfriends ?>" placeholder="Search for your friends">
+		<?php 
+		 $data =  \app\models\Userprofile::find()->select(['CONCAT(firstname," ",lastname) as value'])->where(['!=','user_id',\Yii::$app->user->id])->groupBy('value')->asArray()->all();	
+				
+					echo AutoComplete::widget([
+						'name' => 'searh_field',
+						'id' => 'searh_field',
+						'options' => ['class' => 'form-control','placeholder'=>'Search for your friends'],
+						'value'	=> $findfriends,					
+						'clientOptions' => [
+							'source' => $data, 
+							'autoFill'=>true,							 
+								],
+							]); 
+		?>					
+				<!--<input name="searh_field" id="searh_field" type="text" class="form-control" value="<?= $findfriends ?>" placeholder="Search for your friends">-->
 				<span class="input-group-btn">
 				  <button class="search-wish btn btn-default" type="button">
 					<span class="glyphicon glyphicon-search"></span>

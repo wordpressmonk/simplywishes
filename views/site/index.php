@@ -146,6 +146,10 @@ $(document).click(function (e) {
     }
 });
 
+$('body').on('hidden.bs.popover', function (e) {
+    $(e.target).data("bs.popover").inState.click = false;
+});
+
 });
 
 /* 

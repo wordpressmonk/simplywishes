@@ -351,7 +351,10 @@ class AccountController extends Controller
 		$followlist = [];
 		if($findfriends)
 		{
-			$myfollow =  \app\models\Userprofile::find()->select(['user_id'])->where(['!=','user_id',\Yii::$app->user->id])->andWhere(['or',['like','firstname',$findfriends],['like','lastname',$findfriends] ])->all();
+			/*$myfollow =  \app\models\Userprofile::find()->select(['user_id'])->where(['!=','user_id1',\Yii::$app->user->id])->andWhere(['or',['like','firstname',$findfriends],['like','lastname',$findfriends] ])->all(); */
+			
+			
+			$myfollow =  \app\models\Userprofile::find()->select(['user_id'])->where(['!=','user_id',\Yii::$app->user->id])->andWhere(['like',"CONCAT(firstname, ' ', lastname)",$findfriends] )->all();
 			
 			$foll = FollowRequest::find()->select("requested_to")->where(["requested_by"=>\Yii::$app->user->id])->all();
 			if($foll)
