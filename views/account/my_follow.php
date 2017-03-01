@@ -65,7 +65,7 @@ $this->params['breadcrumbs'][] = $this->title;
 					$profile = UserProfile::find()->where(['user_id'=>$userid])->one();					
 				?>
 					 <div class="col-md-6 grid-item" id="parent_div_<?= $profile->user_id; ?>"> 
-						<div class="smp_inline thumbnail">
+						<div class="smp_inline thumbnail friendprofile_img">
 							<?php 
 							if($profile->profile_image!='') 
 								echo '<img  src="'.\Yii::$app->homeUrl.$profile->profile_image.'" class="img-responsive" alt="my-profile-Image">';

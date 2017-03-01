@@ -514,4 +514,8 @@ ul.smp-footer-links a {
 }	
 /*shareicon css*/
 
+/*constant image size css for frienduser*/
+.friendprofile_img img{
+    min-height: 100px;
+}
 /******* Styles Added for New Template END POINT ******/
