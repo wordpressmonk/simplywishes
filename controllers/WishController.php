@@ -407,7 +407,7 @@ class WishController extends Controller
 		// STEP 2: Post IPN data back to paypal to validate
 		//https://www.sandbox.paypal.com/cgi-bin/webscr
 		//$ch = curl_init('https://www.paypal.com/cgi-bin/webscr');
-		$ch = curl_init('https://www.sandbox.paypal.com/cgi-bin/webscr');
+		$ch = curl_init('https://www.paypal.com/cgi-bin/webscr');
 		curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
 		curl_setopt($ch, CURLOPT_POST, 1);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
