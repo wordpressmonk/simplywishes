@@ -55,7 +55,8 @@ $this->params['breadcrumbs'][] = $this->title;
 			<?php } ?>			
 			<?php if(is_null($model->granted_by) && !\Yii::$app->user->isGuest  && \Yii::$app->user->id!=$model->wished_by){ ?>
 			 <?php if($model->non_pay_option == 0 ){ ?>
-				<form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
+				<!--<form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">-->
+				<form action="https://www.paypal.com/cgi-bin/webscr" method="post"> 
 				  <!-- Identify your business so that you can collect the payments. -->
 				  <!--<input type="hidden" name="business" value="dency@abacies.com">-->
 				  <input type="hidden" name="business" value="<?=$model->wisher->email?>">
@@ -77,11 +78,11 @@ $this->params['breadcrumbs'][] = $this->title;
 				  src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" >
 				</form>
 			<?php } else { ?>
-					<a href="<?=Url::to(['wish/fullfilled','w_id'=>$model->w_id],true)?>"><button class="btn btn-success">Grant this Wish</button></a>
+					<a href="<?=Url::to(['wish/fullfilled','w_id'=>$model->w_id],true)?>"><button class="btn btn-success">Grant This Wish</button></a>
 			<?php } ?> 	
 					
 			<?php } else if(!is_null($model->granted_by)&& \Yii::$app->user->isGuest){ ?>
-				<a href="<?=Url::to(['site/login'])?>"><button class="btn btn-success">Grant this Wish</button></a>
+				<a href="<?=Url::to(['site/login'])?>"><button class="btn btn-success">Grant This Wish</button></a>
 			<?php } ?>
 			
 			<?php if(is_null($model->granted_by) && !\Yii::$app->user->isGuest && \Yii::$app->user->id==$model->wished_by)

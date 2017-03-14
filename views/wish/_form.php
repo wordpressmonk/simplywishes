@@ -98,7 +98,12 @@ use dosamigos\ckeditor\CKEditor;
 
 <script type="text/javascript" >
 $( document ).ready(function() {
-    $("#wish-non_pay_option").change(function(){
+	// Temp this Option is avaliable
+	$(".field-wish-non_pay_option").hide();	
+	$("#wish-expected_cost").removeAttr("readonly");	
+	
+	
+   /*  $("#wish-non_pay_option").change(function(){
 		 if($(this).prop("checked") == true){
 			$("#wish-expected_cost").attr("readonly","readonly");	
 		 }
@@ -109,6 +114,7 @@ $( document ).ready(function() {
 	<?php if($model->non_pay_option == 1)
 	 { ?>
 		$("#wish-expected_cost").attr("readonly","readonly");			
-	<?php } ?>	
+	<?php } ?>	 */
+	
 });
 </script>
