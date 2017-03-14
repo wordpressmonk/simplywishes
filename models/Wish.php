@@ -49,8 +49,8 @@ class Wish extends \yii\db\ActiveRecord
     }
 	public function scenarios() {
         $scenarios = parent::scenarios();
-        $scenarios['create'] = ['category', 'wish_title','summary_title', 'wish_description','primary_image','state', 'country', 'city','expected_cost','expected_date','in_return','who_can'];
-		 $scenarios['update'] = ['category', 'wish_title','summary_title', 'wish_description','state', 'country', 'city','expected_cost','expected_date','in_return','who_can'];
+        $scenarios['create'] = ['category', 'wish_title','summary_title', 'wish_description','primary_image','state', 'country', 'city','expected_cost','expected_date','in_return','who_can','non_pay_option'];
+		 $scenarios['update'] = ['category', 'wish_title','summary_title', 'wish_description','state', 'country', 'city','expected_cost','expected_date','in_return','who_can','non_pay_option'];
         return $scenarios;
     }
     /**
@@ -72,6 +72,7 @@ class Wish extends \yii\db\ActiveRecord
             'city' => 'City',
 			'expected_cost'=>'Expected Cost(USD)',
 			'expected_date'=>'Issue Date',
+			'non_pay_option'=>'Non-Payment Option',
 			'in_return'=>'What Do I Give In Return',
 			'who_can'=>'Who Can Potentialy Help me',
         ];

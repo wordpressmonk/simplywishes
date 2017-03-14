@@ -81,8 +81,9 @@ use dosamigos\ckeditor\CKEditor;
 				
 			</div>
 			<div class="col-lg-6">
-				<?= $form->field($model, 'expected_cost')->textInput(['maxlength' => true])?>
+				<?= $form->field($model, 'expected_cost')->textInput(['maxlength' => true ])?>
 			</div>
+			<?= $form->field($model, 'non_pay_option')->checkbox(['value' => '1']);	?>
 	</div>
 	<?= $form->field($model, 'who_can')->textArea()?>
 	<?= $form->field($model, 'in_return')->textArea()?>
@@ -93,3 +94,20 @@ use dosamigos\ckeditor\CKEditor;
     <?php ActiveForm::end(); ?>
 </div>
 </div>
+
+<script type="text/javascript" >
+$( document ).ready(function() {
+    $("#wish-non_pay_option").change(function(){
+		 if($(this).prop("checked") == true){
+			$("#wish-expected_cost").attr("readonly","readonly");	
+		 }
+		 else if($(this).prop("checked") == false){
+			 $("#wish-expected_cost").removeAttr("readonly");	
+		 }
+	});
+	<?php if($model->non_pay_option == 1)
+	 { ?>
+		$("#wish-expected_cost").attr("readonly","readonly");			
+	<?php } ?>	
+});
+</script>
