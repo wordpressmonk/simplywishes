@@ -83,8 +83,9 @@ use dosamigos\ckeditor\CKEditor;
 			<div class="col-lg-6">
 				<?= $form->field($model, 'expected_cost')->textInput(['maxlength' => true ])?>
 			</div>
-			<?= $form->field($model, 'non_pay_option')->checkbox(['value' => '1']);	?>
+			
 	</div>
+	<?= $form->field($model, 'non_pay_option')->checkbox(['value' => '1']);	?>
 	<?= $form->field($model, 'who_can')->textArea()?>
 	<?= $form->field($model, 'in_return')->textArea()?>
     <div class="form-group">
