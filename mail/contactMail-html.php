@@ -6,7 +6,7 @@ use yii\helpers\Html;
 
 ?>
 <div class="password-reset">
-    <p>Hi, Hello!!!.</p>
+    <p>Hi,</p>
 
     <p><?= Html::encode($body) ?></p>
 	<?php if($phonenumber){ ?>

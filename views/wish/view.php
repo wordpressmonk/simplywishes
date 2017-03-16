@@ -44,8 +44,8 @@ $this->params['breadcrumbs'][] = $this->title;
 		<div class="col-md-8">
 			<p><b>Name : </b><span><a href="<?=Url::to(['account/profile','id'=>$model->wished_by])?>"><span><?=$model->wisherName?></span></a></span></p>
 			<p><b>Wish Description : </b><span><?=$model->wish_description?></span></p>
-			<p><b>Iam Located In : </b><span><?=$model->location?></span></p>
-			<p><b>Expected Date : </b><span><?=$model->expected_date?></span></p>
+			<p><b>Location of Wish : </b><span><?=$model->location?></span></p>
+			<p><b>Date Issued : </b><span><?=$model->expected_date?></span></p>
 			<p><b>What Do I Give In Return : </b><span><?=$model->in_return?> </span></p>
 			<p><b>Who Can Potentialy Help me : </b><span><?=$model->who_can?> </span></p>
 			<p><b>Recipient : </b><span><?=$model->categoryName?></span></p>
@@ -71,7 +71,7 @@ $this->params['breadcrumbs'][] = $this->title;
 				  <input type="hidden" name="currency_code" value="USD">
 
 				  <!-- Display the payment button. -->
-				  <input type="image" name="submit" border="0"
+				  <input type="image" name="submit" border="0" 
 				  src="https://www.paypalobjects.com/webstatic/en_US/i/btn/png/btn_paynow_cc_144x47.png"
 				  alt="Buy Now">
 				  <img alt="" border="0" width="1" height="1"
@@ -89,7 +89,7 @@ $this->params['breadcrumbs'][] = $this->title;
 				echo '<a href="'.Url::to(['wish/update','id'=>$model->w_id]).'"><button class="btn btn-info">Update Wish</button></a>';
 			?>
 				<?php if(is_null($model->granted_by) && !\Yii::$app->user->isGuest && \Yii::$app->user->id==$model->wished_by)
-				echo '<button class="btn btn-danger deletecheck">Delete </button>';
+			//	echo '<button class="btn btn-danger deletecheck">Delete </button>';
 			?>
 		</div>
 	</div>

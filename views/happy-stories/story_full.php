@@ -52,7 +52,7 @@ $this->params['breadcrumbs'][] = $this->title;
 			 
 			 <?php  /* Html::a('<i class="fa fa-trash" aria-hidden="true"></i> Delete', ['delete', 'id' => $model->hs_id], ['class' => 'btn btn-danger deletecheck','style'=>"margin-top: 20px;"]) */ ?>
 			 
-			  <button class="btn btn-danger deletecheck" for="<?= $model->hs_id ?>" ><i class="fa fa-trash" aria-hidden="true"></i> Delete </button>
+			  <!--<button class="btn btn-danger deletecheck" for="<?= $model->hs_id ?>" ><i class="fa fa-trash" aria-hidden="true"></i> Delete </button>-->
 			</div>			 
 		<?php } ?>
 		<div class="col-md-3 happystory sharefull-list">

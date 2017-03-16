@@ -35,8 +35,8 @@ $this->params['breadcrumbs'][] = $this->title;
 					<div class="media-body"> 
 						<!--<h4 class="media-heading">Top aligned media</h4>-->
 						<a href="<?= Url::to(["account/profile","id"=>$story->user_id]) ?>">Author: <?= $story->author->fullname; ?></a>
-						<p> <?=substr($story->story_text,0,450)?>..!</p>
-						<a href="<?=Yii::$app->homeUrl?>happy-stories/story-details?id=<?= $story->hs_id; ?>" ><h5>Read More>></h5></a>
+						<p> <?=substr($story->story_text,0,450)?></p>
+						<a href="<?=Yii::$app->homeUrl?>happy-stories/story-details?id=<?= $story->hs_id; ?>" ><h5>Read More</h5></a>
 					</div> 
 				</div>
 			</div>

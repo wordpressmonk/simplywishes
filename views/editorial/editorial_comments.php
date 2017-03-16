@@ -48,8 +48,8 @@ $this->params['breadcrumbs'][] = $this->title;
 			<div class="row edit">
 				<div class="form-group col-md-8">
 					<p><?= $model->e_title; ?></p>
-					<p><img src="<?=Yii::$app->homeUrl?><?php echo $profile->profile_image; ?>" height="100px"/></a>Author: <?php echo $profile->Fullname; ?></p>
-					<p>Date: <?php echo date("d/m/Y",strtotime($model->created_at)); ?></p>
+					<p><img src="<?=Yii::$app->homeUrl?><?php echo $profile->profile_image; ?>" height="100px"/></a> &nbsp;Author: &nbsp;<a class="atagcolor" href="<?=Yii::$app->homeUrl?>account/profile?id=<?php echo $model->created_by ?>" ><?php echo $profile->Fullname; ?></a></p>
+					<p>Date: &nbsp;<?php echo date("m/d/Y",strtotime($model->created_at)); ?></p>
 					<p><?= $model->e_text ?></p>					
 				</div>
 				<div class="form-group col-md-4">				
@@ -88,7 +88,7 @@ $this->params['breadcrumbs'][] = $this->title;
 							<img src="<?=Yii::$app->homeUrl?><?= $profile->profile_image; ?>" height="100px"/>				
 						</div>
 						<div class="form-group col-md-8">	
-							<h4><?= $profile->firstname.' '.$profile->lastname ?></h4>						
+							<h4><a class="atagcolor" href="<?=Yii::$app->homeUrl?>account/profile?id=<?php echo $profile->user_id ?>" ><?= $profile->firstname.' '.$profile->lastname ?></a></h4>						
 							<p><?= $user->comments ?></p>
 				<span class="on-reply" style="cursor: pointer;" for="<?= $user->e_comment_id ?>" ><b><u>Reply<u></b></span>
 				
@@ -118,7 +118,7 @@ $this->params['breadcrumbs'][] = $this->title;
 							<img src="<?=Yii::$app->homeUrl?><?= $replyprofile->profile_image; ?>" height="50px"/>				
 						</div>
 						<div class="form-group col-md-10">	
-							<h5><?= $replyprofile->firstname.' '.$replyprofile->lastname; ?></h5>						
+							<h5><a class="atagcolor" href="<?=Yii::$app->homeUrl?>account/profile?id=<?php echo $replyprofile->user_id ?>" ><?= $replyprofile->firstname.' '.$replyprofile->lastname; ?></a></h5>						
 							<p><?= $replyuser->comments ?></p>
 						</div>	
 						</div>	

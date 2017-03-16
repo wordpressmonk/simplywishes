@@ -518,4 +518,13 @@ ul.smp-footer-links a {
 .friendprofile_img img{
     min-height: 100px;
 }
+.atagcolor{
+	color: #337ab7 !important;
+}
+.imagesize{
+	height:100px;	
+}
+.sum-font-size{
+	font-size:20px;	
+}
 /******* Styles Added for New Template END POINT ******/
