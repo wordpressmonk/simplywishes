@@ -45,7 +45,7 @@ $this->params['breadcrumbs'][] = $this->title;
 			<p><b>Name : </b><span><a href="<?=Url::to(['account/profile','id'=>$model->wished_by])?>"><span><?=$model->wisherName?></span></a></span></p>
 			<p><b>Wish Description : </b><span><?=$model->wish_description?></span></p>
 			<p><b>Location of Wish : </b><span><?=$model->location?></span></p>
-			<p><b>Date Issued : </b><span><?=$model->expected_date?></span></p>
+			<p><b>Date Issued : </b><span><?php echo date("m/d/Y",strtotime($model->expected_date)); ?></span></p>
 			<p><b>What Do I Give In Return : </b><span><?=$model->in_return?> </span></p>
 			<p><b>Who Can Potentialy Help me : </b><span><?=$model->who_can?> </span></p>
 			<p><b>Recipient : </b><span><?=$model->categoryName?></span></p>

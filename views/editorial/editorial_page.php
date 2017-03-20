@@ -41,7 +41,7 @@ $this->params['breadcrumbs'][] = $this->title;
 			<div class="row edit">
 				<div class="form-group col-md-9">
 					<p><?php echo $tmp->e_title; ?></p>
-					<p><img src="<?=Yii::$app->homeUrl?><?php echo $profile->profile_image; ?>" height="100px"/> &nbsp;Author: &nbsp;<a class="atagcolor" href="<?=Yii::$app->homeUrl?>account/profile?id=<?php echo $tmp->created_by ?>" ><?php echo $profile->Fullname ?></a></p>
+					<p><img src="<?=Yii::$app->homeUrl?><?php echo $profile->profile_image; ?>" height="100px"/> <a class="atagcolor" href="<?=Yii::$app->homeUrl?>account/profile?id=<?php echo $tmp->created_by ?>" >&nbsp;Author: &nbsp;<?php echo $profile->Fullname ?></a></p>
 					<p>Date: &nbsp;<?php echo date("m/d/Y",strtotime($tmp->created_at)); ?></p>					
 					<p><?php echo substr($tmp->e_text,0,450)?></p>
 					<a href="<?=Yii::$app->homeUrl?>editorial/editorial-page?id=<?php echo $tmp->e_id; ?>"><h5>Read More</h5></a>

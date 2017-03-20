@@ -109,7 +109,7 @@ $this->params['breadcrumbs'][] = $this->title;
 	
    <?= $form->field($profile, 'dulpicate_image')->hiddenInput()->label(false) ?>	
    
-					<h3> Change Password </h3>
+					<h3  class="fnt-green" > Change Password </h3>
 					<p> Change password if you want to, or leave it empty</p>
 					
 					<?= $form->field($user, 'password')->passwordInput() ?>

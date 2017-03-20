@@ -71,7 +71,8 @@ button:focus {outline:0 !important;}
 	color:#f3ae1a;
 }
 .txt-smp-green{
-	background-color: #66cc66;
+ /*	background-color: #66cc66;  */
+    background-color: #b30c4a;
     padding: 7px;
     border-radius: 14px;
     color: #fff;
@@ -89,7 +90,8 @@ button:focus {outline:0 !important;}
     color: #fff;
 }
 .txt-smp-pink {
-    background-color: #b30c4a;
+   /* background-color: #b30c4a; */
+   background-color: #66cc66;
     padding: 7px;
     border-radius: 14px;
     color: #fff;
@@ -499,10 +501,10 @@ ul.smp-footer-links a {
 
 
 .newmsg{
-		font-weight:800;
+		font-weight:900 !important;
 	}
 .newmsg span{
-		color: red;
+		color: black;
 		margin-left: 100px;
 	}
 
@@ -527,4 +529,18 @@ ul.smp-footer-links a {
 .sum-font-size{
 	font-size:20px;	
 }
+.listesinside
+{
+	margin-left:2px;
+}
+
+.readedmsg{
+	background-color: #F1F1F1;
+}
+
+.readedmsg span{
+		color: black;
+		margin-left: 100px;
+	}
+	
 /******* Styles Added for New Template END POINT ******/

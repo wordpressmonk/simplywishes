@@ -282,7 +282,7 @@ class SiteController extends Controller
         return $this->render('requestPasswordResetToken', ['model' => $model,]);
     }
 	
-	 public function actionResetPassword($token)
+	public function actionResetPassword($token)
     {
         try {         
 			$user = User::findByPasswordResetToken($token);

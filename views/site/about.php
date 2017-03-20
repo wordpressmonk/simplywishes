@@ -7,7 +7,7 @@ $this->title = 'About Us';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-about smp-mg-bottom">
-    <h1 style="color:#99cc33"><?= Html::encode($this->title) ?></h1>
+    <h1 class="fnt-green" ><?= Html::encode($this->title) ?></h1>
 
     <p>
        If you have a wish, or you want to make someone’s dream come true, you’re at the right place. SimplyWishes connects

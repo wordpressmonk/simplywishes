@@ -17,7 +17,8 @@ use dosamigos\ckeditor\CKEditor;
 
     <?= $form->field($model, 'wish_title')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'summary_title')->textInput(['maxlength' => true]) ?>
+    <?php // $form->field($model, 'summary_title')->textInput(['maxlength' => true]) ?>
+	
 	<?= $form->field($model, 'wish_description')->widget(CKEditor::className(), [
         'options' => ['rows' => 6],
         'preset' => 'basic'

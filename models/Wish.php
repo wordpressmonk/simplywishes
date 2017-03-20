@@ -186,7 +186,7 @@ class Wish extends \yii\db\ActiveRecord
 						</div></p>
             <!--<p>Wish For : <span>'.$this->wish_title.'</span></p>
             <p>Location : <span>'.$this->location.'</span></p>-->
-			<p class="desc" >'.substr($this->summary_title,0,50).'</p>
+			<p class="desc" >'.substr($this->wish_title,0,50).'</p>
             <p><a class="fnt-green" href="'.Url::to(['wish/view','id'=>$this->w_id]).'">Read More</a>
             &nbsp;<span><i class="fa fa-thumbs-o-up fa-1x fnt-blue"></i> <span id="likecmt_'.$this->w_id.'"  >'.$this->likesCount.'</span> Likes </span>
 			 </p>';
@@ -219,7 +219,7 @@ class Wish extends \yii\db\ActiveRecord
             $str .=  '<p><div class="list-icon">
 							<img src="'.$this->wisherPic.'" alt="">
 							<a href="'.Url::to(['account/profile','id'=>$this->wished_by]).'"><span>'.$this->wisherName.'</span></a>
-							<p></p><p class="desc" >'.substr($this->summary_title,0,50).'</p>
+							<p></p><p class="desc" >'.substr($this->wish_title,0,50).'</p>
 						<p><a class="fnt-green" href="'.Url::to(['wish/view','id'=>$this->w_id]).'">Read More</a>
 						&nbsp;<i class="fa fa-thumbs-o-up fa-1x fnt-blue"></i> <span id="likecmt_'.$this->w_id.'"  >'.$this->likesCount.'</span> Likes
 						 </p>
@@ -264,7 +264,7 @@ class Wish extends \yii\db\ActiveRecord
             $str .=  '<p><div class="list-icon">
 							<img src="'.$this->wisherPic.'" alt="">
 							<a href="'.Url::to(['account/profile','id'=>$this->wished_by]).'"><span>'.$this->wisherName.'</span></a>
-							<p></p><p class="desc" >'.substr($this->summary_title,0,50).'</p>
+							<p></p><p class="desc" >'.substr($this->wish_title,0,50).'</p>
 						<p><a class="fnt-green" href="'.Url::to(['wish/view','id'=>$this->w_id]).'">Read More</a>
 						&nbsp;<i class="fa fa-thumbs-o-up fa-1x fnt-blue"></i> <span id="likecmt_'.$this->w_id.'"  >'.$this->likesCount.'</span> Likes
 						 </p>
@@ -329,7 +329,7 @@ class Wish extends \yii\db\ActiveRecord
             $str .=  '<p><div class="list-icon">
 							<img src="'.$this->wisherPic.'" alt="">
 							<a href="'.Url::to(['account/profile','id'=>$this->wished_by]).'"><span>'.$this->wisherName.'</span></a>
-							<p></p><p class="desc" >'.substr($this->summary_title,0,50).'</p>
+							<p></p><p class="desc" >'.substr($this->wish_title,0,50).'</p>
 						<p><a class="fnt-green" href="'.Url::to(['wish/view','id'=>$this->w_id]).'">Read More</a>
 						&nbsp;<i class="fa fa-thumbs-o-up fa-1x fnt-blue"></i> <span id="likecmt_'.$this->w_id.'"  >'.$this->likesCount.'</span> Likes
 						 </p>

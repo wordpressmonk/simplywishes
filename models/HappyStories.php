@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\helpers\Url;
 
 /**
  * This is the model class for table "happy_stories".
@@ -96,4 +97,56 @@ class HappyStories extends \yii\db\ActiveRecord
     {
         return $this->hasOne(UserProfile::className(), ['user_id' => 'user_id']);
     }	
+	
+	public function getHappyAsCard(){
+		  $str = '';
+	
+		$str .= '<div class="col-md-10 happystory smp-mg-bottom">
+				<div class="media"> 
+					<div class="media-left">';
+					
+		$str .= '<img alt="64x64" src="'.\Yii::$app->homeUrl.$this->story_image.'" class="media-object"   style="width: 200px;border: solid 2px #0cb370;">';
+		
+		$str .= '<span><i class="fa fa-thumbs-o-up fnt-blue"></i>'.$this->likesCount.' Likes</span>';
+		$str .= '</div>';
+		
+		$str .= '<div class="media-body">'; 
+					
+		$str .= '<a href="'.Url::to(["account/profile","id"=>$this->user_id]).'">Author: '.$this->author->fullname.'</a>';
+		$str .= '<p>'.substr($this->story_text,0,450).'</p>';
+		$str .= '<a href="<?=Yii::$app->homeUrl?>happy-stories/story-details?id='.$this->hs_id.'" ><h5>Read More</h5></a>';
+		$str .= '</div> 
+				</div>
+			</div>';
+			
+			
+		echo $str;
+	}
+	
+	
+	public function getMyHappyAsCard(){
+		  $str = '';
+	
+		$str .= '<div class="col-md-12 happystory smp-mg-bottom">
+				<div class="media"> 
+					<div class="media-left">';
+					
+		$str .= '<img alt="64x64" src="'.\Yii::$app->homeUrl.$this->story_image.'" class="media-object"   style="width: 200px;border: solid 2px #0cb370;">';
+		
+		$str .= '<span><i class="fa fa-thumbs-o-up fnt-blue"></i>'.$this->likesCount.' Likes</span>';
+		$str .= '</div>';
+		
+		$str .= '<div class="media-body">'; 
+					
+		$str .= '<a href="'.Url::to(["account/profile","id"=>$this->user_id]).'">Author: '.$this->author->fullname.'</a>';
+		$str .= '<p>'.substr($this->story_text,0,450).'</p>';
+		$str .= '<a href="<?=Yii::$app->homeUrl?>happy-stories/story-details?id='.$this->hs_id.'" ><h5>Read More</h5></a>';
+		$str .= '</div> 
+				</div>
+			</div>';
+			
+			
+		echo $str;
+	}
+	
 }

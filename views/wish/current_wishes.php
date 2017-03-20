@@ -20,8 +20,9 @@ use yii\helpers\Url;
 				else $active = ''; ?>
 				<li class="<?=$active?> list-group-item dropdown">
 					<a data-toggle="collapse" data-target="#demo">Recipient 
-						<i class="fa fa-plus text-success pull-right"></i>
-						<i class="fa fa-minus text-success pull-right" style="display:none;"></i>
+					
+						<i class="fa fa-plus text-success pull-right" <?php if(!empty($active)){ echo "style='display:none;'"; } ?> ></i>
+						<i class="fa fa-minus text-success pull-right" <?php if(empty($active)){ echo "style='display:none;'"; } ?> ></i>
 					</a>
 					<ul id="demo" class="nav nav-stacked collapsed collapse">
 						<?php

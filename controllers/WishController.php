@@ -109,6 +109,7 @@ class WishController extends Controller
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
+		
     }
     public function actionScrollPopular($page)
     {
@@ -209,7 +210,7 @@ class WishController extends Controller
 				'countries' => $countries,
 				'states' => $states,
 				'cities' => $cities,
-				'user' => $user ,
+				'user' => $user,
 				'profile' => $profile
 				
             ]);

@@ -12,6 +12,7 @@ use app\models\User;
 class ResetPasswordForm extends Model
 {
     public $password;
+    public $verify_password;
 
     /**
      * @var \common\models\User
@@ -47,10 +48,25 @@ class ResetPasswordForm extends Model
     {
         return [
             ['password', 'required'],
-            ['password', 'string', 'min' => 6,'max'=>15],
+            ['verify_password', 'required'],
+            [['password','verify_password'], 'string', 'min' => 6,'max'=>15],
+			[['verify_password'],'compare','compareAttribute'=>'password','message'=>'Password do not match'],
         ];
     }
 
+	
+	  /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'password' => 'New Password',
+            'verify_password' => 'Confirm Password',
+          
+        ];
+    }
+	
     /**
      * Resets password.
      *

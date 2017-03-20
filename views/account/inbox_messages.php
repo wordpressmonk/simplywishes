@@ -31,7 +31,12 @@ use yii\web\JsExpression;
 			
 			foreach($messages as $msg){
 				$profile = \app\models\Userprofile::find()->where(['user_id'=>$msg->sender_id])->one();
-				echo '<li class="list-group-item"  id="li_list_'.$msg->m_id.'" >
+				if($msg->read_text != 0)
+					$color_var = "readedmsg";
+				else
+					$color_var = "";
+				
+				echo '<li class="list-group-item '.$color_var.' "  id="li_list_'.$msg->m_id.'" >
 					<input type="checkbox" class="checkBoxClass" name="selection[]" value="'.$msg->m_id.'" ></input>	
 					<span style="cursor:pointer" class="pull-right remove_delete" title="Remove"  for="'.$msg->m_id.'"><i class="fa fa-trash-o" aria-hidden="true"> </i></span>
 					
@@ -42,11 +47,11 @@ use yii\web\JsExpression;
 						
 						if($msg->read_text == 0)
 						{
-							echo '<div id="read_'.$msg->m_id.'" class="list-group-item-heading newmsg" for="'.$msg->m_id.'" >'.$profile->fullname.' <span id="readicon_'.$msg->m_id.'" class="unread" >-unread</span></div>';
+							echo '<div id="read_'.$msg->m_id.'" class="list-group-item-heading newmsg" for="'.$msg->m_id.'" >'.$profile->fullname.' <span id="readicon_'.$msg->m_id.'" class="unread" >- '.substr($msg->text,0,10).'</span></div>';
 						}
 						else 
 						{
-							echo '<div class="list-group-item-heading" >'.$profile->fullname.'</div>';
+							echo '<div class="list-group-item-heading" >'.$profile->fullname.'<span class="unread" >- '.substr($msg->text,0,10).'</span></div>';
 						}
 						
 					echo '<p class="list-group-item-text">
@@ -195,7 +200,8 @@ use yii\web\JsExpression;
 				   },
 				   success: function(data) {		
 						$("#read_"+msg_id).removeClass("newmsg");	
-						$("#readicon_"+msg_id).remove();																	
+						$("#read_"+msg_id).addClass("readedmsg");	
+					//	$("#readicon_"+msg_id).remove();																	
 				   }
 				 }); 				 
 		});	
