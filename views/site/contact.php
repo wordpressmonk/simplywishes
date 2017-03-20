@@ -31,7 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
                     <?= $form->field($model, 'email') ?>
 
-                    <?= $form->field($model, 'phone_number')->label("Phone Number"); ?>
+                    <?= $form->field($model, 'phone_number'); ?>
 					
                     <?= $form->field($model, 'subject') ?>
 

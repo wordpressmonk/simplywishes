@@ -3,20 +3,27 @@
 namespace app\models;
 
 use Yii;
-use yii\base\Model;
+//use yii\base\Model;
 
 /**
  * ContactForm is the model behind the contact form.
  */
-class ContactForm extends Model
+//class ContactForm extends Model
+class ContactForm extends \yii\db\ActiveRecord
 {
-    public $name;
+    /* public $name;
     public $email;
     public $subject;
     public $phone_number;
-    public $body;
+    public $body;  */
     public $verifyCode;
 
+	
+	public static function tableName()
+    {
+        return 'contact';
+    }
+	
 
     /**
      * @return array the validation rules.
@@ -35,43 +42,48 @@ class ContactForm extends Model
         ];
     }
 
-    /**
-     * @return array customized attribute labels
+	
+	   /**
+     * @inheritdoc
      */
     public function attributeLabels()
     {
         return [
-            'verifyCode' => 'Verification Code',
+            'contact_id' => 'Contact ID',
+            'name' => 'Name',
+            'email' => 'Email',
+            'subject' => 'Subject',
+            'body' => 'Body',
+            'phone_number' => 'Phone Number',
+            'created_at' => 'Created At',
+			'verifyCode' => 'Verification Code',
         ];
     }
-
+	
     /**
      * Sends an email to the specified email address using the information collected by this model.
      * @param string $email the target email address
      * @return bool whether the model passes validation
      */
-    public function contact($email)
+    public function contact()
     {	
-        if ($this->validate()) {
-			  $message = Yii::$app
+  
+		$message = Yii::$app
             ->mailer
             ->compose(
                 ['html' => 'contactMail-html'],
-                ['body' => $this->body,'phonenumber'=>$this->phone_number]
+                ['username' => $this->name]
             )
             ->setFrom([Yii::$app->params['supportEmail'] => 'SimplyWishes '])
             ->setTo($this->email)
-            ->setSubject('SimplyWishes '.$this->subject);			
+            ->setSubject('SimplyWishes ');			
             
 		$message->getSwiftMessage()->getHeaders()->addTextHeader('MIME-version', '1.0\n');
-		$message->getSwiftMessage()->getHeaders()->addTextHeader('charset', ' iso-8859-1\n');
-		
+		$message->getSwiftMessage()->getHeaders()->addTextHeader('charset', ' iso-8859-1\n');		
 		$message->send();
 		
 		return true;
 		
-        }
-        return false;
     }
 	
 	

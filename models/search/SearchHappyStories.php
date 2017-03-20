@@ -93,7 +93,7 @@ public $wishtitle;
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
 			'pagination' => [
-                'pageSize'=>2
+                'pageSize'=>10
             ]
         ]);
 		$query->joinWith(['author as user_profile']);	
@@ -135,7 +135,7 @@ public $wishtitle;
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
 			'pagination' => [
-                'pageSize'=>2
+                'pageSize'=>10
             ]
         ]);
 		$query->joinWith(['author as user_profile']);	

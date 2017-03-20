@@ -4,6 +4,8 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use app\models\UserProfile;
 use app\models\EditorialComments;
+use yii\helpers\Url;
+
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Editorial */
@@ -54,7 +56,7 @@ $this->params['breadcrumbs'][] = $this->title;
 				</div>
 				<div class="form-group col-md-4">				
 				
-					<div class="shareIcons" data_text="" data_url=""></div>
+					<div class="shareIcons" data_text="<?php echo $model->e_title; ?>" data_url="<?= Url::to(['editorial/editorial-page','id'=>$model->e_id],true) ?>" ></div>
 					<div class="editrightimg">
 					<center><img src="<?=Yii::$app->homeUrl?><?php echo $model->e_image; ?>" height="180px"/></center>
 					</div>

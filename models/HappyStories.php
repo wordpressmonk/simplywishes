@@ -100,7 +100,7 @@ class HappyStories extends \yii\db\ActiveRecord
 	
 	public function getHappyAsCard(){
 		  $str = '';
-	
+		$wish_details = $this->wish;
 		$str .= '<div class="col-md-10 happystory smp-mg-bottom">
 				<div class="media"> 
 					<div class="media-left">';
@@ -111,7 +111,7 @@ class HappyStories extends \yii\db\ActiveRecord
 		$str .= '</div>';
 		
 		$str .= '<div class="media-body">'; 
-					
+		$str .=	'<h4 class="media-heading">'.$wish_details->wish_title.'</h4>';
 		$str .= '<a href="'.Url::to(["account/profile","id"=>$this->user_id]).'">Author: '.$this->author->fullname.'</a>';
 		$str .= '<p>'.substr($this->story_text,0,450).'</p>';
 		$str .= '<a href="<?=Yii::$app->homeUrl?>happy-stories/story-details?id='.$this->hs_id.'" ><h5>Read More</h5></a>';
@@ -126,7 +126,7 @@ class HappyStories extends \yii\db\ActiveRecord
 	
 	public function getMyHappyAsCard(){
 		  $str = '';
-	
+		$wish_details = $this->wish;
 		$str .= '<div class="col-md-12 happystory smp-mg-bottom">
 				<div class="media"> 
 					<div class="media-left">';
@@ -137,7 +137,7 @@ class HappyStories extends \yii\db\ActiveRecord
 		$str .= '</div>';
 		
 		$str .= '<div class="media-body">'; 
-					
+		$str .=	'<h4 class="media-heading">'.$wish_details->wish_title.'</h4>';			
 		$str .= '<a href="'.Url::to(["account/profile","id"=>$this->user_id]).'">Author: '.$this->author->fullname.'</a>';
 		$str .= '<p>'.substr($this->story_text,0,450).'</p>';
 		$str .= '<a href="<?=Yii::$app->homeUrl?>happy-stories/story-details?id='.$this->hs_id.'" ><h5>Read More</h5></a>';

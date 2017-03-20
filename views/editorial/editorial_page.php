@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use app\models\UserProfile;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Editorial */
@@ -49,7 +50,7 @@ $this->params['breadcrumbs'][] = $this->title;
 		
 				<div class="form-group col-md-3">				
 					
-					<div class="shareIcons" data_text="" data_url=""></div>
+					<div class="shareIcons" data_text="<?php echo $tmp->e_title; ?>" data_url="<?= Url::to(['editorial/editorial-page','id'=>$tmp->e_id],true) ?>"> </div>
 					<div class="editrightimg">
 						<center><a href="<?=Yii::$app->homeUrl?>editorial/editorial-page?id=<?php echo $tmp->e_id; ?>"><img class="imagesize" src="<?=Yii::$app->homeUrl?><?php echo $tmp->e_image; ?>" /></a></center>	
 					</div>					
@@ -63,5 +64,21 @@ $this->params['breadcrumbs'][] = $this->title;
 	?>
 	
 </div>
-
+<script>
+	$(".shareIcons").each(function(){
+		var elem = $(this);
+			elem.jsSocials({
+			showLabel: false,
+			showCount: false,
+			shares: ["facebook","googleplus", "pinterest", "linkedin",
+			{
+				share: "twitter",           // name of share
+				via: "simply_wishes",       // custom twitter sharing param 'via' (optional)
+				hashtags: "simplywishes,dream_come_true"   // custom twitter sharing param 'hashtags' (optional)
+			}],
+			url : elem.attr("data_url"),
+			text: elem.attr("data_text"),
+		});
+	});
+</script>
 
