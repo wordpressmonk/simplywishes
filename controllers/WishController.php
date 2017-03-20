@@ -181,8 +181,11 @@ class WishController extends Controller
 		$model->scenario = 'create';
 		
 		$countries = \yii\helpers\ArrayHelper::map(\app\models\Country::find()->all(),'id','name');	
-		$states = \yii\helpers\ArrayHelper::map(\app\models\State::find()->all(),'id','name');	
-		$cities = \yii\helpers\ArrayHelper::map(\app\models\City::find()->all(),'id','name');	
+		/* $states = \yii\helpers\ArrayHelper::map(\app\models\State::find()->all(),'id','name');
+		$cities = \yii\helpers\ArrayHelper::map(\app\models\City::find()->all(),'id','name');	 */		
+		
+		$states = [];			
+		$cities = [];	
 		
 		$user = User::findOne(\Yii::$app->user->id);
 		$profile = UserProfile::find()->where(['user_id'=>\Yii::$app->user->id])->one();
@@ -229,8 +232,8 @@ class WishController extends Controller
 		$model->scenario = 'update';
 		$categories =  ArrayHelper::map(Category::find()->all(), 'cat_id', 'title');
 		$countries = \yii\helpers\ArrayHelper::map(\app\models\Country::find()->all(),'id','name');	
-		$states = \yii\helpers\ArrayHelper::map(\app\models\State::find()->all(),'id','name');	
-		$cities = \yii\helpers\ArrayHelper::map(\app\models\City::find()->all(),'id','name');	
+		$states = \yii\helpers\ArrayHelper::map(\app\models\State::find()->where(['country_id'=>$model->country ])->all(),'id','name');	
+		$cities = \yii\helpers\ArrayHelper::map(\app\models\City::find()->where(['state_id'=>$model->state])->all(),'id','name');	
 		$current_image = $model->primary_image;
 		
 		$user = User::findOne(\Yii::$app->user->id);
