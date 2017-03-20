@@ -82,6 +82,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
 		</div>
 		<div class="col-md-8">
+			<?php $wish_details = $model->wish; ?>
+		<h4 class="media-heading"><?= $wish_details->wish_title; ?></h4>
 			<p><?php echo Html::a('Author: '.$profile->fullname, ['account/profile', 'id' => $model->user_id])?> <?php echo $model->story_text; ?> </p>
 		</div>
 	</div>
