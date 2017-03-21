@@ -71,9 +71,10 @@ $this->params['breadcrumbs'][] = $this->title;
 				  <input type="hidden" name="currency_code" value="USD">
 
 				  <!-- Display the payment button. -->
-				  <input type="image" name="submit" border="0" 
+				  <!--<input type="image" name="submit" border="0" 
 				  src="https://www.paypalobjects.com/webstatic/en_US/i/btn/png/btn_paynow_cc_144x47.png"
-				  alt="Buy Now">
+				  alt="Buy Now">-->
+				  <button class="btn btn-success">Grant This Wish</button>
 				  <img alt="" border="0" width="1" height="1"
 				  src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" >
 				</form>
@@ -82,7 +83,9 @@ $this->params['breadcrumbs'][] = $this->title;
 			<?php } ?> 	
 					
 			<?php } else if(!is_null($model->granted_by)&& \Yii::$app->user->isGuest){ ?>
-				<a href="<?=Url::to(['site/login'])?>"><button class="btn btn-success">Grant This Wish</button></a>
+				<a href="<?=Url::to(['site/login','red_url'=>Yii::$app->homeUrl.'wish/view?id='.$model->w_id])?>"><button class="btn btn-success">Grant This Wish</button></a>
+			<?php } else if(\Yii::$app->user->isGuest) { ?>
+				<a href="<?=Url::to(['site/login','red_url'=>Yii::$app->homeUrl.'wish/view?id='.$model->w_id])?>"><button class="btn btn-success">Grant This Wish</button></a>
 			<?php } ?>
 			
 			<?php if(is_null($model->granted_by) && !\Yii::$app->user->isGuest && \Yii::$app->user->id==$model->wished_by)
