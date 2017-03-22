@@ -33,7 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
 				?>
 				<!--<i class="fa fa-save txt-smp-orange"></i> &nbsp;
 				<i class="fa fa-thumbs-o-up txt-smp-green"></i>--> 
-				<span  data-placement="top"  data-popover-content=""><img data-placement="top" class="listesinside"  src="<?= Yii::$app->homeUrl ?>images/Share-Icon.png"  /></span>					
+				<span  data-placement="top"  data-popover-content=""><img data-placement="top" class="listesinside removelistesinside"  src="<?= Yii::$app->homeUrl ?>images/Share-Icon.png"  /></span>					
 				<div class="shareIcons hide" ></div>
 				
 				</p>

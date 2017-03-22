@@ -94,8 +94,8 @@ $this->params['breadcrumbs'][] = $this->title;
 							<p><?= $user->comments ?></p>
 				<span class="on-reply" style="cursor: pointer;" for="<?= $user->e_comment_id ?>" ><b><u>Reply<u></b></span>
 				
-				<div  style="display:none;" id="<?php echo "replylist_".$user->e_comment_id ?>" class="comment-form2 reply full" data-plugin="comment-reply">	
-					<a class="close" data-action="comment-close">X</a>
+				<div  style="display:none; margin-top:10px" id="<?php echo "replylist_".$user->e_comment_id ?>" class="comment-form2 reply full" data-plugin="comment-reply">	
+					<!--<a class="close" data-action="comment-close">X</a> -->
 					<?php $form = ActiveForm::begin(['action' =>['editorial/commentreply']]); ?>				 
 					 <?= $form->field($listcomments, 'comments')->textarea(['rows' => 3])->label(false) ?>			
 					 <?= $form->field($listcomments, 'e_id')->hiddeninput(['value'=>$model->e_id])->label(false) ?>			
@@ -145,12 +145,19 @@ $this->params['breadcrumbs'][] = $this->title;
 <script>
 $(document).ready(function(){
     $(".on-reply").click(function(){ 
-		var id = $(this).attr("for");		
-		$("#replylist_"+id).show();
+		var id = $(this).attr("for");
+		
+		if($("#replylist_"+id).is(':hidden'))
+		{
+			$("#replylist_"+id).show();			
+		} else {
+			$("#replylist_"+id).hide();	
+		}  	
+		
     });
-	$(".close").click(function(){ 
+	/* $(".close").click(function(){ 
 		$(this).parent().hide();
-    });
+    }); */
 });
 </script>
 <script>

@@ -16,7 +16,8 @@ use dosamigos\ckeditor\CKEditor;
 
 	<?= $form->field($model, 'e_text')->widget(CKEditor::className(), [
         'options' => ['rows' => 6],
-        'preset' => 'basic'
+        'preset' => 'basic',
+	
     ]); ?>		
     <?php // $form->field($model, 'e_image')->fileInput(['class' => 'form-control']) ?>
 

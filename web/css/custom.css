@@ -73,26 +73,26 @@ button:focus {outline:0 !important;}
 .txt-smp-green{
  /*	background-color: #66cc66;  */
     background-color: #b30c4a;
-    padding: 7px;
+    padding: 8px;
     border-radius: 14px;
     color: #fff;
 }
 .txt-smp-orange{
     background-color: #f3ae1a;
-    padding: 7px;
+    padding: 8px;
     border-radius: 14px;
     color: #fff;
 }
 .txt-smp-blue {
     background-color: #1a67f3;
-    padding: 7px;
+    padding: 8px;
     border-radius: 14px;
     color: #fff;
 }
 .txt-smp-pink {
    /* background-color: #b30c4a; */
    background-color: #66cc66;
-    padding: 7px;
+    padding: 8px;
     border-radius: 14px;
     color: #fff;
 }
@@ -544,9 +544,14 @@ ul.smp-footer-links a {
 }
 .listesinside
 {
-	margin-left:2px;
+	 margin-left: 1px; 
+	padding-top: 3px;
 }
-
+.removelistesinside
+{
+	margin-left: 0px !important;
+	padding-top: 0px !important;
+}
 .readedmsg{
 	background-color: #F1F1F1;
 }

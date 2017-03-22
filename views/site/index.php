@@ -29,21 +29,17 @@ use yii\helpers\Url;
 				  ////////////////////////////
 				  echo  '<div class="smp-wish-desc">';
 					echo  '<p><div class="list-icon">
-							<img src="'.$model->wisherPic.'" alt="">
+							<img src="'.$model->wisherPic.'" alt="" />
 							<a href="'.Url::to(['account/profile','id'=>$model->wished_by]).'"><span>'.$model->wisherName.'</span></a>
 						</div></p>
 					<!--<p>Wish For : <span>'.$model->wish_title.'</span></p>
 					<p>Location : <span>'.$model->location.'</span></p>-->
 					<p class="desc">'.substr($model->wish_title,0,50).'..</p>
 					<p><a class="fnt-green" href="'.Url::to(['wish/view','id'=>$model->w_id]).'">Read More</a>
-					&nbsp;<i class="fa fa-thumbs-o-up fnt-blue"></i> <span id="likecmt_'.$model->w_id.'"  >'.$model->likesCount.'</span> Likes
-					</a>
-					</p>';
+					&nbsp;<i class="fa fa-thumbs-o-up fnt-blue"></i> <span id="likecmt_'.$model->w_id.'"  >'.$model->likesCount.'</span> Likes </p>';
 					
 				  echo  '</div>';
 				  
-					
-					
 				  echo  '</div>';
 			}?>
 		</section>
@@ -51,7 +47,7 @@ use yii\helpers\Url;
 	<div class="simply-head">
 		<a href="<?=\Yii::$app->homeUrl?>wish/granted"><button class="btn btn-smp-green smpl-brdr" type="button">SEE MORE FULFILLED WISHES</button></a>
 	</div>
-<script>
+<script type="text/javascript">
 	$(".shareIcons").each(function(){
 		var elem = $(this);
 			elem.jsSocials({
@@ -114,11 +110,10 @@ use yii\helpers\Url;
 
 </script>
 
-<script>
+<script type="text/javascript" >
 $(document).ready(function(){	
 var isVisible = false;
 var clickedAway = false;
-	
 	$(function(){
 		$('.listesinside').popover({   
 			html: true,
@@ -127,7 +122,7 @@ var clickedAway = false;
 				return clone;
 			}
 		}).click(function(e) {
-			e.preventDefault();
+			//e.preventDefault();
 			clickedAway = false;
 			isVisible = true;
 		});
@@ -136,9 +131,8 @@ var clickedAway = false;
 		 $('.listesinside').popover('hide');
 	}); */
 	
-	
 $(document).click(function (e) {
-    if (isVisible & clickedAway) {
+    if (isVisible & clickedAway) {  
         $('.listesinside').popover('hide');
         isVisible = clickedAway = false;
     } else {
@@ -192,15 +186,15 @@ $(document).on("click", ".report-img", function() {
 	 infinite: true,
 	 speed: 300,
 	 slidesToShow: 5,
-	 slidesToScroll: 1,
-	 responsive: [
+	 slidesToScroll: 4,
+	  responsive: [
 		{
 		 breakpoint: 1024,
 		 settings: {
 			slidesToShow: 3,
-			slidesToScroll: 1,
+			slidesToScroll: 2,
 			infinite: true,
-			dots: false
+			dots: false,
 		 }
 		},
 		{
@@ -217,13 +211,15 @@ $(document).on("click", ".report-img", function() {
 			slidesToScroll: 1
 		 }
 		}
-	 ]
+	 ] 
       });
       
-	 
+
+	
     });
   </script>
   
+
   <!--------------- SLIDER CHECK Function END ----------------------------------->
   
   
