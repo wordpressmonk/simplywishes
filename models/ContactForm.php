@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use app\models\MailContent;
 //use yii\base\Model;
 
 /**
@@ -67,16 +68,24 @@ class ContactForm extends \yii\db\ActiveRecord
      */
     public function contact()
     {	
-  
+		
+		$mailcontent = MailContent::find()->where(['m_id'=>1])->one();
+		$editmessage = $mailcontent->mail_message;		
+		$subject = $mailcontent->mail_subject;
+		if(empty($subject))
+			$subject = 	'SimplyWishes ';
+		
+		
+		
 		$message = Yii::$app
             ->mailer
             ->compose(
                 ['html' => 'contactMail-html'],
-                ['username' => $this->name]
+                ['username' => $this->name, 'editmessage' => $editmessage ]
             )
             ->setFrom([Yii::$app->params['supportEmail'] => 'SimplyWishes '])
             ->setTo($this->email)
-            ->setSubject('SimplyWishes ');			
+            ->setSubject($subject);			
             
 		$message->getSwiftMessage()->getHeaders()->addTextHeader('MIME-version', '1.0\n');
 		$message->getSwiftMessage()->getHeaders()->addTextHeader('charset', ' iso-8859-1\n');		

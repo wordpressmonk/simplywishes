@@ -5,6 +5,7 @@ use Yii;
 use yii\base\Model;
 use yii\base\InvalidParamException;
 use app\models\User;
+use app\models\MailContent;
 
 /**
  * Password reset form
@@ -82,6 +83,12 @@ class ResetPasswordForm extends Model
 	
 	public function sendEmailResetSuccess()
     {  
+		$mailcontent = MailContent::find()->where(['m_id'=>4])->one();
+		$editmessage = $mailcontent->mail_message;		
+		$subject = $mailcontent->mail_subject;
+		if(empty($subject))
+			$subject = 	'SimplyWishes ';
+		
 	
 		$userdetails = $this->_user;
 		
@@ -105,11 +112,11 @@ class ResetPasswordForm extends Model
        $message = Yii::$app
             ->mailer
             ->compose(
-                ['html' => 'passwordResetSuccessMessage-html'],['user'=>$user]               
+                ['html' => 'passwordResetSuccessMessage-html'],['user'=>$user , 'editmessage' => $editmessage ]               
             )
             ->setFrom([Yii::$app->params['supportEmail'] => 'SimplyWishes '])
             ->setTo($userdetails->email)
-            ->setSubject('SimplyWishes Reset-Password Success');
+            ->setSubject($subject);
           			
 		$message->getSwiftMessage()->getHeaders()->addTextHeader('MIME-version', '1.0\n');
 		$message->getSwiftMessage()->getHeaders()->addTextHeader('charset', ' iso-8859-1\n');

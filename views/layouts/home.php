@@ -67,6 +67,7 @@ AppAsset::register($this);
 					<li><a href="<?=Yii::$app->homeUrl?>happy-stories/my-story"><i class="fa fa-smile-o fa-lg"></i>My Happy Story</a></li>
 					<?php if(isset(\Yii::$app->user->identity->role) && (\Yii::$app->user->identity->role == 'admin')){ ?>
 					<li><a href="<?=Yii::$app->homeUrl?>happy-stories/permission"><i class="fa fa-list-alt fa-lg"></i>Happy Premission</a></li>
+					<li><a href="<?=Yii::$app->homeUrl?>mail-content/index"><i class="fa fa-clipboard fa-lg"></i>Mail Content</a></li>
 					<!-- <li><a href="<?=Yii::$app->homeUrl?>wish/report-action"><i class="fa fa-flag-checkered fa-lg" ></i>
 Report Action</a></li> -->
 					<?php } ?>

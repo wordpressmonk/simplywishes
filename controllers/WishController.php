@@ -19,6 +19,7 @@ use yii\helpers\ArrayHelper;
 use yii\web\UploadedFile;
 use yii\data\ActiveDataProvider;
 use yii\helpers\Url;
+use app\models\MailContent;
 
 use app\models\Payment;
 /**
@@ -411,7 +412,7 @@ class WishController extends Controller
 
 		// STEP 2: Post IPN data back to paypal to validate
 		//https://www.sandbox.paypal.com/cgi-bin/webscr
-		//$ch = curl_init('https://www.paypal.com/cgi-bin/webscr');
+		//$ch = curl_init('https://www.sandbox.paypal.com/cgi-bin/webscr');
 		$ch = curl_init('https://www.paypal.com/cgi-bin/webscr');
 		curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
 		curl_setopt($ch, CURLOPT_POST, 1);
@@ -486,6 +487,13 @@ class WishController extends Controller
 	
 	public function sendEmail($id)
     {
+		
+		$mailcontent = MailContent::find()->where(['m_id'=>5])->one();
+		$editmessage = $mailcontent->mail_message;		
+		$subject = $mailcontent->mail_subject;
+		if(empty($subject))
+			$subject = 	'SimplyWishes ';
+		
         /* @var $user User */
         $user = User::findOne([
             'status' => User::STATUS_ACTIVE,
@@ -500,11 +508,11 @@ class WishController extends Controller
             ->mailer
             ->compose(
                 ['html' => 'grantedSuccess-html'],
-                ['user' => $user]
+                ['user' => $user, 'editmessage' => $editmessage ]
             )
             ->setFrom([Yii::$app->params['supportEmail'] => 'SimplyWishes '])
             ->setTo($user->email)
-            ->setSubject('SimplyWishes Grant for your Wishe');			
+            ->setSubject($subject);			
             
 		$message->getSwiftMessage()->getHeaders()->addTextHeader('MIME-version', '1.0\n');
 		$message->getSwiftMessage()->getHeaders()->addTextHeader('charset', ' iso-8859-1\n');

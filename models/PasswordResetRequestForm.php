@@ -4,6 +4,7 @@ namespace app\models;
 use Yii;
 use yii\base\Model;
 use app\models\User;
+use app\models\MailContent;
 
 /**
  * Password reset request form
@@ -37,6 +38,14 @@ class PasswordResetRequestForm extends Model
      */
     public function sendEmail()
     {
+		
+		$mailcontent = MailContent::find()->where(['m_id'=>3])->one();
+		$editmessage = $mailcontent->mail_message;		
+		$subject = $mailcontent->mail_subject;
+		if(empty($subject))
+			$subject = 	'SimplyWishes ';
+		
+		
         /* @var $user User */
         $user = User::findOne([
             'status' => User::STATUS_ACTIVE,
@@ -59,11 +68,11 @@ class PasswordResetRequestForm extends Model
             ->mailer
             ->compose(
                 ['html' => 'passwordResetToken-html'],
-                ['user' => $user]
+                ['user' => $user , 'editmessage' => $editmessage ]
             )
             ->setFrom([Yii::$app->params['supportEmail'] => 'SimplyWishes '])
             ->setTo($this->email)
-            ->setSubject('SimplyWishes Please Reset Your Password');			
+            ->setSubject($subject);			
             
 		$message->getSwiftMessage()->getHeaders()->addTextHeader('MIME-version', '1.0\n');
 		$message->getSwiftMessage()->getHeaders()->addTextHeader('charset', ' iso-8859-1\n');
