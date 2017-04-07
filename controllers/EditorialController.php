@@ -10,6 +10,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\web\UploadedFile;
 use yii\filters\VerbFilter;
+use Embed\Embed;
 
 /**
  * EditorialController implements the CRUD actions for Editorial model.
@@ -101,6 +102,8 @@ class EditorialController extends Controller
 		$model->scenario = 'update_by_editorial_admin';
         if ($model->load(Yii::$app->request->post())){
 			
+			
+			
 			/**		Image Uploaded for Update function Line 
 			**/		
 			$model->e_image = UploadedFile::getInstance($model, 'e_image');										
@@ -112,9 +115,9 @@ class EditorialController extends Controller
 				
 				$model->updated_by = \Yii::$app->user->id;
 				$model->updated_at = date('Y-m-d H:i:s');
-				
+
 				if($model->save())
-				{	
+				{				
 					return $this->redirect(['view', 'id' => $model->e_id]);
 				} else {
 					return $this->render('update', ['model' => $model,]);
@@ -208,4 +211,36 @@ class EditorialController extends Controller
 			   } 
 		 }
     }
+	
+	
+	public function actionEmbed($url){
+		
+		//Load any url:
+		$info = Embed::create($url);				
+		//var_dump($info->code);die;
+		//echo preg_match_all('/src="([\s\S]*?)"/', $info->code,$src[], PREG_SET_ORDER);die;
+		if($info && $info->code){			
+			$xpath = new \DOMXPath(@\DOMDocument::loadHTML($info->code));
+			$src = $xpath->evaluate("string(//iframe/@src)");	
+			if(!$src)
+				return $url;			
+		}
+		if (preg_match('/youtube.com/',$info->code))
+			return $src."&rel=0";
+		else
+			return $src;
+	}
+	
+	
+	public function actionUpload(){
+		//$name = uniqid();
+		$name = preg_replace( 
+                     array("/\s+/", "/[^-\.\w]+/"), 
+                     array("_", ""), 
+                     trim($_FILES["media"]["name"])); 
+		$dir = "uploads/media/";
+		move_uploaded_file($_FILES["media"]["tmp_name"], $dir. $name);
+		return $url = Yii::$app->urlManager->createAbsoluteUrl([$dir.$name]);
+	}
+	
 }

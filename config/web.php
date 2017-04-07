@@ -32,28 +32,13 @@ $config = [
 			'transport' => [
             'class' => 'Swift_SmtpTransport',
             'host' => 'smtp.gmail.com',
-            'username' => 'arivu.ilan@gmail.com',
-            'password' => 'arivuilan',
+            'username' => 'arivazhagan0117@gmail.com',
+            'password' => 'Arivu@!@#Ilan',
             'port' => '587',
             'encryption' => 'tls', 
                         ], 
         ],
 		
-		/* 'mail' => [
-        'class' => 'yii\swiftmailer\Mailer',
-        'viewPath' => '@common/mail',
-        'useFileTransport' => false,//set this property to false to send mails to real email addresses
-        //comment the following array to send mail using php's mail function
-        'transport' => [
-            'class' => 'Swift_SmtpTransport',
-            'host' => 'smtp.gmail.com',
-            'username' => 'arivu.ilan@gmail.com',
-            'password' => 'arivuilan',
-            'port' => '587',
-            'encryption' => 'tls', 
-                        ], 
-    ], */
-	
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
             'targets' => [

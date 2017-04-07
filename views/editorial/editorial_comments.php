@@ -60,7 +60,22 @@ $this->params['breadcrumbs'][] = $this->title;
 					<div class="editrightimg">
 					<center><img src="<?=Yii::$app->homeUrl?><?php echo $model->e_image; ?>" height="180px"/></center>
 					</div>
+					<br>
+					<div><?php if($model->featured_video_url != ''){ 
+							$url = $model->featured_video_url; 
+										
+					if (!filter_var($url, FILTER_VALIDATE_URL) === false) {
+							echo "<iframe width='600' height='300' src=".$url." controls></iframe>";
+						} else {
+							echo $url;
+					}
+					}
+			
+					?>
+					</div>
+				
 				</div>
+				
 				
 			</div>
 			
@@ -177,4 +192,9 @@ $(document).ready(function(){
 		});
 	});
 </script>
+<style>
+iframe{
+	max-width: 100%;
+}
+</style>
 

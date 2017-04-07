@@ -16,6 +16,8 @@ use Yii;
  */
 class Editorial extends \yii\db\ActiveRecord
 {
+	public $featured_video_upload;
+		
     /**
      * @inheritdoc
      */
@@ -33,10 +35,12 @@ class Editorial extends \yii\db\ActiveRecord
             [['e_title', 'e_text', ], 'required'],
 			[['e_image'], 'required','except' => 'update_by_editorial_admin'], 
             [['e_text'], 'string'],
+            [['featured_video_url'], 'string'],
             [['status'], 'integer'],
             [['created_at'], 'safe'],
             [['e_title'], 'string', 'max' => 250],
 			[['e_image'], 'file','extensions' => 'jpg,png'],
+			[['featured_video_upload'], 'file','extensions' => 'mp4,m4v,webm,ogv', 'skipOnEmpty' => true],
          
         ];
     }
@@ -45,7 +49,7 @@ class Editorial extends \yii\db\ActiveRecord
 	public function scenarios()
     {
         $scenarios = parent::scenarios();
-        $scenarios['update_by_editorial_admin'] = ['e_title','e_text','e_image']; //Scenario Values Only Accepted
+        $scenarios['update_by_editorial_admin'] = ['e_title','e_text','e_image','featured_video_url']; //Scenario Values Only Accepted
         return $scenarios;
     } 
 	
@@ -61,6 +65,8 @@ class Editorial extends \yii\db\ActiveRecord
             'e_image' => 'Image',
             'status' => 'Status',
             'created_at' => 'Created At',
+            'featured_video_url' => 'Featured Video',
+			'featured_video_upload' => 'Feattured Video Upload',
         ];
     }
 	
