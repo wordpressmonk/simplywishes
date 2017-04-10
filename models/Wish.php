@@ -45,6 +45,7 @@ class Wish extends \yii\db\ActiveRecord
             [['wish_title'], 'string', 'max' => 100],
             [['summary_title','who_can'], 'string', 'max' => 150],
 			[['in_return'], 'string', 'max' => 1500],
+			[['expected_cost'], 'integer'],
 		//	[['expected_cost'], 'in','range'=>range(100,1000),'message'=>'Expected Cost(USD) Range In 100 to 1000' ],
         ];
     }
