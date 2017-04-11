@@ -94,6 +94,11 @@ use yii\helpers\Url;
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
+	<?php 
+		if($model->isNewRecord)
+			echo $form->field($model, 'auto_id')->textInput()->label(false) 
+	?>
+	
     <?php ActiveForm::end(); ?>
 </div>
 </div>

@@ -555,7 +555,7 @@ class AccountController extends Controller
 		
 		//$inbox_messages = Message::find()->where(['recipient_id'=>\Yii::$app->user->id,'recipient_del' => 0,'parent_id' => 0, 'reply_recipient_id' => 0 ])->orwhere(['reply_recipient_id' => \Yii::$app->user->id])->orderBy('m_id DESC')->all();
 		
-		$inbox_messages = Message::find()->where(['recipient_id'=>\Yii::$app->user->id,'recipient_del' => 0,'parent_id' => 0, 'reply_recipient_id' => 0 ])->orwhere(['reply_recipient_id' => \Yii::$app->user->id,'recipient_del' => 0,'parent_id' => 0])->orderBy('m_id DESC')->all();
+		$inbox_messages = Message::find()->where(['recipient_id'=>\Yii::$app->user->id,'recipient_del' => 0,'parent_id' => 0, 'reply_recipient_id' => 0 ])->orwhere(['reply_recipient_id' => \Yii::$app->user->id,'recipient_del' => 0,'parent_id' => 0])->orderBy('created_at DESC')->all();
 			
 		foreach($inbox_messages as $messages){
 			
@@ -611,7 +611,7 @@ class AccountController extends Controller
 		
 		$threads = [];
 		
-		$sent_messages = Message::find()->where(['sender_id'=>\Yii::$app->user->id,'sender_del' => 0,'parent_id' => 0, 'reply_sender_id' => 0 ])->orwhere(['reply_sender_id' => \Yii::$app->user->id,'sender_del' => 0,'parent_id' => 0])->orderBy('m_id DESC')->all();
+		$sent_messages = Message::find()->where(['sender_id'=>\Yii::$app->user->id,'sender_del' => 0,'parent_id' => 0, 'reply_sender_id' => 0 ])->orwhere(['reply_sender_id' => \Yii::$app->user->id,'sender_del' => 0,'parent_id' => 0])->orderBy('created_at DESC')->all();
 		
 		foreach($sent_messages as $messages){
 			

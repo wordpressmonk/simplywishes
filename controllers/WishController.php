@@ -196,6 +196,13 @@ class WishController extends Controller
 		 */
 		$categories =  ArrayHelper::map(Category::find()->all(), 'cat_id', 'title');
         if ($model->load(Yii::$app->request->post())) {
+			
+			
+			echo "<pre>";
+			echo "Create Ticet";
+			print_r(Yii::$app->request->post());
+			exit;
+			
 			$model->primary_image = UploadedFile::getInstance($model, 'primary_image');
 			if(!empty($model->primary_image)) {
 				if(!$model->uploadImage())
@@ -584,5 +591,24 @@ class WishController extends Controller
 	  }
     }
 	
+	public function actionWishAutosave()
+    {
+		
+		if(Yii::$app->request->post())
+		{
+			$models = Yii::$app->request->post();
+			
+			
+			// echo "<pre>";
+			print_r($models['Wish']['auto_id']);
+			
+			/* echo "<pre>";	
+			print_r($models); */
+			$models['Wish']['auto_id'] = 123;
+			return json_encode($models['Wish']['auto_id']);
+			
+		}
+		
+    }
 	
 }
