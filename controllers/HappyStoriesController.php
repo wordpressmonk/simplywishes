@@ -108,11 +108,18 @@ class HappyStoriesController extends \yii\web\Controller
 		  
          if ($model->load(Yii::$app->request->post())) {
 			
+			/* echo "<pre>";
+			print_r(Yii::$app->request->post());
+			exit;
+			 */
 			 $model->user_id = \Yii::$app->user->id;
 			$model->story_image = UploadedFile::getInstance($model, 'story_image');
 				if(!empty($model->story_image)) {
 					if(!$model->uploadImage())
 						return;
+				}else 
+				{
+					$model->story_image = $model->dulpicate_image;
 				}
 				
 				if($model->save())
@@ -146,7 +153,7 @@ class HappyStoriesController extends \yii\web\Controller
     {
         $model = HappyStories::findOne($id);
 		$current_image = $model->story_image;
-		$model->scenario = 'update_by_happystory_user';
+		//$model->scenario = 'update_by_happystory_user';
 		
 		$user = User::findOne(\Yii::$app->user->id);
 		$profile = UserProfile::find()->where(['user_id'=>\Yii::$app->user->id])->one();
@@ -159,8 +166,17 @@ class HappyStoriesController extends \yii\web\Controller
 				if(!empty($model->story_image)){ 
 					if(!$model->uploadImage())
 						return;
-				}else
-					$model->story_image = $current_image;
+				}
+			 else
+				{					
+					if(!empty($model->dulpicate_image) && ($model->dulpicate_image != $current_image ))
+					{
+						$model->story_image = $model->dulpicate_image;
+					} else {
+						$model->story_image = $current_image;
+					}					
+				}
+				
 				if($model->save())
 				{	Yii::$app->session->setFlash('success_happystory');
 					//return $this->redirect(['story-details', 'id' => $model->hs_id]);

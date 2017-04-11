@@ -18,6 +18,8 @@ use yii\helpers\Url;
  */
 class HappyStories extends \yii\db\ActiveRecord
 {
+	public $dulpicate_image;
+	
     /**
      * @inheritdoc
      */
@@ -33,11 +35,14 @@ class HappyStories extends \yii\db\ActiveRecord
     {
         return [
             [['user_id', 'wish_id', 'story_text'], 'required','except' => 'update_by_happystory_adminuser'],
-			[['story_image'], 'required','except' => 'update_by_happystory_user'], 
+			
+			//[['story_image'], 'required','except' => 'update_by_happystory_user'], 
+			
             [['user_id', 'wish_id'], 'integer','except' => 'update_by_happystory_adminuser'],
             [['status'], 'integer','on' => 'update_by_happystory_adminuser'],
             [['story_text'], 'string'],
-            [['created_at'], 'safe'],          
+            [['created_at'], 'safe'],
+			[['dulpicate_image'], 'safe'],			
 			[['story_image'], 'file','extensions' => 'jpg,png'],
         ];
     }
