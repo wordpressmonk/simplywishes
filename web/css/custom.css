@@ -300,7 +300,7 @@ ul.collapse.detail {
 	margin:5px;
 }
 li.media.media_textbox {
-    width: 90%;
+    width: 100%;  /* new message box */
     display: inline-block;
 }
 li.media.media_button{

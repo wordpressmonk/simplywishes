@@ -206,6 +206,7 @@ class WishController extends Controller
 			//print_r($model);die;
 			
 			$model->save();
+			$model->sendCreateSuccessEmail(\Yii::$app->user->id);
             return $this->redirect(['account/my-account']);
         } else {
             return $this->render('create', [
@@ -253,6 +254,7 @@ class WishController extends Controller
 			
 			$model->wished_by = \Yii::$app->user->id;
 			$model->save();
+			$model->sendUpdateSuccessEmail(\Yii::$app->user->id);
             return $this->redirect(['view', 'id' => $model->w_id]);
         } else {
             return $this->render('update', [
@@ -411,9 +413,9 @@ class WishController extends Controller
 
 
 		// STEP 2: Post IPN data back to paypal to validate
-		//https://www.sandbox.paypal.com/cgi-bin/webscr
-		$ch = curl_init('https://www.ipnpb.paypal.com/cgi-bin/webscr');
-		//$ch = curl_init('https://www.paypal.com/cgi-bin/webscr');
+		//https://www.ipnpb.sandbox.paypal.com/cgi-bin/webscr
+		$ch = curl_init('https://www.ipnpb.sandbox.paypal.com/cgi-bin/webscr');
+		//$ch = curl_init('https://www.ipnpb.paypal.com/cgi-bin/webscr');
 		curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
 		curl_setopt($ch, CURLOPT_POST, 1);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);

@@ -118,6 +118,7 @@ class HappyStoriesController extends \yii\web\Controller
 				if($model->save())
 				{
 					Yii::$app->session->setFlash('success_adminhappystory');
+					$model->sendSuccessEmail(\Yii::$app->user->id);
 				    return $this->redirect(['my-story']);
 				}	
 				else
@@ -266,6 +267,7 @@ class HappyStoriesController extends \yii\web\Controller
 		
 				if($model->save())
 				{	
+					$model->sendAdminSuccessEmail( $model->user_id);
 					return $this->redirect(['view', 'id' => $model->hs_id]);
 				} else {
 			

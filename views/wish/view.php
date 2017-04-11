@@ -55,8 +55,8 @@ $this->params['breadcrumbs'][] = $this->title;
 			<?php } ?>			
 			<?php if(is_null($model->granted_by) && !\Yii::$app->user->isGuest  && \Yii::$app->user->id!=$model->wished_by){ ?>
 			 <?php if($model->non_pay_option == 0 ){ ?>
-				<!--<form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post"> -->
-			    <form action="https://www.paypal.com/cgi-bin/webscr" method="post"> 
+				<form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
+			   <!-- <form action="https://www.paypal.com/cgi-bin/webscr" method="post"> -->
 				  <!-- Identify your business so that you can collect the payments. -->
 				  <!--<input type="hidden" name="business" value="dency@abacies.com">-->
 				  <input type="hidden" name="business" value="<?=$model->wisher->email?>">

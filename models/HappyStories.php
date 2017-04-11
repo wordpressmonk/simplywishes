@@ -149,4 +149,79 @@ class HappyStories extends \yii\db\ActiveRecord
 		echo $str;
 	}
 	
+	
+		
+	public function sendSuccessEmail($id)
+    {
+		
+		$mailcontent = MailContent::find()->where(['m_id'=>7])->one();
+		$editmessage = $mailcontent->mail_message;		
+		$subject = $mailcontent->mail_subject;
+		if(empty($subject))
+			$subject = 	'SimplyWishes ';
+		
+		
+        /* @var $user User */
+        $user = User::findOne([
+            'status' => User::STATUS_ACTIVE,
+            'id' => $id,
+        ]);
+			
+        if (!$user) {
+            return false;
+        }
+      
+        $message = Yii::$app
+            ->mailer
+            ->compose(
+                ['html' => 'happystoriesSuccess-html'],
+                ['user' => $user, 'editmessage' => $editmessage ]
+            )
+            ->setFrom([Yii::$app->params['supportEmail'] => 'SimplyWishes '])
+            ->setTo( $user->email)
+            ->setSubject($subject);			
+            
+		$message->getSwiftMessage()->getHeaders()->addTextHeader('MIME-version', '1.0\n');
+		$message->getSwiftMessage()->getHeaders()->addTextHeader('charset', ' iso-8859-1\n');
+		
+		return $message->send();
+    }
+	
+	public function sendAdminSuccessEmail($id)
+    {
+		
+		$mailcontent = MailContent::find()->where(['m_id'=>8])->one();
+		$editmessage = $mailcontent->mail_message;		
+		$subject = $mailcontent->mail_subject;
+		if(empty($subject))
+			$subject = 	'SimplyWishes ';
+		
+		
+        /* @var $user User */
+        $user = User::findOne([
+            'status' => User::STATUS_ACTIVE,
+            'id' => $id,
+        ]);
+			
+        if (!$user) {
+            return false;
+        }
+      
+        $message = Yii::$app
+            ->mailer
+            ->compose(
+                ['html' => 'happystoriesAdminSuccess-html'],
+                ['user' => $user, 'editmessage' => $editmessage ]
+            )
+            ->setFrom([Yii::$app->params['supportEmail'] => 'SimplyWishes '])
+            ->setTo( $user->email)
+            ->setSubject($subject);			
+            
+		$message->getSwiftMessage()->getHeaders()->addTextHeader('MIME-version', '1.0\n');
+		$message->getSwiftMessage()->getHeaders()->addTextHeader('charset', ' iso-8859-1\n');
+		
+		return $message->send();
+    }
+	
+	
 }
