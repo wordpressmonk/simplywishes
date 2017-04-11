@@ -22,7 +22,7 @@ use yii\helpers\Url;
  */
 class Wish extends \yii\db\ActiveRecord
 {
-	public $auto_id;
+	//public $auto_id;
 	
     /**
      * @inheritdoc
@@ -48,7 +48,7 @@ class Wish extends \yii\db\ActiveRecord
             [['summary_title','who_can'], 'string', 'max' => 150],
 			[['in_return'], 'string', 'max' => 1500],
 			[['expected_cost'], 'integer'],
-			[['auto_id'], 'safe'],
+			//[['auto_id'], 'safe'],
 		//	[['expected_cost'], 'in','range'=>range(100,1000),'message'=>'Expected Cost(USD) Range In 100 to 1000' ],
         ];
     }

@@ -95,8 +95,8 @@ use yii\helpers\Url;
     </div>
 
 	<?php 
-		if($model->isNewRecord)
-			echo $form->field($model, 'auto_id')->textInput()->label(false) 
+		/* if($model->isNewRecord)
+			echo $form->field($model, 'auto_id')->textInput()->label(false)  */
 	?>
 	
     <?php ActiveForm::end(); ?>

@@ -198,10 +198,10 @@ class WishController extends Controller
         if ($model->load(Yii::$app->request->post())) {
 			
 			
-			echo "<pre>";
+			/* echo "<pre>";
 			echo "Create Ticet";
 			print_r(Yii::$app->request->post());
-			exit;
+			exit; */
 			
 			$model->primary_image = UploadedFile::getInstance($model, 'primary_image');
 			if(!empty($model->primary_image)) {
