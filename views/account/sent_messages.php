@@ -267,9 +267,12 @@ use yii\web\JsExpression;
 					}
 					
 					
-				}
+				},
+				 error: function (response) {
+						$("#"+id).removeAttr('disabled');
+					}
 			});					
-			$("#"+id).removeAttr('disabled');
+		
 
 		});
 	

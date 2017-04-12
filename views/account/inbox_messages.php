@@ -303,11 +303,11 @@ use yii\web\JsExpression;
 							$("#"+id).removeAttr('disabled');
 					}
 					
-					
-				}
+				},
+				error: function (response) {
+						$("#"+id).removeAttr('disabled');
+					}	
 			});
-			
-				$("#"+id).removeAttr('disabled');
 				
 		});
 	
