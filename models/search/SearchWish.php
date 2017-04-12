@@ -80,7 +80,7 @@ class SearchWish extends Wish
      */
     public function search($params,$cat_id=null)
     {
-        $query = Wish::find()->where(['granted_by' => null])->orderBy('w_id DESC');
+        $query = Wish::find()->where(['granted_by' => null,'wish_status'=>0])->orderBy('w_id DESC');
 		if($cat_id)
 			$query->andWhere(['category'=>$cat_id]);
         // add conditions that should always apply here
@@ -198,7 +198,7 @@ class SearchWish extends Wish
 	}
 	public function searchUserWishes($params, $user_id, $type){
 		
-        $query = Wish::find()->where(['wished_by'=>$user_id])->orderBy('w_id DESC');
+        $query = Wish::find()->where(['wished_by'=>$user_id,'wish_status'=>0])->orderBy('w_id DESC');
         // add conditions that should always apply here
 		if($type == 'fullfilled')
 			$query->andWhere(['not', ['granted_by' => null]]);
@@ -288,5 +288,44 @@ class SearchWish extends Wish
     }
 	
 
+	public function searchDrafts($params)
+    {
+        $query = Wish::find()->where(['wish_status' => 1])->orderBy('w_id DESC');
+	
+        // add conditions that should always apply here
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+            'pagination' => [
+                'pageSize'=>5
+            ]
+        ]);
+
+        $this->load($params);
+
+        if (!$this->validate()) {
+            // uncomment the following line if you do not want to return any records when validation fails
+            // $query->where('0=1');
+            return $dataProvider;
+        }
+
+        // grid filtering conditions
+        $query->andFilterWhere([
+            'w_id' => $this->w_id,
+            'wished_by' => $this->wished_by,
+            'granted_by' => $this->granted_by,
+            'category' => $this->category,
+            'state' => $this->state,
+            'country' => $this->country,
+            'city' => $this->city,
+        ]);
+
+        $query->andFilterWhere(['like', 'wish_title', $this->wish_title])
+            ->andFilterWhere(['like', 'summary_title', $this->summary_title])
+            ->andFilterWhere(['like', 'wish_description', $this->wish_description])
+            ->andFilterWhere(['like', 'primary_image', $this->primary_image]);
+
+        return $dataProvider;
+    }
 	
 }

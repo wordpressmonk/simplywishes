@@ -11,6 +11,7 @@ use app\models\UserProfile;
 use yii\web\UploadedFile;
 use app\models\search\SearchWish;
 use app\models\Message;
+use app\models\Wish;
 use app\models\FriendRequest;
 use app\models\FollowRequest;
 
@@ -196,6 +197,7 @@ class AccountController extends Controller
 			$message->recipient_id = $to;
 			$message->parent_id = 0;
 			$message->text = $msg;
+			$message->created_at = date("Y-m-d H:i:s");
 			if($message->save()){
 				Yii::$app->session->setFlash('messageSent');
 			}
@@ -282,6 +284,7 @@ class AccountController extends Controller
 			$message->recipient_id = $to;
 			$message->parent_id = 0;
 			$message->text = $msg;
+			$message->created_at =  date("Y-m-d H:i:s");
 			if($message->save()){
 				Yii::$app->session->setFlash('messageSent');
 			}
@@ -555,7 +558,11 @@ class AccountController extends Controller
 		
 		//$inbox_messages = Message::find()->where(['recipient_id'=>\Yii::$app->user->id,'recipient_del' => 0,'parent_id' => 0, 'reply_recipient_id' => 0 ])->orwhere(['reply_recipient_id' => \Yii::$app->user->id])->orderBy('m_id DESC')->all();
 		
-		$inbox_messages = Message::find()->where(['recipient_id'=>\Yii::$app->user->id,'recipient_del' => 0,'parent_id' => 0, 'reply_recipient_id' => 0 ])->orwhere(['reply_recipient_id' => \Yii::$app->user->id,'recipient_del' => 0,'parent_id' => 0])->orderBy('created_at DESC')->all();
+		 $inbox_messages = Message::find()->where(['recipient_id'=>\Yii::$app->user->id,'recipient_del' => 0,'parent_id' => 0, 'reply_recipient_id' => 0 ])->orwhere(['reply_recipient_id' => \Yii::$app->user->id,'recipient_del' => 0,'parent_id' => 0])->orderBy('created_at DESC')->all(); 
+		
+		
+		/* $inbox_messages = Message::find()->where(['recipient_id'=>\Yii::$app->user->id,'recipient_del' => 0,'parent_id' => 0, 'reply_recipient_id' => 0 ])->orwhere(['reply_recipient_id' => \Yii::$app->user->id,'recipient_del' => 0,'parent_id' => 0])->orwhere(['reply_sender_id' => \Yii::$app->user->id,'recipient_del' => 0,'parent_id' => 0])->orderBy('created_at DESC')->all(); */
+			
 			
 		foreach($inbox_messages as $messages){
 			
@@ -611,7 +618,10 @@ class AccountController extends Controller
 		
 		$threads = [];
 		
-		$sent_messages = Message::find()->where(['sender_id'=>\Yii::$app->user->id,'sender_del' => 0,'parent_id' => 0, 'reply_sender_id' => 0 ])->orwhere(['reply_sender_id' => \Yii::$app->user->id,'sender_del' => 0,'parent_id' => 0])->orderBy('created_at DESC')->all();
+		 $sent_messages = Message::find()->where(['sender_id'=>\Yii::$app->user->id,'sender_del' => 0,'parent_id' => 0, 'reply_sender_id' => 0 ])->orwhere(['reply_sender_id' => \Yii::$app->user->id,'sender_del' => 0,'parent_id' => 0])->orderBy('created_at DESC')->all(); 
+		
+		
+		/* $sent_messages = Message::find()->where(['sender_id'=>\Yii::$app->user->id,'sender_del' => 0,'parent_id' => 0, 'reply_sender_id' => 0 ])->orwhere(['reply_sender_id' => \Yii::$app->user->id,'sender_del' => 0,'parent_id' => 0])->orwhere(['reply_recipient_id' => \Yii::$app->user->id,'recipient_del' => 0,'parent_id' => 0])->orderBy('created_at DESC')->all(); */
 		
 		foreach($sent_messages as $messages){
 			
@@ -676,6 +686,7 @@ class AccountController extends Controller
 			$message->read_text = 0;
 			$message->sender_del = 0;
 			$message->recipient_del = 0;
+			$message->created_at = date("Y-m-d H:i:s");
 
 			if($message->save()){
 				
@@ -685,7 +696,7 @@ class AccountController extends Controller
 				$parentmessages->read_text = 0;
 				$parentmessages->sender_del = 0;
 				$parentmessages->recipient_del = 0;
-				$parentmessages->created_at =  date("Y-m-d H:i:s");
+				$parentmessages->created_at = date("Y-m-d H:i:s");
 				$parentmessages->save();
 				
 				return json_encode([
@@ -698,5 +709,7 @@ class AccountController extends Controller
 		}
 	}
 	
+	
+
 	
 }

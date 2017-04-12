@@ -26,7 +26,11 @@ use yii\helpers\Url;
     ]); ?>
 
 
+    <?php // $form->field($model, 'primary_image')->fileInput(['class' => 'form-control',"onChange"=>"upload();return false;"]) ?>
     <?= $form->field($model, 'primary_image')->fileInput(['class' => 'form-control']) ?>
+	
+	<?php // $form->field($model, 'primary_image_name')->textInput() ?>
+		
 	<div class="row">
 					<div class="col-lg-4">
 						<?= $form->field($model, 'country')->dropDownList($countries,[
@@ -95,8 +99,8 @@ use yii\helpers\Url;
     </div>
 
 	<?php 
-		/* if($model->isNewRecord)
-			echo $form->field($model, 'auto_id')->textInput()->label(false)  */
+		 if($model->isNewRecord)
+			echo $form->field($model, 'auto_id')->hiddenInput()->label(false)  
 	?>
 	
     <?php ActiveForm::end(); ?>
@@ -124,4 +128,27 @@ $( document ).ready(function() {
 	<?php } ?>	 
 	
 });
+</script>
+
+<script type="text/javascript" >
+/* function upload(){
+  data = new FormData();
+  data.append('file', $('#wish-primary_image')[0].files[0]);
+  var imgname  =  $('#wish-primary_image').val();
+  var size  =  $('#wish-primary_image')[0].files[0].size;
+  var ext =  imgname.substr( (imgname.lastIndexOf('.') +1) );
+  var display_name = imgname.substr( (imgname.lastIndexOf('\\') +1) );
+  $.ajax({
+        url: 'upload-file',
+        type: "POST",
+        data: data,
+        enctype: 'multipart/form-data',
+        processData: false,  // tell jQuery not to process the data
+        contentType: false,
+        success: function(json){      
+			$("#wish-primary_image_name").val(json);
+        }
+  });
+}
+ */
 </script>

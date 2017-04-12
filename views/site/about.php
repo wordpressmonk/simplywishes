@@ -22,7 +22,13 @@ $this->params['breadcrumbs'][] = $this->title;
 		<section class="regular slider">
 		<?php foreach($dataProvider->models as $model){
 			$userProfile = UserProfile::find()->where(['user_id'=>$model->wished_by])->one();
+			//echo $userProfile['user_id'];
+			
 			echo '<div><a href="'.Url::to(['account/profile','id'=>$userProfile->user_id]).'"><img style="width: 200px; !important"  src="'.\Yii::$app->homeUrl.$userProfile->profile_image.'"/></a></div>';
+			
+			
+			//echo '<div><a href="'.Url::to(['account/profile','id'=>$userProfile['user_id'] ]).'"><img style="width: 200px; !important"  src="'.\Yii::$app->homeUrl.$userProfile['profile_image'].'"/></a></div>';
+			
 		}?>
 		</section>
 	</div>

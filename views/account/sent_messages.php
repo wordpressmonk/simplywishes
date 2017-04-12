@@ -62,7 +62,7 @@ use yii\web\JsExpression;
 								<label for="message">Enter Your Message</label>
 								<textarea id="'.$key.'_msg" class="form-control" rows="2"></textarea>
 							</div>
-							<button type="button" data-send_to="'.$msg['recipient_id'].'" data-msg_id ="'.$msg['m_id'].'" class="send-msg btn btn-primary pull-right">Reply</button>
+							<button type="button" id="rpy_'.$msg['m_id'].'" data-send_to="'.$msg['recipient_id'].'" data-msg_id ="'.$msg['m_id'].'" class="send-msg btn btn-primary pull-right">Reply</button>
 						</li>
 						';
 
@@ -176,7 +176,7 @@ use yii\web\JsExpression;
 				var msg_id = $.map($('input[name="selection[]"]:checked'), function(c){return c.value; })
 				if($.trim(msg_id) === "")
 				 {
-					alert("Please Select the Checkbox to Delete!!!.");
+					alert("Please Select the Checkbox to Delete.");
 					return false;
 				  }				
 				 $.ajax({
@@ -227,17 +227,30 @@ use yii\web\JsExpression;
 			$(this).parent('li').addClass('active'); 
 		});
 
-		$(".send-msg").on("click",function(){			
+		$(".send-msg").on("click",function(){	
+
+			var id = $(this).attr('id');
+
 			var send_to = $(this).attr('data-send_to');
 			var msg_id = $(this).attr('data-msg_id');
 			var msg = $('#'+msg_id+'_msg').val();
+			if($.trim(msg) === "")
+			{
+				alert("Please check the message.");
+				return false;
+				
+			}
+		
 			var prof_image = "<?=\Yii::$app->homeUrl.$current_user->profile_image?>";
 			var fullname = "<?=$current_user->fullname?>";
 			var elem = $(this);
 			console.log(msg);
 			var send_from = "<?=\Yii::$app->user->id?>";
 			
-		
+			$("#"+id).attr('disabled','disabled');
+			
+			
+			
 			$.ajax({
 				url : '<?=Url::to(['account/reply-message'])?>',
 				type : 'POST',
@@ -250,11 +263,14 @@ use yii\web\JsExpression;
 						var html = '<li class="media"><div class="media-left list-icon"><img src="'+prof_image+'" alt=""></div><div class="media-body"><h4 class="media-heading">'+fullname+'</h4><p class="list-group-item-text">'+msg+'<span class="label label-primary pull-right">Date:Now</span></p></div></li>';
 					//$(elem).parent('li').append(html);
 						$( html ).insertAfter( $(elem).parent('li'));
+						$("#"+id).removeAttr('disabled');
 					}
 					
 					
 				}
-			});
+			});					
+			$("#"+id).removeAttr('disabled');
+
 		});
 	
 

@@ -29,17 +29,21 @@ $this->params['breadcrumbs'][] = $this->title;
 </div>
 
 <script>
-/* 
+
+  
  $(function () {
-    $.post("wish-autosave", function (data) {
-       callback(data);
-    }, "json");
+	 
+	 $.post( "wish-autosave", function( data ) {
+			$("#wish-auto_id").val(data);
+		});
+
+
     setInterval(function () {
         $.post("wish-autosave", $("form").serialize());
-    }, 10000); 
+    }, 5000); 
 	
-});
-   */
-
+}); 
+   
+ 
  
 </script>

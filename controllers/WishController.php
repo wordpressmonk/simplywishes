@@ -182,37 +182,50 @@ class WishController extends Controller
 		$model->scenario = 'create';
 		
 		$countries = \yii\helpers\ArrayHelper::map(\app\models\Country::find()->all(),'id','name');	
-		/* $states = \yii\helpers\ArrayHelper::map(\app\models\State::find()->all(),'id','name');
-		$cities = \yii\helpers\ArrayHelper::map(\app\models\City::find()->all(),'id','name');	 */		
 		
 		$states = [];			
 		$cities = [];	
 		
 		$user = User::findOne(\Yii::$app->user->id);
 		$profile = UserProfile::find()->where(['user_id'=>\Yii::$app->user->id])->one();
-		
-		/* $states = "";
-		$cities = "";
-		 */
+				
 		$categories =  ArrayHelper::map(Category::find()->all(), 'cat_id', 'title');
         if ($model->load(Yii::$app->request->post())) {
 			
-			
-			/* echo "<pre>";
-			echo "Create Ticet";
-			print_r(Yii::$app->request->post());
-			exit; */
-			
 			$model->primary_image = UploadedFile::getInstance($model, 'primary_image');
-			if(!empty($model->primary_image)) {
-				if(!$model->uploadImage())
-					return;
+				if(!empty($model->primary_image)) {
+					if(!$model->uploadImage())
+						return;
+				}
+				$model->wished_by = \Yii::$app->user->id;
+				$model->wish_status = 0;
+			
+			if(!empty($model->auto_id))
+			{
+				$model1 = Wish::findOne($model->auto_id);
+				$model1->w_id = $model->auto_id;
+				$model1->wished_by = \Yii::$app->user->id;					
+				$model1->category = $model->category;
+				$model1->wish_title = $model->wish_title;
+				$model1->wish_description = $model->wish_description;
+				$model1->primary_image = $model->primary_image;
+				$model1->expected_cost = $model->expected_cost;
+				$model1->expected_date = $model->expected_date;
+				$model1->in_return = $model->in_return;
+				$model1->who_can = $model->who_can;
+				$model1->state = $model->state;
+				$model1->country = $model->country;
+				$model1->city = $model->city;
+				$model1->non_pay_option = $model->non_pay_option;
+				$model1->wish_status =$model->wish_status;				
+						
+				$model1->update();
 			}
-			$model->wished_by = \Yii::$app->user->id;
+			else
+			{ 				
+				$model->save();
+			}
 			
-			//print_r($model);die;
-			
-			$model->save();
 			$model->sendCreateSuccessEmail(\Yii::$app->user->id);
             return $this->redirect(['account/my-account']);
         } else {
@@ -591,24 +604,147 @@ class WishController extends Controller
 	  }
     }
 	
+	 public function actionUploadFile(){
+
+            $name =time().$_FILES['file']['name'];
+			$name = preg_replace('/\s+/', '', $name);
+			
+  		    $filetype = array('jpeg','jpg','png','gif','bmp','tif','tiff');
+            $path=\Yii::$app->basePath.'/web/uploads/'.$name;
+            $file_ext =  pathinfo($name, PATHINFO_EXTENSION);
+            if(in_array(strtolower($file_ext), $filetype))
+            {
+			  $filepath = $tmp_filename = $_FILES['file']['tmp_name'];
+              @move_uploaded_file($tmp_filename,$path);
+			  
+			 return \Yii::$app->homeUrl.'uploads/'.$name;
+  		  }
+
+  	}
+	
 	public function actionWishAutosave()
     {
 		
 		if(Yii::$app->request->post())
 		{
-			$models = Yii::$app->request->post();
+			
+			/* $sourcePath = $_FILES['file']['tmp_name']; 
+			echo "<pre>";
+			print_r($sourcePath);
+			exit;
+			 */
+			$models2 = Yii::$app->request->post();			
+			$models =  Wish::find()->where(['w_id'=>$models2['Wish']['auto_id']])->one();
+			$models->category = $models2['Wish']['category'];
+			$models->wish_title = $models2['Wish']['wish_title'];		
+			$models->wish_description = $models2['Wish']['wish_description'];
 			
 			
-			// echo "<pre>";
-			print_r($models['Wish']['auto_id']);
+			$models->expected_cost = $models2['Wish']['expected_cost'];
+			$models->expected_date = $models2['Wish']['expected_date'];
+			$models->in_return = $models2['Wish']['in_return'];
+			$models->who_can = $models2['Wish']['who_can'];
+			$models->state = $models2['Wish']['state'];
+			$models->country = $models2['Wish']['country'];
+			$models->city = $models2['Wish']['city'];
+			$models->non_pay_option = $models2['Wish']['non_pay_option'];
 			
-			/* echo "<pre>";	
-			print_r($models); */
-			$models['Wish']['auto_id'] = 123;
-			return json_encode($models['Wish']['auto_id']);
 			
+			if($models->save(false))
+			{
+				
+				echo "Success1";
+			}
+			else
+			{				
+				echo "failed2";
+			}
+			
+		} else 
+		{
+			$models = new Wish();
+			$models->wished_by = \Yii::$app->user->id;
+			$models->wish_status = 1;
+			$models->save(false);
+			$models->auto_id = $models->w_id;
+			return json_encode($models->auto_id);
 		}
 		
     }
+	
+	
+		/**
+     * Lists all Editorial models.
+     * @return mixed
+     */
+    public function actionMyDrafts()
+    {
+        $searchModel = new SearchWish();
+        $dataProvider = $searchModel->searchDrafts(Yii::$app->request->queryParams);
+
+        return $this->render('my_drafts', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+	
+	
+	 public function actionDeleteDraft($id)
+    {
+		$this->findModel($id)->delete();
+        return $this->redirect(['my-drafts']); 
+    }
+	
+	 public function actionViewDraft($id)
+    {
+        return $this->render('view_draft', [
+            'model' => $this->findModel($id),
+        ]);
+    }
+	
+	
+	 public function actionUpdateDraft($id)
+    {
+   	
+		 $model = $this->findModel($id);
+		$model->scenario = 'update';
+		$categories =  ArrayHelper::map(Category::find()->all(), 'cat_id', 'title');
+		$countries = \yii\helpers\ArrayHelper::map(\app\models\Country::find()->all(),'id','name');	
+		$states = \yii\helpers\ArrayHelper::map(\app\models\State::find()->where(['country_id'=>$model->country ])->all(),'id','name');	
+		$cities = \yii\helpers\ArrayHelper::map(\app\models\City::find()->where(['state_id'=>$model->state])->all(),'id','name');	
+		$current_image = $model->primary_image;
+		
+		$user = User::findOne(\Yii::$app->user->id);
+		$profile = UserProfile::find()->where(['user_id'=>\Yii::$app->user->id])->one();
+		
+        if ($model->load(Yii::$app->request->post())) {
+			//check for a new image
+			$model->primary_image = UploadedFile::getInstance($model, 'primary_image');
+			if(!empty($model->primary_image)) {
+				if(!$model->uploadImage())
+					return;
+			}
+			else
+				$model->primary_image = $current_image;
+			//save model
+			
+			$model->wished_by = \Yii::$app->user->id;
+			$model->save();
+			$model->sendUpdateSuccessEmail(\Yii::$app->user->id);
+            return $this->redirect(['my-drafts', 'id' => $model->w_id]);
+        } else {
+            return $this->render('update_draft', [
+                'model' => $model,
+				'categories' => $categories,
+				'countries' => $countries,
+				'states' => $states,
+				'cities' => $cities,
+				'user' => $user ,
+				'profile' => $profile
+            ]);
+        }
+		
+    }
+	
 	
 }

@@ -14,7 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 
     <div class="alert alert-success" style="display:none">
-            <span><?= ucfirst($profile->firstname)." ".ucfirst($profile->lastname) ?></span> and <span id="alert-name" ></span> are friends now!!!.
+            <span><?= ucfirst($profile->firstname)." ".ucfirst($profile->lastname) ?></span> and <span id="alert-name" ></span> are friends now.
     </div>
 		
 <div class="site-contact">
@@ -65,7 +65,7 @@ $this->params['breadcrumbs'][] = $this->title;
 			 </div>
 			  
 			<?php } } else {
-				echo "Sorry, No new Friend Requested !!!.";
+				echo "Sorry, No new Friend Requested.";
 			} ?>	
 		</div>
 	  </div>
@@ -99,7 +99,7 @@ $this->params['breadcrumbs'][] = $this->title;
 			
 			var listcount = $(".grid .grid-item").length;
 			 if( parseInt($.trim(listcount)) <= 1 ){
-					$(".grid").html("Sorry, No new Friend Requested !!!."); 
+					$(".grid").html("Sorry, No new Friend Requested."); 
 				} 
 		
 		});

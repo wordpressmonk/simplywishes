@@ -17,7 +17,7 @@ use dosamigos\ckeditor\CKEditor;
    
 		<?php
 		$user_id = \Yii::$app->user->id;
-		$wish = ArrayHelper::map(Wish::find()->where(['wished_by'=>$user_id])->orderBy('wish_title')->all(), 'w_id', 'wish_title');
+		$wish = ArrayHelper::map(Wish::find()->where(['wished_by'=>$user_id])->andwhere(['!=','granted_by',''])->orderBy('wish_title')->all(), 'w_id', 'wish_title');
 			echo $form->field($model, 'wish_id')->dropDownList(
             $wish,           // Flat array ('id'=>'label')
             ['prompt'=>'--Wishes List--']    // options
@@ -40,9 +40,9 @@ use dosamigos\ckeditor\CKEditor;
 	</br>
       <span>Or Choose One</span>         
       <div class="gravatar thumbnail">
-        <a class="profilelogo" for="images/lady1.jpg" ><img class="selected" src="<?=Yii::$app->homeUrl?>images/lady1.jpg"/></a>
-		<a class="profilelogo" for="images/man1.jpg" ><img src="<?=Yii::$app->homeUrl?>images/man1.jpg"/></a>
-		<a class="profilelogo" for="images/lady2.jpg" ><img src="<?=Yii::$app->homeUrl?>images/lady2.jpg"/></a>					
+        <a class="profilelogo" for="images/happy1.jpg" ><img class="selected" src="<?=Yii::$app->homeUrl?>images/happy1.jpg"/></a>
+		<a class="profilelogo" for="images/happy2.jpg" ><img src="<?=Yii::$app->homeUrl?>images/happy2.jpg"/></a>
+		<a class="profilelogo" for="images/happy3.jpg" ><img src="<?=Yii::$app->homeUrl?>images/happy3.jpg"/></a>					
 	  </div>
 	  
 	
@@ -50,7 +50,7 @@ use dosamigos\ckeditor\CKEditor;
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
-	<?= $form->field($model, 'dulpicate_image')->hiddenInput(['value'=>'images/lady1.jpg'])->label(false) ?>	
+	<?= $form->field($model, 'dulpicate_image')->hiddenInput(['value'=>'images/happy1.jpg'])->label(false) ?>	
 	
     <?php ActiveForm::end(); ?>
 

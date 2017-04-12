@@ -84,21 +84,32 @@ $this->params['breadcrumbs'][] = $this->title;
 	  
 	  </br>
       <span>Or Choose One</span>         
-      <div class="gravatar thumbnail">
-        <a class="profilelogo" for="images/lady1.jpg" ><img class="selected" src="<?=Yii::$app->homeUrl?>images/lady1.jpg"/></a>
-		<a class="profilelogo" for="images/man1.jpg" ><img src="<?=Yii::$app->homeUrl?>images/man1.jpg"/></a>
-		<a class="profilelogo" for="images/lady2.jpg" ><img src="<?=Yii::$app->homeUrl?>images/lady2.jpg"/></a>
-		<a class="profilelogo" for="images/man2.jpg" ><img src="<?=Yii::$app->homeUrl?>images/man2.jpg"/></a>
-		<a class="profilelogo" for="images/lady3.jpg" ><img src="<?=Yii::$app->homeUrl?>images/lady3.jpg"/></a>
-		<a class="profilelogo" for="images/man3.jpg" ><img src="<?=Yii::$app->homeUrl?>images/man3.jpg"/></a>
-		<a class="profilelogo" for="images/lady4.jpg" ><img src="<?=Yii::$app->homeUrl?>images/lady4.jpg"/></a>
-		<a class="profilelogo" for="images/man4.jpg" ><img src="<?=Yii::$app->homeUrl?>images/man4.jpg"/></a>
-		<a class="profilelogo" for="images/lady5.jpg" ><img src="<?=Yii::$app->homeUrl?>images/lady5.jpg"/></a>
-		
+      <div class="gravatar thumbnail" style="width:101% !important">
+        <a class="profilelogo" for="images/img1.jpg" ><img class="selected" src="<?=Yii::$app->homeUrl?>images/img1.jpg"/></a>
+		<a class="profilelogo" for="images/img2.jpg" ><img src="<?=Yii::$app->homeUrl?>images/img2.jpg"/></a>
+		<a class="profilelogo" for="images/img3.jpg" ><img src="<?=Yii::$app->homeUrl?>images/img3.jpg"/></a>
+		<a class="profilelogo" for="images/img4.jpg" ><img src="<?=Yii::$app->homeUrl?>images/img4.jpg"/></a>
+		<a class="profilelogo" for="images/img5.jpg" ><img src="<?=Yii::$app->homeUrl?>images/img5.jpg"/></a>
+		<a class="profilelogo" for="images/img6.jpg" ><img src="<?=Yii::$app->homeUrl?>images/img6.jpg"/></a>
+		<a class="profilelogo" for="images/img7.jpg" ><img src="<?=Yii::$app->homeUrl?>images/img7.jpg"/></a>
+		<a class="profilelogo" for="images/img8.jpg" ><img src="<?=Yii::$app->homeUrl?>images/img8.jpg"/></a>
+		<a class="profilelogo" for="images/img9.jpg" ><img src="<?=Yii::$app->homeUrl?>images/img9.jpg"/></a>
+		<a class="profilelogo" for="images/img10.jpg" ><img src="<?=Yii::$app->homeUrl?>images/img10.jpg"/></a>
+		<a class="profilelogo" for="images/img11.jpg" ><img src="<?=Yii::$app->homeUrl?>images/img11.jpg"/></a>
+		<a class="profilelogo" for="images/img12.jpg" ><img src="<?=Yii::$app->homeUrl?>images/img12.jpg"/></a>
+		<a class="profilelogo" for="images/img13.jpg" ><img src="<?=Yii::$app->homeUrl?>images/img13.jpg"/></a>
+		<a class="profilelogo" for="images/img14.jpg" ><img src="<?=Yii::$app->homeUrl?>images/img14.jpg"/></a>
+		<a class="profilelogo" for="images/img15.jpg" ><img src="<?=Yii::$app->homeUrl?>images/img15.jpg"/></a>
+		<a class="profilelogo" for="images/img16.jpg" ><img src="<?=Yii::$app->homeUrl?>images/img16.jpg"/></a>
+		<a class="profilelogo" for="images/img17.jpg" ><img src="<?=Yii::$app->homeUrl?>images/img17.jpg"/></a>
+		<a class="profilelogo" for="images/img18.jpg" ><img src="<?=Yii::$app->homeUrl?>images/img18.jpg"/></a>
+		<a class="profilelogo" for="images/img19.jpg" ><img src="<?=Yii::$app->homeUrl?>images/img19.jpg"/></a>
+		<a class="profilelogo" for="images/img20.jpg" ><img src="<?=Yii::$app->homeUrl?>images/img20.jpg"/></a>
+		<a class="profilelogo" for="images/img21.jpg" ><img src="<?=Yii::$app->homeUrl?>images/img21.jpg"/></a>
 		
 	  </div>
 	
-   <?= $form->field($profile, 'dulpicate_image')->hiddenInput(['value'=>'images/lady1.jpg'])->label(false) ?>	
+   <?= $form->field($profile, 'dulpicate_image')->hiddenInput(['value'=>'images/img1.jpg'])->label(false) ?>	
    
 	<div class="checkbox">
 	

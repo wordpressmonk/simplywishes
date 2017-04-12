@@ -25,14 +25,14 @@ $this->params['breadcrumbs'][] = $this->title;
 	<?php if (Yii::$app->session->hasFlash('success_happystory')): ?>
 
         <div class="alert alert-success" style="margin-top: 20px;  width: 80%;">
-            Your Story is Updated Successfully !!!.	
+            Your Story is Updated Successfully.	
         </div>
 	<?php endif; ?>	
 	
 	<?php if (Yii::$app->session->hasFlash('success_adminhappystory')): ?>
 
         <div class="alert alert-success" style="margin-top: 20px;  width: 80%;">
-            Your Story is Created Successfully waiting for Site Approvel !!!.
+            Your Story is Created Successfully waiting for Site Approvel.
         </div>
 	<?php endif; ?>	
 
@@ -76,7 +76,7 @@ $this->params['breadcrumbs'][] = $this->title;
 		<?php
 		}
 	} else {
-		echo "Sorry, No more Story from you!!!.";
+		echo "Sorry, No more Story from you.";
 	}	
 		?>
 	
