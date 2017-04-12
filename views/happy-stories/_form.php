@@ -40,9 +40,9 @@ use dosamigos\ckeditor\CKEditor;
 	</br>
       <span>Or Choose One</span>         
       <div class="gravatar thumbnail" style="width:101% !important">
-        <a class="profilelogo" for="images/happy1.jpg" ><img src="<?=Yii::$app->homeUrl?>images/happy1.jpg"/></a>
-		<a class="profilelogo" for="images/happy2.jpg" ><img src="<?=Yii::$app->homeUrl?>images/happy2.jpg"/></a>
-		<a class="profilelogo" for="images/happy3.jpg" ><img src="<?=Yii::$app->homeUrl?>images/happy3.jpg"/></a>					
+        <a class="profilelogo" style="width: 150px;!important" for="images/happy1.jpg" ><img style="width: 126px;!important" src="<?=Yii::$app->homeUrl?>images/happy1.jpg"/></a>
+		<a class="profilelogo" style="width: 150px;!important"for="images/happy2.jpg" ><img style="width: 150px;!important" src="<?=Yii::$app->homeUrl?>images/happy2.jpg"/></a>
+		<a class="profilelogo" style="width: 150px;!important" for="images/happy3.jpg" ><img style="width: 150px;!important" src="<?=Yii::$app->homeUrl?>images/happy3.jpg"/></a>					
 	  </div>
 	  
 	
