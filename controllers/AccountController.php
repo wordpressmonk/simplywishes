@@ -496,14 +496,6 @@ class AccountController extends Controller
 					if($message)
 					{
 						
-						
-						/* if($message->reply_recipient_id == \Yii::$app->user->id )
-							$message->recipient_del = 1;
-						else if ($message->reply_sender_id == \Yii::$app->user->id )
-							$message->sender_del = 1;							
-						else 	
-						   $message->recipient_del = 1;
-						 */
 						if(!empty($message->delete_status))
 						{
 							$message->delete_status = $message->delete_status.",".\Yii::$app->user->id.",";
@@ -516,7 +508,7 @@ class AccountController extends Controller
 					}
 				 }
 			}  		
-				exit;
+			
 		}
 		
 	public function actionDeleteInboxMessage()
@@ -528,12 +520,7 @@ class AccountController extends Controller
 				
 				if($message)
 				{	
-						  /* if($message->recipient_id == \Yii::$app->user->id )
-							$message->recipient_del = 1;
-						else if ($message->sender_id == \Yii::$app->user->id )
-							$message->sender_del = 1;							
-						else 	
-							$message->recipient_del = 1;  */
+						 
 						 
 						if(!empty($message->delete_status))
 						{
@@ -574,9 +561,7 @@ class AccountController extends Controller
 	 $deleteduser = ",".\Yii::$app->user->id.",";	
 	 $inbox_messages = Message::find()->where(['parent_id'=>0])->andwhere(['NOT LIKE','delete_status',$deleteduser ])->andwhere(['OR',['reply_recipient_id' => \Yii::$app->user->id],['reply_sender_id' => \Yii::$app->user->id],['and',['recipient_id'=>\Yii::$app->user->id],['reply_recipient_id' => 0 ]]])->orderBy('created_at DESC')->all();  
 	
-		
-		 /* $inbox_messages = Message::find()->where(['recipient_id'=>\Yii::$app->user->id,'parent_id' => 0, 'reply_recipient_id' => 0 ])->orwhere(['reply_recipient_id' => \Yii::$app->user->id,'parent_id' => 0])->orwhere(['reply_sender_id' => \Yii::$app->user->id,'parent_id' => 0])->orderBy('created_at DESC')->all();   */
-					
+	
 		foreach($inbox_messages as $messages){
 			
 		$thread_messages = Message::find()->where(['parent_id' => $messages->m_id ])->orderBy('m_id DESC')->all();
@@ -622,9 +607,6 @@ class AccountController extends Controller
 			
 		}
 		
-		arsort($threads);
-		
-		 
 		return $threads;
 	} 
 	
@@ -634,9 +616,7 @@ class AccountController extends Controller
 		$threads = [];
 		
 			$deleteduser = ",".\Yii::$app->user->id.",";	
-			
-		 /* $sent_messages = Message::find()->where(['sender_id'=>\Yii::$app->user->id,'parent_id' => 0, 'reply_sender_id' => 0 ])->orwhere(['reply_sender_id' => \Yii::$app->user->id,'parent_id' => 0])->orwhere(['reply_recipient_id' => \Yii::$app->user->id,'parent_id' => 0])->orderBy('created_at DESC')->all();  */
-		 
+		
 		  $sent_messages = Message::find()->where(['parent_id'=>0])->andwhere(['NOT LIKE','delete_status',$deleteduser ])->andwhere(['OR',['reply_recipient_id' => \Yii::$app->user->id],['reply_sender_id' => \Yii::$app->user->id],['and',['sender_id'=>\Yii::$app->user->id],['reply_sender_id' => 0 ]]])->orderBy('created_at DESC')->all();  
 		  
 		
@@ -674,7 +654,7 @@ class AccountController extends Controller
 		    'read_text' => $messages->read_text,
 		    'text' => $messages->text,
 			'created_at' => $messages->created_at,
-			'recipient_id' =>$messages->recipient_id,	
+			'sender_id' =>$messages->recipient_id,	
 			'recipient_id'=> $other_id,			
 			];	
 			
@@ -684,10 +664,6 @@ class AccountController extends Controller
 			}
 			
 		}
-		
-		arsort($threads);
-		
-		
 		 
 		return $threads;
 	} 
@@ -726,8 +702,7 @@ class AccountController extends Controller
 			$message->parent_id = $msg_id;
 			$message->text = $msg;
 			$message->read_text = 0;
-			$message->sender_del = 0;
-			$message->recipient_del = 0;
+			$message->delete_status = "";
 			$message->created_at = date("Y-m-d H:i:s");
 
 			if($message->save()){
@@ -736,8 +711,6 @@ class AccountController extends Controller
 				$parentmessages->reply_sender_id = $from;
 				$parentmessages->reply_recipient_id = $to;
 				$parentmessages->read_text = $to;
-				$parentmessages->sender_del = 0;
-				$parentmessages->recipient_del = 0;
 				$parentmessages->delete_status = "";
 				$parentmessages->created_at = date("Y-m-d H:i:s");
 				$parentmessages->save();

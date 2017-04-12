@@ -37,8 +37,12 @@ use yii\web\JsExpression;
 				$reply="";
 				if(isset($msg['threads']) && !empty($msg['threads']))
 				{
-					$reply =" , me";
+					$reply =" , me";	
+					$profile = \app\models\Userprofile::find()->where(['user_id'=>$msg['recipient_id']])->one();					
+				}else{
+					$profile = \app\models\Userprofile::find()->where(['user_id'=>$msg['sender_id']])->one();
 				}
+				
 				
 			 	echo '<li class="list-group-item" id="li_list_'.$msg['m_id'].'" >		
 						<input type="checkbox" class="checkBoxClass" name="selection[]" value="'.$msg['m_id'].'" ></input>					
