@@ -28,22 +28,20 @@ $this->params['breadcrumbs'][] = $this->title;
 </div>
 </div>
 
-<script>
-
-  
- $(function () {
-	 
-	 $.post( "wish-autosave", function( data ) {
-			$("#wish-auto_id").val(data);
-		});
-
-
-    setInterval(function () {
-        $.post("wish-autosave", $("form").serialize());
-    }, 5000); 
-	
-}); 
-   
+<script type="text/javascript">
  
+ $( document ).ready(function() {
+	 $( "#draft_form" ).click(function() {	
+			var auto_id = $("#wish-auto_id").val();
+
+			if($.trim(auto_id) === "")
+			{
+				  $.post( "wish-autosave", function( data ) {
+					$("#wish-auto_id").val(data);
+					});	
+			}
+			$.post("wish-autosave", $("form").serialize());
+		});
+ });
  
 </script>

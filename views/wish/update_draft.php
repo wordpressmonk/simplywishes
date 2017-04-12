@@ -38,6 +38,10 @@ $wishstatus = array('0'=>"Active",'1'=>"In-Active");
         'preset' => 'basic'
     ]); ?>
 
+	<?php if(!empty($model->primary_image)) {  ?>
+		 <img src="<?= \Yii::$app->homeUrl.$model->primary_image;?>" width="150" height="150" />
+	<?php } ?>	
+	
 
     <?= $form->field($model, 'primary_image')->fileInput(['class' => 'form-control']) ?>
 	

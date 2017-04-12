@@ -39,8 +39,8 @@ use dosamigos\ckeditor\CKEditor;
 		?>
 	</br>
       <span>Or Choose One</span>         
-      <div class="gravatar thumbnail">
-        <a class="profilelogo" for="images/happy1.jpg" ><img class="selected" src="<?=Yii::$app->homeUrl?>images/happy1.jpg"/></a>
+      <div class="gravatar thumbnail" style="width:101% !important">
+        <a class="profilelogo" for="images/happy1.jpg" ><img src="<?=Yii::$app->homeUrl?>images/happy1.jpg"/></a>
 		<a class="profilelogo" for="images/happy2.jpg" ><img src="<?=Yii::$app->homeUrl?>images/happy2.jpg"/></a>
 		<a class="profilelogo" for="images/happy3.jpg" ><img src="<?=Yii::$app->homeUrl?>images/happy3.jpg"/></a>					
 	  </div>
@@ -50,7 +50,7 @@ use dosamigos\ckeditor\CKEditor;
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
-	<?= $form->field($model, 'dulpicate_image')->hiddenInput(['value'=>'images/happy1.jpg'])->label(false) ?>	
+	<?= $form->field($model, 'dulpicate_image')->hiddenInput(['value'=>($model->story_image)?$model->story_image:'images/happy1.jpg'])->label(false) ?>	
 	
     <?php ActiveForm::end(); ?>
 

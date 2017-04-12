@@ -12,7 +12,7 @@ use yii\helpers\Url;
 
 <div class="row">
 <div class="col-md-12">
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(['id' => 'draft_form']); ?>
 
     <?= $form->field($model, 'category')->dropDownlist($categories,['prompt'=>'--Select--']) ?>
 
@@ -25,11 +25,14 @@ use yii\helpers\Url;
         'preset' => 'basic'
     ]); ?>
 
-
-    <?php // $form->field($model, 'primary_image')->fileInput(['class' => 'form-control',"onChange"=>"upload();return false;"]) ?>
-    <?= $form->field($model, 'primary_image')->fileInput(['class' => 'form-control']) ?>
+	<?php if(!empty($model->primary_image)) {  ?>
+		 <img src="<?= \Yii::$app->homeUrl.$model->primary_image;?>" width="150" height="150" />
+	<?php } ?>	
 	
-	<?php // $form->field($model, 'primary_image_name')->textInput() ?>
+
+    <?php  echo $form->field($model, 'primary_image')->fileInput(['class' => 'form-control',"onChange"=>"upload();return false;"]) ?>
+
+	<?php echo $form->field($model, 'primary_image_name')->hiddenInput(['value'=>(!empty($model->primary_image))?$model->primary_image:""])->label(false); ?>
 		
 	<div class="row">
 					<div class="col-lg-4">
@@ -131,7 +134,7 @@ $( document ).ready(function() {
 </script>
 
 <script type="text/javascript" >
-/* function upload(){
+ function upload(){
   data = new FormData();
   data.append('file', $('#wish-primary_image')[0].files[0]);
   var imgname  =  $('#wish-primary_image').val();
@@ -147,8 +150,9 @@ $( document ).ready(function() {
         contentType: false,
         success: function(json){      
 			$("#wish-primary_image_name").val(json);
+			
         }
   });
 }
- */
+ 
 </script>

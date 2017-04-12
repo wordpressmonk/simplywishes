@@ -617,7 +617,7 @@ class WishController extends Controller
 			  $filepath = $tmp_filename = $_FILES['file']['tmp_name'];
               @move_uploaded_file($tmp_filename,$path);
 			  
-			 return \Yii::$app->homeUrl.'uploads/'.$name;
+			 return 'uploads/'.$name;
   		  }
 
   	}
@@ -628,18 +628,13 @@ class WishController extends Controller
 		if(Yii::$app->request->post())
 		{
 			
-			/* $sourcePath = $_FILES['file']['tmp_name']; 
-			echo "<pre>";
-			print_r($sourcePath);
-			exit;
-			 */
 			$models2 = Yii::$app->request->post();			
 			$models =  Wish::find()->where(['w_id'=>$models2['Wish']['auto_id']])->one();
 			$models->category = $models2['Wish']['category'];
 			$models->wish_title = $models2['Wish']['wish_title'];		
 			$models->wish_description = $models2['Wish']['wish_description'];
 			
-			
+			$models->primary_image = $models2['Wish']['primary_image_name'];
 			$models->expected_cost = $models2['Wish']['expected_cost'];
 			$models->expected_date = $models2['Wish']['expected_date'];
 			$models->in_return = $models2['Wish']['in_return'];

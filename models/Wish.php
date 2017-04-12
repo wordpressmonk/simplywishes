@@ -23,6 +23,7 @@ use yii\helpers\Url;
 class Wish extends \yii\db\ActiveRecord
 {
 	public $auto_id;
+	public $primary_image_name;
 	
     /**
      * @inheritdoc
@@ -48,7 +49,7 @@ class Wish extends \yii\db\ActiveRecord
             [['summary_title','who_can'], 'string', 'max' => 150],
 			[['in_return'], 'string', 'max' => 1500],
 			[['expected_cost'], 'integer'],
-			[['auto_id','wish_status'], 'safe'],
+			[['auto_id','wish_status','primary_image_name'], 'safe'],
 		//	[['expected_cost'], 'in','range'=>range(100,1000),'message'=>'Expected Cost(USD) Range In 100 to 1000' ],
         ];
     }
@@ -84,8 +85,8 @@ class Wish extends \yii\db\ActiveRecord
     }
 	public function uploadImage(){
 		//if($this->validate()) {
-			$this->primary_image->saveAs('uploads/' . $this->primary_image->baseName. '.' .$this->primary_image->extension);
-			$this->primary_image = 'uploads/'.$this->primary_image->baseName.'.'.$this->primary_image->extension;
+			$this->primary_image->saveAs('uploads/' .time().$this->primary_image->baseName. '.' .$this->primary_image->extension);
+			$this->primary_image = 'uploads/'.time().$this->primary_image->baseName.'.'.$this->primary_image->extension;
 			return true;
 		//}else
 		//	return false;

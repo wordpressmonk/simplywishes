@@ -35,7 +35,14 @@ $payoption = array('0'=>"Financial",'1'=>"Non-financial");
         'attributes' => [          
 		  'categoryName',
 		  'wish_title',
-
+			
+			[
+                'attribute'=>'primary_image',
+				'value'=>!empty($model->primary_image)?Yii::$app->homeUrl.$model->primary_image:'',
+				 'format' => !empty($model->primary_image)?['image',['height'=>'100px','width'=>'300px']]:'text',
+				
+            ],
+			
 		   [
 				 'label'=>'Expected cost',
 				 'value' =>($model->non_pay_option == 1)?"-":$model->expected_cost,
