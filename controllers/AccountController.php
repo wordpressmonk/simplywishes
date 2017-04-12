@@ -272,24 +272,7 @@ class AccountController extends Controller
 		return $threads;
 	}  */
 	
-	public function actionSendMessageInbox(){
-		
-		$from = \Yii::$app->request->post()['send_from'];
-		$to = \Yii::$app->request->post()['send_to'];
-		$msg = \Yii::$app->request->post()['msg'];
-		
-		if($from != '' && $to != '' && $msg != ''){
-			$message = new Message();
-			$message->sender_id = $from;
-			$message->recipient_id = $to;
-			$message->parent_id = 0;
-			$message->text = $msg;
-			$message->created_at =  date("Y-m-d H:i:s");
-			if($message->save()){
-				Yii::$app->session->setFlash('messageSent');
-			}
-		}
-	}
+
 	
 /* 	public function actionSendResetPassword(){
 		if(isset(\Yii::$app->request->post()['email'])){
@@ -434,7 +417,8 @@ class AccountController extends Controller
 	 
 	 public function actionMultiDeleteSendMessage()
 	 {    
-			$msg_id = Yii::$app->request->post()['msg_id'];	
+			$msg_id = Yii::$app->request->post()['msg_id'];
+			
 			if($msg_id)
 			{
 				 foreach($msg_id as $tmp)
@@ -442,13 +426,21 @@ class AccountController extends Controller
 					$message =  Message::find()->where(['m_id'=>$tmp ])->andwhere(['OR',['recipient_id'=>\Yii::$app->user->id],['sender_id'=>\Yii::$app->user->id]])->one();
 					if($message)
 					{
-						if($message->reply_sender_id == \Yii::$app->user->id )
+						/* if($message->reply_sender_id == \Yii::$app->user->id )
 							$message->sender_del = 1;
 						else if ($message->reply_recipient_id == \Yii::$app->user->id )
 							$message->recipient_del = 1;							
 						else 							
 							$message->sender_del = 1;
-					
+						 */
+						if(!empty($message->delete_status))
+						{
+							$message->delete_status = $message->delete_status.",".\Yii::$app->user->id.",";
+						} else 
+						{
+							$message->delete_status = ",".\Yii::$app->user->id.",";
+						}
+						
 						$message->save(); 						
 					}
 				 }
@@ -464,13 +456,21 @@ class AccountController extends Controller
 				
 				if($message)
 				{
-					if($message->reply_sender_id == \Yii::$app->user->id )
+					/* if($message->reply_sender_id == \Yii::$app->user->id )
 						$message->sender_del = 1;
 					else if ($message->reply_recipient_id == \Yii::$app->user->id )
 						$message->recipient_del = 1;							
 					else 							
-						$message->sender_del = 1;
-												
+						$message->sender_del = 1; */
+					
+						if(!empty($message->delete_status))
+						{
+							$message->delete_status = $message->delete_status.",".\Yii::$app->user->id.",";
+						} else 
+						{
+							$message->delete_status = ",".\Yii::$app->user->id.",";
+						}
+						
 						$message->save(); 						
 				}				 
 			}  			
@@ -487,25 +487,36 @@ class AccountController extends Controller
 	 public function actionMultiDeleteInboxMessage()
 	 {    
 			$msg_id = Yii::$app->request->post()['msg_id'];	
+				
 			if($msg_id)
 			{
 				 foreach($msg_id as $tmp)
 				 {					
-					$message =  Message::find()->where(['m_id'=>$tmp ])->andwhere(['OR',['recipient_id'=>\Yii::$app->user->id],['sender_id'=>\Yii::$app->user->id]])->one()->one();
+					$message =  Message::find()->where(['m_id'=>$tmp])->andwhere(['OR',['recipient_id'=>\Yii::$app->user->id],['sender_id'=>\Yii::$app->user->id]])->one();
 					if($message)
 					{
 						
-						if($message->reply_recipient_id == \Yii::$app->user->id )
+						
+						/* if($message->reply_recipient_id == \Yii::$app->user->id )
 							$message->recipient_del = 1;
 						else if ($message->reply_sender_id == \Yii::$app->user->id )
 							$message->sender_del = 1;							
 						else 	
-						$message->recipient_del = 1;
-					
+						   $message->recipient_del = 1;
+						 */
+						if(!empty($message->delete_status))
+						{
+							$message->delete_status = $message->delete_status.",".\Yii::$app->user->id.",";
+						} else 
+						{
+							$message->delete_status = ",".\Yii::$app->user->id.",";
+						}
+						
 						$message->save(); 						
 					}
 				 }
-			}  			
+			}  		
+				exit;
 		}
 		
 	public function actionDeleteInboxMessage()
@@ -513,20 +524,26 @@ class AccountController extends Controller
 			$msg_id = Yii::$app->request->post()['msg_id'];	
 			if($msg_id)
 			{
-				
-			//	$message =  Message::find()->where(['recipient_id'=>\Yii::$app->user->id,'m_id'=>$msg_id ])->one();
-			
 				$message =  Message::find()->where(['m_id'=>$msg_id ])->andwhere(['OR',['recipient_id'=>\Yii::$app->user->id],['sender_id'=>\Yii::$app->user->id]])->one();
 				
 				if($message)
 				{	
-						if($message->reply_recipient_id == \Yii::$app->user->id )
+						  /* if($message->recipient_id == \Yii::$app->user->id )
 							$message->recipient_del = 1;
-						else if ($message->reply_sender_id == \Yii::$app->user->id )
+						else if ($message->sender_id == \Yii::$app->user->id )
 							$message->sender_del = 1;							
 						else 	
-						$message->recipient_del = 1;
-							
+							$message->recipient_del = 1;  */
+						 
+						if(!empty($message->delete_status))
+						{
+							$message->delete_status = $message->delete_status.",".\Yii::$app->user->id.",";
+						} else 
+						{
+							$message->delete_status = ",".\Yii::$app->user->id.",";
+						}
+						
+					
 						$message->save(); 						
 				}				 
 			}  			
@@ -537,9 +554,7 @@ class AccountController extends Controller
 	 {    
 			$msg_id = Yii::$app->request->post()['msg_id'];	
 			if($msg_id)
-			{							
-			//	$message =  Message::find()->where(['recipient_id'=>\Yii::$app->user->id,'m_id'=>$msg_id ])->one();
-				
+			{											
 				$message =  Message::find()->where(['m_id'=>$msg_id ])->andwhere(['Or',['recipient_id'=>\Yii::$app->user->id],['reply_recipient_id'=>\Yii::$app->user->id]])->one();
 				
 				
@@ -556,14 +571,12 @@ class AccountController extends Controller
 		//first send
 		$threads = [];
 		
-		//$inbox_messages = Message::find()->where(['recipient_id'=>\Yii::$app->user->id,'recipient_del' => 0,'parent_id' => 0, 'reply_recipient_id' => 0 ])->orwhere(['reply_recipient_id' => \Yii::$app->user->id])->orderBy('m_id DESC')->all();
+	 $deleteduser = ",".\Yii::$app->user->id.",";	
+	 $inbox_messages = Message::find()->where(['parent_id'=>0])->andwhere(['NOT LIKE','delete_status',$deleteduser ])->andwhere(['OR',['reply_recipient_id' => \Yii::$app->user->id],['reply_sender_id' => \Yii::$app->user->id],['and',['recipient_id'=>\Yii::$app->user->id],['reply_recipient_id' => 0 ]]])->orderBy('created_at DESC')->all();  
+	
 		
-		 $inbox_messages = Message::find()->where(['recipient_id'=>\Yii::$app->user->id,'recipient_del' => 0,'parent_id' => 0, 'reply_recipient_id' => 0 ])->orwhere(['reply_recipient_id' => \Yii::$app->user->id,'recipient_del' => 0,'parent_id' => 0])->orderBy('created_at DESC')->all(); 
-		
-		
-		/* $inbox_messages = Message::find()->where(['recipient_id'=>\Yii::$app->user->id,'recipient_del' => 0,'parent_id' => 0, 'reply_recipient_id' => 0 ])->orwhere(['reply_recipient_id' => \Yii::$app->user->id,'recipient_del' => 0,'parent_id' => 0])->orwhere(['reply_sender_id' => \Yii::$app->user->id,'recipient_del' => 0,'parent_id' => 0])->orderBy('created_at DESC')->all(); */
-			
-			
+		 /* $inbox_messages = Message::find()->where(['recipient_id'=>\Yii::$app->user->id,'parent_id' => 0, 'reply_recipient_id' => 0 ])->orwhere(['reply_recipient_id' => \Yii::$app->user->id,'parent_id' => 0])->orwhere(['reply_sender_id' => \Yii::$app->user->id,'parent_id' => 0])->orderBy('created_at DESC')->all();   */
+					
 		foreach($inbox_messages as $messages){
 			
 		$thread_messages = Message::find()->where(['parent_id' => $messages->m_id ])->orderBy('m_id DESC')->all();
@@ -583,16 +596,23 @@ class AccountController extends Controller
 						}	
 					
 		  } 
-		
-
+		$other_id = $messages->sender_id;
+		if($messages->reply_recipient_id != 0)
+		{
+			
+			if($messages->reply_recipient_id != \Yii::$app->user->id )
+				$other_id = $messages->reply_recipient_id;
+			else if($messages->reply_sender_id != \Yii::$app->user->id )
+				$other_id = $messages->reply_sender_id;
+		}			
 		
 		  $threads[$messages->m_id] = [	
 			'm_id' => $messages->m_id,
 		    'read_text' => $messages->read_text,
 		    'text' => $messages->text,
 			'created_at' => $messages->created_at,
-			'sender_id' => ($messages->reply_sender_id == 0)?$messages->sender_id:$messages->reply_sender_id,
-			
+			'sender_id' => $messages->sender_id,
+			'recipient_id'=> $other_id,
 			];	
 			
 			if(isset($thread_messages) && !empty($thread_messages))
@@ -604,11 +624,6 @@ class AccountController extends Controller
 		
 		arsort($threads);
 		
-		/* 
-		echo "<pre>";
-		print_r($threads);
-		exit; 
-		 */
 		 
 		return $threads;
 	} 
@@ -618,10 +633,12 @@ class AccountController extends Controller
 		
 		$threads = [];
 		
-		 $sent_messages = Message::find()->where(['sender_id'=>\Yii::$app->user->id,'sender_del' => 0,'parent_id' => 0, 'reply_sender_id' => 0 ])->orwhere(['reply_sender_id' => \Yii::$app->user->id,'sender_del' => 0,'parent_id' => 0])->orderBy('created_at DESC')->all(); 
-		
-		
-		/* $sent_messages = Message::find()->where(['sender_id'=>\Yii::$app->user->id,'sender_del' => 0,'parent_id' => 0, 'reply_sender_id' => 0 ])->orwhere(['reply_sender_id' => \Yii::$app->user->id,'sender_del' => 0,'parent_id' => 0])->orwhere(['reply_recipient_id' => \Yii::$app->user->id,'recipient_del' => 0,'parent_id' => 0])->orderBy('created_at DESC')->all(); */
+			$deleteduser = ",".\Yii::$app->user->id.",";	
+			
+		 /* $sent_messages = Message::find()->where(['sender_id'=>\Yii::$app->user->id,'parent_id' => 0, 'reply_sender_id' => 0 ])->orwhere(['reply_sender_id' => \Yii::$app->user->id,'parent_id' => 0])->orwhere(['reply_recipient_id' => \Yii::$app->user->id,'parent_id' => 0])->orderBy('created_at DESC')->all();  */
+		 
+		  $sent_messages = Message::find()->where(['parent_id'=>0])->andwhere(['NOT LIKE','delete_status',$deleteduser ])->andwhere(['OR',['reply_recipient_id' => \Yii::$app->user->id],['reply_sender_id' => \Yii::$app->user->id],['and',['sender_id'=>\Yii::$app->user->id],['reply_sender_id' => 0 ]]])->orderBy('created_at DESC')->all();  
+		  
 		
 		foreach($sent_messages as $messages){
 			
@@ -641,14 +658,24 @@ class AccountController extends Controller
 									];																
 						}	 			
 		  } 
-				
+			
+		$other_id = $messages->sender_id;
+		if($messages->reply_recipient_id != 0)
+		{
+			
+			if($messages->reply_recipient_id != \Yii::$app->user->id )
+				$other_id = $messages->reply_recipient_id;
+			else if($messages->reply_sender_id != \Yii::$app->user->id )
+				$other_id = $messages->reply_sender_id;
+		}	
+		
 		  $threads[$messages->m_id] = [	
 			'm_id' => $messages->m_id,
 		    'read_text' => $messages->read_text,
 		    'text' => $messages->text,
 			'created_at' => $messages->created_at,
-			//'recipient_id' => ($messages->sender_id == 0)?$messages->recipient_id:$messages->sender_id,	
-			'recipient_id' => ($messages->reply_recipient_id == 0)?$messages->recipient_id:$messages->reply_recipient_id,			
+			'recipient_id' =>$messages->recipient_id,	
+			'recipient_id'=> $other_id,			
 			];	
 			
 			if(isset($thread_messages) && !empty($thread_messages))
@@ -660,15 +687,30 @@ class AccountController extends Controller
 		
 		arsort($threads);
 		
-		/* 
-		echo "<pre>";
-		print_r($threads);
-		exit; 
-		 */
+		
 		 
 		return $threads;
 	} 
 	
+		public function actionSendMessageInbox(){
+		
+		$from = \Yii::$app->request->post()['send_from'];
+		$to = \Yii::$app->request->post()['send_to'];
+		$msg = \Yii::$app->request->post()['msg'];
+		
+		if($from != '' && $to != '' && $msg != ''){
+			$message = new Message();
+			$message->sender_id = $from;
+			$message->recipient_id = $to;
+			$message->parent_id = 0;
+			$message->read_text = $to;
+			$message->text = $msg;
+			$message->created_at =  date("Y-m-d H:i:s");
+			if($message->save()){
+				Yii::$app->session->setFlash('messageSent');
+			}
+		}
+	}
 	
 	public function actionReplyMessage()
 	{		
@@ -693,9 +735,10 @@ class AccountController extends Controller
 				$parentmessages = Message::find()->where(['m_id'=>$message->parent_id])->one();
 				$parentmessages->reply_sender_id = $from;
 				$parentmessages->reply_recipient_id = $to;
-				$parentmessages->read_text = 0;
+				$parentmessages->read_text = $to;
 				$parentmessages->sender_del = 0;
 				$parentmessages->recipient_del = 0;
+				$parentmessages->delete_status = "";
 				$parentmessages->created_at = date("Y-m-d H:i:s");
 				$parentmessages->save();
 				

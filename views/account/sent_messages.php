@@ -34,6 +34,12 @@ use yii\web\JsExpression;
 			foreach($messages as $key=>$msg){
 				$profile = \app\models\Userprofile::find()->where(['user_id'=>$msg['recipient_id']])->one();
 				
+				$reply="";
+				if(isset($msg['threads']) && !empty($msg['threads']))
+				{
+					$reply =" , me";
+				}
+				
 			 	echo '<li class="list-group-item" id="li_list_'.$msg['m_id'].'" >		
 						<input type="checkbox" class="checkBoxClass" name="selection[]" value="'.$msg['m_id'].'" ></input>					
 						 <span style="cursor:pointer" class="pull-right remove_delete" title="Remove"  for="'.$msg['m_id'].'"><i class="fa fa-trash-o" aria-hidden="true"> </i></span>
@@ -44,7 +50,7 @@ use yii\web\JsExpression;
 						
 					<div class="smp_expand" data-toggle="collapse" title="Click here To View Conversation">
 											
-						<div class="list-group-item-heading">'.$profile['fullname'].'</div>
+						<div class="list-group-item-heading">'.$profile['fullname'].$reply.'</div>
 						<p class="list-group-item-text">
 						
 						<span class="label label-primary pull-right">Date:'.$msg['created_at'].'</span></p>

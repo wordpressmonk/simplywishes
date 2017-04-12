@@ -35,13 +35,20 @@ use yii\web\JsExpression;
 			
 			foreach($messages as $key=>$msg){
 				
-				$profile = \app\models\Userprofile::find()->where(['user_id'=>$msg['sender_id']])->one();
 				
+				$reply="";
+				if(isset($msg['threads']) && !empty($msg['threads']))
+				{
+					$reply ="me, ";		
+					$profile = \app\models\Userprofile::find()->where(['user_id'=>$msg['recipient_id']])->one();					
+				}else{
+					$profile = \app\models\Userprofile::find()->where(['user_id'=>$msg['sender_id']])->one();
+				}
 				
-				if($msg['read_text'] != 0)
-					$color_var = "readedmsg";
-				else
+				if($msg['read_text'] == \Yii::$app->user->id) 
 					$color_var = "";
+				else 
+					$color_var = "readedmsg";
 				
 				echo '<li class="list-group-item '.$color_var.' "  id="li_list_'.$msg['m_id'].'" >
 					<input type="checkbox" class="checkBoxClass" name="selection[]" value="'.$msg['m_id'].'" ></input>	
@@ -53,13 +60,13 @@ use yii\web\JsExpression;
 						
 					<div class="smp_expand" data-toggle="collapse" title="Click here To View Conversation" >';
 						
-						if($msg['read_text'] == 0)
+						if($msg['read_text'] == \Yii::$app->user->id) 
 						{
-							echo '<div id="read_'.$msg['m_id'].'" class="list-group-item-heading newmsg" for="'.$msg['m_id'].'" >'.$profile->fullname.' <span id="readicon_'.$msg['m_id'].'" class="unread" >- '.substr($msg['text'],0,10).'</span></div>';
+							echo '<div id="read_'.$msg['m_id'].'" class="list-group-item-heading newmsg" for="'.$msg['m_id'].'" >'.$reply.$profile->fullname.' <span id="readicon_'.$msg['m_id'].'" class="unread" >- '.substr($msg['text'],0,10).'</span></div>';
 						}
 						else 
 						{
-							echo '<div class="list-group-item-heading" >'.$profile->fullname.'<span class="unread" >- '.substr($msg['text'],0,10).'</span></div>';
+							echo '<div class="list-group-item-heading" >'.$reply.$profile->fullname.'<span class="unread" >- '.substr($msg['text'],0,10).'</span></div>';
 						}
 						
 					echo '<p class="list-group-item-text">
@@ -77,7 +84,7 @@ use yii\web\JsExpression;
 								<label for="message">Enter Your Message</label>
 								<textarea id="'.$key.'_msg" class="form-control" rows="2"></textarea>
 							</div>
-							<button type="button" id="rpy_'.$msg['m_id'].'" data-send_to="'.$msg['sender_id'].'" data-msg_id ="'.$msg['m_id'].'" class="send-msg btn btn-primary pull-right">Reply</button>
+							<button type="button" id="rpy_'.$msg['m_id'].'" data-send_to="'.$msg['recipient_id'].'" data-msg_id ="'.$msg['m_id'].'" class="send-msg btn btn-primary pull-right">Reply</button>
 						</li>
 						';
 					if(isset($msg['threads']) && !empty($msg['threads']))
@@ -203,7 +210,7 @@ use yii\web\JsExpression;
 				   type: 'POST',
 				   data: {  msg_id: msg_id,
 				   },
-				   success: function(data) {		
+				   success: function(data) {					
 						location.reload();
 				   }
 				 }); 
