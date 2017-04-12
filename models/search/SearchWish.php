@@ -290,7 +290,7 @@ class SearchWish extends Wish
 
 	public function searchDrafts($params)
     {
-        $query = Wish::find()->where(['wish_status' => 1])->orderBy('w_id DESC');
+        $query = Wish::find()->where(['wish_status' => 1,'wished_by' =>Yii::$app->user->id ])->orderBy('w_id DESC');
 	
         // add conditions that should always apply here
 
