@@ -100,7 +100,7 @@ $this->params['breadcrumbs'][] = $this->title;
 		<a class="profilelogo" for="images/img2.jpg" ><img src="<?=Yii::$app->homeUrl?>images/img2.jpg"/></a>
 		<a class="profilelogo" for="images/img3.jpg" ><img src="<?=Yii::$app->homeUrl?>images/img3.jpg"/></a>
 		<a class="profilelogo" for="images/img4.jpg" ><img src="<?=Yii::$app->homeUrl?>images/img4.jpg"/></a>
-		<a class="profilelogo" for="images/img5.jpg" ><img src="<?=Yii::$app->homeUrl?>images/img5.jpg"/></a>
+		<!--<a class="profilelogo" for="images/img5.jpg" ><img src="<?=Yii::$app->homeUrl?>images/img5.jpg"/></a>-->
 		<a class="profilelogo" for="images/img6.jpg" ><img src="<?=Yii::$app->homeUrl?>images/img6.jpg"/></a>
 		<a class="profilelogo" for="images/img7.jpg" ><img src="<?=Yii::$app->homeUrl?>images/img7.jpg"/></a>
 		<a class="profilelogo" for="images/img8.jpg" ><img src="<?=Yii::$app->homeUrl?>images/img8.jpg"/></a>
@@ -117,6 +117,21 @@ $this->params['breadcrumbs'][] = $this->title;
 		<a class="profilelogo" for="images/img19.jpg" ><img src="<?=Yii::$app->homeUrl?>images/img19.jpg"/></a>
 		<a class="profilelogo" for="images/img20.jpg" ><img src="<?=Yii::$app->homeUrl?>images/img20.jpg"/></a>
 		<a class="profilelogo" for="images/img21.jpg" ><img src="<?=Yii::$app->homeUrl?>images/img21.jpg"/></a>
+		<a class="profilelogo" for="images/img22.jpg" ><img src="<?=Yii::$app->homeUrl?>images/img22.jpg"/></a>
+		<a class="profilelogo" for="images/img23.jpg" ><img src="<?=Yii::$app->homeUrl?>images/img23.jpg"/></a>
+		<a class="profilelogo" for="images/img24.jpg" ><img src="<?=Yii::$app->homeUrl?>images/img24.jpg"/></a>
+		<a class="profilelogo" for="images/img25.jpg" ><img src="<?=Yii::$app->homeUrl?>images/img25.jpg"/></a>
+		<a class="profilelogo" for="images/img26.jpg" ><img src="<?=Yii::$app->homeUrl?>images/img26.jpg"/></a>
+		<a class="profilelogo" for="images/img27.jpg" ><img src="<?=Yii::$app->homeUrl?>images/img27.jpg"/></a>
+		<a class="profilelogo" for="images/img28.jpg" ><img src="<?=Yii::$app->homeUrl?>images/img28.jpg"/></a>
+		<a class="profilelogo" for="images/img29.jpg" ><img src="<?=Yii::$app->homeUrl?>images/img29.jpg"/></a>
+		<!--<a class="profilelogo" for="images/img30.jpg" ><img src="<?=Yii::$app->homeUrl?>images/img30.jpg"/></a>-->
+		<a class="profilelogo" for="images/img31.jpg" ><img src="<?=Yii::$app->homeUrl?>images/img31.jpg"/></a>
+		<a class="profilelogo" for="images/img32.jpg" ><img src="<?=Yii::$app->homeUrl?>images/img32.jpg"/></a>
+		<a class="profilelogo" for="images/img33.jpg" ><img src="<?=Yii::$app->homeUrl?>images/img33.jpg"/></a>
+		<a class="profilelogo" for="images/img34.jpg" ><img src="<?=Yii::$app->homeUrl?>images/img34.jpg"/></a>
+		<a class="profilelogo" for="images/img35.jpg" ><img src="<?=Yii::$app->homeUrl?>images/img35.jpg"/></a>
+		<a class="profilelogo" for="images/img36.jpg" ><img src="<?=Yii::$app->homeUrl?>images/img36.jpg"/></a>
 		
 	  </div>
 	
