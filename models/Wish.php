@@ -22,6 +22,9 @@ use yii\helpers\Url;
  */
 class Wish extends \yii\db\ActiveRecord
 {
+	public $auto_id;
+	public $primary_image_name;
+	
     /**
      * @inheritdoc
      */
@@ -45,12 +48,15 @@ class Wish extends \yii\db\ActiveRecord
             [['wish_title'], 'string', 'max' => 100],
             [['summary_title','who_can'], 'string', 'max' => 150],
 			[['in_return'], 'string', 'max' => 1500],
+			[['expected_cost'], 'integer'],
+			[['auto_id','wish_status','primary_image_name'], 'safe'],
+		//	[['expected_cost'], 'in','range'=>range(100,1000),'message'=>'Expected Cost(USD) Range In 100 to 1000' ],
         ];
     }
 	public function scenarios() {
         $scenarios = parent::scenarios();
-        $scenarios['create'] = ['category', 'wish_title','summary_title', 'wish_description','primary_image','state', 'country', 'city','expected_cost','expected_date','in_return','who_can'];
-		 $scenarios['update'] = ['category', 'wish_title','summary_title', 'wish_description','state', 'country', 'city','expected_cost','expected_date','in_return','who_can'];
+        $scenarios['create'] = ['category', 'wish_title','summary_title', 'wish_description','primary_image','state', 'country', 'city','expected_cost','expected_date','in_return','who_can','non_pay_option','auto_id','wish_status'];
+		 $scenarios['update'] = ['category', 'wish_title','summary_title', 'wish_description','state', 'country', 'city','expected_cost','expected_date','in_return','who_can','non_pay_option','auto_id','wish_status'];
         return $scenarios;
     }
     /**
@@ -72,14 +78,15 @@ class Wish extends \yii\db\ActiveRecord
             'city' => 'City',
 			'expected_cost'=>'Expected Cost(USD)',
 			'expected_date'=>'Issue Date',
+			'non_pay_option'=>'Non-Payment Wish',
 			'in_return'=>'What Do I Give In Return',
 			'who_can'=>'Who Can Potentialy Help me',
         ];
     }
 	public function uploadImage(){
 		//if($this->validate()) {
-			$this->primary_image->saveAs('uploads/' . $this->primary_image->baseName . '.' .$this->primary_image->extension);
-			$this->primary_image = 'uploads/'.$this->primary_image->baseName.'.'.$this->primary_image->extension;
+			$this->primary_image->saveAs('uploads/' .time().$this->primary_image->baseName. '.' .$this->primary_image->extension);
+			$this->primary_image = 'uploads/'.time().$this->primary_image->baseName.'.'.$this->primary_image->extension;
 			return true;
 		//}else
 		//	return false;
@@ -185,7 +192,7 @@ class Wish extends \yii\db\ActiveRecord
 						</div></p>
             <!--<p>Wish For : <span>'.$this->wish_title.'</span></p>
             <p>Location : <span>'.$this->location.'</span></p>-->
-			<p class="desc" >'.substr($this->summary_title,0,50).'</p>
+			<p class="desc" >'.substr($this->wish_title,0,50).'</p>
             <p><a class="fnt-green" href="'.Url::to(['wish/view','id'=>$this->w_id]).'">Read More</a>
             &nbsp;<span><i class="fa fa-thumbs-o-up fa-1x fnt-blue"></i> <span id="likecmt_'.$this->w_id.'"  >'.$this->likesCount.'</span> Likes </span>
 			 </p>';
@@ -218,7 +225,7 @@ class Wish extends \yii\db\ActiveRecord
             $str .=  '<p><div class="list-icon">
 							<img src="'.$this->wisherPic.'" alt="">
 							<a href="'.Url::to(['account/profile','id'=>$this->wished_by]).'"><span>'.$this->wisherName.'</span></a>
-							<p></p><p class="desc" >'.substr($this->summary_title,0,50).'</p>
+							<p></p><p class="desc" >'.substr($this->wish_title,0,50).'</p>
 						<p><a class="fnt-green" href="'.Url::to(['wish/view','id'=>$this->w_id]).'">Read More</a>
 						&nbsp;<i class="fa fa-thumbs-o-up fa-1x fnt-blue"></i> <span id="likecmt_'.$this->w_id.'"  >'.$this->likesCount.'</span> Likes
 						 </p>
@@ -263,7 +270,7 @@ class Wish extends \yii\db\ActiveRecord
             $str .=  '<p><div class="list-icon">
 							<img src="'.$this->wisherPic.'" alt="">
 							<a href="'.Url::to(['account/profile','id'=>$this->wished_by]).'"><span>'.$this->wisherName.'</span></a>
-							<p></p><p class="desc" >'.substr($this->summary_title,0,50).'</p>
+							<p></p><p class="desc" >'.substr($this->wish_title,0,50).'</p>
 						<p><a class="fnt-green" href="'.Url::to(['wish/view','id'=>$this->w_id]).'">Read More</a>
 						&nbsp;<i class="fa fa-thumbs-o-up fa-1x fnt-blue"></i> <span id="likecmt_'.$this->w_id.'"  >'.$this->likesCount.'</span> Likes
 						 </p>
@@ -328,7 +335,7 @@ class Wish extends \yii\db\ActiveRecord
             $str .=  '<p><div class="list-icon">
 							<img src="'.$this->wisherPic.'" alt="">
 							<a href="'.Url::to(['account/profile','id'=>$this->wished_by]).'"><span>'.$this->wisherName.'</span></a>
-							<p></p><p class="desc" >'.substr($this->summary_title,0,50).'</p>
+							<p></p><p class="desc" >'.substr($this->wish_title,0,50).'</p>
 						<p><a class="fnt-green" href="'.Url::to(['wish/view','id'=>$this->w_id]).'">Read More</a>
 						&nbsp;<i class="fa fa-thumbs-o-up fa-1x fnt-blue"></i> <span id="likecmt_'.$this->w_id.'"  >'.$this->likesCount.'</span> Likes
 						 </p>
@@ -460,4 +467,81 @@ class Wish extends \yii\db\ActiveRecord
 		
 		return "$profile->firstname $profile->lastname";
 	}		
+	
+	
+			
+	public function sendCreateSuccessEmail($id)
+    {
+		
+		$mailcontent = MailContent::find()->where(['m_id'=>9])->one();
+		$editmessage = $mailcontent->mail_message;		
+		$subject = $mailcontent->mail_subject;
+		if(empty($subject))
+			$subject = 	'SimplyWishes ';
+		
+		
+        /* @var $user User */
+        $user = User::findOne([
+            'status' => User::STATUS_ACTIVE,
+            'id' => $id,
+        ]);
+			
+        if (!$user) {
+            return false;
+        }
+      
+        $message = Yii::$app
+            ->mailer
+            ->compose(
+                ['html' => 'wishcreateSuccess-html'],
+                ['user' => $user, 'editmessage' => $editmessage ]
+            )
+            ->setFrom([Yii::$app->params['supportEmail'] => 'SimplyWishes '])
+            ->setTo( $user->email)
+            ->setSubject($subject);			
+            
+		$message->getSwiftMessage()->getHeaders()->addTextHeader('MIME-version', '1.0\n');
+		$message->getSwiftMessage()->getHeaders()->addTextHeader('charset', ' iso-8859-1\n');
+		
+		return $message->send();
+    }
+	
+	public function sendUpdateSuccessEmail($id)
+    {
+		
+		$mailcontent = MailContent::find()->where(['m_id'=>10])->one();
+		$editmessage = $mailcontent->mail_message;		
+		$subject = $mailcontent->mail_subject;
+		if(empty($subject))
+			$subject = 	'SimplyWishes ';
+		
+		
+        /* @var $user User */
+        $user = User::findOne([
+            'status' => User::STATUS_ACTIVE,
+            'id' => $id,
+        ]);
+			
+        if (!$user) {
+            return false;
+        }
+      
+        $message = Yii::$app
+            ->mailer
+            ->compose(
+                ['html' => 'wishupdateSuccess-html'],
+                ['user' => $user, 'editmessage' => $editmessage ]
+            )
+            ->setFrom([Yii::$app->params['supportEmail'] => 'SimplyWishes '])
+            ->setTo( $user->email)
+            ->setSubject($subject);			
+            
+		$message->getSwiftMessage()->getHeaders()->addTextHeader('MIME-version', '1.0\n');
+		$message->getSwiftMessage()->getHeaders()->addTextHeader('charset', ' iso-8859-1\n');
+		
+		return $message->send();
+    }
+	
+	
+	
 }

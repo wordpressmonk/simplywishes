@@ -52,7 +52,7 @@ $this->params['breadcrumbs'][] = $this->title;
 			 
 			 <?php  /* Html::a('<i class="fa fa-trash" aria-hidden="true"></i> Delete', ['delete', 'id' => $model->hs_id], ['class' => 'btn btn-danger deletecheck','style'=>"margin-top: 20px;"]) */ ?>
 			 
-			  <button class="btn btn-danger deletecheck" for="<?= $model->hs_id ?>" ><i class="fa fa-trash" aria-hidden="true"></i> Delete </button>
+			  <!--<button class="btn btn-danger deletecheck" for="<?= $model->hs_id ?>" ><i class="fa fa-trash" aria-hidden="true"></i> Delete </button>-->
 			</div>			 
 		<?php } ?>
 		<div class="col-md-3 happystory sharefull-list">
@@ -82,6 +82,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
 		</div>
 		<div class="col-md-8">
+			<?php $wish_details = $model->wish; ?>
+		<h4 class="media-heading"><?= $wish_details->wish_title; ?></h4>
 			<p><?php echo Html::a('Author: '.$profile->fullname, ['account/profile', 'id' => $model->user_id])?> <?php echo $model->story_text; ?> </p>
 		</div>
 	</div>

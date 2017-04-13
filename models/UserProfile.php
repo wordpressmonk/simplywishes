@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use app\models\MailContent;
 
 /**
  * This is the model class for table "user_profile".
@@ -112,6 +113,14 @@ class UserProfile extends \yii\db\ActiveRecord
 	
 	public function sendEmail($email)
     {
+		
+		$mailcontent = MailContent::find()->where(['m_id'=>2])->one();
+		$editmessage = $mailcontent->mail_message;		
+		$subject = $mailcontent->mail_subject;
+		if(empty($subject))
+			$subject = 	'SimplyWishes ';
+		
+		
         /* @var $user User */
         $user = User::findOne([
             'status' => User::STATUS_ACTIVE,
@@ -126,16 +135,54 @@ class UserProfile extends \yii\db\ActiveRecord
             ->mailer
             ->compose(
                 ['html' => 'signupRegister-html'],
-                ['user' => $user]
+                ['user' => $user, 'editmessage' => $editmessage ]
             )
             ->setFrom([Yii::$app->params['supportEmail'] => 'SimplyWishes '])
             ->setTo($email)
-            ->setSubject('SimplyWishes Please Reset Your Password');			
+            ->setSubject($subject);			
             
 		$message->getSwiftMessage()->getHeaders()->addTextHeader('MIME-version', '1.0\n');
 		$message->getSwiftMessage()->getHeaders()->addTextHeader('charset', ' iso-8859-1\n');
 		
 		return $message->send();
     }
+	
+	
+	public function sendProfileEmail($id)
+    {
+		
+		$mailcontent = MailContent::find()->where(['m_id'=>6])->one();
+		$editmessage = $mailcontent->mail_message;		
+		$subject = $mailcontent->mail_subject;
+		if(empty($subject))
+			$subject = 	'SimplyWishes ';
+		
+		
+        /* @var $user User */
+        $user = User::findOne([
+            'status' => User::STATUS_ACTIVE,
+            'id' => $id,
+        ]);
+			
+        if (!$user) {
+            return false;
+        }
+      
+        $message = Yii::$app
+            ->mailer
+            ->compose(
+                ['html' => 'profileupdatedSuccess-html'],
+                ['user' => $user, 'editmessage' => $editmessage ]
+            )
+            ->setFrom([Yii::$app->params['supportEmail'] => 'SimplyWishes '])
+            ->setTo( $user->email)
+            ->setSubject($subject);			
+            
+		$message->getSwiftMessage()->getHeaders()->addTextHeader('MIME-version', '1.0\n');
+		$message->getSwiftMessage()->getHeaders()->addTextHeader('charset', ' iso-8859-1\n');
+		
+		return $message->send();
+    }
+	
 	
 }

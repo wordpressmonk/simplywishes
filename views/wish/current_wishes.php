@@ -15,13 +15,22 @@ use yii\helpers\Url;
 				else 
 					echo '<li class="active list-group-item"><a href="#current" data-toggle="tab">Current Wishes</a></li>'			
 				?>
-				<?php if($cat_id) 
-					$active = 'active';
-				else $active = ''; ?>
+				
+				<?php 
+					if($cat_id) 
+					{
+						$active = 'test';
+					} 
+					else 
+					{
+						$active = ''; 
+					}
+				?>
 				<li class="<?=$active?> list-group-item dropdown">
-					<a data-toggle="collapse" data-target="#demo">Recipient 
-						<i class="fa fa-plus text-success pull-right"></i>
-						<i class="fa fa-minus text-success pull-right" style="display:none;"></i>
+					<a data-toggle="collapse" data-target="#demo" >Recipient 
+					
+						<i class="fa fa-plus text-success pull-right" <?php if(!empty($active)){ echo "style='display:none;'"; } ?> ></i>
+						<i class="fa fa-minus text-success pull-right" <?php if(empty($active)){ echo "style='display:none;'"; } ?> ></i>
 					</a>
 					<ul id="demo" class="nav nav-stacked collapsed collapse">
 						<?php

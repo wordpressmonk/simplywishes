@@ -33,7 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
 				?>
 				<!--<i class="fa fa-save txt-smp-orange"></i> &nbsp;
 				<i class="fa fa-thumbs-o-up txt-smp-green"></i>--> 
-				<span  data-placement="top"  data-popover-content=""><img data-placement="top" class="listesinside"  src="<?= Yii::$app->homeUrl ?>images/Share-Icon.png"  /></span>					
+				<span  data-placement="top"  data-popover-content=""><img data-placement="top" class="listesinside removelistesinside"  src="<?= Yii::$app->homeUrl ?>images/Share-Icon.png"  /></span>					
 				<div class="shareIcons hide" ></div>
 				
 				</p>
@@ -44,8 +44,8 @@ $this->params['breadcrumbs'][] = $this->title;
 		<div class="col-md-8">
 			<p><b>Name : </b><span><a href="<?=Url::to(['account/profile','id'=>$model->wished_by])?>"><span><?=$model->wisherName?></span></a></span></p>
 			<p><b>Wish Description : </b><span><?=$model->wish_description?></span></p>
-			<p><b>Iam Located In : </b><span><?=$model->location?></span></p>
-			<p><b>Expected Date : </b><span><?=$model->expected_date?></span></p>
+			<p><b>Location of Wish : </b><span><?=$model->location?></span></p>
+			<p><b>Date Issued : </b><span><?php echo date("m/d/Y",strtotime($model->expected_date)); ?></span></p>
 			<p><b>What Do I Give In Return : </b><span><?=$model->in_return?> </span></p>
 			<p><b>Who Can Potentialy Help me : </b><span><?=$model->who_can?> </span></p>
 			<p><b>Recipient : </b><span><?=$model->categoryName?></span></p>
@@ -54,7 +54,9 @@ $this->params['breadcrumbs'][] = $this->title;
 			<p><b>Wish granted by : </b><span><a href="<?=Url::to(['account/profile','id'=>$model->granted_by])?>"><span><?=$model->GrantedWisherName?></span></a></span></p>		
 			<?php } ?>			
 			<?php if(is_null($model->granted_by) && !\Yii::$app->user->isGuest  && \Yii::$app->user->id!=$model->wished_by){ ?>
+			 <?php if($model->non_pay_option == 0 ){ ?>
 				<form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
+			   <!-- <form action="https://www.paypal.com/cgi-bin/webscr" method="post"> -->
 				  <!-- Identify your business so that you can collect the payments. -->
 				  <!--<input type="hidden" name="business" value="dency@abacies.com">-->
 				  <input type="hidden" name="business" value="<?=$model->wisher->email?>">
@@ -69,21 +71,28 @@ $this->params['breadcrumbs'][] = $this->title;
 				  <input type="hidden" name="currency_code" value="USD">
 
 				  <!-- Display the payment button. -->
-				  <input type="image" name="submit" border="0"
+				  <!--<input type="image" name="submit" border="0" 
 				  src="https://www.paypalobjects.com/webstatic/en_US/i/btn/png/btn_paynow_cc_144x47.png"
-				  alt="Buy Now">
+				  alt="Buy Now">-->
+				  <button class="btn btn-success">Grant This Wish</button>
 				  <img alt="" border="0" width="1" height="1"
 				  src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" >
 				</form>
+			<?php } else { ?>
+					<a href="<?=Url::to(['wish/fullfilled','w_id'=>$model->w_id],true)?>"><button class="btn btn-success">Grant This Wish</button></a>
+			<?php } ?> 	
+					
 			<?php } else if(!is_null($model->granted_by)&& \Yii::$app->user->isGuest){ ?>
-				<a href="<?=Url::to(['site/login'])?>"><button class="btn btn-success">Grant this Wish</button></a>
+				<a href="<?=Url::to(['site/login','red_url'=>Yii::$app->homeUrl.'wish/view?id='.$model->w_id])?>"><button class="btn btn-success">Grant This Wish</button></a>
+			<?php } else if(\Yii::$app->user->isGuest) { ?>
+				<a href="<?=Url::to(['site/login','red_url'=>Yii::$app->homeUrl.'wish/view?id='.$model->w_id])?>"><button class="btn btn-success">Grant This Wish</button></a>
 			<?php } ?>
 			
 			<?php if(is_null($model->granted_by) && !\Yii::$app->user->isGuest && \Yii::$app->user->id==$model->wished_by)
 				echo '<a href="'.Url::to(['wish/update','id'=>$model->w_id]).'"><button class="btn btn-info">Update Wish</button></a>';
 			?>
 				<?php if(is_null($model->granted_by) && !\Yii::$app->user->isGuest && \Yii::$app->user->id==$model->wished_by)
-				echo '<button class="btn btn-danger deletecheck">Delete </button>';
+			//	echo '<button class="btn btn-danger deletecheck">Delete </button>';
 			?>
 		</div>
 	</div>

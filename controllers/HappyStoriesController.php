@@ -11,7 +11,7 @@ use app\models\UserProfile;
 use app\models\search\SearchHappyStories;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
-
+use yii\helpers\Url;
 
 class HappyStoriesController extends \yii\web\Controller
 {
@@ -29,10 +29,10 @@ class HappyStoriesController extends \yii\web\Controller
             ],
             'access' => [
                 'class' => AccessControl::className(), 
-				'except' => ['index','story-details','like'],	
+				'except' => ['index','story-details','like','scroll-happy'],	
                 'rules' => [
                     [
-                        'actions' => ['create','update','my-story','delete','permission','view','update-new'],
+                        'actions' => ['create','update','my-story','delete','permission','view','update-new','scroll-my-happy'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -43,21 +43,60 @@ class HappyStoriesController extends \yii\web\Controller
 	
     public function actionIndex()
     {		
-		$stories = HappyStories::find()->where(['status'=>0])->orderBy('hs_id Desc')->all();				
-        return $this->render('index', ['stories' => $stories]);
-	
+		/* $stories = HappyStories::find()->where(['status'=>0])->orderBy('hs_id Desc')->all();				
+        return $this->render('index', ['stories' => $stories]); */
+				
+		$searchModel = new SearchHappyStories();
+        $dataProvider = $searchModel->searchLive(Yii::$app->request->queryParams);
+
+        return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+		
     }
 
+	 public function actionScrollHappy($page)
+    {
+        $searchModel = new SearchHappyStories();
+        $dataProvider = $searchModel->searchLive(Yii::$app->request->queryParams);
+		$dataProvider->pagination->page = $page;
+        $str = '';
+        foreach($dataProvider->models as $story){
+			$str .= $story->happyAsCard;
+        }
+        return $str;
+    }
+	
 	
 	 public function actionMyStory()
     {			
 		$user = User::findOne(\Yii::$app->user->id);
 		$profile = UserProfile::find()->where(['user_id'=>\Yii::$app->user->id])->one();
+	
+		$searchModel = new SearchHappyStories();
+        $dataProvider = $searchModel->searchMystories(Yii::$app->request->queryParams);
 		
-		$stories = HappyStories::find()->where(['user_id'=>\Yii::$app->user->id])->orderBy('hs_id Desc')->all();
-		return $this->render('my-story', ['stories' => $stories,'user' => $user,
-			'profile' => $profile]);
+        return $this->render('my-story', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+			'user' => $user,
+			'profile' => $profile
+        ]);
 		
+    }
+	
+	
+	 public function actionScrollMyHappy($page)
+    {
+        $searchModel = new SearchHappyStories();
+        $dataProvider = $searchModel->searchMystories(Yii::$app->request->queryParams);
+		$dataProvider->pagination->page = $page;
+        $str = '';
+        foreach($dataProvider->models as $story){
+			$str .= $story->myHappyAsCard;
+        }
+        return $str;
     }
 	
 	public function actionCreate()
@@ -69,16 +108,24 @@ class HappyStoriesController extends \yii\web\Controller
 		  
          if ($model->load(Yii::$app->request->post())) {
 			
+			/* echo "<pre>";
+			print_r(Yii::$app->request->post());
+			exit;
+			 */
 			 $model->user_id = \Yii::$app->user->id;
 			$model->story_image = UploadedFile::getInstance($model, 'story_image');
 				if(!empty($model->story_image)) {
 					if(!$model->uploadImage())
 						return;
+				}else 
+				{
+					$model->story_image = $model->dulpicate_image;
 				}
 				
 				if($model->save())
 				{
 					Yii::$app->session->setFlash('success_adminhappystory');
+					$model->sendSuccessEmail(\Yii::$app->user->id);
 				    return $this->redirect(['my-story']);
 				}	
 				else
@@ -106,7 +153,7 @@ class HappyStoriesController extends \yii\web\Controller
     {
         $model = HappyStories::findOne($id);
 		$current_image = $model->story_image;
-		$model->scenario = 'update_by_happystory_user';
+		//$model->scenario = 'update_by_happystory_user';
 		
 		$user = User::findOne(\Yii::$app->user->id);
 		$profile = UserProfile::find()->where(['user_id'=>\Yii::$app->user->id])->one();
@@ -119,8 +166,17 @@ class HappyStoriesController extends \yii\web\Controller
 				if(!empty($model->story_image)){ 
 					if(!$model->uploadImage())
 						return;
-				}else
-					$model->story_image = $current_image;
+				}
+			 else
+				{					
+					if(!empty($model->dulpicate_image) && ($model->dulpicate_image != $current_image ))
+					{
+						$model->story_image = $model->dulpicate_image;
+					} else {
+						$model->story_image = $current_image;
+					}					
+				}
+				
 				if($model->save())
 				{	Yii::$app->session->setFlash('success_happystory');
 					//return $this->redirect(['story-details', 'id' => $model->hs_id]);
@@ -227,6 +283,7 @@ class HappyStoriesController extends \yii\web\Controller
 		
 				if($model->save())
 				{	
+					$model->sendAdminSuccessEmail( $model->user_id);
 					return $this->redirect(['view', 'id' => $model->hs_id]);
 				} else {
 			

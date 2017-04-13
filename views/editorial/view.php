@@ -40,6 +40,13 @@ $this->params['breadcrumbs'][] = $this->title;
 				 'format' => !empty($model->e_image)?['image',['height'=>'100px']]:'text',
 				
             ],	
+			
+			[
+                'attribute'=>'Video',
+				'value'=>!empty($model->featured_video_url)?$model->featured_video_url:'-',
+				'format' => 'text',
+				 
+            ],
            
         ],
     ]) ?>

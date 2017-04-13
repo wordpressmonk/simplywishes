@@ -15,7 +15,7 @@ AppAsset::register($this);
 <!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>">
 <head>
-	<title>Simply Wishes</title>
+	<title>SimplyWishes</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<?= Html::csrfMetaTags() ?>
@@ -80,13 +80,15 @@ AppAsset::register($this);
 					<li><a href="<?=Yii::$app->homeUrl?>wish/create"><i class="fa fa-clone fa-lg"></i>Add a Wish</a></li>
 					<li><a href="<?=Yii::$app->homeUrl?>account/inbox-message"><i class="fa fa-inbox fa-lg"></i> Inbox</a></li>
 					<li><a href="<?=Yii::$app->homeUrl?>account/my-account"><i class="fa fa-heart fa-lg"></i>My Wishes</a></li>
+					<li><a href="<?=Yii::$app->homeUrl?>wish/my-drafts"><i class="fa fa-window-restore fa-lg"></i>My Drafts</a></li>
 					<li><a href="<?=Yii::$app->homeUrl?>account/my-friend"><i class="fa fa-users fa-lg"></i>Friends</a></li>
 					<li><a href="<?=Yii::$app->homeUrl?>account/my-saved"><i class="fa fa-save fa-lg"></i>Saved Wishes</a></li>
 					<li><a href="<?=Yii::$app->homeUrl?>happy-stories/create"><i class="fa fa-commenting-o fa-lg"></i>Tell Your Story</a></li>
 					<li><a href="<?=Yii::$app->homeUrl?>happy-stories/my-story"><i class="fa fa-smile-o fa-lg"></i>My Happy Story</a></li>
 					<?php if(isset(\Yii::$app->user->identity->role) && (\Yii::$app->user->identity->role == 'admin')){ ?>
-					<li><a href="<?=Yii::$app->homeUrl?>happy-stories/permission"><i class="fa fa-list-alt fa-lg"></i>
+					<li><a href="<?=Yii::$app->homeUrl?>happy-stories/permission"><i class="fa fa-list-alt fa-lg">
 </i>Happy Premission</a></li>
+<li><a href="<?=Yii::$app->homeUrl?>mail-content/index"><i class="fa fa-clipboard fa-lg"></i>Mail Content</a></li>
 					<!-- <li><a href="<?=Yii::$app->homeUrl?>wish/report-action"><i class="fa fa-flag-checkered fa-lg" ></i>Report Action</a></li>  -->
 					<?php } ?>
 					<li><a href="<?=Yii::$app->homeUrl?>account/edit-account"><i class="fa fa-user-circle-o fa-lg"></i> Account Info</a></li>

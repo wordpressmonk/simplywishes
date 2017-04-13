@@ -71,26 +71,28 @@ button:focus {outline:0 !important;}
 	color:#f3ae1a;
 }
 .txt-smp-green{
-	background-color: #66cc66;
-    padding: 7px;
+ /*	background-color: #66cc66;  */
+    background-color: #b30c4a;
+    padding: 8px;
     border-radius: 14px;
     color: #fff;
 }
 .txt-smp-orange{
     background-color: #f3ae1a;
-    padding: 7px;
+    padding: 8px;
     border-radius: 14px;
     color: #fff;
 }
 .txt-smp-blue {
     background-color: #1a67f3;
-    padding: 7px;
+    padding: 8px;
     border-radius: 14px;
     color: #fff;
 }
 .txt-smp-pink {
-    background-color: #b30c4a;
-    padding: 7px;
+   /* background-color: #b30c4a; */
+   background-color: #66cc66;
+    padding: 8px;
     border-radius: 14px;
     color: #fff;
 }
@@ -217,15 +219,28 @@ border-radius: 16px 0px 0px 16px;
 a[aria-expanded='true'] .fa-plus{
 display:none;
 }
+a[aria-expanded='false'] .fa-plus{
+display:block !important;
+}
+a[aria-expanded='false'] .fa-minus{
+display:none;
+}
+
 a[aria-expanded='true'] .fa-minus{
 display:block !important;
 }
 
 li.selected {
-    background-color: antiquewhite;
+   /* background-color: antiquewhite; */
+   margin:0px;
+   border:none; 
+   box-shadow:none; 
+   border-bottom: 3px solid #66cc66;
+   background-color: transparent;
+   width: -moz-fit-content;
 }
 li.selected a {
-    color: #555 !important;
+    color: #66cc66 !important;
 }
 #demo li a:hover{
 	color: #66cc66;
@@ -285,7 +300,7 @@ ul.collapse.detail {
 	margin:5px;
 }
 li.media.media_textbox {
-    width: 90%;
+    width: 100%;  /* new message box */
     display: inline-block;
 }
 li.media.media_button{
@@ -307,7 +322,7 @@ li.media.media_button{
 .selected{
    margin:10px;
    border:solid 1px blue; 
-   box-shadow:0px 12px 22px 1px #333;
+   box-shadow:0px 12px 22px 1px #333; 
 }
 /* Arivazhagan for new Singup and edit profile Duplicate logo */
 .profilelogo{
@@ -500,10 +515,10 @@ ul.smp-footer-links a {
 
 
 .newmsg{
-		font-weight:800;
+		font-weight:900 !important;
 	}
 .newmsg span{
-		color: red;
+		color: black;
 		margin-left: 100px;
 	}
 
@@ -519,4 +534,32 @@ ul.smp-footer-links a {
 .friendprofile_img img{
     min-height: 100px;
 }
+.atagcolor{
+	color: #337ab7 !important;
+}
+.imagesize{
+	height:100px;	
+}
+.sum-font-size{
+	font-size:20px;	
+}
+.listesinside
+{
+	 margin-left: 1px; 
+	padding-top: 3px;
+}
+.removelistesinside
+{
+	margin-left: 0px !important;
+	padding-top: 0px !important;
+}
+.readedmsg{	
+	background-color: #F1F1F1;	
+}
+
+.readedmsg span{
+		color: black;
+		margin-left: 100px;
+	}
+	
 /******* Styles Added for New Template END POINT ******/

@@ -59,7 +59,7 @@ $this->params['breadcrumbs'][] = $this->title;
 			</div>
 			  
 			<?php } } else {
-				echo "Sorry, No more friends!!!.";
+				echo "Sorry, No more friends.";
 			} ?>
         </div>
        </div>

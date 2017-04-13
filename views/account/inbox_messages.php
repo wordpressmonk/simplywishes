@@ -12,9 +12,9 @@ use yii\web\JsExpression;
 		  <li role="presentation" class="active">
 			<a>Inbox</a>
 		  </li>
-		  <li role="presentation" >
+		 <li role="presentation" >
 			<a href="<?=\Yii::$app->homeUrl?>account/sent-message" role="tab" >Sent Mail</a>
-		  </li>
+		  </li> 
 		</ul>
 	   <div class="tab-content">
 		<div role="tabpanel" class="tab-pane  active grid" id="inboxmailtab">
@@ -29,36 +29,82 @@ use yii\web\JsExpression;
 		<?php 	
 			$current_user = \app\models\Userprofile::find()->where(['user_id'=>\Yii::$app->user->id])->one();
 			
-			foreach($messages as $msg){
-				$profile = \app\models\Userprofile::find()->where(['user_id'=>$msg->sender_id])->one();
-				echo '<li class="list-group-item"  id="li_list_'.$msg->m_id.'" >
-					<input type="checkbox" class="checkBoxClass" name="selection[]" value="'.$msg->m_id.'" ></input>	
-					<span style="cursor:pointer" class="pull-right remove_delete" title="Remove"  for="'.$msg->m_id.'"><i class="fa fa-trash-o" aria-hidden="true"> </i></span>
+			 /* echo "<pre>";
+			print_r($messages);
+			exit; */ 
+			
+			foreach($messages as $key=>$msg){
+				
+				
+				$reply="";
+				if(isset($msg['threads']) && !empty($msg['threads']))
+				{
+					$reply ="me, ";		
+					$profile = \app\models\Userprofile::find()->where(['user_id'=>$msg['recipient_id']])->one();					
+				}else{
+					$profile = \app\models\Userprofile::find()->where(['user_id'=>$msg['sender_id']])->one();
+				}
+				
+				if($msg['read_text'] == \Yii::$app->user->id) 
+					$color_var = "";
+				else 
+					$color_var = "readedmsg";
+				
+				echo '<li class="list-group-item '.$color_var.' "  id="li_list_'.$msg['m_id'].'" >
+					<input type="checkbox" class="checkBoxClass" name="selection[]" value="'.$msg['m_id'].'" ></input>	
+					<span style="cursor:pointer" class="pull-right remove_delete" title="Remove"  for="'.$msg['m_id'].'"><i class="fa fa-trash-o" aria-hidden="true"> </i></span>
 					
-					<a class="smp_expand" data-toggle="collapse" title="Click here To View Conversation">
-						<div class="list-icon">
-							<img src="'.\Yii::$app->homeUrl.$profile->profile_image.'" alt="">
-						</div>';
+					<div class="list-icon">
+							<a href="'.Url::to(['profile','id'=>$profile->user_id]).'" target="_blank" ><img src="'.\Yii::$app->homeUrl.$profile->profile_image.'" alt=""></a>
+						</div>
 						
-						if($msg->read_text == 0)
+					<div class="smp_expand" data-toggle="collapse" title="Click here To View Conversation" >';
+						
+						if($msg['read_text'] == \Yii::$app->user->id) 
 						{
-							echo '<div id="read_'.$msg->m_id.'" class="list-group-item-heading newmsg" for="'.$msg->m_id.'" >'.$profile->fullname.' <span id="readicon_'.$msg->m_id.'" class="unread" >-unread</span></div>';
+							echo '<div id="read_'.$msg['m_id'].'" class="list-group-item-heading newmsg" for="'.$msg['m_id'].'" >'.$reply.$profile->fullname.' <span id="readicon_'.$msg['m_id'].'" class="unread" >- '.substr($msg['text'],0,10).'</span></div>';
 						}
 						else 
 						{
-							echo '<div class="list-group-item-heading" >'.$profile->fullname.'</div>';
+							echo '<div class="list-group-item-heading" >'.$reply.$profile->fullname.'<span class="unread" >- '.substr($msg['text'],0,10).'</span></div>';
 						}
 						
 					echo '<p class="list-group-item-text">
-						<span class="label label-primary pull-right">Date:'.$msg->created_at.'</span></p>
-					</a>
+						<span class="label label-primary pull-right">Date:'.$msg['created_at'].'</span></p>
+					</div>
 					<ul class="collapse detail">';							
 						echo '<li class="media">						  
 						  <div class="media-body">						
-							<p class="list-group-item-text">'.$msg->text.'</p>							
+							<p class="list-group-item-text">'.$msg['text'].'</p>							
 						  </div>
 						</li>';
-										
+						
+					echo '<li class="media media_textbox">
+							<div class="form-group">
+								<label for="message">Enter Your Message</label>
+								<textarea id="'.$key.'_msg" class="form-control" rows="2"></textarea>
+							</div>
+							<button type="button" id="rpy_'.$msg['m_id'].'" data-send_to="'.$msg['recipient_id'].'" data-msg_id ="'.$msg['m_id'].'" class="send-msg btn btn-primary pull-right">Reply</button>
+						</li>
+						';
+					if(isset($msg['threads']) && !empty($msg['threads']))
+					{						
+						arsort($msg['threads']);
+						foreach($msg['threads'] as $key2=>$thread){
+							$profile = \app\models\Userprofile::find()->where(['user_id'=>$thread['send_by']])->one();
+							echo '<li class="media">
+							  <div class="media-left list-icon">
+								 <img src="'.\Yii::$app->homeUrl.$profile->profile_image.'" alt="">
+							  </div>
+							  <div class="media-body">
+								<h4 class="media-heading">'.$profile->fullname.'</h4>
+								<p class="list-group-item-text">'.$thread['text'].'<span class="label label-primary pull-right">Date:'.$thread['created_at'].'</span></p>
+								
+							  </div>
+							</li>';
+						} 	 
+					}
+					
 					echo '</ul>
 					</li>';
 			}
@@ -156,7 +202,7 @@ use yii\web\JsExpression;
 				var msg_id = $.map($('input[name="selection[]"]:checked'), function(c){return c.value; })
 				if($.trim(msg_id) === "")
 				 {
-					alert("Please Select the Checkbox to Delete!!!.");
+					alert("Please Select the Checkbox to Delete.");
 					return false;
 				  }				
 				 $.ajax({
@@ -164,7 +210,7 @@ use yii\web\JsExpression;
 				   type: 'POST',
 				   data: {  msg_id: msg_id,
 				   },
-				   success: function(data) {		
+				   success: function(data) {					
 						location.reload();
 				   }
 				 }); 
@@ -195,7 +241,8 @@ use yii\web\JsExpression;
 				   },
 				   success: function(data) {		
 						$("#read_"+msg_id).removeClass("newmsg");	
-						$("#readicon_"+msg_id).remove();																	
+						$("#read_"+msg_id).addClass("readedmsg");	
+					//	$("#readicon_"+msg_id).remove();																	
 				   }
 				 }); 				 
 		});	
@@ -220,34 +267,75 @@ use yii\web\JsExpression;
 			$(this).parent('li').addClass('active');
 		});
 
-		$(".send-msg").on("click",function(){			
+		$(".send-msg").on("click",function(){		
+			var id = $(this).attr('id');
+			
 			var send_to = $(this).attr('data-send_to');
-			var msg = $('#'+send_to+'_msg').val();
+			var msg_id = $(this).attr('data-msg_id');
+			var msg = $('#'+msg_id+'_msg').val();
+			if($.trim(msg) === "")
+			{
+				alert("Please check the message.");
+				return false;
+				
+			}
+		
+		
 			var prof_image = "<?=\Yii::$app->homeUrl.$current_user->profile_image?>";
 			var fullname = "<?=$current_user->fullname?>";
 			var elem = $(this);
 			console.log(msg);
 			var send_from = "<?=\Yii::$app->user->id?>";
+			
+			$("#"+id).attr('disabled','disabled');
+			
+		/* 			
+			alert(send_to);
+			alert(msg_id);
+			alert(msg);
+			alert(send_from);
+			return false;  			
+			*/
+			
 			$.ajax({
 				url : '<?=Url::to(['account/reply-message'])?>',
 				type : 'POST',
-				data : {msg:msg,send_from:send_from,send_to:send_to},
+				data : {msg:msg,send_from:send_from,send_to:send_to,msg_id:msg_id},
 				success: function(response){
 					var data = $.parseJSON(response);
-					//console.log(response.status);
 					if(data.status){
-						$('#'+send_to+'_msg').val("");
+						$('#'+msg_id+'_msg').val("");
 						var html = '<li class="media"><div class="media-left list-icon"><img src="'+prof_image+'" alt=""></div><div class="media-body"><h4 class="media-heading">'+fullname+'</h4><p class="list-group-item-text">'+msg+'<span class="label label-primary pull-right">Date:Now</span></p></div></li>';
-					//$(elem).parent('li').append(html);
 						$( html ).insertAfter( $(elem).parent('li'));
+							$("#"+id).removeAttr('disabled');
 					}
 					
-					
-				}
+				},
+				error: function (response) {
+						$("#"+id).removeAttr('disabled');
+					}	
 			});
+				
 		});
 	
 
 	//});
 	</script>
-	
+<style>
+input.checkBoxClass {
+    float: left;
+    margin-top: 15px;
+    margin-right: 8px;
+}
+.list-icon{
+    float: left;
+    margin-right: 10px;
+}
+.list-group-item-heading {
+    padding-top: 10px;
+}
+.list-icon a img {
+    width: 40px;
+    border-radius: 100%;
+}
+</style>

@@ -6,5 +6,8 @@ use yii\helpers\Url;
 /* @var $message \yii\mail\BaseMessage instance of newly created mail message */
 
 ?>
-<h2>Rest your password here</h2>
+<div class="password-reset">
+<h2>Reset your password here</h2>
 <?= Html::a('Reset', Url::to(['account/reset-password','key'=>$key],true)) ?>
+
+</div>

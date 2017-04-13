@@ -74,7 +74,7 @@ class SiteController extends Controller
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
              'pagination' => [
-                'pageSize'=>10
+                'pageSize'=>12
             ] 
         ]);
         return $this->render('index',['models'=>$dataProvider->models]);
@@ -123,9 +123,11 @@ class SiteController extends Controller
     public function actionContact()
     {
         $model = new ContactForm();
-        if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
-            Yii::$app->session->setFlash('contactFormSubmitted');
+		
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
 
+			$model->contact();
+            Yii::$app->session->setFlash('contactFormSubmitted');
             return $this->refresh();
         }
         return $this->render('contact', [
@@ -282,7 +284,7 @@ class SiteController extends Controller
         return $this->render('requestPasswordResetToken', ['model' => $model,]);
     }
 	
-	 public function actionResetPassword($token)
+	public function actionResetPassword($token)
     {
         try {         
 			$user = User::findByPasswordResetToken($token);
