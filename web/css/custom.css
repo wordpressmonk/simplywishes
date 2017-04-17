@@ -709,6 +709,16 @@ ul.smp-footer-links a {
     .message #select_all{
       margin: 0px;
     }
+    .grid{
+      height: 100% !important;
+    }
+    .smp-mg-bottom {
+      font-size: 12px;
+    }
+    a.btn.btn-success.pull-right.newtest {
+      padding: 2px;
+      margin-top: -50px !important;
+    }
 
   }
 
@@ -836,6 +846,16 @@ ul.smp-footer-links a {
     }
     .message #select_all{
       margin: 0px;
+    }
+    .grid{
+      height: 100% !important;
+    }
+    .smp-mg-bottom {
+      font-size: 12px;
+    }
+    a.btn.btn-success.pull-right.newtest {
+      padding: 2px;
+      margin-top: -50px !important;
     }
   }
 }
