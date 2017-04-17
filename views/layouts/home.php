@@ -113,7 +113,7 @@ AppAsset::register($this);
 </div>
 <!--***** Header Ends*****-->
 <?php if(!\Yii::$app->user->isGuest){  ?>
-	<div  style="background-image:url('<?=Yii::$app->homeUrl?>images/login_banner.jpg');">	
+	<div class="banner-home" style="background-image:url('<?=Yii::$app->homeUrl?>images/login_banner.jpg');">	
 
 		<div class="container" style="padding: 25px 0px 50px 36px;">
 
