@@ -698,10 +698,12 @@ ul.smp-footer-links a {
       margin-top: 10px;
     }
     button#multi_delete {
-      font-size: 8px;
+      font-size: 10px;
+      padding: 6px 6px;
     }
     #sendmessage button{
-      font-size: 8px;
+      font-size: 10px;
+      padding: 6px 6px;
     }
 
   }
@@ -818,6 +820,14 @@ ul.smp-footer-links a {
     }
     .btngroup{
       margin-top: 10px;
+    }
+    button#multi_delete {
+      font-size: 10px;
+      padding: 6px 6px;
+    }
+    #sendmessage button{
+      font-size: 10px;
+      padding: 6px 6px;
     }
   }
 }
