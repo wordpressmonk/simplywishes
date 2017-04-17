@@ -683,113 +683,135 @@ ul.smp-footer-links a {
       margin-right: 0px !important;
     }
     .smp-pills li.active a{
-      padding: 8px 0px;
-   }
-
-
- }
-
- /***** Responsive Navbar Ends Chrome Browser******/
-
-
- @-moz-document url-prefix() { 
-
-
-  @media screen and (min-width: 768px) and (max-width: 1024px) {
-    .smp-head{
-      padding-top: 0px;
+      padding: 6px;
     }
-    .smp-head .col-md-4{
-      width: 100% !important;
-      padding: 0px;
+    .smp-pills{
+      padding: 20px;
     }
-    .smp-head .col-md-8{
-      width: 100% !important;
+    .smp-pills li a{
+      padding: 8px;
     }
-    .smp-logo a img{
-      width: 100%;
+    .join, .login{
+      padding: 0px !important;
     }
-    .smp-head .container-fluid{
-      font-size: 12px;
+    .btngroup{
+      margin-top: 10px;
     }
 
-    .smpl-brdr-right, .smpl-brdr-left{
-      font-size: 12px !important;
-    }
-    .banner-home {
-      background-size: 100% 100%;
-    }
-    .slick-next {
-      right: -20px !important; 
-    }
-    .slick-prev {
-      left: -20px !important;
-    }
   }
 
+  /***** Responsive Navbar Ends Chrome Browser******/
 
-  @media screen and (max-width: 480px) {
-    .banner-home {
-      background-size: 100% 100%;
-    }
-    .smp-head{
-      padding-top: 0px;
-    }
-    .smp-head .col-md-4{
-      width: 100% !important;
-      padding: 0px;
-    }
-    .smp-head .col-md-8{
-      width: 100% !important;
-    }
-    .smp-logo a img{
-      width: 100%;
-    }
-    .navbar-inverse .navbar-collapse,  .navbar-inverse .navbar-form {
-      border-color: #1085bf;
-    }
-    .navbar-inverse .navbar-toggle {
-      border-color:  #1085bf;
-    }
-    .navbar-inverse .navbar-toggle:hover, .navbar-inverse .navbar-toggle:focus {
-      background-color:  #66cc66;
-    }
-    .slide_header {
-      font-size: 38px ;
-    }
-    .shareicon-home{
-      width: 32px !important;
-    }
-    .slick-next {
-      right: -20px !important; 
-    }
-    .slick-prev {
-      left: -20px !important;
-    }
-    .smp-foot .container-fluid .col-md-12{
-      padding: 0px;
-      }​
-      p.copyright {
-        font-size: 13px;
+
+  @-moz-document url-prefix() { 
+
+
+    @media screen and (min-width: 768px) and (max-width: 1024px) {
+      .smp-head{
+        padding-top: 0px;
       }
-      .smp-foot p{
-        text-align: center;
-        font-size: 11px;
-      }
-      .smp-footer-links{
+      .smp-head .col-md-4{
+        width: 100% !important;
         padding: 0px;
-        text-align: center;
       }
-      .smp-footer-links li {
-        font-size: 10px;
-        padding-right: 0px;
+      .smp-head .col-md-8{
+        width: 100% !important;
       }
-      .navbar-header{
-        margin-right: 0px !important;
+      .smp-logo a img{
+        width: 100%;
       }
-      .smp-pills li.active a{
-       padding: 8px 0px;
-     }
+      .smp-head .container-fluid{
+        font-size: 12px;
+      }
 
-   }
- }
+      .smpl-brdr-right, .smpl-brdr-left{
+        font-size: 12px !important;
+      }
+      .banner-home {
+        background-size: 100% 100%;
+      }
+      .slick-next {
+        right: -20px !important; 
+      }
+      .slick-prev {
+        left: -20px !important;
+      }
+    }
+
+
+    @media screen and (max-width: 480px) {
+      .banner-home {
+        background-size: 100% 100%;
+      }
+      .smp-head{
+        padding-top: 0px;
+      }
+      .smp-head .col-md-4{
+        width: 100% !important;
+        padding: 0px;
+      }
+      .smp-head .col-md-8{
+        width: 100% !important;
+      }
+      .smp-logo a img{
+        width: 100%;
+      }
+      .navbar-inverse .navbar-collapse,  .navbar-inverse .navbar-form {
+        border-color: #1085bf;
+      }
+      .navbar-inverse .navbar-toggle {
+        border-color:  #1085bf;
+      }
+      .navbar-inverse .navbar-toggle:hover, .navbar-inverse .navbar-toggle:focus {
+        background-color:  #66cc66;
+      }
+      .slide_header {
+        font-size: 38px ;
+      }
+      .shareicon-home{
+        width: 32px !important;
+      }
+      .slick-next {
+        right: -20px !important; 
+      }
+      .slick-prev {
+        left: -20px !important;
+      }
+      .smp-foot .container-fluid .col-md-12{
+        padding: 0px;
+        }​
+        p.copyright {
+          font-size: 13px;
+        }
+        .smp-foot p{
+          text-align: center;
+          font-size: 11px;
+        }
+        .smp-footer-links{
+          padding: 0px;
+          text-align: center;
+        }
+        .smp-footer-links li {
+          font-size: 10px;
+          padding-right: 0px;
+        }
+        .navbar-header{
+          margin-right: 0px !important;
+        }
+        .smp-pills li.active a{
+         padding: 7px;
+       }
+       .smp-pills{
+        padding: 20px;
+      }
+      .smp-pills li a{
+       padding: 8px;
+     }
+     .join, .login{
+      padding: 0px !important;
+    }
+    .btngroup{
+      margin-top: 10px;
+    }
+  }
+}

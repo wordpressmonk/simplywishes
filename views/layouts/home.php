@@ -95,11 +95,11 @@ AppAsset::register($this);
 				</li>
 				<?php } else { ?>		
 				<li data-id="edt_home" class="dropdown" class="active">
-					<div class="btn-group pull-right">
-						<a href="<?=Yii::$app->homeUrl?>site/login"><button class="btn btn-smp-blue smpl-brdr-left" type="button">
+					<div class="btn-group pull-right btngroup">
+						<a class="login" href="<?=Yii::$app->homeUrl?>site/login"><button class="btn btn-smp-blue smpl-brdr-left" type="button">
 							Login
 						</button></a>
-						<a href="<?=Yii::$app->homeUrl?>site/sign-up"><button class="btn btn-smp-green smpl-brdr-right" type="button">
+						<a class="join" href="<?=Yii::$app->homeUrl?>site/sign-up"><button class="btn btn-smp-green smpl-brdr-right" type="button">
 							Join Today
 						</button></a>
 					</div>
