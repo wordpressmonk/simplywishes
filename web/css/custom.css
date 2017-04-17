@@ -646,7 +646,7 @@ ul.smp-footer-links a {
   .navbar-inverse .navbar-toggle {
     border-color:  #1085bf;
   }
-  .navbar-inverse .navbar-toggle:hover, .navbar-inverse .navbar-toggle:focus {
+  .navbar-inverse .navbar-toggle:hover {
     background-color:  #66cc66;
   }
   .slide_header {
@@ -696,6 +696,12 @@ ul.smp-footer-links a {
     }
     .btngroup{
       margin-top: 10px;
+    }
+    button#multi_delete {
+      font-size: 8px;
+    }
+    #sendmessage button{
+      font-size: 8px;
     }
 
   }
