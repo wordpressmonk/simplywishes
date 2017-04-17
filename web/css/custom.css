@@ -719,6 +719,9 @@ ul.smp-footer-links a {
       padding: 2px;
       margin-top: -50px !important;
     }
+    .media-body {
+      display: block;
+    }
 
   }
 
@@ -856,6 +859,9 @@ ul.smp-footer-links a {
     a.btn.btn-success.pull-right.newtest {
       padding: 2px;
       margin-top: -50px !important;
+    }
+    .media-body {
+      display: block;
     }
   }
 }
