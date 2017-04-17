@@ -704,6 +704,10 @@ ul.smp-footer-links a {
     #sendmessage button{
       font-size: 7px;
       padding: 4px 4px;
+      margin-top: -5px;
+    }
+    .message #select_all{
+      margin: 0px;
     }
 
   }
@@ -828,6 +832,10 @@ ul.smp-footer-links a {
     #sendmessage button{
       font-size: 7px;
       padding: 4px 4px;
+      margin-top: -5px;
+    }
+    .message #select_all{
+      margin: 0px;
     }
   }
 }
