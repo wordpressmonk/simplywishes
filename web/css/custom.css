@@ -566,315 +566,365 @@ ul.smp-footer-links a {
 
 /***** Responsive Navbar Starts ******/
 
-.smp-head .container-fluid, .navbar-collapse{
+/*.smp-head .container-fluid, .navbar-collapse{
   padding: 0px;
-}
-.smp-head .container{
-  padding: 0px;
-}
-.smp-head .navbar-inverse {
-  background-color: transparent;
-  border-color: transparent;
-}
-.smp-logo a img{
-  width: 100%;
-}
-.smp-footer-links{
-  float: right;
-}
-/***** Responsive Navbar Ends ******/
-
-
-/***** Responsive Navbar Starts for Chrome Browser******/
-
-@media screen and (-webkit-min-device-pixel-ratio:0) { 
-
-}
-
-@media screen and (-webkit-min-device-pixel-ratio:0) and (min-width: 768px) and (max-width: 1024px) {
-  .smp-head{
-    padding-top: 0px;
-  }
-  .smp-head .col-md-4{
-    width: 100% !important;
+  }*/
+  .smp-head .container{
     padding: 0px;
   }
-  .smp-head .col-md-8{
-    width: 100% !important;
+  .smp-head .navbar-inverse {
+    background-color: transparent;
+    border-color: transparent;
   }
   .smp-logo a img{
     width: 100%;
   }
-  .smp-head .container-fluid{
-    font-size: 12px;
+  .smp-footer-links{
+    float: right;
+  }
+  /***** Responsive Navbar Ends ******/
+
+
+  /***** Responsive Navbar Starts for Chrome Browser******/
+
+  @media screen and (-webkit-min-device-pixel-ratio:0) { 
+
   }
 
-  .smpl-brdr-right, .smpl-brdr-left{
-    font-size: 12px !important;
-  }
-  .banner-home {
-    background-size: 100% 100%;
-  }
-  .slick-next {
-    right: -20px !important; 
-  }
-  .slick-prev {
-    left: -20px !important;
-  }
-  .grid{
-    height: 100% !important;
-  }
-}
-
-@media screen and (-webkit-min-device-pixel-ratio:0) and (max-width: 480px) {
-  .banner-home {
-    background-size: 100% 100%;
-  }
-  .smp-head{
-    padding-top: 0px;
-  }
-  .smp-head .col-md-4{
-    width: 100% !important;
-    padding: 0px;
-  }
-  .smp-head .col-md-8{
-    width: 100% !important;
-  }
-  .smp-logo a img{
-    width: 100%;
-  }
-  .navbar-inverse .navbar-collapse,  .navbar-inverse .navbar-form {
-    border-color: #1085bf;
-  }
-  .navbar-inverse .navbar-toggle {
-    border-color:  #1085bf;
-  }
-  .navbar-inverse .navbar-toggle:hover {
-    background-color:  #66cc66;
-  }
-  .slide_header {
-    font-size: 38px ;
-  }
-  .shareicon-home{
-    width: 32px !important;
-  }
-  .slick-next {
-    right: -20px !important; 
-  }
-  .slick-prev {
-    left: -20px !important;
-  }
-  .smp-foot .container-fluid .col-md-12{
-    padding: 0px;
-    }​
-    p.copyright {
-      font-size: 13px;
+  @media screen and (-webkit-min-device-pixel-ratio:0) and (min-width: 768px) and (max-width: 1024px) {
+    .smp-head{
+      padding-top: 0px;
     }
-    .smp-foot p{
-      text-align: center;
-      font-size: 11px;
-    }
-    .smp-footer-links{
+    .smp-head .col-md-4{
+      width: 100% !important;
       padding: 0px;
-      text-align: center;
     }
-    .smp-footer-links li {
-      font-size: 10px;
-      padding-right: 0px;
+    .smp-head .col-md-8{
+      width: 100% !important;
     }
-    .navbar-header{
-      margin-right: 0px !important;
+    .smp-logo a img{
+      width: 100%;
     }
-    .smp-pills li.active a{
-      padding: 6px;
+    .smp-head .container-fluid{
+      font-size: 12px;
     }
-    .smp-pills{
-      padding: 20px;
+    .smpl-brdr-right, .smpl-brdr-left{
+      font-size: 12px !important;
     }
-    .smp-pills li a{
-      padding: 8px;
+    .banner-home {
+      background-size: 100% 100%;
     }
-    .join, .login{
-      padding: 0px !important;
+    .slick-next {
+      right: -20px !important; 
     }
-    .btngroup{
-      margin-top: 10px;
-    }
-    button#multi_delete {
-      font-size: 7px;
-      padding: 4px 4px;
-    }
-    #sendmessage button{
-      font-size: 7px;
-      padding: 4px 4px;
-      margin-top: -5px;
-    }
-    .message #select_all{
-      margin: 0px;
+    .slick-prev {
+      left: -20px !important;
     }
     .grid{
       height: 100% !important;
     }
-    .smp-mg-bottom {
-      font-size: 12px;
+    footer p{
+      text-align: center;
     }
-    a.btn.btn-success.pull-right.newtest {
-      padding: 2px;
-      margin-top: -50px !important;
+    .smp-footer-links {
+      float: none;
+      text-align: center;
     }
-    .media-body {
-      display: block;
-    }
-    .media:first-child {
-      margin-top: 13px;
-    }
-
   }
 
-  /***** Responsive Navbar Ends Chrome Browser******/
+  @media screen and (-webkit-min-device-pixel-ratio:0) and (min-width: 481px) and (max-width: 767px) {
+    .banner-home {
+      background-size: 100% 100%;
+    }
+    .navbar-inverse .navbar-toggle {
+      border-color:  #1085bf;
+    }
+    .navbar-inverse .navbar-collapse,  .navbar-inverse .navbar-form {
+      border-color: #1085bf;
+    }
+    footer p{
+      text-align: center;
+    }
+    .smp-footer-links {
+      float: none;
+      text-align: center;
+    }
+  }
 
-
-  @-moz-document url-prefix() { 
-
-
-    @media screen and (min-width: 768px) and (max-width: 1024px) {
-      .smp-head{
-        padding-top: 0px;
+  @media screen and (-webkit-min-device-pixel-ratio:0) and (max-width: 480px) {
+    .banner-home {
+      background-size: 100% 100%;
+    }
+    .smp-head{
+      padding-top: 0px;
+    }
+    .smp-head .col-md-4{
+      width: 100% !important;
+      padding: 0px;
+    }
+    .smp-head .col-md-8{
+      width: 100% !important;
+    }
+    .smp-logo a img{
+      width: 100%;
+    }
+    .navbar-inverse .navbar-collapse,  .navbar-inverse .navbar-form {
+      border-color: #1085bf;
+    }
+    .navbar-inverse .navbar-toggle {
+      border-color:  #1085bf;
+    }
+    .navbar-inverse .navbar-toggle:hover {
+      background-color:  #66cc66;
+    }
+    .slide_header {
+      font-size: 38px ;
+    }
+    .shareicon-home{
+      width: 32px !important;
+    }
+    .slick-next {
+      right: -20px !important; 
+    }
+    .slick-prev {
+      left: -20px !important;
+    }
+    .smp-foot .container-fluid .col-md-12{
+      padding: 0px;
+      }​
+      p.copyright {
+        font-size: 13px;
       }
-      .smp-head .col-md-4{
-        width: 100% !important;
+      .smp-foot p{
+        text-align: center;
+        font-size: 11px;
+      }
+      .smp-footer-links{
         padding: 0px;
+        text-align: center;
       }
-      .smp-head .col-md-8{
-        width: 100% !important;
+      .smp-footer-links li {
+        font-size: 10px;
+        padding-right: 0px;
       }
-      .smp-logo a img{
-        width: 100%;
+      .navbar-header{
+        margin-right: 0px !important;
       }
-      .smp-head .container-fluid{
-        font-size: 12px;
+      .smp-pills li.active a{
+        padding: 6px;
       }
-
-      .smpl-brdr-right, .smpl-brdr-left{
-        font-size: 12px !important;
+      .smp-pills{
+        padding: 20px;
       }
-      .banner-home {
-        background-size: 100% 100%;
+      .smp-pills li a{
+        padding: 8px;
       }
-      .slick-next {
-        right: -20px !important; 
+      .join, .login{
+        padding: 0px !important;
       }
-      .slick-prev {
-        left: -20px !important;
+      .btngroup{
+        margin-top: 10px;
+      }
+      button#multi_delete {
+        font-size: 7px;
+        padding: 4px 4px;
+      }
+      #sendmessage button{
+        font-size: 7px;
+        padding: 4px 4px;
+        margin-top: -5px;
+      }
+      .message #select_all{
+        margin: 0px;
       }
       .grid{
         height: 100% !important;
       }
+      .smp-mg-bottom {
+        font-size: 12px;
+      }
+      a.btn.btn-success.pull-right.newtest {
+        padding: 2px;
+        margin-top: -50px !important;
+      }
+      .media-body {
+        display: block;
+      }
+      .media:first-child {
+        margin-top: 13px;
+      }
+
     }
 
+    /***** Responsive Navbar Ends Chrome Browser******/
 
-    @media screen and (max-width: 480px) {
-      .banner-home {
-        background-size: 100% 100%;
-      }
-      .smp-head{
-        padding-top: 0px;
-      }
-      .smp-head .col-md-4{
-        width: 100% !important;
-        padding: 0px;
-      }
-      .smp-head .col-md-8{
-        width: 100% !important;
-      }
-      .smp-logo a img{
-        width: 100%;
-      }
-      .navbar-inverse .navbar-collapse,  .navbar-inverse .navbar-form {
-        border-color: #1085bf;
-      }
-      .navbar-inverse .navbar-toggle {
-        border-color:  #1085bf;
-      }
-      .navbar-inverse .navbar-toggle:hover, .navbar-inverse .navbar-toggle:focus {
-        background-color:  #66cc66;
-      }
-      .slide_header {
-        font-size: 38px ;
-      }
-      .shareicon-home{
-        width: 32px !important;
-      }
-      .slick-next {
-        right: -20px !important; 
-      }
-      .slick-prev {
-        left: -20px !important;
-      }
-      .smp-foot .container-fluid .col-md-12{
-        padding: 0px;
-        }​
-        p.copyright {
-          font-size: 13px;
+
+    @-moz-document url-prefix() { 
+
+
+      @media screen and (min-width: 768px) and (max-width: 1024px) {
+        .smp-head{
+          padding-top: 0px;
         }
-        .smp-foot p{
-          text-align: center;
-          font-size: 11px;
-        }
-        .smp-footer-links{
+        .smp-head .col-md-4{
+          width: 100% !important;
           padding: 0px;
+        }
+        .smp-head .col-md-8{
+          width: 100% !important;
+        }
+        .smp-logo a img{
+          width: 100%;
+        }
+        .smp-head .container-fluid{
+          font-size: 12px;
+        }
+
+        .smpl-brdr-right, .smpl-brdr-left{
+          font-size: 12px !important;
+        }
+        .banner-home {
+          background-size: 100% 100%;
+        }
+        .slick-next {
+          right: -20px !important; 
+        }
+        .slick-prev {
+          left: -20px !important;
+        }
+        .grid{
+          height: 100% !important;
+        }
+        footer p{
           text-align: center;
         }
-        .smp-footer-links li {
-          font-size: 10px;
-          padding-right: 0px;
+        .smp-footer-links {
+          float: none;
+          text-align: center;
         }
-        .navbar-header{
-          margin-right: 0px !important;
-        }
-        .smp-pills li.active a{
-         padding: 7px;
-       }
-       .smp-pills{
-        padding: 20px;
       }
-      .smp-pills li a{
-       padding: 8px;
-     }
-     .join, .login{
-      padding: 0px !important;
-    }
-    .btngroup{
-      margin-top: 10px;
-    }
-    button#multi_delete {
-      font-size: 7px;
-      padding: 4px 4px;
-    }
-    #sendmessage button{
-      font-size: 7px;
-      padding: 4px 4px;
-      margin-top: -5px;
-    }
-    .message #select_all{
-      margin: 0px;
-    }
-    .grid{
-      height: 100% !important;
-    }
-    .smp-mg-bottom {
-      font-size: 12px;
-    }
-    a.btn.btn-success.pull-right.newtest {
-      padding: 2px;
-      margin-top: -50px !important;
-    }
-    .media-body {
-      display: block;
-    }
-    .media:first-child {
-      margin-top: 13px;
-    }
 
+ @media screen and (min-width: 481px) and (max-width: 767px) {
+    .banner-home {
+      background-size: 100% 100%;
+    }
+    .navbar-inverse .navbar-toggle {
+      border-color:  #1085bf;
+    }
+    .navbar-inverse .navbar-collapse,  .navbar-inverse .navbar-form {
+      border-color: #1085bf;
+    }
+    footer p{
+      text-align: center;
+    }
+    .smp-footer-links {
+      float: none;
+      text-align: center;
+    }
   }
-}
+
+      @media screen and (max-width: 480px) {
+        .banner-home {
+          background-size: 100% 100%;
+        }
+        .smp-head{
+          padding-top: 0px;
+        }
+        .smp-head .col-md-4{
+          width: 100% !important;
+          padding: 0px;
+        }
+        .smp-head .col-md-8{
+          width: 100% !important;
+        }
+        .smp-logo a img{
+          width: 100%;
+        }
+        .navbar-inverse .navbar-collapse,  .navbar-inverse .navbar-form {
+          border-color: #1085bf;
+        }
+        .navbar-inverse .navbar-toggle {
+          border-color:  #1085bf;
+        }
+        .navbar-inverse .navbar-toggle:hover, .navbar-inverse .navbar-toggle:focus {
+          background-color:  #66cc66;
+        }
+        .slide_header {
+          font-size: 38px ;
+        }
+        .shareicon-home{
+          width: 32px !important;
+        }
+        .slick-next {
+          right: -20px !important; 
+        }
+        .slick-prev {
+          left: -20px !important;
+        }
+        .smp-foot .container-fluid .col-md-12{
+          padding: 0px;
+          }​
+          p.copyright {
+            font-size: 13px;
+          }
+          .smp-foot p{
+            text-align: center;
+            font-size: 11px;
+          }
+          .smp-footer-links{
+            padding: 0px;
+            text-align: center;
+          }
+          .smp-footer-links li {
+            font-size: 10px;
+            padding-right: 0px;
+          }
+          .navbar-header{
+            margin-right: 0px !important;
+          }
+          .smp-pills li.active a{
+           padding: 7px;
+         }
+         .smp-pills{
+          padding: 20px;
+        }
+        .smp-pills li a{
+         padding: 8px;
+       }
+       .join, .login{
+        padding: 0px !important;
+      }
+      .btngroup{
+        margin-top: 10px;
+      }
+      button#multi_delete {
+        font-size: 7px;
+        padding: 4px 4px;
+      }
+      #sendmessage button{
+        font-size: 7px;
+        padding: 4px 4px;
+        margin-top: -5px;
+      }
+      .message #select_all{
+        margin: 0px;
+      }
+      .grid{
+        height: 100% !important;
+      }
+      .smp-mg-bottom {
+        font-size: 12px;
+      }
+      a.btn.btn-success.pull-right.newtest {
+        padding: 2px;
+        margin-top: -50px !important;
+      }
+      .media-body {
+        display: block;
+      }
+      .media:first-child {
+        margin-top: 13px;
+      }
+
+    }
+  }
