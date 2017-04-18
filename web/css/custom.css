@@ -649,6 +649,9 @@ ul.smp-footer-links a {
       float: none;
       text-align: center;
     }
+    .grid{
+      height: 100% !important;
+    }
   }
 
   @media screen and (-webkit-min-device-pixel-ratio:0) and (max-width: 480px) {
@@ -804,24 +807,27 @@ ul.smp-footer-links a {
         }
       }
 
- @media screen and (min-width: 481px) and (max-width: 767px) {
-    .banner-home {
-      background-size: 100% 100%;
-    }
-    .navbar-inverse .navbar-toggle {
-      border-color:  #1085bf;
-    }
-    .navbar-inverse .navbar-collapse,  .navbar-inverse .navbar-form {
-      border-color: #1085bf;
-    }
-    footer p{
-      text-align: center;
-    }
-    .smp-footer-links {
-      float: none;
-      text-align: center;
-    }
-  }
+      @media screen and (min-width: 481px) and (max-width: 767px) {
+        .banner-home {
+          background-size: 100% 100%;
+        }
+        .navbar-inverse .navbar-toggle {
+          border-color:  #1085bf;
+        }
+        .navbar-inverse .navbar-collapse,  .navbar-inverse .navbar-form {
+          border-color: #1085bf;
+        }
+        footer p{
+          text-align: center;
+        }
+        .smp-footer-links {
+          float: none;
+          text-align: center;
+        }
+        .grid{
+          height: 100% !important;
+        }
+      }
 
       @media screen and (max-width: 480px) {
         .banner-home {
