@@ -587,9 +587,6 @@ ul.smp-footer-links a {
 
   /***** Responsive Navbar Starts for Chrome Browser******/
 
-  @media screen and (-webkit-min-device-pixel-ratio:0) { 
-
-  }
 
   @media screen and (-webkit-min-device-pixel-ratio:0) and (min-width: 768px) and (max-width: 1024px) {
     .smp-head{
@@ -652,6 +649,9 @@ ul.smp-footer-links a {
     .navbar-inverse .navbar-collapse,  .navbar-inverse .navbar-form {
       border-color: #1085bf;
     }
+    .navbar-inverse .navbar-toggle:hover, .navbar-inverse .navbar-toggle:focus {
+      background-color:  #66cc66;
+    }
     footer p{
       text-align: center;
     }
@@ -664,6 +664,11 @@ ul.smp-footer-links a {
     }
     .tell-ur-story {
       margin-top: -50px;
+    }
+    .smp_inline {
+      width: 100%;
+      margin-left: 0px;
+      margin-bottom: 10px;
     }
   }
 
@@ -840,6 +845,9 @@ ul.smp-footer-links a {
         .navbar-inverse .navbar-collapse,  .navbar-inverse .navbar-form {
           border-color: #1085bf;
         }
+        .navbar-inverse .navbar-toggle:hover, .navbar-inverse .navbar-toggle:focus {
+          background-color:  #66cc66;
+        }
         footer p{
           text-align: center;
         }
@@ -852,6 +860,11 @@ ul.smp-footer-links a {
         }
         .tell-ur-story {
           margin-top: -50px;
+        }
+        .smp_inline {
+          width: 100%;
+          margin-left: 0px;
+          margin-bottom: 10px;
         }
       }
 
