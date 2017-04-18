@@ -777,7 +777,11 @@ ul.smp-footer-links a {
       .tell-ur-story {
         margin-top: -50px;
       }
-
+      .smp_inline {
+        width: 100%;
+        margin-left: 0px;
+        margin-bottom: 10px;
+      }
     }
 
     /***** Responsive Navbar Ends Chrome Browser******/
@@ -972,6 +976,11 @@ ul.smp-footer-links a {
       }
       .tell-ur-story {
         margin-top: -50px;
+      }
+      .smp_inline {
+        width: 100%;
+        margin-left: 0px;
+        margin-bottom: 10px;
       }
     }
   }
