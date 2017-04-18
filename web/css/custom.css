@@ -621,6 +621,9 @@ ul.smp-footer-links a {
   .slick-prev {
     left: -20px !important;
   }
+  .grid{
+    height: 100% !important;
+  }
 }
 
 @media screen and (-webkit-min-device-pixel-ratio:0) and (max-width: 480px) {
@@ -722,6 +725,9 @@ ul.smp-footer-links a {
     .media-body {
       display: block;
     }
+    .media:first-child {
+      margin-top: 13px;
+    }
 
   }
 
@@ -760,6 +766,9 @@ ul.smp-footer-links a {
       }
       .slick-prev {
         left: -20px !important;
+      }
+      .grid{
+        height: 100% !important;
       }
     }
 
@@ -863,5 +872,9 @@ ul.smp-footer-links a {
     .media-body {
       display: block;
     }
+    .media:first-child {
+      margin-top: 13px;
+    }
+
   }
 }
