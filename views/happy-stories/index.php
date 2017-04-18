@@ -20,7 +20,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h3 class="fnt-green smp-mg-bottom"  >Happy Wish Stories</h3>
 	
-		<a class='btn btn-success pull-right' href="<?=Yii::$app->homeUrl?>happy-stories/create">Tell Your Story</a> 
+		<a class='btn btn-success pull-right tell-ur-story' href="<?=Yii::$app->homeUrl?>happy-stories/create">Tell Your Story</a> 
 		<div class="grid"  data-masonry='{ "itemSelector": ".grid-item" }'>
 	<?php
 	
