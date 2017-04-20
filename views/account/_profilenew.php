@@ -78,7 +78,7 @@ use app\models\FriendRequest;
 					<a href="<?=Yii::$app->homeUrl?>account/my-account"><i class="fa fa-tasks fa-6x fnt-blue" aria-hidden="true"></i>My Wishes</a>
 				</div>
 				<div class="col-md-6 link-thumb">
-					<a href="<?=Yii::$app->homeUrl?>account/my-drafts"><i class="fa fa-window-restore fa-6x fnt-grey" aria-hidden="true"></i>My Drafts</a>
+					<a href="<?=Yii::$app->homeUrl?>wish/my-drafts"><i class="fa fa-window-restore fa-6x fnt-grey" aria-hidden="true"></i>My Drafts</a>
 				</div>
 				<div class="col-md-6 link-thumb">
 					<a href="<?=Yii::$app->homeUrl?>account/my-friend"><i class="fa fa-group fa-6x fnt-grn-yellow " aria-hidden="true"></i>Friends</a>
