@@ -7,7 +7,7 @@ use yii\helpers\Url;
 /* @var $this yii\web\View */
 /* @var $model app\models\Editorial */
 /* @var $form yii\widgets\ActiveForm */
-$this->registerJsFile(\Yii::$app->homeUrl."js/waitingfor.js");
+$this->registerJsFile(\Yii::$app->homeUrl."css/waitingfor.js");
 ?>
 
 <div class="editorial-form">
