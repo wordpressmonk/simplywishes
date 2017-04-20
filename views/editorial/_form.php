@@ -98,7 +98,7 @@ function saveFile(input){
 	var ext = input.files[0]['name'].substring(input.files[0]['name'].lastIndexOf('.') + 1).toLowerCase();	
  	if(file != undefined){
 		
-	//	waitingDialog.show('Uploading..');
+		waitingDialog.show('Uploading..');
 	 formData= new FormData();
 	if(ext == "mp4" || ext == "m4v" || ext == "webm" || ext == "ogv"){
 		formData.append("media", file); 
@@ -109,14 +109,14 @@ function saveFile(input){
 			processData: false,
 			contentType: false,
 			success: function(data){
-		//		waitingDialog.hide();
+				waitingDialog.hide();
 				//$(input).attr('src', data);
 				$('#video_url').val(data);
 			}
 		}); 
  	}else{
 		alert("Extension not supported");
-	//	waitingDialog.hide();
+		waitingDialog.hide();
 		return false;
 	} 
 
@@ -131,19 +131,19 @@ function saveVideoUrl(input){
 
 	var url = $(input).val();
 	if(url!=''){
-	//waitingDialog.show('Fetching..');
+	waitingDialog.show('Fetching..');
 		$.ajax({
 			url: "<?=Url::to(['editorial/embed'])?>?url="+url,
 			type: "GET",
 			processData: false,
 			contentType: false,
 			success: function(data){
-			//	waitingDialog.hide();
+				waitingDialog.hide();
 				$('#video_url').val(data);
 			},
 			 error:function(data){
 				//alert("Oops!Something wrong happend. Please try again later");
-		//		waitingDialog.hide();
+				waitingDialog.hide();
 			} 
 		});		
 	}
