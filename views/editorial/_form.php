@@ -77,8 +77,6 @@ $this->registerJsFile(\Yii::$app->homeUrl."js/waitingfor.js");
 				var tmppath = URL.createObjectURL(event.target.files[0]);
 				$("#imagesorce").fadeIn("fast").attr('src',tmppath);
 			});
-		/* 	CKEDITOR.config.extraPlugins = 'filebrowser';
-CKEDITOR.config.filebrowserUploadUrl = '/upload.php'; */
   });  
   </script>
   

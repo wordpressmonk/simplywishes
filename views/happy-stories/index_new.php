@@ -8,7 +8,7 @@ use yii\helpers\Url;
 /* @var $searchModel app\models\search\SearchEditorial */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Happy Stories';
+$this->title = 'Stories Approval';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="editorial-index">

@@ -32,9 +32,7 @@
 	</div>
 	<div class="col-md-12 smp-mg-bottom"></div>
 	<div class="col-md-12 link-thumb-contain">
-		<div class="col-md-3">
-			<a href="<?=Yii::$app->homeUrl?>account/edit-account"><i class="fa fa-picture-o fa-10x fnt-grey" aria-hidden="true"></i>Edit Profile</a>
-		</div>
+		
 		<div class="col-md-3">
 			<a href="<?=Yii::$app->homeUrl?>account/edit-account"><i class="fa fa-id-card fa-10x fnt-green" aria-hidden="true"></i>Account Info</a>
 		</div>
@@ -46,6 +44,9 @@
 		</div>
 		<div class="col-md-3">
 			<a href="<?=Yii::$app->homeUrl?>account/my-account"><i class="fa fa-tasks fa-10x fnt-blue" aria-hidden="true"></i>My Wishes</a>
+		</div>
+		<div class="col-md-3">
+			<a href="<?=Yii::$app->homeUrl?>account/my-drafts"><i class="fa fa-window-restore fa-10x fnt-grey" aria-hidden="true"></i>My Drafts</a>
 		</div>
 		<div class="col-md-3">
 			<a href="<?=Yii::$app->homeUrl?>account/my-friend"><i class="fa fa-group fa-10x fnt-grn-yellow " aria-hidden="true"></i>Friends</a>
