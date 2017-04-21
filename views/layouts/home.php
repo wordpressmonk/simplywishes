@@ -156,7 +156,7 @@ AppAsset::register($this);
 					<a style="text-decoration: none;"  href="https://www.pinterest.com/simplywishe5244/" target="_blank">
 						<img  class="shareicon-home" style="width:30px" src="<?=Yii::$app->homeUrl?>images/icon/Pinterest.png" alt="Pinterest" />
 					</a>	
-					<a style="text-decoration: none;"  href="http://www.reditte.com/user/simplywishes/" target="_blank">
+					<a style="text-decoration: none;"  href="https://www.reddit.com/user/simplywishes/" target="_blank">
 						<img class="shareicon-home" style="width:30px" src="<?=Yii::$app->homeUrl?>images/icon/reddit.png" alt="Reddit" />
 					</a>
 					<a style="text-decoration: none;"  href="https://twitter.com/simply_wishes" target="_blank">
