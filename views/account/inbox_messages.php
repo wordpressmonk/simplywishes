@@ -58,7 +58,7 @@ use yii\web\JsExpression;
 							<a href="'.Url::to(['profile','id'=>$profile->user_id]).'" target="_blank" ><img src="'.\Yii::$app->homeUrl.$profile->profile_image.'" alt=""></a>
 						</div>
 						
-					<div class="smp_expand" data-toggle="collapse" title="Click here To View Conversation" >';
+					<div class="smp_expand pointerclass" data-toggle="collapse" title="Click here To View Conversation" >';
 						
 						if($msg['read_text'] == \Yii::$app->user->id) 
 						{
@@ -337,5 +337,8 @@ input.checkBoxClass {
 .list-icon a img {
     width: 40px;
     border-radius: 100%;
+}
+.pointerclass{
+	cursor: pointer;
 }
 </style>
