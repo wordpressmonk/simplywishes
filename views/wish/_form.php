@@ -105,10 +105,12 @@ use yii\helpers\Url;
 	
 	<!-- NON Financial Begin --->
 		
-	<?= $form->field($model, 'show_mail_status')->checkbox(['value' => '1']);	?>
+	<?= $form->field($model, 'show_mail_status')->checkbox(['value' => '1','class'=>"checkall"]);	?>
+	<div id="wish-show_mail_status_check" style="display:none; color:#a94442;" >Please Check this field </div>
 	<?= $form->field($model, 'show_mail')->textInput(['maxlength' => true,'class'=>'form-control test']) ?>
 	
-	<?= $form->field($model, 'show_person_status')->checkbox(['value' => '1']);	?>
+	<?= $form->field($model, 'show_person_status')->checkbox(['value' => '1','class'=>"checkall"]);	?>
+	<div id="wish-show_person_status_check" style="display:none; color:#a94442;" >Please Check this field </div>
 	<div class="row">
 			<div class="col-lg-6">
 	<?= $form->field($model, 'show_person_location')->textInput(['maxlength' => true]) ?>
@@ -129,7 +131,8 @@ use yii\helpers\Url;
 			
 	</div>
 			</div>
-	<?= $form->field($model, 'show_reserved_status')->checkbox(['value' => '1']);	?>
+	<?= $form->field($model, 'show_reserved_status')->checkbox(['value' => '1','class'=>"checkall"]);	?>
+		<div id="wish-show_reserved_status_check" style="display:none; color:#a94442;" >Please Check this field </div>
 	<?= $form->field($model, 'show_reserved_name')->textInput(['maxlength' => true]) ?>
 	<div class="row">
 	<div class="col-lg-6">
@@ -150,13 +153,20 @@ use yii\helpers\Url;
 				
 	</div>
 			</div>
-	<?= $form->field($model, 'show_other_status')->checkbox(['value' => '1']);	?>
+	<?= $form->field($model, 'show_other_status')->checkbox(['value' => '1','class'=>"checkall"]);	?>
+		<div id="wish-show_other_status_check" style="display:none; color:#a94442;" >Please Check this field </div>
 	<?= $form->field($model, 'show_other_specify')->textInput(['maxlength' => true]) ?>
 	
-	<div class="form-group" id="agree_check" >			
-		<input type="checkbox" checked="checked" disabled="disabled" class="msg" name="i_agree_decide" id="i_agree_decide" value="1" > I understand that the grantor will fulfill this wish in the manner specified by you within one month of the date that the grantor accepts this wish. In the meanwhile, this wish will be marked as "In Progress" and after one month, it will be marked as "Fulfilled". You should update or ressubmit your wish if it has not been fulfilled after one month. </input>
+	<div class="form-group" id="agree_check" >	
+		<div id="i_agree_decide_req" style="display:none; color:#a94442;" >Please Check this field </div>
+		<input type="checkbox"  class="msg" name="i_agree_decide" id="i_agree_decide" value="1" > I understand that the grantor will fulfill this wish in the manner specified by you within one month of the date that the grantor accepts this wish. In the meanwhile, this wish will be marked as "In Progress" and after one month, it will be marked as "Fulfilled". You should update or ressubmit your wish if it has not been fulfilled after one month. </input>
 	</div>
-			
+	
+	<div class="form-group" id="agree_check2" >	
+		<div id="i_agree_decide_req2" style="display:none; color:#a94442;" >Please Check this field </div>
+		<input type="checkbox"  class="msg" name="i_agree_decide2" id="i_agree_decide2" value="1" > I understand that the grantor will fulfill this wish in the manner specified by you within one month of the date that the grantor accepts this wish. In the meanwhile, this wish will be marked as "In Progress" and after one month, it will be marked as "Fulfilled". You should update or ressubmit your wish if it has not been fulfilled after one month. </input>
+	</div>
+	
 	<!-- NON Financial End --->
 
 	
@@ -204,6 +214,7 @@ $( document ).ready(function() {
 	$(".field-wish-show_reserved_date").hide();
 	$(".field-wish-show_other_specify").hide();
 	$("#agree_check").hide();
+	$("#agree_check2").hide();
 			
 	$(".field-wish-show_mail").css("margin", " 0 0 0 50px");
 	$(".field-wish-show_person_location").css("margin", " 0 0 0 50px");
@@ -230,6 +241,7 @@ $( document ).ready(function() {
 				$(".field-wish-show_reserved_date").hide();
 				$(".field-wish-show_other_specify").hide();
 				$("#agree_check").hide();
+				$("#agree_check2").hide();
 			} else if(parseInt(pay_option) == parseInt('1'))
 			{
 				$(".field-wish-expected_cost").hide();
@@ -245,6 +257,7 @@ $( document ).ready(function() {
 				$(".field-wish-show_reserved_date").show();
 				$(".field-wish-show_other_specify").show();
 				$("#agree_check").show();  
+				$("#agree_check2").hide();  
 				
 			} else if(parseInt(pay_option) == parseInt('2'))
 			{
@@ -261,16 +274,17 @@ $( document ).ready(function() {
 				$(".field-wish-show_reserved_location").hide();
 				$(".field-wish-show_reserved_date").hide();
 				$(".field-wish-show_other_specify").hide();
+				$("#agree_check2").show();
 				$("#agree_check").hide();
 			}				
 			
 		});
 	
 	
-	<?php if($model->non_pay_option == 0)
+	<?php if((!$model->isNewRecord) && ($model->non_pay_option == 0))
 			{ ?>
 			$(".field-wish-expected_cost").show();	
-	<?php } else if($model->non_pay_option == 1){ ?>
+	<?php } else if((!$model->isNewRecord) && ($model->non_pay_option == 1)){ ?>
 			$(".field-wish-expected_cost").hide();
 			$(".field-wish-show_mail_status").show();
 			$(".field-wish-show_person_status").show();
@@ -284,7 +298,7 @@ $( document ).ready(function() {
 			$(".field-wish-show_reserved_date").show();
 			$(".field-wish-show_other_specify").show();
 				
-	<?php } else if($model->non_pay_option == 2){ ?>
+	<?php } else if((!$model->isNewRecord) && ($model->non_pay_option == 2)){ ?>
 			$(".field-wish-expected_cost").hide();
 			$(".field-wish-show_mail_status").hide();
 			$(".field-wish-show_person_status").hide();
@@ -298,6 +312,101 @@ $( document ).ready(function() {
 			$(".field-wish-show_reserved_date").hide();
 			$(".field-wish-show_other_specify").hide();
 	<?php } ?>
+	
+	
+	$( "#draft_form" ).submit(function( event ) {
+			
+		var pay_option = $("#wish-non_pay_option").val();
+		if(parseInt(pay_option) == parseInt('1'))
+		{					
+			var check = false;
+			var show_mail = $("#wish-show_mail").val();
+			if($.trim(show_mail) !== "")
+			{
+				if($("#wish-show_mail_status").prop("checked") == false){
+					$("#wish-show_mail_status_check").show();
+					check = true;
+				}
+			}
+			
+			var show_person_location = $("#wish-show_person_location").val();
+			var show_person_date = $("#wish-show_person_date").val();
+			if(($.trim(show_person_location) !== "") || ($.trim(show_person_date) !== "") )
+			{
+				if($("#wish-show_person_status").prop("checked") == false){
+					$("#wish-show_person_status_check").show();
+					check = true;
+				}
+			}
+			
+			var show_reserved_name = $("#wish-show_reserved_name").val();
+			var show_reserved_location = $("#wish-show_reserved_location").val();
+			var show_reserved_date = $("#wish-show_reserved_date").val();
+			if(($.trim(show_reserved_name) !== "") || ($.trim(show_reserved_location) !== "") || ($.trim(show_reserved_date) !== "")  )
+			{
+				if($("#wish-show_reserved_status").prop("checked") == false){
+					$("#wish-show_reserved_status_check").show();
+					check = true;
+				}
+			}
+			
+		
+			var show_other_specify = $("#wish-show_other_specify").val();
+			if($.trim(show_other_specify) !== "")
+			{
+				if($("#wish-show_other_status").prop("checked") == false){
+					$("#wish-show_other_status_check").show();
+					check = true;
+				}
+			}								
+			if($("#i_agree_decide").prop("checked") == false){
+				$("#i_agree_decide_req").show();
+				check = true;
+			}
+					
+			if(check == true)
+			{				
+				return false;
+			}
+			
+			if($('.checkall:checkbox:checked').length == 0)
+			{
+				alert("Please Choose any field For Contact.")
+				return false;
+			}
+			
+		} 
+		else if(parseInt(pay_option) == parseInt('2'))
+		{
+			if($("#i_agree_decide2").prop("checked") == false){
+				$("#i_agree_decide_req2").show();
+				return false;
+			}
+						
+		}
+		
+	});
+		
+	    $("#i_agree_decide2").change(function(){
+			if($("#i_agree_decide2").prop("checked") == true){
+						$("#i_agree_decide_req2").hide();
+			}						 
+	    });
+	
+	    $("#i_agree_decide").change(function(){
+			if($("#i_agree_decide").prop("checked") == true){
+						$("#i_agree_decide_req").hide();
+			}						 
+	    });
+	
+	
+		$(".checkall").change(function(){
+			var id = $(this).attr("id");
+			if($("#"+id).prop("checked") == true){
+						$("#"+id+"_check").hide();
+			}						 
+	    });
+		
 });
 </script>
 

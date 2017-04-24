@@ -200,7 +200,7 @@ class WishController extends Controller
 				$model->wished_by = \Yii::$app->user->id;
 				$model->wish_status = 0;
 			
-			if(!empty($model->auto_id))
+			if(!empty($model->auto_id) && (isset($model->auto_id)))
 			{
 				$model1 = Wish::findOne($model->auto_id);
 				$model1->w_id = $model->auto_id;
