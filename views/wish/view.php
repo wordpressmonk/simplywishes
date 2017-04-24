@@ -74,24 +74,27 @@ $this->params['breadcrumbs'][] = $this->title;
 				  <!--<input type="image" name="submit" border="0" 
 				  src="https://www.paypalobjects.com/webstatic/en_US/i/btn/png/btn_paynow_cc_144x47.png"
 				  alt="Buy Now">-->
-				  <button class="btn btn-success">Grant This Wish F</button>
+				  <button class="btn btn-success">Grant This Wish</button>
 				  <img alt="" border="0" width="1" height="1"
 				  src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" >
 				</form>
 			<?php } else if($model->non_pay_option == 1 ){ ?>
-					<a href="#messagemodal1" data-toggle="modal" ><button class="btn btn-success">Grant This Wish NF</button></a>
-				
+					<?php if(!empty($model->process_granted_by)){ ?>
+					  <button class="btn btn-success">In Progress</button>					
+					<?php } else { ?>
+					  <a href="#messagemodal1" data-toggle="modal" ><button class="btn btn-success">Grant This Wish </button></a>
+					<?php } ?>
 			<?php } else if($model->non_pay_option == 2 ){ ?>
 					<?php if(!empty($model->process_granted_by)){ ?>
 					<button class="btn btn-success">In Progress</button>					
 					<?php } else { ?>
-					<a href="#messagemodal2" data-toggle="modal"><button class="btn btn-success">Grant This Wish D</button></a>
+					<a href="#messagemodal2" data-toggle="modal"><button class="btn btn-success">Grant This Wish </button></a>
 					<?php } ?>
 			<?php } ?>
 			<?php } else if(!is_null($model->granted_by)&& \Yii::$app->user->isGuest){ ?>
-				<a href="<?=Url::to(['site/login','red_url'=>Yii::$app->homeUrl.'wish/view?id='.$model->w_id])?>"><button class="btn btn-success">Grant This Wish L</button></a>
+				<a href="<?=Url::to(['site/login','red_url'=>Yii::$app->homeUrl.'wish/view?id='.$model->w_id])?>"><button class="btn btn-success">Grant This Wish </button></a>
 			<?php } else if(\Yii::$app->user->isGuest) { ?>
-				<a href="<?=Url::to(['site/login','red_url'=>Yii::$app->homeUrl.'wish/view?id='.$model->w_id])?>"><button class="btn btn-success">Grant This Wish L</button></a>
+				<a href="<?=Url::to(['site/login','red_url'=>Yii::$app->homeUrl.'wish/view?id='.$model->w_id])?>"><button class="btn btn-success">Grant This Wish </button></a>
 			<?php } ?>
 			
 			<?php if((is_null($model->granted_by)) && (!\Yii::$app->user->isGuest) && (\Yii::$app->user->id==$model->wished_by) && (!empty($model->process_status)))
@@ -366,9 +369,9 @@ $('body').on('hidden.bs.popover', function (e) {
 				type : 'POST',
 				data : {processstatus:processstatus,wish_id:wish_id},
 				success: function(response){
-					console.log("response");
 					$('#messagemodal1').modal('hide');
 					alert("This Wish Has Been Granted Successfully.");
+					location.reload();
 				}
 			});
 			
@@ -400,12 +403,13 @@ $('body').on('hidden.bs.popover', function (e) {
 				data : {processstatus:processstatus,wish_id:wish_id},
 				success: function(response){
 					$.ajax({
-						url : '<?=Url::to(['account/send-message'])?>',
+						url : '<?=Url::to(['account/send-message-wishes'])?>',
 						type : 'POST',
 						data : {msg:msg,send_from:send_from,send_to:send_to},
 						success: function(response){
 							alert("This Wish Has Been Granted Successfully.");
 							$('#messagemodal2').modal('hide');
+							location.reload();
 						}
 					});
 				}

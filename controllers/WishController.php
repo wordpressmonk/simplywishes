@@ -200,8 +200,11 @@ class WishController extends Controller
 				$model->wished_by = \Yii::$app->user->id;
 				$model->wish_status = 0;
 			
-			if(!empty($model->auto_id) && (isset($model->auto_id)))
+			
+			
+			if(!empty($model->auto_id))
 			{
+			
 				$model1 = Wish::findOne($model->auto_id);
 				$model1->w_id = $model->auto_id;
 				$model1->wished_by = \Yii::$app->user->id;					
@@ -217,9 +220,24 @@ class WishController extends Controller
 				$model1->country = $model->country;
 				$model1->city = $model->city;
 				$model1->non_pay_option = $model->non_pay_option;
-				$model1->wish_status =$model->wish_status;				
-						
-				$model1->update();
+				$model1->wish_status = $model->wish_status;				
+				$model1->show_mail_status = $model->show_mail_status;
+				$model1->show_mail = $model->show_mail;
+				$model1->show_person_status = $model->show_person_status;
+				$model1->show_person_location = $model->show_person_location;
+				$model1->show_person_date = $model->show_person_date;
+				$model1->show_reserved_status = $model->show_reserved_status;
+				$model1->show_reserved_name = $model->show_reserved_name;
+				$model1->show_reserved_location = $model->show_reserved_location;
+				$model1->show_reserved_date = $model->show_reserved_date;
+				$model1->show_other_status = $model->show_other_status;
+				$model1->show_other_specify = $model->show_other_specify;
+				$model1->contition_status = $model->contition_status;
+				$model1->process_status = $model->process_status;
+				$model1->process_granted_by = $model->process_granted_by;
+				$model1->process_granted_date= $model->process_granted_date;			
+	
+				$model1->update(false);
 			}
 			else
 			{ 				

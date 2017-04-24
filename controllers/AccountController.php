@@ -223,6 +223,26 @@ class AccountController extends Controller
 		}
 	}
 	
+	
+	public function actionSendMessageWishes(){
+		
+		$from = \Yii::$app->request->post()['send_from'];
+		$to = \Yii::$app->request->post()['send_to'];
+		$msg = \Yii::$app->request->post()['msg'];
+		
+		if($from != '' && $to != '' && $msg != ''){
+			$message = new Message();
+			$message->sender_id = $from;
+			$message->recipient_id = $to;
+			$message->parent_id = 0;
+			$message->text = $msg;
+			$message->created_at = date("Y-m-d H:i:s");
+			if($message->save()){
+				Yii::$app->session->setFlash('messageSent');
+			}			
+		}
+	}
+	
 /* 	public function actionInbox(){
 		$user = User::findOne(\Yii::$app->user->id);
 		$profile = UserProfile::find()->where(['user_id'=>\Yii::$app->user->id])->one();
