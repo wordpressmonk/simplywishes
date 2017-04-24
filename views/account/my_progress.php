@@ -3,48 +3,39 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 ?>
 <script src="<?= Yii::$app->request->baseUrl?>/src/masonry.js" type="text/javascript"></script>
-<script src="<?= Yii::$app->request->baseUrl?>/src/imagesloaded.js" type="text/javascript"></script>
-	
-	<?php if(Yii::$app->session->getFlash('success')!='') { ?>
-			<div class="alert alert-success" role="alert">
-				<strong> <?= Yii::$app->session->getFlash('success'); ?>.</strong>
-			</div>
-	
-		<?php } ?>
-		
+<script src="<?= Yii::$app->request->baseUrl?>/src/imagesloaded.js" type="text/javascript"></script>	
 	<?php echo $this->render('_profilenew',['user'=>$user,'profile'=>$profile])?>
 	<!-- To replace tab as link remove data-toggle=tab and replace href with link-->
-<div class="col-md-8" >
+<div class="col-md-8" >		
 	<ul class="nav nav-tabs smp-mg-bottom" role="tablist">
-	  <li role="presentation" class="active">
-		<a href="#activewish" role="tab" data-toggle="tab">My Active Wishes</a>
+	  <li role="presentation">
+		<a href="<?=\Yii::$app->homeUrl?>account/my-account" role="tab">My Active Wishes</a>
+	  </li>
+	   <li role="presentation"  class="active">
+		<a href="#processwish" role="tab" data-toggle="tab" >My Progress</a>
 	  </li>
 	  <li role="presentation">
-		<a href="<?=\Yii::$app->homeUrl?>account/my-progress" role="tab" >My Progress</a>
-	  </li>
-	  <li role="presentation">
-		<a href="<?=\Yii::$app->homeUrl?>account/my-fullfilled" role="tab" >My Fullfilled Wishes</a>
+		<a href="<?=\Yii::$app->homeUrl?>account/my-fullfilled" role="tab">My Fullfilled Wishes</a>
 	  </li>
 	  <li role="presentation">
 		<a href="<?=\Yii::$app->homeUrl?>account/my-saved" role="tab" >My Saved Wishes</a>
 	  </li>
-	   
+	 
 	</ul>
 	<div class="tab-content">
-		<div role="tabpanel" class="tab-pane active grid" id="activewish">
-			<?php foreach($dataProvider->models as $wish){
-				echo $wish->htmlForProfile;;
-			}?>
+		<div role="tabpanel" class="tab-pane" id="activewish">
 		</div>
-		<div role="tabpanel" class="tab-pane" id="fullfilledwish">
-			
+		<div role="tabpanel" class="tab-pane active grid" id="processwish">
+			<?php foreach($dataProvider->models as $wish){
+				echo $wish->htmlForProfile;
+			}?>			
 		</div>
 	  </div>
-	</div>
+   </div>
 </div>
 	<script>
 	
-			var $container = $('.grid');
+		var $container = $('.grid');
   					$container.imagesLoaded(function(){
   						$container.animate({ opacity: 1 });
 						$(".shareIcons").each(function(){
@@ -65,9 +56,9 @@ use yii\helpers\Url;
 							$container.masonry();
   					});
 					
+					
 	/* var $container = $('.grid');
   	$container.masonry();
-	
 	$(".shareIcons").jsSocials({
 		showLabel: false,
 		showCount: false,
@@ -115,7 +106,8 @@ use yii\helpers\Url;
 		});
 	});
 	</script>
-	<script>	
+	
+<script>	
 var isVisible = false;
 var clickedAway = false;
 
@@ -172,4 +164,5 @@ $('body').on('hidden.bs.popover', function (e) {
 		});
 	 }
 }); */
+
 </script>

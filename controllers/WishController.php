@@ -741,5 +741,76 @@ class WishController extends Controller
 		
     }
 	
+	 public function actionProcessWish()
+    {
+		
+        $w_id = \Yii::$app->request->post()['wish_id'];
+		$processstatus = \Yii::$app->request->post()['processstatus'];
+		
+		$wish = $this->findModel($w_id);
+		//explicitly set up the granted_by to the user id
+		//listen to the IPN and change back to NULL if not success.		
+		$wish->process_granted_by = \Yii::$app->user->id;
+		$wish->process_granted_date = date('d-m-Y');
+		$wish->process_status = $processstatus;
+
+		if($wish->save(false))
+		{		
+			echo "Success";
+			/* $this->sendEmail($wish->wished_by);		
+			return $this->redirect(['wish/view','id'=>$w_id]); */
+		}
+		
+    }
+		
+	 public function actionResubmitProcessWish()
+    {
+		
+        $w_id = \Yii::$app->request->post()['wish_id'];
+		$userid = \Yii::$app->request->post()['userid'];
+		
+	if(isset(\Yii::$app->user->identity->role) && (\Yii::$app->user->identity->role == 'admin'))		
+		$wish =  Wish::find()->where(['w_id'=>$w_id])->one();
+	else
+		$wish =  Wish::find()->where(['w_id'=>$w_id,'wished_by'=>$userid])->one();
+
+		if($wish)
+		{
+			$wish->process_granted_by = "";
+			$wish->process_granted_date = "";
+			$wish->process_status = 0;
+
+			if($wish->save(false))
+			{		
+				echo "Success";
+			}
+		}
+		
+    }
 	
+    public function actionGrantProcessWish()
+    {	
+		 $w_id = \Yii::$app->request->post()['wish_id'];
+		$userid = \Yii::$app->request->post()['userid'];
+		
+		if(isset(\Yii::$app->user->identity->role) && (\Yii::$app->user->identity->role == 'admin'))		
+		  $wish =  Wish::find()->where(['w_id'=>$w_id])->one();
+		else
+		  $wish =  Wish::find()->where(['w_id'=>$w_id,'wished_by'=>$userid])->one();
+
+		if($wish)
+		{
+			$wish->granted_by = $wish->process_granted_by;
+			$wish->granted_date = date('d-m-Y');
+			$wish->process_granted_by = "";
+			$wish->process_granted_date = "";
+			$wish->process_status = 0;
+
+			if($wish->save(false))
+			{			
+				$this->sendEmail($wish->wished_by);		
+				return $this->redirect(['wish/view','id'=>$w_id]);
+			}
+		}	
+	}	
 }

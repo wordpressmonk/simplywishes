@@ -74,30 +74,151 @@ $this->params['breadcrumbs'][] = $this->title;
 				  <!--<input type="image" name="submit" border="0" 
 				  src="https://www.paypalobjects.com/webstatic/en_US/i/btn/png/btn_paynow_cc_144x47.png"
 				  alt="Buy Now">-->
-				  <button class="btn btn-success">Grant This Wish</button>
+				  <button class="btn btn-success">Grant This Wish F</button>
 				  <img alt="" border="0" width="1" height="1"
 				  src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" >
 				</form>
-			<?php } else { ?>
-					<a href="<?=Url::to(['wish/fullfilled','w_id'=>$model->w_id],true)?>"><button class="btn btn-success">Grant This Wish</button></a>
-			<?php } ?> 	
-					
+			<?php } else if($model->non_pay_option == 1 ){ ?>
+					<a href="#messagemodal1" data-toggle="modal" ><button class="btn btn-success">Grant This Wish NF</button></a>
+				
+			<?php } else if($model->non_pay_option == 2 ){ ?>
+					<?php if(!empty($model->process_granted_by)){ ?>
+					<button class="btn btn-success">In Process</button>					
+					<?php } else { ?>
+					<a href="#messagemodal2" data-toggle="modal"><button class="btn btn-success">Grant This Wish D</button></a>
+					<?php } ?>
+			<?php } ?>
 			<?php } else if(!is_null($model->granted_by)&& \Yii::$app->user->isGuest){ ?>
-				<a href="<?=Url::to(['site/login','red_url'=>Yii::$app->homeUrl.'wish/view?id='.$model->w_id])?>"><button class="btn btn-success">Grant This Wish</button></a>
+				<a href="<?=Url::to(['site/login','red_url'=>Yii::$app->homeUrl.'wish/view?id='.$model->w_id])?>"><button class="btn btn-success">Grant This Wish L</button></a>
 			<?php } else if(\Yii::$app->user->isGuest) { ?>
-				<a href="<?=Url::to(['site/login','red_url'=>Yii::$app->homeUrl.'wish/view?id='.$model->w_id])?>"><button class="btn btn-success">Grant This Wish</button></a>
+				<a href="<?=Url::to(['site/login','red_url'=>Yii::$app->homeUrl.'wish/view?id='.$model->w_id])?>"><button class="btn btn-success">Grant This Wish L</button></a>
 			<?php } ?>
 			
-			<?php if(is_null($model->granted_by) && !\Yii::$app->user->isGuest && \Yii::$app->user->id==$model->wished_by)
-				echo '<a href="'.Url::to(['wish/update','id'=>$model->w_id]).'"><button class="btn btn-info">Update Wish</button></a>';
+			<?php if((is_null($model->granted_by)) && (!\Yii::$app->user->isGuest) && (\Yii::$app->user->id==$model->wished_by) && (!empty($model->process_status)))
+				{
+					$date1 = new DateTime($model->process_granted_date);
+					$date2 = new DateTime(date("d-m-Y"));				
+					$diff = $date2->diff($date1)->format("%a");					
+					if($diff > 30)
+					{
+						echo '<button class="btn btn-info" id="grant_progress_wishes" >Fulfilled </button>';
+						
+						echo '<button class="btn btn-danger"  style="margin-left:15px" id="Resubmit_wishes"> Re-submit </button>';
+					} else {					
+						echo '<button class="btn btn-info">In Process</button>';
+					}		
+				} 
+				else if((is_null($model->granted_by)) && (!\Yii::$app->user->isGuest) && (\Yii::$app->user->id==$model->wished_by))
+				{
+				 echo '<a href="'.Url::to(['wish/update','id'=>$model->w_id]).'"><button class="btn btn-info">Update Wish</button></a>';
+				}
 			?>
-				<?php if(is_null($model->granted_by) && !\Yii::$app->user->isGuest && \Yii::$app->user->id==$model->wished_by)
-			//	echo '<button class="btn btn-danger deletecheck">Delete </button>';
-			?>
+			
 		</div>
 	</div>
 </div>
 </div>
+
+
+
+
+<!-- modal NON financial Starts -->
+	<div class="modal fade" id="messagemodal1" tabindex="-1" role="dialog">
+	  <div class="modal-dialog" role="document">
+		<div class="modal-content">
+		  <div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			<h4 class="modal-title">Non-financial</h4>
+		  </div>
+		  <div class="modal-body">
+			<div class="media">
+			  <div class="media-left list-icon">
+
+			  </div>
+			  <div class="media-body">
+				<h4 class="media-heading">“ Wisher would like to receive this wish via ”  
+				</h4>
+				<br>
+				<?php if($model->show_mail_status == 1){ ?>
+					<p>Mail to this address : <b><?=$model->show_mail?></b> </p>
+				<?php } ?>	
+				<?php if(($model->show_mail_status == 1) && ($model->show_person_status == 1)){ ?>
+				    <p>or </p>
+				<?php } ?>	
+				<?php if($model->show_person_status == 1){ ?>
+				    <p>In Person at this location :  <b><?=$model->show_person_location?> on <?=$model->show_person_date ?></b></p>
+				<?php } ?>		
+				<?php if((($model->show_mail_status == 1) || ($model->show_person_status == 1)) && ($model->show_reserved_status == 1)){ ?>
+					<p>or </p>
+				<?php } ?>	
+				<?php if($model->show_reserved_status == 1){ ?>
+					<p>Reserved at this location : <b><?=$model->show_reserved_name?> , <?=$model->show_reserved_location?> on <?=$model->show_reserved_date ?></b></p>
+				<?php } ?>	
+				<?php if((($model->show_mail_status == 1) || ($model->show_person_status == 1) || ($model->show_reserved_status == 1) )&& ($model->show_other_status == 1)){ ?>
+					<p>or </p>
+				<?php } ?>	
+				<?php if($model->show_other_status == 1){ ?>
+					<p>Other : <b><?=$model->show_other_specify ?></b></p>
+				<?php } ?>	
+
+			  </div>
+			</div>
+			</br>
+			<div class="form-group">
+			
+			<input type="checkbox" class="msg-check" name="i_agree_non_fulfilled" id="i_agree_non_fulfilled" value="1" > I agree to fulfill this wish in the manner specified by the wisher and within one month of the date that I accept it as a grantor. In the meanwhile, this wish will be marked ad "In Progress" and after one month, it will be marked as "Fulfilled". The Wisher should update or ressubmit their wish if it has not been fulfilled after one month. </input>
+			</div>
+		  </div>
+		  <div class="modal-footer">
+			<button type="button" class="send-msg-check btn btn-primary">Send</button>
+			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		  </div>
+		</div>
+	  </div>
+	</div>
+	<!-- modal Ends -->
+	
+	
+	
+	
+<!-- modal DEcider Starts -->
+	<div class="modal fade" id="messagemodal2" tabindex="-1" role="dialog">
+	  <div class="modal-dialog" role="document">
+		<div class="modal-content">
+		  <div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			<h4 class="modal-title">Decide Later</h4>
+		  </div>
+		  <div class="modal-body">
+			<div class="media">
+			  <div class="media-left list-icon">
+					
+			  </div>
+			  <div class="media-body">
+				<h4 class="media-heading">“ Wisher has not specified a delivery method for this wish. Please message the wisher to arrange wish delivery ”</h4>
+			  </div>
+			</div>
+			</br>
+			<div class="form-group">
+			<label for="message">Enter Your Message</label>
+			<textarea class="msg form-control" name="msg-textarea" id="msg-textarea" rows="4"></textarea>
+			</div>
+			<div class="form-group">
+			
+			<input type="checkbox" class="msg" name="i_agree_decide" id="i_agree_decide" value="1" > I agree to fulfill this wish in the manner specified by the wisher and within one month of the date that I accept it as a grantor. In the meanwhile, this wish will be marked as "In Progress" and after one month, it will be marked as "Fulfilled". The Wisher should update or ressubmit their wish if it has not been fulfilled after one month. </input>
+			</div>
+		  </div>
+		  <div class="modal-footer">
+			<button type="button" class="send-msg-check-decide btn btn-primary">Send</button>
+			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		  </div>
+		</div>
+	  </div>
+	</div>
+	<!-- modal Ends -->
+	
+	
+	
 <script>
 	$(".shareIcons").jsSocials({
 		showLabel: false,
@@ -224,5 +345,115 @@ $('body').on('hidden.bs.popover', function (e) {
 	 }
 }); */
 
+
+	$(".send-msg-check").on("click",function(){
+
+			var processstatus = 0;
+
+			 if($('#i_agree_non_fulfilled').prop("checked") == true){
+				 var processstatus = 1;		
+			
+			 }
+			 else if($('#i_agree_non_fulfilled').prop("checked") == false){
+				alert("Oops!, Sry Your Grant this wish is not Accepted. ");
+				return false;
+			 }
+			 
+			 var wish_id = "<?=$model->w_id?>";
+			 
+			 $.ajax({
+				url : '<?=Url::to(['wish/process-wish'])?>',
+				type : 'POST',
+				data : {processstatus:processstatus,wish_id:wish_id},
+				success: function(response){
+					console.log("response");
+					$('#messagemodal1').modal('hide');
+					alert("Your Grant this wish Successfully. ");
+				}
+			});
+			
+			
+		});
+		
+	$(".send-msg-check-decide").on("click",function(){
+			var processstatus = 0;
+			 if($('#i_agree_decide').prop("checked") == true){
+				 var processstatus = 1;					
+			 }
+			 else if($('#i_agree_decide').prop("checked") == false){
+				alert("Oops!, Sry Your Grant this wish is not Accepted. ");
+				return false;
+			 }
+			var wish_id = "<?=$model->w_id?>";
+			var msg = $('#msg-textarea').val();
+			var send_to = "<?=$model->wished_by?>";
+			var send_from = "<?=\Yii::$app->user->id?>";
+			if($.trim(msg) === "")
+			{
+				alert("Please check the message.");
+				return false;				
+			}
+			
+			$.ajax({
+				url : '<?=Url::to(['wish/process-wish'])?>',
+				type : 'POST',
+				data : {processstatus:processstatus,wish_id:wish_id},
+				success: function(response){
+					$.ajax({
+						url : '<?=Url::to(['account/send-message'])?>',
+						type : 'POST',
+						data : {msg:msg,send_from:send_from,send_to:send_to},
+						success: function(response){
+							alert("Your Grant this wish Successfully. ");
+							$('#messagemodal2').modal('hide');
+						}
+					});
+				}
+			});
+			
+			
+			
+		});	
+	
+	
+		
+	$("#Resubmit_wishes").on("click",function(){
+			
+			var wish_id = "<?=$model->w_id?>";
+			var userid  = "<?=\Yii::$app->user->id?>";
+			
+			if (confirm('Are You Sure to Re-Submit this wish again.')) {
+					$.ajax({
+						url : '<?=Url::to(['wish/resubmit-process-wish'])?>',
+						type : 'POST',
+						data : { wish_id:wish_id,userid:userid},
+						success: function(response){
+					
+						}
+					});
+				} 
+			
+		});	
+	
+	
+		$("#grant_progress_wishes").on("click",function(){
+			
+			var wish_id = "<?=$model->w_id?>";
+			var userid  = "<?=\Yii::$app->user->id?>";
+			
+			if (confirm('Are You Sure to Grant to Fullfield this wish.')) {
+					 $.ajax({
+						url : '<?=Url::to(['wish/grant-process-wish'])?>',
+						type : 'POST',
+						data : { wish_id:wish_id,userid:userid},
+						success: function(response){
+								
+						}
+					}); 
+				} 
+			
+		});
+		
+	
 </script>
 

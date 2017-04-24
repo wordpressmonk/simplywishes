@@ -7,9 +7,16 @@ $this->title = 'About Us';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-about smp-mg-bottom">
-    <h1 class="fnt-green" ><?= Html::encode($this->title) ?></h1>
-
+ <h1 class="fnt-green" ><?= Html::encode($this->title) ?></h1>
+	<?php if(!Yii::$app->user->isGuest && \Yii::$app->user->identity->role == 'admin'){?>
     <p>
+        <?= Html::a('Update', ['page/update', 'id' => $model->p_id], ['class' => 'btn btn-primary']) ?>
+    </p>
+	<?php } ?>
+   
+  <?= $model->content?>
+  
+   <!-- <p>
        If you have a wish, or you want to make someone’s dream come true, you’re at the right place. SimplyWishes connects
 	   people from around the globe or around the corner to partner with one another in fulfilling wishes. If you have a wish,post it! There’s no dream too little or too big. If you find joy in enhancing the lives of others, then browse through our list of wishes and start making someone’s dream a reality!
 	</p>
@@ -17,7 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
 	   We are environmentalists, journalists, urbane, villagers, entrepreneurs, inventors, physicists, engineers, software gurus, soccer-players, roller derby dolls, cat lovers, dog admirers, bee keepers, natives, immigrants, travelers,
 	   homesteaders, do gooders, Well Wishers!
 
-    </p>
+    </p>-->
 	<div class="smp_about_slide">
 		<section class="regular slider">
 		<?php foreach($dataProvider->models as $model){

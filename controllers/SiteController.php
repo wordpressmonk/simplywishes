@@ -140,8 +140,11 @@ class SiteController extends Controller
      *
      * @return string
      */
+	 
     public function actionAbout()
-    {
+    {	
+		$model = \app\models\Page::find()->where(['p_id'=>4])->one();
+		
 		$query = Wish::find()->select(['wishes.wished_by,count(w_id) as total_wishes'])->orderBy('total_wishes DESC');
 		$query->groupBy('wished_by');
 		
@@ -153,6 +156,7 @@ class SiteController extends Controller
         ]);
         return $this->render('about',[
 			'dataProvider' => $dataProvider,
+			'model' => $model,
 		]);
     }
 

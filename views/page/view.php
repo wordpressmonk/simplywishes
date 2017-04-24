@@ -16,13 +16,13 @@ $this->params['breadcrumbs'][] = $this->title;
 	<?php if(!Yii::$app->user->isGuest && \Yii::$app->user->identity->role == 'admin'){?>
     <p>
         <?= Html::a('Update', ['update', 'id' => $model->p_id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->p_id], [
+        <?php /* echo Html::a('Delete', ['delete', 'id' => $model->p_id], [
             'class' => 'btn btn-danger',
             'data' => [
                 'confirm' => 'Are you sure you want to delete this item?',
                 'method' => 'post',
             ],
-        ]) ?>
+        ]) */ ?>
     </p>
 	<?php } ?>
 

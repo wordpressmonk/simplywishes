@@ -95,7 +95,11 @@ class PageController extends Controller
 			$model = $this->findModel($id);
 
 			if ($model->load(Yii::$app->request->post()) && $model->save()) {
+				if($model->p_id ==  4)
+				return $this->redirect(['site/about', 'id' => $model->p_id]);
+				else
 				return $this->redirect(['view', 'id' => $model->p_id]);
+			
 			} else {
 				return $this->render('update', [
 					'model' => $model,

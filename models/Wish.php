@@ -40,7 +40,10 @@ class Wish extends \yii\db\ActiveRecord
     {
         return [
             //[['category', 'wish_title','state', 'country', 'city','expected_cost','expected_date'], 'required'],
-            [['category', 'wish_title','state', 'country', 'city','expected_date'], 'required'],
+            [['category', 'wish_title','state', 'country', 'city','expected_date','non_pay_option'], 'required'],
+			
+            [['non_pay_option'], 'required','when' => function($model) { return $model->non_pay_option == 0; }],
+			
 			['primary_image', 'required', 'message' => '{attribute} can\'t be blank', 'on'=>'create'],
             [['wished_by', 'granted_by', 'category', 'state', 'country', 'city'], 'integer'],
             [['wish_description'], 'string'],
@@ -48,15 +51,19 @@ class Wish extends \yii\db\ActiveRecord
             [['wish_title'], 'string', 'max' => 100],
             [['summary_title','who_can'], 'string', 'max' => 150],
 			[['in_return'], 'string', 'max' => 1500],
-			[['expected_cost'], 'integer'],
+			[['expected_cost','non_pay_option'], 'integer'],
 			[['auto_id','wish_status','primary_image_name'], 'safe'],
 		//	[['expected_cost'], 'in','range'=>range(100,1000),'message'=>'Expected Cost(USD) Range In 100 to 1000' ],
+			[['show_mail_status','show_person_status','show_reserved_status','show_other_status'], 'integer'],
+			[['show_mail','show_person_location','show_person_date','show_reserved_name','show_reserved_location','show_reserved_date','show_other_specify'], 'string'],
         ];
     }
 	public function scenarios() {
         $scenarios = parent::scenarios();
-        $scenarios['create'] = ['category', 'wish_title','summary_title', 'wish_description','primary_image','state', 'country', 'city','expected_cost','expected_date','in_return','who_can','non_pay_option','auto_id','wish_status'];
-		 $scenarios['update'] = ['category', 'wish_title','summary_title', 'wish_description','state', 'country', 'city','expected_cost','expected_date','in_return','who_can','non_pay_option','auto_id','wish_status'];
+        $scenarios['create'] = ['category', 'wish_title','summary_title', 'wish_description','primary_image','state', 'country', 'city','expected_cost','expected_date','in_return','who_can','non_pay_option','auto_id','wish_status','show_mail_status','show_person_status','show_reserved_status','show_other_status','show_mail','show_person_location','show_person_date','show_reserved_name','show_reserved_location','show_reserved_date','show_other_specify'];
+		
+		 $scenarios['update'] = ['category', 'wish_title','summary_title', 'wish_description','state', 'country', 'city','expected_cost','expected_date','in_return','who_can','non_pay_option','auto_id','wish_status','show_mail_status','show_person_status','show_reserved_status','show_other_status','show_mail','show_person_location','show_person_date','show_reserved_name','show_reserved_location','show_reserved_date','show_other_specify'];
+		 
         return $scenarios;
     }
     /**
@@ -76,11 +83,25 @@ class Wish extends \yii\db\ActiveRecord
             'state' => 'State',
             'country' => 'Country',
             'city' => 'City',
-			'expected_cost'=>'Expected Cost(USD)',
+			 'expected_cost'=>'Expected Cost(USD)', 
+			
 			'expected_date'=>'Issue Date',
-			'non_pay_option'=>'Non-Payment Wish',
+			'non_pay_option'=>'Non-Payment Wish',			
 			'in_return'=>'What Do I Give In Return',
 			'who_can'=>'Who Can Potentialy Help me',
+			
+			
+			'show_mail_status'=>'Mail',
+			'show_person_status'=>'In Person',
+			'show_reserved_status'=>'Reserved Under Your Name',
+			'show_other_status'=>'Other',
+			'show_mail'=>'Address ( not made public )',
+			'show_person_location'=>'Location',
+			'show_person_date'=>'Date',
+			'show_reserved_name'=>'Full Name',
+			'show_reserved_location'=>'Location',
+			'show_reserved_date'=>'Date',
+			'show_other_specify'=>'Please Specify',
         ];
     }
 	public function uploadImage(){

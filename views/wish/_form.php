@@ -90,11 +90,76 @@ use yii\helpers\Url;
 				
 			</div>
 			<div class="col-lg-6">
-				<?= $form->field($model, 'expected_cost')->textInput(['maxlength' => true ])?>
+				
 			</div>
 			
 	</div>
-	<?= $form->field($model, 'non_pay_option')->checkbox(['value' => '1']);	?>
+	
+	 <?php  echo $form->field($model, 'non_pay_option')->radioList(['0'=>'Financial','1'=>'Non-financial','2'=>'Decide Later'],['onclick' => "$(this).val($('input:radio:checked').val())"])->label(false); ?>
+	 
+	<!-- Financial Begin --->
+	
+		<?= $form->field($model, 'expected_cost')->textInput(['maxlength' => true])?>
+		
+	<!-- Financial End --->
+	
+	<!-- NON Financial Begin --->
+		
+	<?= $form->field($model, 'show_mail_status')->checkbox(['value' => '1']);	?>
+	<?= $form->field($model, 'show_mail')->textInput(['maxlength' => true,'class'=>'form-control test']) ?>
+	
+	<?= $form->field($model, 'show_person_status')->checkbox(['value' => '1']);	?>
+	<div class="row">
+			<div class="col-lg-6">
+	<?= $form->field($model, 'show_person_location')->textInput(['maxlength' => true]) ?>
+	</div>
+	<div class="col-lg-6">
+		
+	<?= $form->field($model, 'show_person_date')->widget(
+                    DatePicker::className(),
+                    [
+						'attribute' => 'expected_date',
+						'options' => ['placeholder' => 'Select issue date ...'],
+                        'pluginOptions' => [
+                            'format' => 'dd-mm-yyyy',
+							'todayHighlight' => true
+                        ]
+                    ]
+                ); ?>
+			
+	</div>
+			</div>
+	<?= $form->field($model, 'show_reserved_status')->checkbox(['value' => '1']);	?>
+	<?= $form->field($model, 'show_reserved_name')->textInput(['maxlength' => true]) ?>
+	<div class="row">
+	<div class="col-lg-6">
+	<?= $form->field($model, 'show_reserved_location')->textInput(['maxlength' => true]) ?>
+	</div>
+	<div class="col-lg-6">
+	<?= $form->field($model, 'show_reserved_date')->widget(
+                    DatePicker::className(),
+                    [
+						'attribute' => 'expected_date',
+						'options' => ['placeholder' => 'Select issue date ...'],
+                        'pluginOptions' => [
+                            'format' => 'dd-mm-yyyy',
+							'todayHighlight' => true
+                        ]
+                    ]
+                ); ?>
+				
+	</div>
+			</div>
+	<?= $form->field($model, 'show_other_status')->checkbox(['value' => '1']);	?>
+	<?= $form->field($model, 'show_other_specify')->textInput(['maxlength' => true]) ?>
+	
+	<div class="form-group" id="agree_check" >			
+		<input type="checkbox" checked="checked" disabled="disabled" class="msg" name="i_agree_decide" id="i_agree_decide" value="1" > I understand that the grantor will fulfill this wish in the manner specified by you within one month of the date that the grantor accepts this wish. In the meanwhile, this wish will be marked as "In Progress" and after one month, it will be marked as "Fulfilled". You should update or ressubmit your wish if it has not been fulfilled after one month. </input>
+	</div>
+			
+	<!-- NON Financial End --->
+
+	
 	<?= $form->field($model, 'who_can')->textArea()?>
 	<?= $form->field($model, 'in_return')->textArea()?>
     <div class="form-group">
@@ -114,7 +179,7 @@ use yii\helpers\Url;
 $( document ).ready(function() {
 	// Temp this Option is avaliable
 	//$(".field-wish-non_pay_option").hide();	
-	$("#wish-expected_cost").removeAttr("readonly");	
+/* 	$("#wish-expected_cost").removeAttr("readonly");	
 	
 	
      $("#wish-non_pay_option").change(function(){
@@ -124,12 +189,115 @@ $( document ).ready(function() {
 		 else if($(this).prop("checked") == false){
 			 $("#wish-expected_cost").removeAttr("readonly");	
 		 }
-	});
-	<?php if($model->non_pay_option == 1)
-	 { ?>
-		$("#wish-expected_cost").attr("readonly","readonly");			
-	<?php } ?>	 
+	}); */
 	
+	$(".field-wish-expected_cost").hide();
+	$(".field-wish-show_mail_status").hide();
+	$(".field-wish-show_person_status").hide();
+	$(".field-wish-show_reserved_status").hide();
+	$(".field-wish-show_other_status").hide();
+	$(".field-wish-show_mail").hide();
+	$(".field-wish-show_person_location").hide();
+	$(".field-wish-show_person_date").hide();
+	$(".field-wish-show_reserved_name").hide();
+	$(".field-wish-show_reserved_location").hide();
+	$(".field-wish-show_reserved_date").hide();
+	$(".field-wish-show_other_specify").hide();
+	$("#agree_check").hide();
+			
+	$(".field-wish-show_mail").css("margin", " 0 0 0 50px");
+	$(".field-wish-show_person_location").css("margin", " 0 0 0 50px");
+	$(".field-wish-show_person_date").css("margin", " 0 0 0 50px");
+	$(".field-wish-show_reserved_name").css("margin", " 0 0 0 50px");
+	$(".field-wish-show_reserved_location").css("margin", " 0 0 0 50px");
+	$(".field-wish-show_reserved_date").css("margin", " 0 0 0 50px");
+	$(".field-wish-show_other_specify").css("margin", " 0 0 0 50px");
+	
+     $("#wish-non_pay_option").on("change",function(){
+			var pay_option = $(this).val();
+			if(parseInt(pay_option) == parseInt('0'))
+			{
+				$(".field-wish-expected_cost").show();
+				$(".field-wish-show_mail_status").hide();
+				$(".field-wish-show_person_status").hide();
+				$(".field-wish-show_reserved_status").hide();
+				$(".field-wish-show_other_status").hide();
+				$(".field-wish-show_mail").hide();
+				$(".field-wish-show_person_location").hide();
+				$(".field-wish-show_person_date").hide();
+				$(".field-wish-show_reserved_name").hide();
+				$(".field-wish-show_reserved_location").hide();
+				$(".field-wish-show_reserved_date").hide();
+				$(".field-wish-show_other_specify").hide();
+				$("#agree_check").hide();
+			} else if(parseInt(pay_option) == parseInt('1'))
+			{
+				$(".field-wish-expected_cost").hide();
+				$(".field-wish-show_mail_status").show();
+				$(".field-wish-show_person_status").show();
+				$(".field-wish-show_reserved_status").show();
+				$(".field-wish-show_other_status").show();
+				$(".field-wish-show_mail").show();
+				$(".field-wish-show_person_location").show();
+				$(".field-wish-show_person_date").show();
+				$(".field-wish-show_reserved_name").show();
+				$(".field-wish-show_reserved_location").show();
+				$(".field-wish-show_reserved_date").show();
+				$(".field-wish-show_other_specify").show();
+				$("#agree_check").show();  
+				
+			} else if(parseInt(pay_option) == parseInt('2'))
+			{
+				
+				$(".field-wish-expected_cost").hide();
+				$(".field-wish-show_mail_status").hide();
+				$(".field-wish-show_person_status").hide();
+				$(".field-wish-show_reserved_status").hide();
+				$(".field-wish-show_other_status").hide();
+				$(".field-wish-show_mail").hide();
+				$(".field-wish-show_person_location").hide();
+				$(".field-wish-show_person_date").hide();
+				$(".field-wish-show_reserved_name").hide();
+				$(".field-wish-show_reserved_location").hide();
+				$(".field-wish-show_reserved_date").hide();
+				$(".field-wish-show_other_specify").hide();
+				$("#agree_check").hide();
+			}				
+			
+		});
+	
+	
+	<?php if($model->non_pay_option == 0)
+			{ ?>
+			$(".field-wish-expected_cost").show();	
+	<?php } else if($model->non_pay_option == 1){ ?>
+			$(".field-wish-expected_cost").hide();
+			$(".field-wish-show_mail_status").show();
+			$(".field-wish-show_person_status").show();
+			$(".field-wish-show_reserved_status").show();
+			$(".field-wish-show_other_status").show();
+			$(".field-wish-show_mail").show();
+			$(".field-wish-show_person_location").show();
+			$(".field-wish-show_person_date").show();
+			$(".field-wish-show_reserved_name").show();
+			$(".field-wish-show_reserved_location").show();
+			$(".field-wish-show_reserved_date").show();
+			$(".field-wish-show_other_specify").show();
+				
+	<?php } else if($model->non_pay_option == 2){ ?>
+			$(".field-wish-expected_cost").hide();
+			$(".field-wish-show_mail_status").hide();
+			$(".field-wish-show_person_status").hide();
+			$(".field-wish-show_reserved_status").hide();
+			$(".field-wish-show_other_status").hide();
+			$(".field-wish-show_mail").hide();
+			$(".field-wish-show_person_location").hide();
+			$(".field-wish-show_person_date").hide();
+			$(".field-wish-show_reserved_name").hide();
+			$(".field-wish-show_reserved_location").hide();
+			$(".field-wish-show_reserved_date").hide();
+			$(".field-wish-show_other_specify").hide();
+	<?php } ?>
 });
 </script>
 
@@ -156,3 +324,10 @@ $( document ).ready(function() {
 }
  
 </script>
+
+<style>
+#wish-non_pay_option label{
+	margin-left : 25px  !important
+}
+
+</style>

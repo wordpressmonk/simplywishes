@@ -108,6 +108,24 @@ class AccountController extends Controller
             'dataProvider' => $dataProvider,
         ]);			
 	}
+	
+	public function actionMyProgress(){
+		
+		$user = User::findOne(\Yii::$app->user->id);
+		$profile = UserProfile::find()->where(['user_id'=>\Yii::$app->user->id])->one();
+		
+        $searchModel = new SearchWish();
+        $dataProvider = $searchModel->searchProcessWishes(Yii::$app->request->queryParams,\Yii::$app->user->id,'active');
+		
+		return $this->render('my_progress', [
+            'user' => $user,
+			'profile' => $profile,
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);		
+	}
+	
+	
 	public function actionEditAccount()
 	{	
 		$id = \Yii::$app->user->id;
