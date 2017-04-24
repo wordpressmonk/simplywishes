@@ -12,7 +12,7 @@ use yii\helpers\Url;
 		<a href="<?=\Yii::$app->homeUrl?>account/my-account" role="tab">My Active Wishes</a>
 	  </li>
 	   <li role="presentation"  class="active">
-		<a href="#processwish" role="tab" data-toggle="tab" >My Progress</a>
+		<a href="#processwish" role="tab" data-toggle="tab" >My Progress Wishes</a>
 	  </li>
 	  <li role="presentation">
 		<a href="<?=\Yii::$app->homeUrl?>account/my-fullfilled" role="tab">My Fullfilled Wishes</a>

@@ -83,7 +83,7 @@ $this->params['breadcrumbs'][] = $this->title;
 				
 			<?php } else if($model->non_pay_option == 2 ){ ?>
 					<?php if(!empty($model->process_granted_by)){ ?>
-					<button class="btn btn-success">In Process</button>					
+					<button class="btn btn-success">In Progress</button>					
 					<?php } else { ?>
 					<a href="#messagemodal2" data-toggle="modal"><button class="btn btn-success">Grant This Wish D</button></a>
 					<?php } ?>
@@ -105,7 +105,7 @@ $this->params['breadcrumbs'][] = $this->title;
 						
 						echo '<button class="btn btn-danger"  style="margin-left:15px" id="Resubmit_wishes"> Re-submit </button>';
 					} else {					
-						echo '<button class="btn btn-info">In Process</button>';
+						echo '<button class="btn btn-info">In Progress</button>';
 					}		
 				} 
 				else if((is_null($model->granted_by)) && (!\Yii::$app->user->isGuest) && (\Yii::$app->user->id==$model->wished_by))
@@ -355,7 +355,7 @@ $('body').on('hidden.bs.popover', function (e) {
 			
 			 }
 			 else if($('#i_agree_non_fulfilled').prop("checked") == false){
-				alert("Oops!, Sry Your Grant this wish is not Accepted. ");
+				alert("Please Accept The Agreement");
 				return false;
 			 }
 			 
@@ -368,7 +368,7 @@ $('body').on('hidden.bs.popover', function (e) {
 				success: function(response){
 					console.log("response");
 					$('#messagemodal1').modal('hide');
-					alert("Your Grant this wish Successfully. ");
+					alert("This Wish Has Been Granted Successfully.");
 				}
 			});
 			
@@ -381,7 +381,7 @@ $('body').on('hidden.bs.popover', function (e) {
 				 var processstatus = 1;					
 			 }
 			 else if($('#i_agree_decide').prop("checked") == false){
-				alert("Oops!, Sry Your Grant this wish is not Accepted. ");
+				alert("Please Accept The Agreement");
 				return false;
 			 }
 			var wish_id = "<?=$model->w_id?>";
@@ -404,7 +404,7 @@ $('body').on('hidden.bs.popover', function (e) {
 						type : 'POST',
 						data : {msg:msg,send_from:send_from,send_to:send_to},
 						success: function(response){
-							alert("Your Grant this wish Successfully. ");
+							alert("This Wish Has Been Granted Successfully.");
 							$('#messagemodal2').modal('hide');
 						}
 					});

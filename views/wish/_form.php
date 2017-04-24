@@ -281,10 +281,26 @@ $( document ).ready(function() {
 		});
 	
 	
-	<?php if((!$model->isNewRecord) && ($model->non_pay_option == 0))
+	<?php 
+			if((!$model->isNewRecord) && ($model->non_pay_option == 0))
 			{ ?>
-			$(".field-wish-expected_cost").show();	
+				$("#wish-non_pay_option").val(0);
+				$(".field-wish-expected_cost").show();
+				$(".field-wish-show_mail_status").hide();
+				$(".field-wish-show_person_status").hide();
+				$(".field-wish-show_reserved_status").hide();
+				$(".field-wish-show_other_status").hide();
+				$(".field-wish-show_mail").hide();
+				$(".field-wish-show_person_location").hide();
+				$(".field-wish-show_person_date").hide();
+				$(".field-wish-show_reserved_name").hide();
+				$(".field-wish-show_reserved_location").hide();
+				$(".field-wish-show_reserved_date").hide();
+				$(".field-wish-show_other_specify").hide();
+				$("#agree_check").hide();
+				$("#agree_check2").hide();	
 	<?php } else if((!$model->isNewRecord) && ($model->non_pay_option == 1)){ ?>
+			$("#wish-non_pay_option").val(1);
 			$(".field-wish-expected_cost").hide();
 			$(".field-wish-show_mail_status").show();
 			$(".field-wish-show_person_status").show();
@@ -297,8 +313,11 @@ $( document ).ready(function() {
 			$(".field-wish-show_reserved_location").show();
 			$(".field-wish-show_reserved_date").show();
 			$(".field-wish-show_other_specify").show();
+			$("#agree_check").show();  
+			$("#agree_check2").hide();
 				
 	<?php } else if((!$model->isNewRecord) && ($model->non_pay_option == 2)){ ?>
+			$("#wish-non_pay_option").val(2);
 			$(".field-wish-expected_cost").hide();
 			$(".field-wish-show_mail_status").hide();
 			$(".field-wish-show_person_status").hide();
@@ -311,12 +330,15 @@ $( document ).ready(function() {
 			$(".field-wish-show_reserved_location").hide();
 			$(".field-wish-show_reserved_date").hide();
 			$(".field-wish-show_other_specify").hide();
+			$("#agree_check2").show();
+			$("#agree_check").hide();
 	<?php } ?>
 	
 	
-	$( "#draft_form" ).submit(function( event ) {
+$( "#draft_form" ).submit(function( event ) {
 			
 		var pay_option = $("#wish-non_pay_option").val();
+		
 		if(parseInt(pay_option) == parseInt('1'))
 		{					
 			var check = false;
