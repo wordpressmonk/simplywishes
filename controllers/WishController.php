@@ -831,4 +831,18 @@ class WishController extends Controller
 			}
 		}	
 	}	
+	
+	 public function actionMultiDeleteWishes()
+	 {    
+
+			$w_id = Yii::$app->request->post()['w_id'];	
+			if($w_id)
+			{
+				 foreach($w_id as $tmp)
+				 {										
+					$this->findModel($tmp)->delete();
+				 }
+			}  			
+	}
+	
 }

@@ -16,12 +16,29 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1 class="fnt-green"  ><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+	<div class="row" style="margin-bottom:15px">
+		<div class="col-md-6">
+			 
+		</div>	
+		<div class="col-md-6">
+			 
+		  <a class="btn btn-danger pull-right" style="margin-right: 10px;" id="multi_delete" name="multi_delete" >Multi Delete</a>
 
+		</div>	 
+	</div>	
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
+			
+			[	
+					'class' => 'yii\grid\CheckboxColumn',
+					    'checkboxOptions' => function ($data){
+						   return ['checked' =>false,'value'=>$data['w_id']];
+					       },
+								
+			],
 
 			  [
 				'attribute' => 'category',
@@ -58,3 +75,33 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]); ?>
 </div>
+
+
+ <script type = "text/javascript">
+ 
+     $(document).ready(function(){	
+	 
+		$("#multi_delete").click(function(){				 
+		    var r = confirm("Are you Sure To Delete!");
+		    if (r == true) {
+				var w_id = $.map($('input[name="selection[]"]:checked'), function(c){return c.value; })
+				if($.trim(w_id) === "")
+				 {
+					alert("Please Select the Checkbox to Delete!!!.");
+					return false;
+				  }				
+					 $.ajax({
+					   url: '<?=Yii::$app->homeUrl."wish/multi-delete-wishes"?>',
+					   type: 'POST',
+					   data: {  w_id: w_id,
+					   },
+					   success: function(data) {		
+							location.reload();
+					   }
+					 }); 
+				}		
+			 });
+		});
+		 
+  </script> 
+  
