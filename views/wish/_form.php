@@ -95,15 +95,25 @@ use yii\helpers\Url;
 	
 	<!-- NON Financial Begin --->
 		
-	<?= $form->field($model, 'show_mail_status')->checkbox(['value' => '1','class'=>"checkall"]);	?>
+	<?php 
+		if($model->isNewRecord){ 
+			$model->show_mail_status = "1"; 
+			$model->show_person_status = "1"; 
+			$model->show_reserved_status = "1"; 
+			$model->show_other_status = "1"; 
+		}	
+	?>
+	<?= $form->field($model, 'show_mail_status')->checkbox(['value' =>'1','class'=>"checkall"]);	?>
 	<div id="wish-show_mail_status_check" style="display:none; color:#a94442;" >Please Check this field </div>
-	<?= $form->field($model, 'show_mail')->textInput(['maxlength' => true,'class'=>'form-control test','placeholder' => 'xxx@abc.com']) ?>
+	<?= $form->field($model, 'show_mail')->textInput(['maxlength' => true,'class'=>'form-control check_test','placeholder' => 'xxx@abc.com']) ?>
+	<div id="wish-show_mail_check" style="display:none; color:#a94442; margin-left:50px" >Please Fill this field </div>
 	
 	<?= $form->field($model, 'show_person_status')->checkbox(['value' => '1','class'=>"checkall"]);	?>
 	<div id="wish-show_person_status_check" style="display:none; color:#a94442;" >Please Check this field </div>
 	<div class="row">
 			<div class="col-lg-6">
-	<?= $form->field($model, 'show_person_location')->textInput(['maxlength' => true]) ?>
+	<?= $form->field($model, 'show_person_location')->textInput(['maxlength' => true,'class'=>'form-control check_test']) ?>
+	<div id="wish-show_person_location_check" style="display:none; color:#a94442; margin-left:50px" >Please Fill this field </div>
 	</div>
 	<div class="col-lg-6">
 		
@@ -111,41 +121,46 @@ use yii\helpers\Url;
                     DatePicker::className(),
                     [
 						'attribute' => 'expected_date',
-						'options' => ['placeholder' => 'Select issue date ...'],
+						'options' => ['placeholder' => 'Select issue date ...','class'=>'form-control check_test'],						
                         'pluginOptions' => [
                             'format' => 'dd-mm-yyyy',
 							'todayHighlight' => true
                         ]
                     ]
                 ); ?>
-			
+		
+<div id="wish-show_person_date_check" style="display:none; color:#a94442; margin-left:50px" >Please Fill this field </div>		
 	</div>
 			</div>
 	<?= $form->field($model, 'show_reserved_status')->checkbox(['value' => '1','class'=>"checkall"]);	?>
 		<div id="wish-show_reserved_status_check" style="display:none; color:#a94442;" >Please Check this field </div>
-	<?= $form->field($model, 'show_reserved_name')->textInput(['maxlength' => true]) ?>
+	<?= $form->field($model, 'show_reserved_name')->textInput(['maxlength' => true,'class'=>'form-control check_test']) ?>
+	<div id="wish-show_reserved_name_check" style="display:none; color:#a94442; margin-left:50px" >Please Fill this field </div>
 	<div class="row">
 	<div class="col-lg-6">
-	<?= $form->field($model, 'show_reserved_location')->textInput(['maxlength' => true]) ?>
+	<?= $form->field($model, 'show_reserved_location')->textInput(['maxlength' => true,'class'=>'form-control check_test']) ?>
+	<div id="wish-show_reserved_location_check" style="display:none; color:#a94442; margin-left:50px" >Please Fill this field </div>
 	</div>
 	<div class="col-lg-6">
 	<?= $form->field($model, 'show_reserved_date')->widget(
                     DatePicker::className(),
                     [
 						'attribute' => 'expected_date',
-						'options' => ['placeholder' => 'Select issue date ...'],
+						'options' => ['placeholder' => 'Select issue date ...','class'=>'form-control check_test'],
+						
                         'pluginOptions' => [
                             'format' => 'dd-mm-yyyy',
 							'todayHighlight' => true
                         ]
                     ]
                 ); ?>
-				
+	<div id="wish-show_reserved_date_check" style="display:none; color:#a94442; margin-left:50px" >Please Fill this field </div>			
 	</div>
 			</div>
 	<?= $form->field($model, 'show_other_status')->checkbox(['value' => '1','class'=>"checkall"]);	?>
 		<div id="wish-show_other_status_check" style="display:none; color:#a94442;" >Please Check this field </div>
-	<?= $form->field($model, 'show_other_specify')->textInput(['maxlength' => true]) ?>
+	<?= $form->field($model, 'show_other_specify')->textInput(['maxlength' => true,'class'=>'form-control check_test']) ?>
+	<div id="wish-show_other_specify_check" style="display:none; color:#a94442; margin-left:50px" >Please Fill this field </div>
 	
 	<div class="form-group" id="agree_check" >	
 		<div id="i_agree_decide_req" style="display:none; color:#a94442;" >Please Check this field </div>
@@ -330,7 +345,8 @@ $( "#draft_form" ).submit(function( event ) {
 		var pay_option = $("#wish-non_pay_option").val();
 		
 		if(parseInt(pay_option) == parseInt('1'))
-		{					
+		{	
+			//********************* Begin *******************/	
 			var check = false;
 			var show_mail = $("#wish-show_mail").val();
 			if($.trim(show_mail) !== "")
@@ -376,6 +392,74 @@ $( "#draft_form" ).submit(function( event ) {
 				check = true;
 			}
 					
+			
+			
+			//********************* End *******************/
+			//********************* Begin *******************/
+			
+		
+			
+			if($("#wish-show_mail_status").prop("checked") == true)
+			{
+				var show_mail = $("#wish-show_mail").val();
+				if($.trim(show_mail) == "")
+				{
+					$("#wish-show_mail"+"_check").show();
+					check = true;
+				}
+			}
+			
+			if($("#wish-show_person_status").prop("checked") == true)
+			{
+				var show_person_location = $("#wish-show_person_location").val();
+				if($.trim(show_person_location) == "")
+				{
+					$("#wish-show_person_location"+"_check").show();
+					check = true;
+				}
+				var show_person_date = $("#wish-show_person_date").val();
+				if($.trim(show_person_date) == "")
+				{
+					$("#wish-show_person_date"+"_check").show();
+					check = true;
+				}
+			}
+			
+			if($("#wish-show_reserved_status").prop("checked") == true)
+			{
+				
+				var show_reserved_name = $("#wish-show_reserved_name").val();
+				if($.trim(show_reserved_name) == "")
+				{
+					$("#wish-show_reserved_name"+"_check").show();
+					check = true;
+				}
+				
+				var show_reserved_location = $("#wish-show_reserved_location").val();
+				if($.trim(show_reserved_location) == "")
+				{
+					$("#wish-show_reserved_location"+"_check").show();
+					check = true;
+				}
+				var show_reserved_date = $("#wish-show_reserved_date").val();
+				if($.trim(show_reserved_date) == "")
+				{
+					$("#wish-show_reserved_date"+"_check").show();
+					check = true;
+				}
+			}
+			
+			
+			if($("#wish-show_other_status").prop("checked") == true)
+			{
+				var show_other_specify = $("#wish-show_other_specify").val();
+				if($.trim(show_other_specify) == "")
+				{
+					$("#wish-show_other_specify"+"_check").show();
+					check = true;
+				}
+			}
+			
 			if(check == true)
 			{				
 				return false;
@@ -386,6 +470,8 @@ $( "#draft_form" ).submit(function( event ) {
 				alert("Please Choose any field For Contact.")
 				return false;
 			}
+			
+			//********************* End *******************/
 			
 		} 
 		else if(parseInt(pay_option) == parseInt('2'))
@@ -435,6 +521,12 @@ $( "#draft_form" ).submit(function( event ) {
 			}						 
 	    });
 		
+		$(".check_test").change(function(){
+			var id = $(this).attr("id");
+			if($("#"+id).val() != ""){
+				$("#"+id+"_check").hide();
+			}						 
+	    });
 });
 </script>
 

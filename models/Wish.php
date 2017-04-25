@@ -59,6 +59,9 @@ class Wish extends \yii\db\ActiveRecord
 			
         ];
     }
+	
+
+
 	public function scenarios() {
         $scenarios = parent::scenarios();
         $scenarios['create'] = ['category', 'wish_title','summary_title', 'wish_description','primary_image','state', 'country', 'city','expected_cost','expected_date','in_return','who_can','non_pay_option','auto_id','wish_status','show_mail_status','show_person_status','show_reserved_status','show_other_status','show_mail','show_person_location','show_person_date','show_reserved_name','show_reserved_location','show_reserved_date','show_other_specify','i_agree_decide2','i_agree_decide'];
