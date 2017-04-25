@@ -169,7 +169,7 @@ $this->params['breadcrumbs'][] = $this->title;
 			</br>
 			<div class="form-group">
 			
-			<input type="checkbox" class="msg-check" name="i_agree_non_fulfilled" id="i_agree_non_fulfilled" value="1" > I agree to fulfill this wish in the manner specified by the wisher and within one month of the date that I accept it as a grantor. In the meanwhile, this wish will be marked ad "In Progress" and after one month, it will be marked as "Fulfilled". The Wisher should update or ressubmit their wish if it has not been fulfilled after one month. </input>
+			<input type="checkbox" class="msg-check" name="i_agree_non_fulfilled" id="i_agree_non_fulfilled" value="1" > I agree to fulfill this wish in the manner specified by the wisher and within one month of the date that I accept it as a grantor. In the meanwhile, this wish will be marked as "In Progress" and after one month, it will be marked as "Fulfilled". The Wisher should update or ressubmit their wish if it has not been fulfilled after one month. </input>
 			</div>
 		  </div>
 		  <div class="modal-footer">
