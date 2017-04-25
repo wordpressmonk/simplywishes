@@ -140,7 +140,7 @@ AppAsset::register($this);
         			<footer class="container-fluid">
         				<div class="col-md-12">
         					<div class="col-md-4">
-        						<p> &copy; SimplyWishes 2016, All Rights Reserved</p>
+        						<p> &copy; SimplyWishes 2017, All Rights Reserved</p>
         					</div>
         					<div class="col-md-8">
         						<ul class="smp-footer-links">

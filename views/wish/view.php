@@ -446,7 +446,7 @@ $('body').on('hidden.bs.popover', function (e) {
 			var wish_id = "<?=$model->w_id?>";
 			var userid  = "<?=\Yii::$app->user->id?>";
 			
-			if (confirm('Are You Sure to Grant to Fullfield this wish.')) {
+			if (confirm('Are You Sure Your Wish Has been Fullfield.')) {
 					 $.ajax({
 						url : '<?=Url::to(['wish/grant-process-wish'])?>',
 						type : 'POST',
