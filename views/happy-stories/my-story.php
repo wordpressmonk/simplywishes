@@ -47,6 +47,10 @@ $this->params['breadcrumbs'][] = $this->title;
 			foreach($dataProvider->models as $story)
 			{
 				$wish_details = $story->wish;
+				/* echo "<pre>";
+				print_r($wish_details->wish_title);
+				exit; */
+				
 				$profile = UserProfile::find()->where(['user_id'=>$story->user_id])->one();		
 
 				?>
@@ -65,8 +69,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
 								</div> 
 								<?php } ?>
-								<!--<h4 class="media-heading"><?php // $wish_details->wish_title; ?></h4>-->
-								<h4 class="media-heading">THTHHHH</h4>
+								<h4 class="media-heading"><?php echo $wish_details['wish_title']; ?></h4>
+								
 								<a href="<?= Url::to(["account/profile","id"=>$story->user_id]) ?>">Author: <?= $story->author->fullname; ?></a>
 								<p> <?=substr($story->story_text,0,450)?></p>
 								<a href="<?=Yii::$app->homeUrl?>happy-stories/story-details?id=<?= $story->hs_id; ?>" ><h5>Read More</h5></a>
