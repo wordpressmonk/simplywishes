@@ -662,6 +662,20 @@ class WishController extends Controller
 			$models->country = $models2['Wish']['country'];
 			$models->city = $models2['Wish']['city'];
 			$models->non_pay_option = $models2['Wish']['non_pay_option'];
+		
+		
+				$models->show_mail_status = $models2['Wish']['show_mail_status'];
+				$models->show_mail = $models2['Wish']['show_mail'];
+				$models->show_person_status = $models2['Wish']['show_person_status'];
+				$models->show_person_location = $models2['Wish']['show_person_location'];
+				$models->show_person_date = $models2['Wish']['show_person_date'];
+				$models->show_reserved_status = $models2['Wish']['show_reserved_status'];
+				$models->show_reserved_name = $models2['Wish']['show_reserved_name'];
+				$models->show_reserved_location = $models2['Wish']['show_reserved_location'];
+				$models->show_reserved_date = $models2['Wish']['show_reserved_date'];
+				$models->show_other_status = $models2['Wish']['show_other_status'];
+				$models->show_other_specify = $models2['Wish']['show_other_specify'];
+				
 			
 			
 			if($models->save(false))

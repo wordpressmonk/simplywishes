@@ -209,19 +209,6 @@ $wishstatus = array('0'=>"Active",'1'=>"In-Active");
 
 <script type="text/javascript" >
 $( document ).ready(function() {
-	// Temp this Option is avaliable
-	//$(".field-wish-non_pay_option").hide();	
-/* 	$("#wish-expected_cost").removeAttr("readonly");	
-	
-	
-     $("#wish-non_pay_option").change(function(){
-		 if($(this).prop("checked") == true){
-			$("#wish-expected_cost").attr("readonly","readonly");	
-		 }
-		 else if($(this).prop("checked") == false){
-			 $("#wish-expected_cost").removeAttr("readonly");	
-		 }
-	}); */
 	
 	$(".field-wish-expected_cost").hide();
 	$(".field-wish-show_mail_status").hide();
@@ -550,30 +537,6 @@ $( "#draft_form" ).submit(function( event ) {
 	    });
 		
 });
-</script>
-
-<script type="text/javascript" >
- function upload(){
-  data = new FormData();
-  data.append('file', $('#wish-primary_image')[0].files[0]);
-  var imgname  =  $('#wish-primary_image').val();
-  var size  =  $('#wish-primary_image')[0].files[0].size;
-  var ext =  imgname.substr( (imgname.lastIndexOf('.') +1) );
-  var display_name = imgname.substr( (imgname.lastIndexOf('\\') +1) );
-  $.ajax({
-        url: 'upload-file',
-        type: "POST",
-        data: data,
-        enctype: 'multipart/form-data',
-        processData: false,  // tell jQuery not to process the data
-        contentType: false,
-        success: function(json){      
-			$("#wish-primary_image_name").val(json);
-			
-        }
-  });
-}
- 
 </script>
 
 <style>
