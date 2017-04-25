@@ -432,7 +432,8 @@ $('body').on('hidden.bs.popover', function (e) {
 						type : 'POST',
 						data : { wish_id:wish_id,userid:userid},
 						success: function(response){
-					
+							alert("This Wish Has Been Re-Submitted Successfully.");
+							location.reload();
 						}
 					});
 				} 
@@ -451,7 +452,8 @@ $('body').on('hidden.bs.popover', function (e) {
 						type : 'POST',
 						data : { wish_id:wish_id,userid:userid},
 						success: function(response){
-								
+							alert("This Wish Has Been Fulfilled Successfully.");
+							location.reload();	
 						}
 					}); 
 				} 

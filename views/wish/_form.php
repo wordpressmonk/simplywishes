@@ -90,7 +90,7 @@ use yii\helpers\Url;
 	<!-- Financial Begin --->
 	
 		<?= $form->field($model, 'expected_cost')->textInput(['maxlength' => true])?>
-		
+		<div id="expected_cost_check" style="display:none; color:#a94442;" >Expected Cost Is empty check</div>
 	<!-- Financial End --->
 	
 	<!-- NON Financial Begin --->
@@ -396,8 +396,24 @@ $( "#draft_form" ).submit(function( event ) {
 			}
 						
 		}
+		else if(parseInt(pay_option) == parseInt('0'))
+		{
+			var expected_cost = $("#wish-expected_cost").val();
+			if($.trim(expected_cost) == ""){
+				$("#expected_cost_check").show();
+				return false;
+			}
+						
+		}
 		
 	});
+		
+		 $("#wish-expected_cost").change(function(){
+			var expected_cost = $(this).val();
+			if($.trim(expected_cost) != ""){
+				$("#expected_cost_check").hide();
+			}						 
+	    });
 		
 	    $("#i_agree_decide2").change(function(){
 			if($("#i_agree_decide2").prop("checked") == true){
