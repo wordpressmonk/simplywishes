@@ -59,7 +59,7 @@ AppAsset::register($this);
         <hr style="border-color:#1085bf;">
 
         <nav class="navbar navbar-inverse">
-        	<div class="container-fluid">
+        	<div class="container-fluid nav-without-image-hmepge ">
         		<div class="navbar-header">
         			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
         				<span class="icon-bar"></span>
@@ -67,7 +67,7 @@ AppAsset::register($this);
         				<span class="icon-bar"></span>                        
         			</button>
         		</div>
-        		<div class="collapse navbar-collapse" id="myNavbar">
+        		<div class="collapse navbar-collapse paddingalign" id="myNavbar">
 
         			<ul class="nav nav-pills smp-pills">
         				<li data-id="home"><a href="<?=Yii::$app->homeUrl?>#home">Home</a></li>

@@ -997,3 +997,11 @@ ul.smp-footer-links a {
       }
     }
   }
+  
+    .container-fluid.nav-without-image-hmepge {
+   padding: 0px;
+}
+.paddingalign{
+padding-right: 0px !important;
+padding-left:0px !important;
+}
