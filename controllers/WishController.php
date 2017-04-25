@@ -757,9 +757,10 @@ class WishController extends Controller
 			//save model
 			
 			$model->wished_by = \Yii::$app->user->id;
+			$model->wish_status = 0;
 			$model->save();
 			$model->sendUpdateSuccessEmail(\Yii::$app->user->id);
-            return $this->redirect(['my-drafts', 'id' => $model->w_id]);
+            return $this->redirect(['my-drafts']);
         } else {
             return $this->render('update_draft', [
                 'model' => $model,

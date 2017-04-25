@@ -41,10 +41,16 @@ $wishstatus = array('0'=>"Active",'1'=>"In-Active");
 
 	<?php if(!empty($model->primary_image)) {  ?>
 		 <img src="<?= \Yii::$app->homeUrl.$model->primary_image;?>" width="150" height="150" />
-	<?php } ?>	
+	<?php }  ?>	
 	
+	<?php if(empty($model->primary_image)) {  ?>
 
-    <?php  echo $form->field($model, 'primary_image')->fileInput(['class' => 'form-control',"onChange"=>"upload();return false;"]) ?>
+    <?php  echo $form->field($model, 'primary_image')->fileInput(['class' => 'form-control','id'=>'imageclass']) ?>
+	<span id="imageclass_check" style="display:none; color:#a94442;" >Image cannot be blank.</span>
+	
+	<?php } else { ?>
+	   <?php  echo $form->field($model, 'primary_image')->fileInput(['class' => 'form-control' ]) ?>
+	<?php } ?>
 
 	<?php echo $form->field($model, 'primary_image_name')->hiddenInput(['value'=>(!empty($model->primary_image))?$model->primary_image:""])->label(false); ?>
 		
@@ -346,6 +352,24 @@ $( document ).ready(function() {
 	
 $( "#draft_form" ).submit(function( event ) {
 			
+		if($("#imageclass").length)
+		{
+			var check = false;
+			var imagecheck = $("#imageclass").val();
+			if($.trim(imagecheck)  == "")
+			{
+				$('#imageclass_check').show();
+				check = true;
+			} else {
+				$('#imageclass_check').hide();
+			}				
+			
+			if(check == true)
+			{				
+				return false;
+			}
+			
+		}
 		var pay_option = $("#wish-non_pay_option").val();
 		
 		if(parseInt(pay_option) == parseInt('1'))
