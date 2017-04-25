@@ -232,7 +232,8 @@ class WishController extends Controller
 				$model1->show_reserved_date = $model->show_reserved_date;
 				$model1->show_other_status = $model->show_other_status;
 				$model1->show_other_specify = $model->show_other_specify;
-				$model1->contition_status = $model->contition_status;
+				$model1->i_agree_decide = $model->i_agree_decide;
+				$model1->i_agree_decide2 = $model->i_agree_decide2;
 				$model1->process_status = $model->process_status;
 				$model1->process_granted_by = $model->process_granted_by;
 				$model1->process_granted_date= $model->process_granted_date;			

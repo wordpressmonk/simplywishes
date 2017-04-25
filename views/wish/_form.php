@@ -97,7 +97,7 @@ use yii\helpers\Url;
 		
 	<?= $form->field($model, 'show_mail_status')->checkbox(['value' => '1','class'=>"checkall"]);	?>
 	<div id="wish-show_mail_status_check" style="display:none; color:#a94442;" >Please Check this field </div>
-	<?= $form->field($model, 'show_mail')->textInput(['maxlength' => true,'class'=>'form-control test']) ?>
+	<?= $form->field($model, 'show_mail')->textInput(['maxlength' => true,'class'=>'form-control test','placeholder' => 'xxx@abc.com']) ?>
 	
 	<?= $form->field($model, 'show_person_status')->checkbox(['value' => '1','class'=>"checkall"]);	?>
 	<div id="wish-show_person_status_check" style="display:none; color:#a94442;" >Please Check this field </div>
@@ -149,12 +149,12 @@ use yii\helpers\Url;
 	
 	<div class="form-group" id="agree_check" >	
 		<div id="i_agree_decide_req" style="display:none; color:#a94442;" >Please Check this field </div>
-		<input type="checkbox"  class="msg" name="i_agree_decide" id="i_agree_decide" value="1" > I understand that the grantor will fulfill this wish in the manner specified by you within one month of the date that the grantor accepts this wish. In the meanwhile, this wish will be marked as "In Progress" and after one month, it will be marked as "Fulfilled". You should update or ressubmit your wish if it has not been fulfilled after one month. </input>
+		<input type="checkbox"  class="msg" name="Wish[i_agree_decide]" id="i_agree_decide" value="1" <?php echo ($model->i_agree_decide == 1)?"checked":"" ?>> I understand that the grantor will fulfill this wish in the manner specified by you within one month of the date that the grantor accepts this wish. In the meanwhile, this wish will be marked as "In Progress" and after one month, it will be marked as "Fulfilled". You should update or ressubmit your wish if it has not been fulfilled after one month. </input>
 	</div>
 	
 	<div class="form-group" id="agree_check2" >	
 		<div id="i_agree_decide_req2" style="display:none; color:#a94442;" >Please Check this field </div>
-		<input type="checkbox"  class="msg" name="i_agree_decide2" id="i_agree_decide2" value="1" > I understand that the grantor will fulfill this wish in the manner specified by you within one month of the date that the grantor accepts this wish. In the meanwhile, this wish will be marked as "In Progress" and after one month, it will be marked as "Fulfilled". You should update or ressubmit your wish if it has not been fulfilled after one month. </input>
+		<input type="checkbox"  class="msg" name="Wish[i_agree_decide2]" id="i_agree_decide2" value="1" <?php echo ($model->i_agree_decide2 == 1)?"checked":"" ?> > I understand that the grantor will fulfill this wish in the manner specified by you within one month of the date that the grantor accepts this wish. In the meanwhile, this wish will be marked as "In Progress" and after one month, it will be marked as "Fulfilled". You should update or ressubmit your wish if it has not been fulfilled after one month. </input>
 	</div>
 	
 	<!-- NON Financial End --->

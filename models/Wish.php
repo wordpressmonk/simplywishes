@@ -51,7 +51,7 @@ class Wish extends \yii\db\ActiveRecord
             [['wish_title'], 'string', 'max' => 100],
             [['summary_title','who_can'], 'string', 'max' => 150],
 			[['in_return'], 'string', 'max' => 1500],
-			[['expected_cost','non_pay_option'], 'integer'],
+			[['expected_cost','non_pay_option','i_agree_decide2','i_agree_decide'], 'integer'],
 			[['auto_id','wish_status','primary_image_name'], 'safe'],
 		//	[['expected_cost'], 'in','range'=>range(100,1000),'message'=>'Expected Cost(USD) Range In 100 to 1000' ],
 			[['show_mail_status','show_person_status','show_reserved_status','show_other_status'], 'integer'],
@@ -61,9 +61,9 @@ class Wish extends \yii\db\ActiveRecord
     }
 	public function scenarios() {
         $scenarios = parent::scenarios();
-        $scenarios['create'] = ['category', 'wish_title','summary_title', 'wish_description','primary_image','state', 'country', 'city','expected_cost','expected_date','in_return','who_can','non_pay_option','auto_id','wish_status','show_mail_status','show_person_status','show_reserved_status','show_other_status','show_mail','show_person_location','show_person_date','show_reserved_name','show_reserved_location','show_reserved_date','show_other_specify'];
+        $scenarios['create'] = ['category', 'wish_title','summary_title', 'wish_description','primary_image','state', 'country', 'city','expected_cost','expected_date','in_return','who_can','non_pay_option','auto_id','wish_status','show_mail_status','show_person_status','show_reserved_status','show_other_status','show_mail','show_person_location','show_person_date','show_reserved_name','show_reserved_location','show_reserved_date','show_other_specify','i_agree_decide2','i_agree_decide'];
 		
-		 $scenarios['update'] = ['category', 'wish_title','summary_title', 'wish_description','state', 'country', 'city','expected_cost','expected_date','in_return','who_can','non_pay_option','auto_id','wish_status','show_mail_status','show_person_status','show_reserved_status','show_other_status','show_mail','show_person_location','show_person_date','show_reserved_name','show_reserved_location','show_reserved_date','show_other_specify'];
+		 $scenarios['update'] = ['category', 'wish_title','summary_title', 'wish_description','state', 'country', 'city','expected_cost','expected_date','in_return','who_can','non_pay_option','auto_id','wish_status','show_mail_status','show_person_status','show_reserved_status','show_other_status','show_mail','show_person_location','show_person_date','show_reserved_name','show_reserved_location','show_reserved_date','show_other_specify','i_agree_decide2','i_agree_decide'];
 		 
         return $scenarios;
     }
