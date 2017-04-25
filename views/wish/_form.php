@@ -103,17 +103,17 @@ use yii\helpers\Url;
 			$model->show_other_status = "1"; 
 		}	
 	?>
-	<?= $form->field($model, 'show_mail_status')->checkbox(['value' =>'1','class'=>"checkall"]);	?>
+	<?= $form->field($model, 'show_mail_status')->checkbox(['value' =>'1','class'=>"checkall",'for'=>'show_mail_class']);	?>
 	<div id="wish-show_mail_status_check" style="display:none; color:#a94442;" >Please Check this field </div>
 	<?= $form->field($model, 'show_mail')->textInput(['maxlength' => true,'class'=>'form-control check_test','placeholder' => 'xxx@abc.com']) ?>
-	<div id="wish-show_mail_check" style="display:none; color:#a94442; margin-left:50px" >Please Fill this field </div>
+	<div id="wish-show_mail_check" class="show_mail_class" style="display:none; color:#a94442; margin-left:50px" >Please Fill this field </div>
 	
-	<?= $form->field($model, 'show_person_status')->checkbox(['value' => '1','class'=>"checkall"]);	?>
+	<?= $form->field($model, 'show_person_status')->checkbox(['value' => '1','class'=>"checkall",'for'=>'show_person_class']);	?>
 	<div id="wish-show_person_status_check" style="display:none; color:#a94442;" >Please Check this field </div>
 	<div class="row">
 			<div class="col-lg-6">
 	<?= $form->field($model, 'show_person_location')->textInput(['maxlength' => true,'class'=>'form-control check_test']) ?>
-	<div id="wish-show_person_location_check" style="display:none; color:#a94442; margin-left:50px" >Please Fill this field </div>
+	<div id="wish-show_person_location_check" class="show_person_class" style="display:none; color:#a94442; margin-left:50px" >Please Fill this field </div>
 	</div>
 	<div class="col-lg-6">
 		
@@ -129,17 +129,17 @@ use yii\helpers\Url;
                     ]
                 ); ?>
 		
-<div id="wish-show_person_date_check" style="display:none; color:#a94442; margin-left:50px" >Please Fill this field </div>		
+<div id="wish-show_person_date_check" class="show_person_class" style="display:none; color:#a94442; margin-left:50px" >Please Fill this field </div>		
 	</div>
 			</div>
-	<?= $form->field($model, 'show_reserved_status')->checkbox(['value' => '1','class'=>"checkall"]);	?>
-		<div id="wish-show_reserved_status_check" style="display:none; color:#a94442;" >Please Check this field </div>
+	<?= $form->field($model, 'show_reserved_status')->checkbox(['value' => '1','class'=>"checkall",'for'=>'show_reserved_class']);	?>
+		<div id="wish-show_reserved_status_check" class="show_person_class" style="display:none; color:#a94442;" >Please Check this field </div>
 	<?= $form->field($model, 'show_reserved_name')->textInput(['maxlength' => true,'class'=>'form-control check_test']) ?>
-	<div id="wish-show_reserved_name_check" style="display:none; color:#a94442; margin-left:50px" >Please Fill this field </div>
+	<div id="wish-show_reserved_name_check" class="show_reserved_class" style="display:none; color:#a94442; margin-left:50px" >Please Fill this field </div>
 	<div class="row">
 	<div class="col-lg-6">
 	<?= $form->field($model, 'show_reserved_location')->textInput(['maxlength' => true,'class'=>'form-control check_test']) ?>
-	<div id="wish-show_reserved_location_check" style="display:none; color:#a94442; margin-left:50px" >Please Fill this field </div>
+	<div id="wish-show_reserved_location_check" class="show_reserved_class" style="display:none; color:#a94442; margin-left:50px" >Please Fill this field </div>
 	</div>
 	<div class="col-lg-6">
 	<?= $form->field($model, 'show_reserved_date')->widget(
@@ -154,13 +154,13 @@ use yii\helpers\Url;
                         ]
                     ]
                 ); ?>
-	<div id="wish-show_reserved_date_check" style="display:none; color:#a94442; margin-left:50px" >Please Fill this field </div>			
+	<div id="wish-show_reserved_date_check" class="show_reserved_class" style="display:none; color:#a94442; margin-left:50px" >Please Fill this field </div>			
 	</div>
 			</div>
-	<?= $form->field($model, 'show_other_status')->checkbox(['value' => '1','class'=>"checkall"]);	?>
+	<?= $form->field($model, 'show_other_status')->checkbox(['value' => '1','class'=>"checkall",'for'=>"show_other_class"]);	?>
 		<div id="wish-show_other_status_check" style="display:none; color:#a94442;" >Please Check this field </div>
 	<?= $form->field($model, 'show_other_specify')->textInput(['maxlength' => true,'class'=>'form-control check_test']) ?>
-	<div id="wish-show_other_specify_check" style="display:none; color:#a94442; margin-left:50px" >Please Fill this field </div>
+	<div id="wish-show_other_specify_check" class="show_other_class" style="display:none; color:#a94442; margin-left:50px" >Please Fill this field </div>
 	
 	<div class="form-group" id="agree_check" >	
 		<div id="i_agree_decide_req" style="display:none; color:#a94442;" >Please Check this field </div>
@@ -516,9 +516,13 @@ $( "#draft_form" ).submit(function( event ) {
 	
 		$(".checkall").change(function(){
 			var id = $(this).attr("id");
+			var forid = $(this).attr("for");
 			if($("#"+id).prop("checked") == true){
-						$("#"+id+"_check").hide();
-			}						 
+				$("#"+id+"_check").hide();
+			} else 
+			{					
+				$("."+forid).hide();
+			}				
 	    });
 		
 		$(".check_test").change(function(){
@@ -527,6 +531,7 @@ $( "#draft_form" ).submit(function( event ) {
 				$("#"+id+"_check").hide();
 			}						 
 	    });
+		
 });
 </script>
 
