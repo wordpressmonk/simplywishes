@@ -182,6 +182,13 @@ use yii\web\JsExpression;
 		$(".send-msgOne").on("click",function(){
 			console.log($('#msgOne').val());
 			var msg = $('#msgOne').val();
+			if($.trim(msg) === "")
+			{
+				alert("Please check the message.");
+				return false;
+				
+			}
+			
 			var send_to = $("#senduserid").val();
 			var send_from = "<?=\Yii::$app->user->id?>";
 			$.ajax({

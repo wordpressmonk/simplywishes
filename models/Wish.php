@@ -55,8 +55,8 @@ class Wish extends \yii\db\ActiveRecord
 			[['auto_id','wish_status','primary_image_name'], 'safe'],
 		//	[['expected_cost'], 'in','range'=>range(100,1000),'message'=>'Expected Cost(USD) Range In 100 to 1000' ],
 			[['show_mail_status','show_person_status','show_reserved_status','show_other_status'], 'integer'],
-			[['show_mail','show_person_location','show_person_date','show_reserved_name','show_reserved_location','show_reserved_date','show_other_specify'], 'string'],
-			
+			[['show_person_location','show_person_date','show_reserved_name','show_reserved_location','show_reserved_date','show_other_specify'], 'string'],
+			['show_mail','email'],
         ];
     }
 	

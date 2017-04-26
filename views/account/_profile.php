@@ -78,7 +78,7 @@ use app\models\FollowRequest;
 		<div class="modal-content">
 		  <div class="modal-header">
 			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-			<h4 class="modal-title">Message</h4>
+			<h4 class="modal-title">Message1</h4>
 		  </div>
 		  <div class="modal-body">
 			<div class="media">
@@ -113,6 +113,12 @@ use app\models\FollowRequest;
 		$(".send-msg").on("click",function(){
 			console.log($('.msg').val());
 			var msg = $('.msg').val();
+			if($.trim(msg) === "")
+			{
+				alert("Please check the message.");
+				return false;
+				
+			}
 			var send_to = "<?=$user->id?>";
 			var send_from = "<?=\Yii::$app->user->id?>";
 			$.ajax({
