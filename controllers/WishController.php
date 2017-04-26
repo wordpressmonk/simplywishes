@@ -813,6 +813,7 @@ class WishController extends Controller
 			$wish->process_granted_by = "";
 			$wish->process_granted_date = "0000-00-00";
 			$wish->process_status = 0;
+			$wish->email_status = 0;
 
 			if($wish->save(false))
 			{		
