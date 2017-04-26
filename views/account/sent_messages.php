@@ -309,7 +309,8 @@ input.checkBoxClass {
     padding-top: 10px;
 }
 .list-icon a img {
-    width: 40px;
+    max-width: 40px;
+	max-height:40px;
     border-radius: 100%;
 }
 .pointerclass{

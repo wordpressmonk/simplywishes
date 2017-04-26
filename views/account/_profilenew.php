@@ -28,9 +28,9 @@ use app\models\FriendRequest;
 			<div class="thumbnail">
 			<?php 
 			if($profile->profile_image!='') 
-				echo '<img src="'.\Yii::$app->homeUrl.$profile->profile_image.'"  class="img-responsive" alt="my-profile-Image">';
+				echo '<img src="'.\Yii::$app->homeUrl.$profile->profile_image.'"  class="img-responsive const-img-size" alt="my-profile-Image">';
 			else 
-				echo '<img src="'.\Yii::$app->homeUrl.'images/default_profile.png"  class="img-responsive" alt="my-profile-Image">';
+				echo '<img src="'.\Yii::$app->homeUrl.'images/default_profile.png"  class="img-responsive const-img-size" alt="my-profile-Image">';
 			?>
 			</div>
 		

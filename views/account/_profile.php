@@ -29,9 +29,9 @@ use app\models\FollowRequest;
 			<div class="thumbnail">
 			<?php 
 			if($profile->profile_image!='') 
-				echo '<img src="'.\Yii::$app->homeUrl.$profile->profile_image.'"  class="img-responsive" alt="my-profile-Image">';
+				echo '<img src="'.\Yii::$app->homeUrl.$profile->profile_image.'"  class="img-responsive const-img-size" alt="my-profile-Image">';
 			else 
-				echo '<img src="'.\Yii::$app->homeUrl.'images/default_profile.png"  class="img-responsive" alt="my-profile-Image">';
+				echo '<img src="'.\Yii::$app->homeUrl.'images/default_profile.png"  class="img-responsive const-img-size" alt="my-profile-Image">';
 			?>
 			</div>
 		</div>
@@ -78,16 +78,16 @@ use app\models\FollowRequest;
 		<div class="modal-content">
 		  <div class="modal-header">
 			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-			<h4 class="modal-title">Message1</h4>
+			<h4 class="modal-title">Message</h4>
 		  </div>
 		  <div class="modal-body">
 			<div class="media">
 			  <div class="media-left list-icon">
 					<?php 
 					if($profile->profile_image!='') 
-						echo '<img src="'.\Yii::$app->homeUrl.$profile->profile_image.'"  alt="my-profile-Image">';
+						echo '<img  src="'.\Yii::$app->homeUrl.$profile->profile_image.'"  alt="my-profile-Image">';
 					else 
-						echo '<img src="'.\Yii::$app->homeUrl.'images/default_profile.png" alt="my-profile-Image">';
+						echo '<img  src="'.\Yii::$app->homeUrl.'images/default_profile.png" alt="my-profile-Image">';
 					?>
 				 <!--<img src="./images/man1.jpg" alt="">-->
 			  </div>

@@ -545,11 +545,17 @@ ul.smp-footer-links a {
 }
 .listesinside
 {
+	width: 30px;
+    margin-bottom: 7px;
+    height: 33px;
   margin-left: 1px; 
   padding-top: 3px;
 }
 .removelistesinside
 {
+	width: 30px;
+    margin-bottom: 4px;
+    height: 30px;
 	margin-left: 0px !important;
 	padding-top: 0px !important;
 }
@@ -1004,4 +1010,8 @@ ul.smp-footer-links a {
 .paddingalign{
 padding-right: 0px !important;
 padding-left:0px !important;
+}
+.const-img-size {
+    max-height: 150px;
+    width: 100%;
 }
