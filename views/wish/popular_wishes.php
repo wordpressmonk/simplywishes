@@ -74,7 +74,7 @@ use yii\helpers\Url;
   	// Each time the user scrolls
   	win.scroll(function() {
 		console.log($(document).height() - win.height(),"total");
-		var scroll_top = Math.round(win.scrollTop()) + parseInt(20);
+		var scroll_top = Math.round(win.scrollTop());
 		console.log(scroll_top,"top");
   		// End of the document reached?
 		if(parseInt(page) == parseInt(page2)){
