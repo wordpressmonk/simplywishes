@@ -31,7 +31,11 @@ class User extends ActiveRecord implements IdentityInterface
 			[['username'], 'string', 'max' => 255],
 			['email', 'email'],
 			[['username'], 'unique','targetClass' => '\app\models\User', 'message' => 'This Username has already been taken.'],
-			[['email'], 'unique','targetClass' => '\app\models\User', 'message' => 'This email address has already been taken.'],
+		
+		  [['email'], 'unique','targetClass' => '\app\models\User', 'message' => 'This email address has already been taken.','on'=>['sign-up','updatecheck'] ],  
+			
+			//['email', 'uniqueEmail','on'=>'updatecheck'],
+
 			[['password','verify_password'], 'string','min'=>6,'max'=>15],
 			[['verify_password'],'compare','compareAttribute'=>'password','message'=>'Password do not match'],
 		];
@@ -40,6 +44,7 @@ class User extends ActiveRecord implements IdentityInterface
         $scenarios = parent::scenarios();
         $scenarios['create'] = ['username', 'email','password','verify_password'];
 		$scenarios['apply_forgotpassword'] = ['email'];//Scenario Values Only Accepted
+		$scenarios['updatecheck'] = ['email'];//Scenario Values Only Accepted
         return $scenarios;
     }
     /**
@@ -163,4 +168,33 @@ class User extends ActiveRecord implements IdentityInterface
             'status' => self::STATUS_ACTIVE,
         ]);
     }
+	
+	/*  public function uniqueEmail($attribute, $params)
+    {
+	
+        $user = \app\models\User::find()->where('email=:email',array('email'=>$this->email))->all();
+		$check = "start";
+		
+		if(isset($user) && !empty($user))
+		{
+			foreach($user as $tmp)
+			{
+				if(\Yii::$app->user->id != $tmp->id)
+				{					
+					$check = "end";
+					
+				}
+			}
+		}
+		
+		if(	$check == "end")
+		{
+		
+            return $this->addError("email", 'Email already test  exists!');
+		} 
+		
+
+		
+    }  */
+	
 }

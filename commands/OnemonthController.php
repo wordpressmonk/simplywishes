@@ -20,7 +20,7 @@ class OnemonthController extends Controller {
 		
 		$model = $connection->createCommand('SELECT * FROM wishes 
 			WHERE ((process_status = 1) 
-			AND (email_status = 0) AND (process_granted_date < (CURRENT_DATE() - INTERVAL 1 MONTH)) AND (process_granted_date != "" 
+			AND (email_status = 0) AND (process_granted_date < (CURRENT_DATE() - INTERVAL 1 MONTH)) AND (process_granted_date != "0000-00-00" 
 			))');
 		$quickemail = $model->queryAll();
 	

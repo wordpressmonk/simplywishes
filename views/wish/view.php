@@ -100,7 +100,7 @@ $this->params['breadcrumbs'][] = $this->title;
 			<?php if((is_null($model->granted_by)) && (!\Yii::$app->user->isGuest) && (\Yii::$app->user->id==$model->wished_by) && (!empty($model->process_status)))
 				{
 					$date1 = new DateTime($model->process_granted_date);
-					$date2 = new DateTime(date("d-m-Y"));				
+					$date2 = new DateTime(date("Y-m-d"));				
 					$diff = $date2->diff($date1)->format("%a");					
 					if($diff > 30)
 					{

@@ -785,7 +785,7 @@ class WishController extends Controller
 		//explicitly set up the granted_by to the user id
 		//listen to the IPN and change back to NULL if not success.		
 		$wish->process_granted_by = \Yii::$app->user->id;
-		$wish->process_granted_date = date('d-m-Y');
+		$wish->process_granted_date = date('Y-m-d');
 		$wish->process_status = $processstatus;
 
 		if($wish->save(false))
@@ -811,7 +811,7 @@ class WishController extends Controller
 		if($wish)
 		{
 			$wish->process_granted_by = "";
-			$wish->process_granted_date = "";
+			$wish->process_granted_date = "0000-00-00";
 			$wish->process_status = 0;
 
 			if($wish->save(false))
@@ -837,7 +837,7 @@ class WishController extends Controller
 			$wish->granted_by = $wish->process_granted_by;
 			$wish->granted_date = date('d-m-Y');
 			$wish->process_granted_by = "";
-			$wish->process_granted_date = "";
+			$wish->process_granted_date = "0000-00-00";
 			$wish->process_status = 0;
 
 			if($wish->save(false))
