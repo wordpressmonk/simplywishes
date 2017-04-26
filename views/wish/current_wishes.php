@@ -97,7 +97,7 @@ use yii\helpers\Url;
   		// End of the document reached?
 		if(parseInt(page) == parseInt(page2)){
   		//if ($(document).height() - win.height()-1 == scroll_top ) {
-		if($(win).scrollTop() + $(win).height() == $(document).height()){
+		if($(win).scrollTop() + $(win).height() + parseInt(50) >= $(document).height()){
 			console.log("scrolld");
 			page2 = page2+1;
 			$("#loader_img").show();
