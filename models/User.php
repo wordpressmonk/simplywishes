@@ -28,7 +28,8 @@ class User extends ActiveRecord implements IdentityInterface
         return [
 			[['username', 'email'],'required'],
 			[['password','verify_password'], 'required', 'on'=>'sign-up'],
-			[['username', 'email'], 'string', 'max' => 255],
+			[['username'], 'string', 'max' => 255],
+			['email', 'email'],
 			[['username'], 'unique','targetClass' => '\app\models\User', 'message' => 'This Username has already been taken.'],
 			[['email'], 'unique','targetClass' => '\app\models\User', 'message' => 'This email address has already been taken.'],
 			[['password','verify_password'], 'string','min'=>6,'max'=>15],

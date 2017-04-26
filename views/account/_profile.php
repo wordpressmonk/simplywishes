@@ -29,9 +29,9 @@ use app\models\FollowRequest;
 			<div class="thumbnail">
 			<?php 
 			if($profile->profile_image!='') 
-				echo '<img src="'.\Yii::$app->homeUrl.$profile->profile_image.'"  class="img-responsive" alt="my-profile-Image">';
+				echo '<img width="120px" src="'.\Yii::$app->homeUrl.$profile->profile_image.'"  class="img-responsive" alt="my-profile-Image">';
 			else 
-				echo '<img src="'.\Yii::$app->homeUrl.'images/default_profile.png"  class="img-responsive" alt="my-profile-Image">';
+				echo '<img width="120px" src="'.\Yii::$app->homeUrl.'images/default_profile.png"  class="img-responsive" alt="my-profile-Image">';
 			?>
 			</div>
 		</div>

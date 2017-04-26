@@ -49,7 +49,7 @@ use yii\web\JsExpression;
 						 <span style="cursor:pointer" class="pull-right remove_delete" title="Remove"  for="'.$msg['m_id'].'"><i class="fa fa-trash-o" aria-hidden="true"> </i></span>
 						 
 						 <div class="list-icon">
-							To:  <a href="'.Url::to(['profile','id'=>$profile['user_id']]).'" target="_blank" ><img src="'.\Yii::$app->homeUrl.$profile['profile_image'].'" alt=""></a>
+							To:  <a href="'.Url::to(['profile','id'=>$profile['user_id']]).'" target="_blank" ><img wdith="120px" src="'.\Yii::$app->homeUrl.$profile['profile_image'].'" alt=""></a>
 						</div>
 						
 					<div class="smp_expand pointerclass" data-toggle="collapse" title="Click here To View Conversation">
@@ -83,7 +83,7 @@ use yii\web\JsExpression;
 							$profile = \app\models\Userprofile::find()->where(['user_id'=>$thread['send_by']])->one();
 							echo '<li class="media">
 							  <div class="media-left list-icon">
-								 <img src="'.\Yii::$app->homeUrl.$profile->profile_image.'" alt="">
+								 <img wdith="120px" src="'.\Yii::$app->homeUrl.$profile->profile_image.'" alt="">
 							  </div>
 							  <div class="media-body">
 								<h4 class="media-heading">'.$profile->fullname.'</h4>
@@ -270,7 +270,7 @@ use yii\web\JsExpression;
 					//console.log(response.status);
 					if(data.status){
 						$('#'+msg_id+'_msg').val("");
-						var html = '<li class="media"><div class="media-left list-icon"><img src="'+prof_image+'" alt=""></div><div class="media-body"><h4 class="media-heading">'+fullname+'</h4><p class="list-group-item-text">'+msg+'<span class="label label-primary pull-right">Date:Now</span></p></div></li>';
+						var html = '<li class="media"><div class="media-left list-icon"><img wdith="120px" src="'+prof_image+'" alt=""></div><div class="media-body"><h4 class="media-heading">'+fullname+'</h4><p class="list-group-item-text">'+msg+'<span class="label label-primary pull-right">Date:Now</span></p></div></li>';
 					//$(elem).parent('li').append(html);
 						$( html ).insertAfter( $(elem).parent('li'));
 						$("#"+id).removeAttr('disabled');
@@ -303,7 +303,7 @@ input.checkBoxClass {
     padding-top: 10px;
 }
 .list-icon a img {
-    width: 40px;
+    width: 25px;
     border-radius: 100%;
 }
 .pointerclass{
