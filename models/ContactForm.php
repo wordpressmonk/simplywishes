@@ -96,4 +96,39 @@ class ContactForm extends \yii\db\ActiveRecord
     }
 	
 	
+	 public function admincontact()
+    {	
+		
+		 /* @var $user User */
+        $user = User::findOne([
+            'status' => User::STATUS_ACTIVE,
+            'role' => 'admin',
+        ]);
+			
+        if (!$user) {
+            return false;
+        }
+		
+		
+		$subject = 	'SimplyWishes Contact Us ';
+		
+		$message = Yii::$app
+            ->mailer
+            ->compose(
+                ['html' => 'admincontactMail-html'],
+                ['contactname' => $this->name, 'contactemail' => $this->email , 'contactphone' => $this->phone_number , 'contactsubject' => $this->subject , 'contactmesssage' => $this->body]
+            )
+            ->setFrom([Yii::$app->params['supportEmail'] => 'SimplyWishes '])
+            ->setTo($user->email)
+            ->setSubject($subject);			
+            
+		$message->getSwiftMessage()->getHeaders()->addTextHeader('MIME-version', '1.0\n');
+		$message->getSwiftMessage()->getHeaders()->addTextHeader('charset', ' iso-8859-1\n');		
+		$message->send();
+		
+		return true;
+		
+    }
+	
+	
 }

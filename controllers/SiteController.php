@@ -127,6 +127,7 @@ class SiteController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
 
 			$model->contact();
+			$model->admincontact();
             Yii::$app->session->setFlash('contactFormSubmitted');
             return $this->refresh();
         }
