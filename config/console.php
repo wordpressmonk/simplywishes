@@ -20,16 +20,28 @@ $config = [
                 ],
             ],
         ],
+		'mailer' => [
+            'class' => 'yii\swiftmailer\Mailer',
+            'useFileTransport' => false,
+			'transport' => [
+            'class' => 'Swift_SmtpTransport',
+            'host' => 'smtp.gmail.com',
+            'username' => 'arivazhagan0117@gmail.com',
+            'password' => 'Arivu@!@#Ilan',
+            'port' => '587',
+            'encryption' => 'tls', 
+                        ], 
+        ],
+
         'db' => $db,
+		
+	  'urlManager' => [
+		    'class' => 'yii\web\UrlManager',
+			'scriptUrl' => 'http://wordpressmonks.com/works/simplywishes_yii/web/',           
+        ], 
+		// Cron Job Url Change	
     ],
     'params' => $params,
-    /*
-    'controllerMap' => [
-        'fixture' => [ // Fixture generation command line.
-            'class' => 'yii\faker\FixtureController',
-        ],
-    ],
-    */
 ];
 
 if (YII_ENV_DEV) {
