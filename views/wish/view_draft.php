@@ -9,7 +9,7 @@ use yii\widgets\DetailView;
 $this->title = $model->wish_title;
 $this->params['breadcrumbs'][] = $this->title;
 $wishstatus = array('0'=>"Active",'1'=>"In-Active");
-$payoption = array('0'=>"Financial",'1'=>"Non-financial");
+$payoption = array('0'=>"Financial",'1'=>"Non-financial",'2'=>"Decide Later");
 
 ?>
 
@@ -33,7 +33,12 @@ $payoption = array('0'=>"Financial",'1'=>"Non-financial");
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [          
-		  'categoryName',
+		 
+		   [
+				 'label'=>'Recipient',
+				 'value' => $model->categoryName,
+		  ],
+		  
 		  'wish_title',
 			
 			[
@@ -43,16 +48,7 @@ $payoption = array('0'=>"Financial",'1'=>"Non-financial");
 				
             ],
 			
-		   [
-				 'label'=>'Expected cost',
-				 'value' =>($model->non_pay_option == 1)?"-":$model->expected_cost,
-		  ],
-		  
-		  'expected_date',
-		  'in_return',
-		  'who_can',
-		  
-		  [
+			[
 				 'label'=>'Country',
 				 'value' =>($model->country != 0)?$model->countryModel->name:"-",
 		  ],
@@ -64,15 +60,61 @@ $payoption = array('0'=>"Financial",'1'=>"Non-financial");
 				 'label'=>'City',
 				 'value' =>($model->city != 0)?$model->cityModel->name:"-",
 		  ],
-	
-		 // 'non_pay_option',
+		  
+		   [
+				 'label'=>'Expected cost',
+				 'value' =>($model->non_pay_option == 1)?"-":$model->expected_cost,
+				  'visible' => ($model->non_pay_option == 0)?true:false,
+		  ],
+		  
+		  [
+				 'label'=>'Address',
+				 'value' =>($model->show_mail_status == 1)?$model->show_mail:'-',
+				 'visible' => (($model->non_pay_option == 1) && ($model->show_mail_status == 1))?true:false,
+		  ],
+		  [
+				 'label'=>'In Person Location',
+				 'value' =>($model->show_person_status == 1)?$model->show_person_location:'-',
+				 'visible' => (($model->non_pay_option == 1) && ($model->show_person_status == 1))?true:false,
+		  ],
+		  [
+				 'label'=>'In Person Date',
+				 'value' =>($model->show_person_status == 1)?$model->show_person_date:'-',
+				 'visible' => (($model->non_pay_option == 1) && ($model->show_person_status == 1))?true:false,
+		  ],
+		  [
+				 'label'=>'Reserved Under Full Name',
+				 'value' =>($model->show_reserved_status == 1)?$model->show_reserved_name:'-',
+				 'visible' => (($model->non_pay_option == 1) && ($model->show_reserved_status == 1))?true:false,
+		  ],
+		   [
+				 'label'=>'Reserved Under Location',
+				 'value' =>($model->show_reserved_status == 1)?$model->show_reserved_location:'-',
+				 'visible' => (($model->non_pay_option == 1) && ($model->show_reserved_status  == 1))?true:false,
+		  ],
+		   [
+				 'label'=>'Reserved Under Date',
+				 'value' =>($model->show_reserved_status == 1)?$model->show_reserved_date:'-',
+				 'visible' => (($model->non_pay_option == 1) && ($model->show_reserved_status == 1))?true:false,
+		  ],
+		  
+		  [
+				 'label'=>'Reserved Under Date',
+				 'value' =>($model->show_other_status == 1)?$model->show_other_specify:'-',
+				 'visible' => (($model->non_pay_option == 1) && ($model->show_other_status == 1))?true:false,
+		  ],
+		  
+		  'expected_date',
+		  'in_return',
+		  'who_can',
+		  
+		  
+
 		  [
 				 'label'=>'Pay Option',
 				 'value' =>$payoption[$model->non_pay_option],
 		  ],
-		  
-		  
-		  //'wish_status',
+
 		  [
 				 'label'=>'Status',
 				 'value' =>$wishstatus[$model->wish_status],
