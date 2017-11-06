@@ -23,6 +23,24 @@ $this->params['breadcrumbs'][] = $this->title;
 	</div>
 <?php } ?>
 
+ <?php if (Yii::$app->session->hasFlash('activeCheckmail')){ ?>
+
+        <div class="alert alert-success">
+            Your Validation is Complete, Please Login. 
+        </div>
+
+    <?php } else if (Yii::$app->session->hasFlash('RegisterFormSubmitted')){ ?>
+
+        <div class="alert alert-success">
+            Your Registration Has Been Successfully Completed,  Please Check Your E-mail for validation. 
+        </div>
+
+    <?php } else if(Yii::$app->session->hasFlash('RegisterEmailNot')) { ?>
+		<div  class="alert-danger alert ">
+			Oops, Sorry Your E-Mail Is Not validated, Please Check Your E-Mail 
+		</div>
+	<?php } ?>
+
     <?php $form = ActiveForm::begin([
         'id' => 'login-form',
         'layout' => 'horizontal',

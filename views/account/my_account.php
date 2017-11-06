@@ -68,7 +68,7 @@ $this->params['breadcrumbs'][] = $this->title;
 					<div class="col-lg-4">
 						<?= $form->field($profile, 'city')->dropDownList($cities,[
 							'id' => 'city_select',
-							'prompt'=>'--Select State--',
+							'prompt'=>'--Select City--',
 						]); ?>
 					</div>
 					<img src="<?= \Yii::$app->homeUrl.$profile->profile_image;?>" width="150" height="150" />

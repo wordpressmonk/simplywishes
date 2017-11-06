@@ -133,14 +133,14 @@ use yii\web\JsExpression;
 		  </div>
 		  <div class="modal-body">
 			<div class="media">
-		
+		<label>To <span class="valid-star-color" >*</span> </label>
 			  <?php 
 			 $data =  \app\models\Userprofile::find()->select(['CONCAT(firstname," ",lastname) as value', 'CONCAT(firstname," ",lastname) as  label','user_id as id'])->where(['!=','user_id',\Yii::$app->user->id])->asArray()->all();	
 				
 					echo AutoComplete::widget([
 						'name' => 'adduser',
 						'id' => 'adduser',
-						'options' => ['class' => 'form-control','placeholder'=>'Search Name'],						
+						'options' => ['class' => 'form-control','placeholder'=>'Search Name','label'],						
 						'clientOptions' => [
 						 'appendTo'=>'#project-form',
 							'source' => $data, 
@@ -181,6 +181,13 @@ use yii\web\JsExpression;
 	
 		$(".send-msgOne").on("click",function(){
 			console.log($('#msgOne').val());
+			var send_to = $("#senduserid").val();
+			if($.trim(send_to) === "")
+			{
+				alert("Please Select To Sent Message.");
+				return false;
+				
+			}
 			var msg = $('#msgOne').val();
 			if($.trim(msg) === "")
 			{
@@ -189,7 +196,7 @@ use yii\web\JsExpression;
 				
 			}
 			
-			var send_to = $("#senduserid").val();
+			
 			var send_from = "<?=\Yii::$app->user->id?>";
 			$.ajax({
 				url : '<?=Url::to(['account/send-message-inbox'])?>',

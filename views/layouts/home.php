@@ -83,6 +83,7 @@ AppAsset::register($this);
 					Report Action</a></li> -->
 					<?php } ?>
 					<li><a href="<?=Yii::$app->homeUrl?>account/edit-account"><i class="fa fa-user-circle-o fa-lg"></i> Account Info</a></li>
+					<li><a href="<?=Yii::$app->homeUrl?>site/setting-page"><i class="fa fa-cogs fa-lg"></i></i>Settings</a></li>
 					<li><a href="#" >
 						<?php  echo Html::beginForm(['/site/logout'], 'post')
 						. Html::submitButton(

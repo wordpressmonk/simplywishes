@@ -1013,5 +1013,18 @@ padding-left:0px !important;
 }
 .const-img-size {
     max-height: 150px;
-    width: 100%;
 }
+
+.valid-star-color {
+    color:red; 
+	
+}
+
+.valid-star {
+content: "<span class='valid-star-color' >*</span> ";
+}
+
+.fnt-red{
+	color:#a94442;
+}
+

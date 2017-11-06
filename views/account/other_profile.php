@@ -2,8 +2,8 @@
 use yii\helpers\Html;
 use yii\helpers\Url;
 ?>
-<script src="<?= Yii::$app->request->baseUrl?>/src/masonry.js" type="text/javascript"></script>
-<script src="<?= Yii::$app->request->baseUrl?>/src/imagesloaded.js" type="text/javascript"></script>	
+<script src="<?= Yii::$app->request->baseUrl?>/web/src/masonry.js" type="text/javascript"></script>
+<script src="<?= Yii::$app->request->baseUrl?>/web/src/imagesloaded.js" type="text/javascript"></script>	
 	<?php echo $this->render('_profile',['user'=>$user,'profile'=>$profile])?>
 	<!-- To replace tab as link remove data-toggle=tab and replace href with link-->
 	<ul class="nav nav-tabs smp-mg-bottom" role="tablist">

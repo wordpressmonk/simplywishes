@@ -2,14 +2,14 @@
 
 namespace app\commands;
 
+use Yii;
+
 use yii\console\Controller;
 use app\models\Wish;
 use app\models\User;
 use app\models\MailContent;
 use yii\db\Query;
 
-
-use Yii;
 
 
 class OnemonthController extends Controller {
@@ -50,7 +50,7 @@ class OnemonthController extends Controller {
 					->mailer
 					->compose(
 						['html' => 'cronalertwishSuccess-html'],
-						['user' => $user, 'editmessage' => $editmessage ]
+						['user' => $user, 'editmessage' => $editmessage, 'wish_id' => $tmp['w_id'], 'wish_title' =>$tmp['wish_title'] ]
 					)
 					->setFrom([\Yii::$app->params['supportEmail'] => 'SimplyWishes '])
 					->setTo( $user->email)

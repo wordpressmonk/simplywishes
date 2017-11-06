@@ -44,19 +44,21 @@ class Wish extends \yii\db\ActiveRecord
 			
             [['non_pay_option'], 'required','when' => function($model) { return $model->non_pay_option == 0; }],
 			
-			['primary_image', 'required', 'message' => '{attribute} can\'t be blank', 'on'=>'create'],
+			//['primary_image', 'required', 'message' => '{attribute} can\'t be blank', 'on'=>'create'],
             [['wished_by', 'granted_by', 'category', 'state', 'country', 'city'], 'integer'],
             [['wish_description'], 'string'],
 			[['primary_image'], 'file','extensions' => 'jpg, jpeg, png, bmp, gif, tif, tiff', 'skipOnEmpty' => true],
             [['wish_title'], 'string', 'max' => 100],
             [['summary_title','who_can'], 'string', 'max' => 150],
 			[['in_return'], 'string', 'max' => 1500],
-			[['expected_cost','non_pay_option','i_agree_decide2','i_agree_decide'], 'integer'],
+			[['expected_cost'], 'double'],
+			[['non_pay_option','i_agree_decide2','i_agree_decide'], 'integer'],
 			[['auto_id','wish_status','primary_image_name'], 'safe'],
 		//	[['expected_cost'], 'in','range'=>range(100,1000),'message'=>'Expected Cost(USD) Range In 100 to 1000' ],
 			[['show_mail_status','show_person_status','show_reserved_status','show_other_status'], 'integer'],
 			[['show_person_location','show_person_date','show_reserved_name','show_reserved_location','show_reserved_date','show_other_specify'], 'string'],
 			['show_mail','email','message' => 'Enter valid email address'],
+			
         ];
     }
 	
@@ -64,9 +66,9 @@ class Wish extends \yii\db\ActiveRecord
 
 	public function scenarios() {
         $scenarios = parent::scenarios();
-        $scenarios['create'] = ['category', 'wish_title','summary_title', 'wish_description','primary_image','state', 'country', 'city','expected_cost','expected_date','in_return','who_can','non_pay_option','auto_id','wish_status','show_mail_status','show_person_status','show_reserved_status','show_other_status','show_mail','show_person_location','show_person_date','show_reserved_name','show_reserved_location','show_reserved_date','show_other_specify','i_agree_decide2','i_agree_decide'];
+        $scenarios['create'] = ['category', 'wish_title','summary_title', 'wish_description','primary_image','state', 'country', 'city','expected_cost','expected_date','in_return','who_can','non_pay_option','auto_id','wish_status','show_mail_status','show_person_status','show_reserved_status','show_other_status','show_mail','show_person_location','show_person_date','show_reserved_name','show_reserved_location','show_reserved_date','show_other_specify','i_agree_decide2','i_agree_decide','primary_image_name'];
 		
-		 $scenarios['update'] = ['category', 'wish_title','summary_title', 'wish_description','state', 'country', 'city','expected_cost','expected_date','in_return','who_can','non_pay_option','auto_id','wish_status','show_mail_status','show_person_status','show_reserved_status','show_other_status','show_mail','show_person_location','show_person_date','show_reserved_name','show_reserved_location','show_reserved_date','show_other_specify','i_agree_decide2','i_agree_decide'];
+		 $scenarios['update'] = ['category', 'wish_title','summary_title', 'wish_description','state', 'country', 'city','expected_cost','expected_date','in_return','who_can','non_pay_option','auto_id','wish_status','show_mail_status','show_person_status','show_reserved_status','show_other_status','show_mail','show_person_location','show_person_date','show_reserved_name','show_reserved_location','show_reserved_date','show_other_specify','i_agree_decide2','i_agree_decide','primary_image_name'];
 		 
         return $scenarios;
     }
@@ -567,6 +569,41 @@ class Wish extends \yii\db\ActiveRecord
 		return $message->send();
     }
 	
+	
+	public function sendGrantWishNonFinancialEmail($id,$model)
+    {
+		
+		 $mailcontent = MailContent::find()->where(['m_id'=>12])->one();
+		$editmessage = $mailcontent->mail_message;		
+		$subject = $mailcontent->mail_subject;
+		if(empty($subject))
+			$subject = 	'SimplyWishes ';
+		
+	
+        $user = User::findOne([
+            'status' => User::STATUS_ACTIVE,
+            'id' => $id,
+        ]);
+			
+        if (!$user) {
+            return false;
+        }
+      
+        $message = Yii::$app
+            ->mailer
+            ->compose(
+                ['html' => 'grantwishcontactMessage-html'],
+                ['user' => $user, 'editmessage' => $editmessage,'model' =>$model ]
+            )
+            ->setFrom([Yii::$app->params['supportEmail'] => 'SimplyWishes '])
+            ->setTo( $user->email)
+            ->setSubject($subject);			
+            
+		$message->getSwiftMessage()->getHeaders()->addTextHeader('MIME-version', '1.0\n');
+		$message->getSwiftMessage()->getHeaders()->addTextHeader('charset', ' iso-8859-1\n');
+		
+		return $message->send(); 
+    }
 	
 	
 }

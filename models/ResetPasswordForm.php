@@ -61,11 +61,11 @@ class ResetPasswordForm extends Model
      */
     public function attributeLabels()
     {
-        return [
+         return [
             'password' => 'New Password',
             'verify_password' => 'Confirm Password',
           
-        ];
+        ]; 
     }
 	
     /**

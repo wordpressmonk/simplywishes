@@ -32,8 +32,16 @@ use yii\helpers\Url;
 
     <?php  echo $form->field($model, 'primary_image')->fileInput(['class' => 'form-control',"onChange"=>"upload();return false;"]) ?>
 
-	<?php echo $form->field($model, 'primary_image_name')->hiddenInput(['value'=>(!empty($model->primary_image))?$model->primary_image:""])->label(false); ?>
-		
+	<?php echo $form->field($model, 'primary_image_name')->hiddenInput(['value'=>(!empty($model->primary_image))?$model->primary_image:"images/wish_default/image1.jpg"])->label(false); ?>
+	
+</br>
+      <span>Or Choose One</span>         
+      <div class="gravatar thumbnail" style="width:101% !important">
+        <a class="profilelogo" style="width: 150px;!important" for="images/wish_default/image1.jpg" ><img style="width: 100%;!important" src="<?=Yii::$app->homeUrl?>images/wish_default/image1.jpg"/></a>
+		<a class="profilelogo" style="width: 150px;!important"for="images/wish_default/image2.jpg" ><img style="width: 100%;!important" src="<?=Yii::$app->homeUrl?>images/wish_default/image2.jpg"/></a>
+		<a class="profilelogo" style="width: 150px;!important" for="images/wish_default/image3.jpg" ><img style="width: 100%;!important" src="<?=Yii::$app->homeUrl?>images/wish_default/image3.jpg"/></a>					
+	  </div>
+	  
 	<div class="row">
 					<div class="col-lg-4">
 						<?= $form->field($model, 'country')->dropDownList($countries,[
@@ -559,6 +567,18 @@ $( "#draft_form" ).submit(function( event ) {
  
 </script>
 
+<script type="text/javascript"> 
+  $(function(){				
+		$('.profilelogo').click(function(){
+				 $('.profilelogo').find( "img" ).removeClass('selected'); 
+				  var val = $(this).attr('for');
+				  $(this).find( "img" ).addClass('selected'); 
+				  $("#wish-primary_image_name").val(val);
+		});
+
+  });  
+  </script>
+  
 <style>
 #wish-non_pay_option label{
 	margin-left : 25px  !important

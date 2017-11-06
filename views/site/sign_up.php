@@ -18,15 +18,24 @@ $this->params['breadcrumbs'][] = $this->title;
   <div class="container join-taday">
 	<h3 class="smp-mg-bottom fnt-green"  ><?= Html::encode($this->title) ?></h3>
   
+  
+  <?php if (Yii::$app->session->hasFlash('RegisterFormSubmitted')){ ?>
+
+        <div class="alert alert-success">
+            Your Registration Has Been Successfully Completed,  Please Check Your E-mail for validation. 
+        </div>
+
+    <?php } ?>
+	
 <?php $form = ActiveForm::begin(['id' => 'contact-form','options' => ['class' => 'col-md-8','enctype'=>'multipart/form-data']]); ?>
   
-	   <?= $form->field($user, 'username')->textInput(['autofocus' => true])?>
+	   <?= $form->field($user, 'username')->textInput(['autofocus' => true])->label("Username <span class='valid-star-color' >*</span> ")?>
 	   
-	   <?= $form->field($user, 'email')->label("Email Address") ?>
+	   <?= $form->field($user, 'email')->label("Email Address <span class='valid-star-color' >*</span>") ?>
 	 
-	   <?= $form->field($profile, 'firstname')->label('First Name') ?>
+	   <?= $form->field($profile, 'firstname')->label('First Name <span class="valid-star-color" >*</span>') ?>
 
-	   <?= $form->field($profile, 'lastname')->label('Last Name') ?>
+	   <?= $form->field($profile, 'lastname')->label('Last Name <span class="valid-star-color" >*</span>') ?>
 	
 	   <?= $form->field($profile, 'about')->textarea(['rows' => 6])?>
 		

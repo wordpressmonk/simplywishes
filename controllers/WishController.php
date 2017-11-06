@@ -192,13 +192,20 @@ class WishController extends Controller
 		$categories =  ArrayHelper::map(Category::find()->all(), 'cat_id', 'title');
         if ($model->load(Yii::$app->request->post())) {
 			
-			$model->primary_image = UploadedFile::getInstance($model, 'primary_image');
+			 $model->primary_image = UploadedFile::getInstance($model, 'primary_image');
 				if(!empty($model->primary_image)) {
 					if(!$model->uploadImage())
 						return;
+				} else 
+				{
+					 $model->primary_image = $model->primary_image_name;
 				}
+				
 				$model->wished_by = \Yii::$app->user->id;
 				$model->wish_status = 0;
+				
+			
+			
 			
 			
 			
@@ -206,12 +213,16 @@ class WishController extends Controller
 			{
 			
 				$model1 = Wish::findOne($model->auto_id);
+				
+			
 				$model1->w_id = $model->auto_id;
 				$model1->wished_by = \Yii::$app->user->id;					
 				$model1->category = $model->category;
 				$model1->wish_title = $model->wish_title;
 				$model1->wish_description = $model->wish_description;
+				
 				$model1->primary_image = $model->primary_image;
+		
 				$model1->expected_cost = $model->expected_cost;
 				$model1->expected_date = $model->expected_date;
 				$model1->in_return = $model->in_return;
@@ -286,9 +297,16 @@ class WishController extends Controller
 			if(!empty($model->primary_image)) {
 				if(!$model->uploadImage())
 					return;
-			}
-			else
-				$model->primary_image = $current_image;
+			}			
+			 else
+				{					
+					if(!empty($model->primary_image_name) && ($model->primary_image_name != $current_image ))
+					{
+						$model->primary_image = $model->primary_image_name;
+					} else {
+						$model->primary_image = $current_image;
+					}					
+				}
 			//save model
 			
 			$model->wished_by = \Yii::$app->user->id;
@@ -654,6 +672,7 @@ class WishController extends Controller
 			$models->wish_description = $models2['Wish']['wish_description'];
 			
 			$models->primary_image = $models2['Wish']['primary_image_name'];
+		
 			$models->expected_cost = $models2['Wish']['expected_cost'];
 			$models->expected_date = $models2['Wish']['expected_date'];
 			$models->in_return = $models2['Wish']['in_return'];
@@ -780,6 +799,7 @@ class WishController extends Controller
 		
         $w_id = \Yii::$app->request->post()['wish_id'];
 		$processstatus = \Yii::$app->request->post()['processstatus'];
+		$send_message = \Yii::$app->request->post()['send_message'];
 		
 		$wish = $this->findModel($w_id);
 		//explicitly set up the granted_by to the user id
@@ -790,9 +810,10 @@ class WishController extends Controller
 
 		if($wish->save(false))
 		{		
+			
+			if($send_message == 1)			
+				$wish->sendGrantWishNonFinancialEmail(\Yii::$app->user->id,$wish);		
 			echo "Success";
-			/* $this->sendEmail($wish->wished_by);		
-			return $this->redirect(['wish/view','id'=>$w_id]); */
 		}
 		
     }

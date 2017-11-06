@@ -81,7 +81,7 @@ $this->params['breadcrumbs'][] = $this->title;
 					<?php
 				}
 			} else {
-				echo "Sorry, No more Story from you.";
+				echo "Sorry, No more Happy Stories from you.";
 			}	
 			?>
 

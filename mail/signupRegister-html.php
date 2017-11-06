@@ -5,6 +5,7 @@ use yii\helpers\Html;
 /* @var $user common\models\User */
 
 $resetLink = Yii::$app->urlManager->createAbsoluteUrl('site/login');
+
 ?>
 <div class="password-reset">
 

@@ -363,15 +363,26 @@ $('body').on('hidden.bs.popover', function (e) {
 			 }
 			 
 			 var wish_id = "<?=$model->w_id?>";
-			 
+			var send_to = "<?=$model->wished_by?>";
+			var send_from = "<?=\Yii::$app->user->id?>";
+			
+			 var send_message = 1;
 			 $.ajax({
 				url : '<?=Url::to(['wish/process-wish'])?>',
 				type : 'POST',
-				data : {processstatus:processstatus,wish_id:wish_id},
+				data : {processstatus:processstatus,wish_id:wish_id,send_message:send_message},
 				success: function(response){
-					$('#messagemodal1').modal('hide');
-					alert("This Wish Has Been Granted Successfully.");
-					location.reload();
+					$.ajax({
+						url : '<?=Url::to(['account/send-message-wishes-contact-details'])?>',
+						type : 'POST',
+						data : {send_from:send_from,send_to:send_to,wish_id:wish_id },
+						success: function(response){
+							$('#messagemodal1').modal('hide');
+							alert("This Wish Has Been Granted Successfully.");
+							location.reload();
+						}
+					});
+					
 				}
 			});
 			
@@ -380,6 +391,7 @@ $('body').on('hidden.bs.popover', function (e) {
 		
 	$(".send-msg-check-decide").on("click",function(){
 			var processstatus = 0;
+			
 			 if($('#i_agree_decide').prop("checked") == true){
 				 var processstatus = 1;					
 			 }
@@ -391,6 +403,7 @@ $('body').on('hidden.bs.popover', function (e) {
 			var msg = $('#msg-textarea').val();
 			var send_to = "<?=$model->wished_by?>";
 			var send_from = "<?=\Yii::$app->user->id?>";
+			var send_message = 0;
 			if($.trim(msg) === "")
 			{
 				alert("Please check the message.");
@@ -400,7 +413,7 @@ $('body').on('hidden.bs.popover', function (e) {
 			$.ajax({
 				url : '<?=Url::to(['wish/process-wish'])?>',
 				type : 'POST',
-				data : {processstatus:processstatus,wish_id:wish_id},
+				data : {processstatus:processstatus,wish_id:wish_id,send_message:send_message},
 				success: function(response){
 					$.ajax({
 						url : '<?=Url::to(['account/send-message-wishes'])?>',

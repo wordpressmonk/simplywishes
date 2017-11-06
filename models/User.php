@@ -16,6 +16,7 @@ class User extends ActiveRecord implements IdentityInterface
 	
     const STATUS_DELETED = 12;
     const STATUS_ACTIVE = 10;   
+    const STATUS_INACTIVE = 13;   
 	/**
      * @inheritdoc
      */
@@ -166,6 +167,15 @@ class User extends ActiveRecord implements IdentityInterface
         return static::findOne([
             'password_reset_token' => $token,
             'status' => self::STATUS_ACTIVE,
+        ]);
+    }
+	
+	
+	 public static function findByAuthKeyValidation($auth_key)
+    {        
+        return static::findOne([
+            'auth_key' => $auth_key,
+            'status' => self::STATUS_INACTIVE,
         ]);
     }
 	

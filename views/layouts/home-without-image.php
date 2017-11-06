@@ -34,26 +34,7 @@ AppAsset::register($this);
 			<div class="col-md-8" style="width: 70.667%;" >
 
 				<div class="row" style="padding:4px 0px;">
-					<?php if(\Yii::$app->user->isGuest){ ?>
-			<!--<div class="btn-group pull-right">
-			  <a href="<?=Yii::$app->homeUrl?>site/login"><button class="btn btn-smp-blue smpl-brdr-left" type="button">
-				Login
-			  </button></a>
-			  <a href="<?=Yii::$app->homeUrl?>site/sign-up"><button class="btn btn-smp-green smpl-brdr-right" type="button">
-				Join Today
-			  </button></a>
-			</div> -->
-			<?php  } //else { ?>
-			<!--<div class="btn-group pull-right">
-			  <?php
-			 /*  echo Html::beginForm(['/site/logout'], 'post')
-                . Html::submitButton(
-                    'Logout',
-                    ['class' => 'btn btn-smp-green smpl-brdr']
-                )
-                . Html::endForm();  */?>
-            </div>-->
-            <?php // } ?>
+				
         </div>
 
         <hr style="border-color:#1085bf;">
@@ -103,6 +84,7 @@ AppAsset::register($this);
         									<!-- <li><a href="<?=Yii::$app->homeUrl?>wish/report-action"><i class="fa fa-flag-checkered fa-lg" ></i>Report Action</a></li>  -->
         									<?php } ?>
         									<li><a href="<?=Yii::$app->homeUrl?>account/edit-account"><i class="fa fa-user-circle-o fa-lg"></i> Account Info</a></li>
+											<li><a href="<?=Yii::$app->homeUrl?>site/setting-page"><i class="fa fa-cogs fa-lg"></i></i>Settings</a></li>
         									<li><a href="#" >
         										<?php  echo Html::beginForm(['/site/logout'], 'post')
         										. Html::submitButton(

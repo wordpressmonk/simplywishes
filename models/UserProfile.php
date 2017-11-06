@@ -111,6 +111,43 @@ class UserProfile extends \yii\db\ActiveRecord
 		return $this->firstname." ".$this->lastname;
 	}
 	
+	public function sendVAlidationEmail($email)
+    {
+		
+		$mailcontent = MailContent::find()->where(['m_id'=>13])->one();
+		$editmessage = $mailcontent->mail_message;		
+		$subject = $mailcontent->mail_subject;
+		if(empty($subject))
+			$subject = 	'SimplyWishes ';
+		
+		
+        /* @var $user User */
+        $user = User::findOne([
+            'status' => User::STATUS_INACTIVE,
+            'email' => $email,
+        ]);
+			
+        if (!$user) {
+            return false;
+        }
+      
+        $message = Yii::$app
+            ->mailer
+            ->compose(
+                ['html' => 'signupValidationRegister-html'],
+                ['user' => $user, 'editmessage' => $editmessage ]
+            )
+            ->setFrom([Yii::$app->params['supportEmail'] => 'SimplyWishes '])
+            ->setTo($email)
+            ->setSubject($subject);			
+            
+		$message->getSwiftMessage()->getHeaders()->addTextHeader('MIME-version', '1.0\n');
+		$message->getSwiftMessage()->getHeaders()->addTextHeader('charset', ' iso-8859-1\n');
+		
+		return $message->send();
+    }
+	
+	
 	public function sendEmail($email)
     {
 		
@@ -146,7 +183,6 @@ class UserProfile extends \yii\db\ActiveRecord
 		
 		return $message->send();
     }
-	
 	
 	public function sendProfileEmail($id)
     {

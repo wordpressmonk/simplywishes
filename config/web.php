@@ -2,6 +2,7 @@
 
 $params = require(__DIR__ . '/params.php');
 
+
 $config = [
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
@@ -25,15 +26,13 @@ $config = [
         ],
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
-            // send all mails to a file by default. You have to set
-            // 'useFileTransport' to false and configure a transport
-            // for the mailer to send real emails.
+			
             'useFileTransport' => false,
 			'transport' => [
             'class' => 'Swift_SmtpTransport',
             'host' => 'smtp.gmail.com',
             'username' => 'arivazhagan0117@gmail.com',
-            'password' => 'Arivu@!@#Ilan',
+            'password' => 'jwxxtekxvktoihmp',
             'port' => '587',
             'encryption' => 'tls', 
                         ], 

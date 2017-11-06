@@ -19,9 +19,9 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="col-lg-5">
             <?php $form = ActiveForm::begin(['id' => 'reset-password-form']); ?>
 
-                <?= $form->field($model, 'password')->passwordInput(['autofocus' => true]) ?>
+                <?= $form->field($model, 'password')->passwordInput(['autofocus' => true])->label("New Password <span class='valid-star-color' >*</span> ") ?> 
 				
-				<?= $form->field($model, 'verify_password')->passwordInput() ?>
+				<?= $form->field($model, 'verify_password')->passwordInput()->label("Confirm Password <span class='valid-star-color' >*</span> ")  ?>
 
                 <div class="form-group">
                     <?= Html::submitButton('Save', ['class' => 'btn btn-primary']) ?>

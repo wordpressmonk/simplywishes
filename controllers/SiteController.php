@@ -18,6 +18,8 @@ use app\models\PasswordResetRequestForm;
 use app\models\ResetPasswordForm;
 use app\models\Page;
 
+use ZipArchive;
+
 class SiteController extends Controller
 {
     /**
@@ -129,6 +131,7 @@ class SiteController extends Controller
 			$model->contact();
 			$model->admincontact();
             Yii::$app->session->setFlash('contactFormSubmitted');
+			
             return $this->refresh();
         }
         return $this->render('contact', [
@@ -163,6 +166,10 @@ class SiteController extends Controller
 
 	public function actionSignUp()
 	{
+		if (!Yii::$app->user->isGuest) {
+            return $this->goHome();
+        }
+		
 		$user = new User();
 		$user->scenario = 'sign-up';
 		$profile = new UserProfile();
@@ -175,6 +182,8 @@ class SiteController extends Controller
 		if ($user->load(Yii::$app->request->post()) && $profile->load(Yii::$app->request->post())){			
 			$user->setPassword($user->password);
 			$user->generateAuthKey();
+			$user->status = 13;
+			// In-Active State 
 			//print_r($profile);die;
 			if($user->save()){
 				$profile->user_id = $user->id;
@@ -185,50 +194,27 @@ class SiteController extends Controller
 				if(!empty($profile->profile_image)) { 
 					if(!$profile->uploadImage())
 						return;
-				
-						/************* Image Upload Part Begin ********************/
-				
-		
-				/*
-			if(!empty($profile->profile_image))
-			{
-				$file_path=Yii::$app->basePath.'/web/uploads/';
-				$image =  json_decode($profile->profile_image);
-				
-				if (strpos($image->data, 'data:image/jpeg;base64,') !== false) {
-				$img = str_replace('data:image/jpeg;base64,', '', $image->data);
-				}
-				if (strpos($image->data, 'data:image/png;base64,') !== false) {
-				$img = str_replace('data:image/png;base64,', '', $image->data);
-				}	
-		
-				$img = str_replace(' ', '+', $img);
-				$image_data = base64_decode($img);
-				$profile->profile_image = 'uploads/'.$image_name='rand_'.rand(0000,9999).'time_'.time().'.JPG';
-				$file = $file_path .$image_name;
-				$success = file_put_contents($file, $image_data); */
-				
-				/************* Image Upload Part End ********************/
-				
+								
 				} else {
 					$profile->profile_image = $profile->dulpicate_image;
 
 				}
 							
 				$profile->save();
-				$profile->sendEmail($user->email);
-				
-				\Yii::$app->user->login($user,0);
-				return $this->redirect('index');
+				$profile->sendVAlidationEmail($user->email);
+				Yii::$app->session->setFlash('RegisterFormSubmitted');
+				return $this->redirect(['login']);
+			} else 
+			{
+				return $this->render('sign_up', [
+				'user' => $user,
+				'profile' => $profile,
+				'countries' => $countries,
+				'privacy_policy' => $privacy_policy,
+				'terms' => $terms,
+				'community_guidelines' => $community_guidelines,
+				]);
 			}
-			else return $this->render('sign_up', [
-            'user' => $user,
-			'profile' => $profile,
-			'countries' => $countries,
-			'privacy_policy' => $privacy_policy,
-			'terms' => $terms,
-			'community_guidelines' => $community_guidelines,
-			]);
 		}
         else return $this->render('sign_up', [
             'user' => $user,
@@ -273,7 +259,11 @@ class SiteController extends Controller
 	
 
 	public function actionRequestPasswordReset()
-    {		
+    {	
+		if (!Yii::$app->user->isGuest) {
+            return $this->goHome();
+        }
+		
         $model = new PasswordResetRequestForm();
         if ($model->load(Yii::$app->request->post())) {
 			
@@ -291,6 +281,10 @@ class SiteController extends Controller
 	
 	public function actionResetPassword($token)
     {
+		if (!Yii::$app->user->isGuest) {
+            return $this->goHome();
+        }
+		
         try {         
 			$user = User::findByPasswordResetToken($token);
 			
@@ -322,8 +316,8 @@ class SiteController extends Controller
 	 */
 	public function actionTestMail(){
 		Yii::$app->mailer->compose()
-			->setTo('dency@abacies.com')
-			->setFrom(['dency@abacies.com' => 'Dency G B'])
+			->setTo('arivazhagan@abacies.com')
+			->setFrom(['admin@simplywishes.com' => 'Dency G B'])
 			->setSubject('Test mail from simplywishes')
 			->setTextBody('Regards')
 			->send();		
@@ -342,5 +336,96 @@ class SiteController extends Controller
 	  return $this->render('index_home',['user' => $user,
 			'profile' => $profile ]);
     }
+	
+	
+	public function actionUserValidation($auth_key)
+    {
+		
+		if (!Yii::$app->user->isGuest) {
+            return $this->goHome();
+        }
+		
+        try { 
+        
+			$user = User::findByAuthKeyValidation($auth_key);			
+			if($user)
+			{
+				
+				 $model = User::findOne($user->id);
+				 $model->status = 10;
+				 if($model->save())
+				 {
+					 $profile = UserProfile::find()->where(['user_id'=>$user->id])->one();
+					 $profile->sendEmail($user->email);
+					 Yii::$app->session->setFlash('activeCheckmail');
+				 }	
+			} 	 
+				return $this->redirect(['login']);
+			 							
+        } catch (InvalidParamException $e) {
+            throw new BadRequestHttpException($e->getMessage());
+        }
+			              
+    }
+
+	/**
+     * Lists all Wish models.
+     * @return mixed
+     */
+	public function actionSettingPage()
+    {
+	  if((!\Yii::$app->user->isGuest) && isset(\Yii::$app->user->identity->role) && (\Yii::$app->user->identity->role == 'admin')){ 
+		return $this->render('setting_page');
+	  } else 
+	  {
+		return $this->goHome();
+	  }
+	  
+    }
+	
+	public function actionResetAllUser()
+    {
+	  if((!\Yii::$app->user->isGuest) && isset(\Yii::$app->user->identity->role) && (\Yii::$app->user->identity->role == 'admin')){ 
+		$id = \Yii::$app->user->id;		  
+		$all_wishes_activity = \app\models\Activity::deleteAll();
+		$all_editorial = \app\models\Editorial::deleteAll();
+		$all_editorial_comments = \app\models\EditorialComments::deleteAll();	
+		$all_friend_request = \app\models\FriendRequest::deleteAll();
+		$all_follow_request = \app\models\FollowRequest::deleteAll();
+		$all_messages = \app\models\Message::deleteAll();
+		$all_happy_stories = \app\models\HappyStories::deleteAll();
+		$all_happy_stories_activity = \app\models\StoryActivity::deleteAll();
+		$all_wishes = \app\models\Wish::deleteAll();		
+		$all_users_profile = \app\models\UserProfile::deleteAll(["!=","user_id",$id]);
+		$all_users = \app\models\User::deleteAll(["!=","id",$id]);
+		
+		Yii::$app->session->setFlash('delactiveAllUsers');
+		return $this->redirect(['setting-page']);
+	  } else 
+	  {
+		return $this->goHome();
+	  }
+		
+		
+	}
+	
+	public function actionResetAllUserWishes()
+    {
+	  if((!\Yii::$app->user->isGuest) && isset(\Yii::$app->user->identity->role) && (\Yii::$app->user->identity->role == 'admin')){ 
+	
+		$all_wishes_activity = \app\models\Activity::deleteAll();
+		$all_happy_stories = \app\models\HappyStories::deleteAll();
+		$all_happy_stories_activity = \app\models\StoryActivity::deleteAll();
+		$all_wishes = \app\models\Wish::deleteAll();
+		
+		Yii::$app->session->setFlash('delactiveAllWishes');
+		return $this->redirect(['setting-page']);
+	  } else 
+	  {
+		return $this->goHome();
+	  }
+		
+		
+	}
 	
 }

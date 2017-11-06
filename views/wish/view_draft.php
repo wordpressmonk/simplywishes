@@ -44,7 +44,7 @@ $payoption = array('0'=>"Financial",'1'=>"Non-financial",'2'=>"Decide Later");
 			[
                 'attribute'=>'primary_image',
 				'value'=>!empty($model->primary_image)?Yii::$app->homeUrl.$model->primary_image:'',
-				 'format' => !empty($model->primary_image)?['image',['height'=>'100px','width'=>'300px']]:'text',
+				 'format' => !empty($model->primary_image)?['image',['height'=>'200px','width'=>'200px']]:'text',
 				
             ],
 			

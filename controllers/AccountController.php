@@ -223,6 +223,55 @@ class AccountController extends Controller
 			$message->recipient_id = $to;
 			$message->parent_id = 0;
 			$message->text = $msg;
+			$message->read_text = $to;
+			$message->created_at = date("Y-m-d H:i:s");
+			if($message->save()){
+				Yii::$app->session->setFlash('messageSent');
+			}			
+		}
+	}
+	
+	
+	public function actionSendMessageWishesContactDetails(){
+		
+		$from = \Yii::$app->request->post()['send_from'];
+		$to = \Yii::$app->request->post()['send_to'];
+		$wish_id = \Yii::$app->request->post()['wish_id'];
+		
+		$model = Wish::findOne($wish_id);
+		
+			$details ='<p>Contact Message</p>';						
+				 if($model->show_mail_status == 1){ 
+			$details .='<p>Mail to this address : <b>'.$model->show_mail.'</b></p>';
+				 } 
+				if(($model->show_mail_status == 1) && ($model->show_person_status == 1)){ 
+			$details .='<p>or</p>';
+				 }	
+				if($model->show_person_status == 1){ 
+			$details .='<p>In Person at this location :  <b>'.$model->show_person_location.' on '.$model->show_person_date.'</b></p>';
+			     } 	
+				if((($model->show_mail_status == 1) || ($model->show_person_status == 1)) && ($model->show_reserved_status == 1)){ 
+				$details .='<p>or</p>';
+				 }	
+				 if($model->show_reserved_status == 1){ 
+			$details .='<p>Reserved at this location : <b>'.$model->show_reserved_name.' , '.$model->show_reserved_location.' on '.$model->show_reserved_date.'</b></p>';
+				 }	
+				 if((($model->show_mail_status == 1) || ($model->show_person_status == 1) || ($model->show_reserved_status == 1) )&& ($model->show_other_status == 1)){ 
+				$details .='<p>or</p>';
+				 } 	
+				 if($model->show_other_status == 1){ 
+			$details .='<p>Other : <b>'.$model->show_other_specify.'</b></p>';
+				 } 
+				 
+		$msg = $details;
+		
+		if($from != '' && $to != '' && $msg != ''){
+			$message = new Message();
+			$message->sender_id = $from;
+			$message->recipient_id = $to;
+			$message->parent_id = 0;
+			$message->read_text = $to;
+			$message->text = $msg;
 			$message->created_at = date("Y-m-d H:i:s");
 			if($message->save()){
 				Yii::$app->session->setFlash('messageSent');

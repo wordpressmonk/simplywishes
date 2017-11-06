@@ -14,20 +14,20 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="site-contact">
     <h1 class="fnt-green"><?= Html::encode($this->title) ?></h1>
 
-    <?php if (Yii::$app->session->hasFlash('messageSent')): ?>
+    <?php if (Yii::$app->session->hasFlash('contactFormSubmitted')){ ?>
 
         <div class="alert alert-success">
-            Your message has been sent successfully.
+            Thanks For Contcting Us. We will Reach you Very Soon.
         </div>
 
-    <?php else: ?>
+    <?php } ?>
 
         <div class="row">
             <div class="col-lg-5">
 
                 <?php $form = ActiveForm::begin(['id' => 'contact-form']); ?>
 
-                    <?= $form->field($model, 'name')->textInput(['autofocus' => true]) ?>
+                    <?= $form->field($model, 'name')->textInput(['autofocus' => true ])->label(" Name _ Test  <span class='valid-star-color' >*1</span> ") ?>
 
                     <?= $form->field($model, 'email') ?>
 
@@ -50,5 +50,5 @@ $this->params['breadcrumbs'][] = $this->title;
             </div>
         </div>
 
-    <?php endif; ?>
+    
 </div>

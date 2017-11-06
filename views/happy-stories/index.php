@@ -52,7 +52,7 @@ $this->params['breadcrumbs'][] = $this->title;
 		
 		}
 	} else {
-			echo "Oops, No More Happy Stories...!";
+			echo "No More Happy Stories.";
 	}	
 		
 		?>
